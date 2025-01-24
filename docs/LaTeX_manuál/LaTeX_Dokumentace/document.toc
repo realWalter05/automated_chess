@@ -1,0 +1,40 @@
+\select@language {czech}
+\contentsline {chapter}{\numberline {1}\IeC {\'U}vod}{13}
+\contentsline {section}{\numberline {1.1}\IeC {\v S}ablona dlouhodob\IeC {\'e} maturitn\IeC {\'\i } pr\IeC {\'a}ce v \LaTeX u}{13}
+\contentsline {section}{\numberline {1.2}Co je \LaTeX ~a jak funguje}{13}
+\contentsline {section}{\numberline {1.3}Pou\IeC {\v z}it\IeC {\'\i } \IeC {\v s}ablony}{14}
+\contentsline {chapter}{\numberline {2}Instalace}{15}
+\contentsline {section}{\numberline {2.1}Instalace produktu T\kern -.1667em\lower .5ex\hbox {E}\kern -.125emX\spacefactor \@m {}studio}{15}
+\contentsline {section}{\numberline {2.2}Instalace s\IeC {\'a}zec\IeC {\'\i }ho syst\IeC {\'e}mu MiKT\kern -.1667em\lower .5ex\hbox {E}\kern -.125emX\spacefactor \@m {}}{15}
+\contentsline {chapter}{\numberline {3}Prost\IeC {\v r}ed\IeC {\'\i } T\kern -.1667em\lower .5ex\hbox {E}\kern -.125emX\spacefactor \@m {}studio}{17}
+\contentsline {section}{\numberline {3.1}Sazba v prost\IeC {\v r}ed\IeC {\'\i } T\kern -.1667em\lower .5ex\hbox {E}\kern -.125emX\spacefactor \@m {}studio}{17}
+\contentsline {section}{\numberline {3.2}\IeC {\v C}esk\IeC {\'y} slovn\IeC {\'\i }k}{17}
+\contentsline {chapter}{\numberline {4}Manu\IeC {\'a}l (N\IeC {\'a}vod k pou\IeC {\v z}it\IeC {\'\i } \IeC {\v s}ablony)}{19}
+\contentsline {section}{\numberline {4.1}Struktura \IeC {\v s}ablony}{19}
+\contentsline {section}{\numberline {4.2}Zad\IeC {\'a}n\IeC {\'\i }}{20}
+\contentsline {section}{\numberline {4.3}Kapitoly a podkapitoly}{21}
+\contentsline {section}{\numberline {4.4}Psan\IeC {\'\i } textu}{22}
+\contentsline {subsection}{\numberline {4.4.1}Ukon\IeC {\v c}en\IeC {\'\i } odstavce}{22}
+\contentsline {subsection}{\numberline {4.4.2}Nov\IeC {\'a} strana}{22}
+\contentsline {subsection}{\numberline {4.4.3}Ned\IeC {\v e}liteln\IeC {\'a} mezera}{22}
+\contentsline {subsection}{\numberline {4.4.4}Uvozovky}{23}
+\contentsline {subsection}{\numberline {4.4.5}Poml\IeC {\v c}ky}{23}
+\contentsline {subsection}{\numberline {4.4.6}Speci\IeC {\'a}ln\IeC {\'\i } znaky}{23}
+\contentsline {subsection}{\numberline {4.4.7}Koment\IeC {\'a}\IeC {\v r}e}{23}
+\contentsline {subsection}{\numberline {4.4.8}\IeC {\v R}ezy p\IeC {\'\i }sma}{23}
+\contentsline {section}{\numberline {4.5}Seznamy}{24}
+\contentsline {subsection}{\numberline {4.5.1}\IeC {\v C}\IeC {\'\i }slovan\IeC {\'y} seznam}{24}
+\contentsline {subsection}{\numberline {4.5.2}Ne\IeC {\v c}\IeC {\'\i }slovan\IeC {\'y} seznam}{24}
+\contentsline {subsection}{\numberline {4.5.3}Popisov\IeC {\'y} seznam}{25}
+\contentsline {section}{\numberline {4.6}Stromov\IeC {\'a} struktura}{26}
+\contentsline {section}{\numberline {4.7}Tabulky}{27}
+\contentsline {subsection}{\numberline {4.7.1}Klasick\IeC {\'a} tabulka}{27}
+\contentsline {subsection}{\numberline {4.7.2}Profesion\IeC {\'a}ln\IeC {\'\i } tabulka}{28}
+\contentsline {section}{\numberline {4.8}Obr\IeC {\'a}zek}{29}
+\contentsline {section}{\numberline {4.9}Matematick\IeC {\'y} z\IeC {\'a}pis}{30}
+\contentsline {section}{\numberline {4.10}P\IeC {\v r}\IeC {\'\i }lohy}{31}
+\contentsline {section}{\numberline {4.11}Citace a pou\IeC {\v z}it\IeC {\'a} literatura}{32}
+\contentsline {chapter}{\numberline {5}Z\IeC {\'a}v\IeC {\v e}r}{34}
+\contentsline {chapter}{P\IeC {\v r}\IeC {\'\i }lohy}{37}
+\contentsline {chapter}{\numberline {A}Vytvo\IeC {\v r}en\IeC {\'e} p\IeC {\v r}\IeC {\'\i }kazy}{38}
+\contentsline {chapter}{\numberline {B}U\IeC {\v z}ite\IeC {\v c}n\IeC {\'e} p\IeC {\v r}\IeC {\'\i }kazy a funkce}{42}

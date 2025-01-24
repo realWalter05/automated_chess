@@ -1,0 +1,544 @@
+\documentclass[a4paper, 12pt]{report}
+\usepackage{monapack}
+
+\begin{document}
+
+	\begin{titlepage}
+		\begin{center}
+			\includegraphics[width=3cm]{logo}\\[2mm]
+			Střední průmyslová škola a Vyšší odborná škola, Písek, Karla Čapka 402, Písek\\[2mm]
+			%18-20-M/01 Informační technologie\\[2cm]
+			%{\Huge \bf Manuál} \\[2mm]
+			%\normalsize k maturitní práci téma č. 11\\[6mm]
+			%{\textbf{\huge{Šablona DMP v \LaTeX u}}}\\[2mm]
+			18-20-M/01 Informační technologie\\[1,2cm]
+			\Huge Šablona DMP v \LaTeX u\\[6mm]
+			{\textbf{\Huge{Manuál}}}\\[2mm]
+			\normalsize k maturitní práci téma č. 11
+		\end{center}
+		\vfill
+		\noindent autor:\\
+		\emph{\bf Monika Hanušová, B4.I}\\[2mm]
+		vedoucí maturitní práce:\\
+		\emph{\bf Mgr. Radka Pecková}\\[8mm]
+		Písek 2017/2018
+	\end{titlepage}
+
+	\obsah
+
+	\kapitola{Struktura šablony}
+	Příkaz \strojopis{$\backslash$documentclass[a4paper, 12pt]\{report\}} na začátku dokumentu slouží k určení všeobecných charakteristik tzv. tříd. Nepovinný parametr (v hranatých závorkách) optimalizuje sazbu na velikost papíru A4 a základní velikost písma stanovuje na 12 bodů. Povinný parametr (ve složených závorkách) specifikuje třídu dokumentu report, která je určena pro přípravu rozsáhlejších dokumentů.\\
+	Příkaz \strojopis{$\backslash$usepackage\{monapack\}} zajišťuje zavedení balíku (stylu) vytvořeného pro psaní DPM. Tento balík je nazván \kurziva{monapack} a obsahuje zdrojový text makrojazyka \TeX u.\\
+	Pomocí následujících příkazů se definují základní informace o autorovi a o maturitní práci. Tyto hodnoty jsou následně využity při generaci titulní strany, licenční smlouvy i zadání.\\
+	\\
+	\strojopis{
+		$\backslash$student$\{$Jméno Příjmení$\}$\\
+		$\backslash$trida$\{$Třída$\}$\\
+		$\backslash$obor$\{$Kód oboru Název oboru$\}$\\
+		$\backslash$bydliste$\{$Adresa bydliště$\}$\\
+		$\backslash$datumNarozeni$\{$Datum narození$\}$\\
+		$\backslash$vedouci$\{$Titul, jméno, příjmení$\}$\\
+		$\backslash$nazevPrace$\{$Název práce$\}$\\
+		$\backslash$cisloPrace$\{$Číslo$\}$\\
+		$\backslash$skolniRok$\{$Školní rok$\}$\\
+		$\backslash$reditel$\{$Titul, jméno a příjmení$\}$\\
+	}
+	\novastrana 
+	Praktický příklad:\\
+	\strojopis{
+		$\backslash$student$\{$Monika Hanušová$\}$\\
+		$\backslash$trida$\{$B4.I$\}$\\
+		$\backslash$obor$\{$18-20-M/01 Informační technologie$\}$\\
+		$\backslash$bydliste$\{$tř. Čsl. legií 703/16, 370 06 České Budějovice$\}$\\
+		$\backslash$datumNarozeni$\{$10. 2. 1998$\}$\\
+		$\backslash$vedouci$\{$Mgr. Radka Pecková$\}$\\
+		$\backslash$nazevPrace$\{$Šablona DMP v \LaTeX u$\}$\\
+		$\backslash$cisloPrace$\{$11$\}$\\
+		$\backslash$skolniRok$\{$2017/2018$\}$\\
+		$\backslash$reditel$\{$Ing. Jiří Uhlík$\}$\\
+	}
+	\\
+	Součástí šablony jsou předepsané příkazy, jež v sobě obsahují nadefinované instrukce pro vzhled stránky a další informace. Příkazy \strojopis{$\backslash$zacatek} a \strojopis{$\backslash$konec} určují začátek a konec dokumentace. \\
+	Pro vygenerování titulní stránky se použije příkaz \strojopis{$\backslash$titulniStrana} a licenční smlouva se vygenerujete příkazem \strojopis{$\backslash$licencniSmlouva\{Datum odevzdání\}}. První parametr „Datum odevzdání“ určuje datum, kdy je fyzicky odevzdávána maturitní práce.\\
+	Za každý z následujících příkazů se vždy umístí příslušný text:\\
+	\strojopis{
+		$\backslash$anotace Vlastní text anotace\\
+		$\backslash$annotation Vlastní text anotace v anglickém jazyce\\
+		$\backslash$podekovani Vlastní text poděkování\\
+	}
+	Příkaz \strojopis{$\backslash$obsah} vygeneruje obsah, \strojopis{$\backslash$seznamTabulek} vygeneruje seznam tabulek a seznam obrázků se vygeneruje pomocí \strojopis{$\backslash$seznamObrazku}. Tyto příkazy již neobsahují žádné povinné ani nepovinné parametry. O tvorbě příloh a literatury se dozvíte v dalších kapitolách, viz kapitola 4.10 a~4.11.
+	
+	\kapitola{Zadání}
+	Zadání maturitní práce se vygeneruje příkazem \strojopis{$\backslash$\{termín odevzdání\}\{zadání\}\\
+		\{originalita a vhodnost řešení\}\{funkčnost řešení\}\{hrazení nákladů\}\\
+		\{práce je majetkem\}\{datum podepsání\}}.\\
+	Parametr 2 až 4 jsou bodové seznamy, jež se vytvoří pomocí příkazu \strojopis{$\backslash$bod} a vložením textu bezprostředně za tento příkaz. Pokračuje se stejným způsobem se všemi body. Pátý parametr dokončuje větu „Náklady na materiál bude hradit…“. Do parametru se vepíše jedna z těchto variant: škola/firma/žák. Šestý parametr dokončuje větu: „Funkční vzorek bude majetkem…“. Do parametru se použije jedna z těchto variant: školy/firmy/žáka.\\
+	Zadání je vytvořeno i jako samostatný soubor \kurziva{LaTeX\_task} z důvodu potřeby samostatného souboru již dříve než je psána samotná dokumentace. Po vytisknutí dokumentace je vhodné vyměnit část obsahující zadání za již potvrzené zadání. 
+	
+	\kapitola{Kapitoly a podkapitoly}
+	K rozdělení textu do jednotlivých úrovní slouží kapitoly a podkapitoly. Jsou připraveny celkem čtyři úrovně, jež lze využít:\\
+	\strojopis{
+		$\backslash$kapitola\{název kapitoly aneb nadpis 1. úrovně\}\\
+		$\backslash$podkapitola\{název podkapitoly aneb nadpis 2. úrovně\}\\	
+		$\backslash$podpodkapitola\{název podpodkapitoly aneb nadpis 3. úrovně\}\\
+		$\backslash$podpodpodkapitola\{název podpodpodkapitoly aneb nadpis 4. úrovně\}\\
+	}
+	\\
+	Praktický příklad:\\
+	\strojopis{
+		$\backslash$kapitola\{Úvod\}\\
+		$\backslash$podkapitola\{Téma\}\\
+		$\backslash$podpodkapitola\{Řešení\}\\
+		$\backslash$podpodpodkapitola\{Problematika\}\\
+	}\\
+	Po vysázení: (\viz{sazba01})\\
+	\obrazek{sazba01}{Kapitoly}{6cm}{sazba01}
+	
+	\kapitola{Psaní textu}
+	\podkapitola{Ukončení odstavce}
+	Pro ukončení odstavce je třeba na konec textu přidat dvě zpětná lomítka \strojopis{$\backslash \backslash$}. Další text již bude umístěn na nové řádce.
+	
+	\podkapitola{Nová strana}
+	Šablona sama rozmisťuje strany dle normy. Je-li potřeba i tak vynutit novou stranu, použije se následující příkaz \strojopis{$\backslash$novastrana}.
+	
+	\podkapitola{Nedělitelná mezera}
+	Na konci řádku by se dle typografických pravidel nemělo objevit jedno písmeno či předložka. Používáme proto nedělitelnou mezeru. Ta se v sázecím prostředí \LaTeX ~píše tildou neboli vlnovkou $\sim$ (pravý alt + +).
+	
+	\podkapitola{Uvozovky}
+	Pro umístění textu mezi uvozovky se použije příkaz \strojopis{$\backslash$uv\{text v uvozovkách\}}.
+	
+	\podkapitola{Pomlčky}
+	V \LaTeX u se rozlišuje krátká pomlčka tzv. spojovník, normální pomlčka, dlouhá pomlčka tzv. rozdělovník a matematické mínus, \viztab{pomlcky}.
+	\tab{pomlcky}{Pomlčky}{|c|c|c|c|c|}{
+		\cara
+		Význam & Spojovník & Pomlčka & Rozdělovník & Mat. mínus\\
+		\cara
+		Zápis & - & - - & - - - & \$-\$\\
+		\cara
+	}
+	
+	\podkapitola{Speciální znaky}
+	Pro psaní speciálních znaků v textu, jež by mohly ovlivnit kód, se před ně vloží zpětné lomítko \kurziva{$\backslash$}. Jedná se například o \#, \$ a další. 
+	
+	\podkapitola{Komentáře}
+	Pro psaní komentáře se umístí na začátek řádku procento \kurziva{\%}. Text za procentem se poté nevysází do výsledného dokumentu.
+	
+	\podkapitola{Řezy písma}
+	Pro zvýraznění textu lze využít různé řezy písma. Pro programové kódy, názvy složek a~další se hodí strojopis \strojopis{$\backslash$strojopis\{text\}} a pro kapitálky se použije příkaz \strojopis{$\backslash$kapitalky\\\{text\}}. Pro zdůraznění informace v textu lze vyzkoušet kurzívu \strojopis{$\backslash$kurziva\{text\}}, tučné písmo \strojopis{$\backslash$tucne\{text\}} nebo zvýraznění \strojopis{$\backslash$zvyraznit\{text\}}. Zvýraznění \LaTeX ~provádí zvolením dostatečně odlišného řezu písma. Je-li okolní text (nezvýrazněný) sázen patkově, pak je zvýrazněný text sázen kurzívou a podobně.
+	
+	\kapitola{Seznamy}
+	
+	\podkapitola{Číslovaný seznam}
+	Číslovaný seznam se vytvoří příkazem \strojopis{$\backslash$cislseznam\{$\backslash$bod text $\backslash$bod text2…\}}. Pro jednotlivé položky seznamu se do povinného parametru (složených závorek) vloží \strojopis{$\backslash$bod}, za který se umístí text 1. bodu. Takto se pokračuje s libovolným počtem položek. \\
+	\\
+	Praktický příklad:\\
+	\strojopis{
+		$\backslash$cislseznam\{\\
+		\indent $\backslash$bod základní deska\\
+		\indent $\backslash$bod grafická karta\\
+		\indent $\backslash$bod procesor\\
+		\indent $\backslash$bod hard disk\\
+		\indent $\backslash$bod zvuková karta\\
+		\}\\[1cm]
+	}
+	Po vysázení:
+	\cislseznam{
+		\bod základní deska
+		\bod grafická karta
+		\bod procesor
+		\bod hard disk
+		\bod zvuková karta	
+	}
+	
+	\podkapitola{Nečíslovaný seznam}
+	Obdobným způsobem jako číslovaný seznam lze vytvořit nečíslovaný (bodový) seznam s~použitím příkazu \strojopis{$\backslash$bodseznam\{$\backslash$bod text $\backslash$bod text2\}}.\\
+	Praktický příklad:\\
+	\strojopis{
+		$\backslash$bodseznam\{\\
+		\indent $\backslash$bod základní deska\\
+		\indent $\backslash$bod grafická karta\\
+		\indent $\backslash$bod procesor\\
+		\indent $\backslash$bod hard disk\\
+		\indent $\backslash$bod zvuková karta\\
+		\}\\[1cm]
+	}
+	Po vysázení:
+	\bodseznam{
+		\bod základní deska
+		\bod grafická karta
+		\bod procesor
+		\bod hard disk
+		\bod zvuková karta
+	}
+	
+	\podkapitola{Popisový seznam}
+	U popisového seznamu je místo bodu použita tzv. položka. Položka $\backslash$polozka se skládá ze dvou povinných parametrů. První parametr se vysází tučným písmem a druhý ji doplňuje klasickým textem. Pro vytvoření popisového seznamu se použije následující příkaz: \strojopis{$\backslash$popisseznam\{$\backslash$polozka\{tučný text\}\{klasický text\}}.\\[1cm]
+	\novastrana
+	Praktický příklad:\\
+	\strojopis{
+		$\backslash$popisseznam\{\\
+		\indent $\backslash$polozka \{základní deska\}\{základní hardware většiny počítačů\}\\
+		\indent $\backslash$polozka \{grafická karta\}\{součást počítače, jejímž úkolem je vytvářet \\
+		\indent grafický výstup na monitoru\}\\
+		\indent $\backslash$polozka \{procesor\}\{základní elektronická součást, která umí vykonávat\\
+		\indent strojové instrukce\}\\
+		\}\\[1cm]
+	}
+	Po vysázení:
+	\popisseznam{
+		\polozka {základní deska}{základní hardware většiny počítačů}
+		\polozka {grafická karta}{součást počítače, jejímž úkolem je vytvářet grafický výstup na monitoru}
+		\polozka {procesor}{základní elektronická součást, která umí vykonávat strojové instrukce}
+	}
+	
+	\kapitola{Stromová struktura}
+	Pro tvorbu stromové struktury slouží příkaz $\backslash$strom\{\}. Každá úroveň stromu se napíše do hranatých závorek a každá další se vnoří opět do hranatých závorek následujícím způsobem:\\
+	\strojopis{
+		$\backslash$strom\{\\
+		\indent $[$1. úroveň\\
+		\indent \indent $[$1.1 úroveň$]$\\
+		\indent \indent $[$1.2 úroveň\\
+		\indent \indent \indent $[$1.2.1 úroveň$]$\\
+		\indent \indent $]$\\
+		\indent $]$\\
+		\}\\[1cm]
+	}
+	Praktický příklad: \\
+	\strojopis{
+		$\backslash$strom\{\\
+		\indent$[$Strom\\
+		\indent \indent $[$Větvička$]$\\
+		\indent \indent $[$Lísteček\\
+		\indent \indent \indent $[$Zelený$]$\\
+		\indent \indent \indent $[$Oranžový$]$\\
+		\indent \indent \indent $[$Žlutý$]$\\
+		\indent \indent $]$\\
+		\indent $]$\\
+		\}
+	}\\[1cm]
+	Po vysázení:\\[5mm]
+	\strom{
+		[Strom
+		[Větvička]
+		[Lísteček
+		[Zelený]
+		[Oranžový]
+		[Žlutý]
+		]
+		]
+	}
+	
+	\kapitola{Tabulky}
+	\podkapitola{Klasická tabulka}
+	Příkaz:\\
+	\strojopis{
+		$\backslash$tab\{nazevTabulky\}\{Popisek k tabulce\}\{|c|c|\}\{\\
+		\indent $\backslash$cara\\
+		\indent prvek \& prvek\\
+		\indent $\backslash$cara\\
+		\indent prvek \& prvek\\
+		\indent $\backslash$cara\\
+		\}	
+	}\\
+	Pro tvorbu libovolné tabulky se do prvního povinného parametru příkazu \strojopis{$\backslash$tab} vloží vlastní jedinečný název tabulky. Pomocí tohoto názvu se bude možno v textu odhazovat na tabulku díky příkazu \strojopis{$\backslash$viztab\{nazevTabulky\}}, umístěnému bezprostředně do textu. Druhý parametr určuje popisek, jež se zobrazí pod tabulkou.\\
+	Do třetího povinného parametru se vkládají následující hodnoty. Písmena \kurziva{c}, \kurziva{r}, \kurziva{l} znázorňují umístění textu v jednotlivých sloupcích tabulky, kde \kurziva{c} značí zarovnání na střed, \kurziva{r}~zarovnání vpravo a \kurziva{l} zarovnání vlevo. Pomocí svislice | se určí, mezi kterými sloupci bude vysázena vertikální čára.\\
+	Do čtvrtého povinného parametru se již vloží samotná tabulka. Jednotlivé buňky se od sebe oddělí pomocí znaku ampersand \kurziva{\&} a celý řádek buněk se zakončí dvěma zpětnými lomítky \kurziva{$\backslash \backslash$}, čímž bude ihned možno začít nový řádek buněk. Pro vytvoření horizontální čáry mezi řádky se použije příkaz \strojopis{$\backslash$cara}.\\[1cm]
+	\novastrana
+	Praktický příklad:\\
+	\strojopis{
+		$\backslash$tab\{knihy\}\{Seznam knih a autorů\}\{|c|c|\}\{\\
+		\indent $\backslash$cara\\
+		\indent kniha \& autor\\
+		\indent $\backslash$cara\\
+		\indent 1984 \& George Orwell\\
+		\indent Farma zvířat \& George Orwell\\
+		\indent $\backslash$cara\\
+		\}\\[1cm]
+	}
+	Po vysázení: (\viztab{knihy})
+	\tab{knihy}{Seznam knih a autorů}{|c|c|}{
+		\cara
+		kniha & autor\\
+		\cara
+		1984 & George Orwell\\
+		Farma zvířat & George Orwell\\
+		\cara
+	}
+	
+	\podkapitola{Profesionální tabulka}
+	Profesionální tabulka se hodí pro dokumentace a od obyčejné liší tím, že obsahuje defaultně tři hlavní vodorovné čáry, kde dvě z nich jsou hlavní (čáry označující začátek a~konec jsou širší).  Pro sazbu se použije příkaz \strojopis{$\backslash$tabulka} s povinnými parametry. Na tabulku je též možno odkazovat v textu stejným způsobem jako u klasické tabulky a to pomocí příkazu \strojopis{$\backslash$viztab\{nazevTabulky\}}.\\[1cm]
+	Příkaz:\\
+	\strojopis{
+		$\backslash$tabulka\{nazevTabulky\}\{Popisek k tabulce\}\\
+		\{prvek \& prvek$\backslash \backslash$\}\\
+		\{prvek \& prvek$\backslash \backslash$\\
+		\indent prvek \& prvek\}\\
+	}
+	\\[1cm]
+	Praktický příklad:\\
+	\strojopis{
+		$\backslash$tabulka\{latky\}\{Látky a jejich charakteristika\}\\
+		\{Látka \& Skupenství \& Popis$\backslash \backslash$\}\\
+		\{Voda \& kapalina \& bez chuti, bez zápachu$\backslash \backslash$\\
+		Brom \& kapalina \& červenohnědý, dýmavý, vysoce toxický$\backslash \backslash$\}\\
+	}
+	\\[1cm]
+	Po vysázení: (\viztab{latky})
+	\tabulka{latky}{Látky a jejich charakteristika}
+	{Látka & Skupenství & Popis\\}
+	{Voda & kapalina & bez chuti, bez zápachu\\
+		Brom & kapalina & červenohnědý, dýmavý, vysoce toxický\\}
+	
+	\kapitola{Obrázek}
+	Obrázek se vloží do složky s názvem \kurziva{images} umístěné ve složce s dokumentem. Pro vložení obrázku se použije příkaz \strojopis{$\backslash$obrazek\{nazevObrazku\}\{popisek pod obrázkem\}\\
+		\{šířka obrázku s jednotkou\}\{název souboru\}}.\\
+	Na obrázek je samozřejmě stejně jako na tabulku či citaci možno odkazovat v textu. Použije se příkaz \strojopis{$\backslash$viz\{nazevObrazku\}}, který vytvoří odkaz na obrázek ve formátu, viz~obr.~1.1.
+	\\[1cm]
+	Praktický příklad:\\
+	\strojopis{$\backslash$obrazek\{logoSkoly\}\{Logo školy\}\{5cm\}\{logo\}}
+	\\[1cm]
+	Po vysázení: (\viz{logoSkoly})
+	\obrazek{logoSkoly}{Logo školy}{5cm}{logo}
+	
+	\kapitola{Matematický zápis}
+	Matematický zápis se píše mezi dva znaky dolarů \$ \$. Zápis na více řádků se provede příkazem \strojopis{$\backslash$vzorec\{ \}}, kde se do povinného parametru vepíše daný vzorec. Každý řádek se ukončí klasicky pomocí dvou zpětných lomítek $\backslash \backslash$.  Je-li potřeba zarovnat jednotlivé řádky podle kteréhokoli znaku, na každém řádku se vloží mezi dva ampersandy (př. \&=\&).\\
+	Pro automatickou velikost závorek, jež se přizpůsobí velikosti vzorce, se pro levou závorku použije \strojopis{$\backslash$leva(} a pro pravou závorku \strojopis{$\backslash$prava)}. Závorky lze do sebe vnořovat.\\[1cm]
+	Zlomek: \strojopis{$\backslash$zlomek\{čitatel\}\{jmenovatel\}}\\
+	Dolní index: \strojopis{\_\{dolní index\}}\\
+	Horní index: \strojopis{$\textasciicircum$\{horní index\}}\\
+	Matice (prvky oddělit znakem \& a řádky $\backslash \backslash$): \strojopis{$\backslash$matice\{\}}\\
+	Šipka směřující vpravo: \strojopis{$\backslash$sipka}\\
+	Vložení textu do vzorce: \strojopis{$\backslash$text\{text\}}\\[1cm]
+	Další možnosti zápisů:\\
+	Odmocnina: \strojopis{$\backslash$sqrt[n]\{vzorec pod n-tou odmocninou\}\\}
+	Suma: \strojopis{$\backslash$sum\_\{spodní index\}$\textasciicircum$\{horní index\}}\\
+	Limita: \strojopis{$\backslash$lim\_\{definovaní meze\}\{vzorec pro limitu\}}\\
+	Integrál: \strojopis{$\backslash$int\_od$\textasciicircum$do}\\[1cm]
+	\novastrana
+	Praktický příklad:\\
+	\strojopis{
+		$\backslash$vzorec\{\\
+		1+2\&=\&3$\backslash \backslash$\\
+		B\_\{1\}\&=\&$\backslash$sum\_\{i=1\}$\textasciicircum$N m\_i $\backslash$leva[ x$\textasciicircum$i\_2 $\backslash$leva( $\backslash$omega\_1 x$\textasciicircum$i\_2 - $\backslash$omega\_2\\ x$\textasciicircum$i\_1 $\backslash$prava) - x$\textasciicircum$i\_3 $\backslash$leva( $\backslash$omega\_3 x$\textasciicircum$i\_1 - $\backslash$omega\_1 x$\textasciicircum$i\_3 $\backslash$prava) \\
+		$\backslash$prava]$\backslash \backslash$ \}	
+	}\\[1cm]
+	Po vysázení:
+	\vzorec{
+		1+2&=&3\\
+		B_{1}&=&\sum_{i=1}^N m_i \leva[ x^i_2 \leva( \omega_1 x^i_2 - \omega_2 x^i_1 \prava) - x^i_3 \leva( \omega_3 x^i_1 - \omega_1 x^i_3 \prava) \prava]\\ }
+	Další funkce a symboly naleznete v přílohách.
+	
+	\kapitola{Přílohy}
+	Příkaz \strojopis{$\backslash$prilohy} vytvoří přílohy označené písmeny dle abecedy. Do povinného parametru se vkládají přílohy stejným způsobem, jakoby šlo o kapitoly (viz 4.3 Kapitoly a podkapitoly).\\
+	\strojopis{
+		$\backslash$prilohy\{\\
+		\indent $\backslash$kapitola\{název přílohy1\}\\
+		\indent $\backslash$kapitola\{název přílohy2\}\\
+		\} 
+	}
+	
+	\kapitola{Citace a použitá literatura}
+	Pro dokumentaci je použita citace dle ISO 690 formou číselných odkazů. Pro uvedení odkazu na citaci je potřeba vložit bezprostředně za text příkaz \strojopis{$\backslash$citace\{nazevCitace\}}. Do povinného parametru se uvede libovolně zvolený název citace. Tento název bude jednoznačnou identifikací citace pro celý dokument a bude se na ni odkazovat v seznamu literatury.\\
+	Na konci dokumentu je uveden příkaz \strojopis{$\backslash$literatura\{seznam literatury\}}, jež započne seznam použitých zdrojů (citací, literatury). V povinném parametru se definuje konkrétní seznam, který se vytvoří z následujících příkazů.\\[1cm]
+	Citace pro knihu:\\
+	\strojopis{
+		$\backslash$kniha\{nazevCitace\}\{Příjmení autora\}\{Jméno autora\}\{Název knihy\}\\
+		\{Místo vydání\}\{Nakladatelství\}\{Rok\}\{ISBN\}
+	}
+	\\[1cm]
+	Citace pro kvalifikační práci:\\
+	\strojopis{
+		$\backslash$kvalifikacniprace\{nazevCitace\}\{Příjmení autora\}\{Jméno autora\}\\
+		\{Název práce\}\{Místo\}\{Rok\}\{Druh práce\}\{Univerzita, Fakulta, Katedra\}\\
+		\{Vedoucí diplomové práce jméno\}
+	}\\
+	Vysvětlivky: druh práce – např: Bakalářská práce, Diplomová práce
+	\\[1cm]
+	Citace pro URL adresu:\\
+	\strojopis{
+		$\backslash$url\{nazevCitace\}\{Název stránek\}\{Titulek\}\{Stránky\}\{Rok\}\{Datum\}\{URL odkaz\}	
+	}\\
+	Vysvětlivky: datum -- datum, kdy se cituje; použije se libovolný datum ve formátu RRRR-MM-DD nebo se využije příkaz \strojopis{$\backslash$dnes}
+	\\[1cm]
+	Praktický příklad:\\
+	\strojopis{
+		$\backslash$literatura$\{$\\
+		\indent $\backslash$kniha$\{$princ$\}\{$Saint-Exupéry$\}\{$Antoine~de$\}\{$Malý princ$\}\{$Praha$\}$\\
+		\indent $\{$Státní nakladatelství dětské knihy$\}\{$1966$\}\{$587665858$\}$\\
+		\indent $\backslash$kniha$\{$zaklety$\}\{$Niffenegger$\}\{$Audrey$\}\{$Zakletý v čase$\}\{$Praha$\}$\\
+		\indent $\{$Argo$\}\{$2009$\}\{$978-80-257-0222-2$\}$\\
+		\indent $\backslash$kvalifikacniprace$\{$diplomka$\}\{$Knotek$\}\{$Pavel$\}\{$Kultura jako péče o duši$\}$\\
+		\indent $\{$Praha$\}\{$1999$\}\{$Diplomová práce$\}\{$Karlova Univerzita, Filozofická fakulta, \\
+		\indent Katedra andragogiky$\}\{$Vedoucí diplomové práce Zdeněk Kratochvíl$\}$\\
+		\indent $\backslash$url$\{$adresa$\}\{$Westcom$\}\{$O nás$\}\{$Webnode.cz$\}\{$2018$\}\{\backslash$dnes$\}$\\
+		\indent $\{$http://www.webnode.cz/o-nas/$\}$\\
+		$\}$
+	}\\[1cm]
+	Po vysázení: (\viz{sazba06})
+	\obrazek{sazba06}{Literatura}{12cm}{sazba06}
+	
+	\kapitola{Seznam příkazů}
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{ll}	
+			\toprule[1.5pt]
+			Příkaz & Význam\\
+			\midrule
+			$\backslash$student$\{$Jméno Příjmení$\}$ & Jméno a příjmení autora\\
+			$\backslash$trida$\{$Třída$\}$ & Třída\\
+			$\backslash$obor$\{$Kód oboru Název oboru$\}$ & Kód a název oboru\\
+			$\backslash$bydliste$\{$Adresa bydliště$\}$ & Bydliště autora\\
+			$\backslash$datumNarozeni$\{$Datum narození$\}$ & Datum narození autora\\
+			$\backslash$vedouci$\{$Titul, jméno, příjmení$\}$ & Titul, jméno a příjmení vedoucí/ho\\
+			$\backslash$nazevPrace$\{$Název práce$\}$ & Název práce\\
+			$\backslash$cisloPrace$\{$Číslo$\}$ & Číslo tématu práce\\
+			$\backslash$skolniRok$\{$Školní rok$\}$ & Školní rok\\
+			$\backslash$reditel$\{$Titul, jméno a příjmení$\}$ & Titul, jméno a příjmení ředitele školy\\
+			\bottomrule[1,5pt]
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}
+		\centering
+		\begin{tabular}{ll}	
+			\toprule[1.5pt]
+			Příkaz & Význam\\
+			\midrule
+			$\backslash$zacatek & Začátek dokumentu\\
+			$\backslash$konec & Konec dokumentu\\
+			$\backslash$anotace & Anotace v českém jazyce\\
+			$\backslash$annotation & Anotace v anglickém jazyce\\
+			$\backslash$podekovani & Poděkování\\
+			$\backslash$obsah & Vygeneruje obsah\\
+			$\backslash$seznamTabulek & Vygeneruje seznam tabulek\\
+			$\backslash$seznamObrazku & Vygeneruje seznam obrázků\\
+			$\backslash$titulniStrana & Vygeneruje titulní stranu\\
+			$\backslash$zadani$\{$termín odevzdání$\}\{$zadání$\}$ & Vygeneruje zadání\\
+			$\{$originalita$\}\{$funkčnost$\}\{$náklady$\}$\\
+			$\{$majetek$\}\{$datum podepsání$\}$\\
+			$\backslash$licencniSmlouva$\{$Datum odevzdání$\}$ & Vygeneruje licenční smlouvu\\
+			$\backslash$kapitola$\{$název$\}$ & Vytvoří kapitolu\\
+			$\backslash$podkapitola$\{$název$\}$ & Vytvoří subkapitolu\\	
+			$\backslash$podpodkapitola$\{$název$\}$ & Vytvoří subsubkapitolu\\
+			$\backslash$podpodpodkapitola$\{$název$\}$ & Vytvoří subsubsubkapitolu\\
+			$\backslash$novastrana & Vynucení nové strany\\
+			$\backslash$uv$\{$text$\}$ & Vypíše text v uvozovkách\\
+			$\backslash$strojopis$\{$text$\}$ & Styl textu: strojopis\\
+			$\backslash$kurziva$\{$text$\}$ & Styl textu: kurzíva\\
+			$\backslash$tucne$\{$text$\}$ & Styl textu: tučné\\
+			$\backslash$kapitalky$\{$text$\}$ & Styl textu: kapitálky\\
+			$\backslash$zvyraznit$\{$text$\}$ & Styl textu: zvýrazněné\\
+			\bottomrule[1,5pt]
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}
+		\centering
+		\begin{tabular}{ll}	
+			\toprule[1.5pt]
+			Příkaz & Význam\\
+			\midrule
+			$\backslash$cislseznam$\{ \backslash$bod text$\}$ & Číslovaný seznam\\
+			$\backslash$bodseznam$\{ \backslash$bod text$\}$ & Nečíslovaný seznam\\
+			$\backslash$popisseznam$\{ \backslash$polozka$\{$tučný text$\}$ & Popisový seznam\\
+			$\{$klasický text$\}\}$\\
+			$\backslash$strom$\{\}$ & Stromová struktura\\
+			$\backslash$tab$\{$nazevTabulky$\}\{$Popisek k tabulce$\}$ & Klasická tabulka\\
+			$\{|$c$|$c$|\}\{ \backslash$cara prvek \& prvek$\backslash \backslash$ $\backslash$cara$\}$\\
+			$\backslash$tabulka$\{$nazevTabulky$\}\{$Popisek k tabulce$\}$ & Profesionální tabulka\\
+			$\{$prvek \& prvek$\backslash \backslash \}$$\{$prvek \& prvek $\backslash \backslash \}$\\
+			$\backslash$viztab$\{$nazevTabulky$\}$ & Odkaz na tabulku v textu\\
+			$\backslash$obrazek$\{$nazevObrazku$\}\{$popisek$\}\{$šířka$\}$ & Vložení obrázku\\
+			$\{$soubor$\}$\\
+			$\backslash$viz$\{$nazevObrazku$\}$ & Odkaz na obrázek v textu\\
+			$\backslash$vzorec$\{ \}$ & Matematický zápis i na více řádků\\
+			$\backslash$zlomek$\{$čitatel$\}\{$jmenovatel$\}$ & Zlomek\\
+			$\backslash$matice$\{\}$ & Matice\\
+			$\backslash$sipka & Šipka vpravo\\
+			$\backslash$leva$($ & Automatická velikost levé závorky\\
+			$\backslash$prava$)$ & Automatická velikost pravé závorky\\
+			$\backslash$text$\{$text$\}$ & Vložení textu do vzorce\\
+			$\backslash$prilohy$\{\backslash$kapitola$\{$Příloha$\}$ $\backslash$kapitola & Vytvoří přílohy\\
+			$\{$Příloha 2$\}\}$\\
+			\bottomrule[1,5pt]
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}
+		\centering
+		\begin{tabular}{ll}	
+			\toprule[1.5pt]
+			Příkaz & Význam\\
+			\midrule
+			$\backslash$literatura$\{$seznam literatury$\}$ & Obsahuje seznam literatury\\
+			$\backslash$citace$\{$nazevCitace$\}$ & Odkaz na literaturu v textu\\
+			$\backslash$kniha$\{$nazevCitace$\}\{$Příjmení autora$\}$ & Citace pro knihu\\
+			$\{$Jméno autora$\}\{$Název knihy$\}\{$Místo vydání$\}$\\
+			$\{$Nakladatelství$\}\{$Rok$\}\{$ISBN$\}$\\
+			$\backslash$kvalifikacniprace$\{$nazevCitace$\}$ & Citace pro kvalifikační práci\\
+			$\{$Příjmení autora$\}\{$Jméno autora$\}$\\
+			$\{$Název práce$\}\{$Místo$\}\{$Rok$\}$\\
+			$\{$Druh práce$\}\{$Univerzita, Fakulta, Katedra$\}$\\
+			$\{$Vedoucí diplomové práce jméno$\}$\\
+			$\backslash$url$\{$nazevCitace$\}\{$Název stránek$\}$ & Citace pro URL adresu\\
+			$\{$Titulek$\}\{$Stránky$\}\{$rok$\}\{$datum$\}\{$URL odkaz$\}$\\
+			$\backslash$dnes & Dnešní datum pro citaci URL\\
+			$\backslash$sqrt$[$n$]\{$vzorec pod n-tou odmocninou$\}$ & Odmocnina\\
+			$\backslash$sum\_$\{$spodní index$\}$\textasciicircum $\{$horní index$\}$ & Suma\\	
+			$\backslash$lim\_$\{$definovaní meze$\}\{$vzorec pro limitu$\}$ & Limita\\
+			$\backslash$int\_od\textasciicircum do & Integrál\\
+			\_{dolní index} & Dolní index\\
+			\textasciicircum{horní index} & Horní index\\
+			\$ vzorec \$  & Matematický zápis na jeden řádek\\
+			$\backslash$\$ & Zpětné lomítko před speciální znaky\\
+			$\sim$ & Nedělitelná mezera\\
+			$\backslash \backslash$ & Zalamování textu\\
+			\% & Komentář\\
+			\bottomrule[1,5pt]
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}
+		\centering
+		\begin{tabular}{rlrlrlrl}
+			\hline
+			arccos & $\backslash arccos$ & arcsin & $\backslash$ arcsin & arctan & $\backslash arctan$ & arg & $\backslash arg$\\
+			cos & $\backslash cos$ & cosh & $\backslash cosh$ & cot & $\backslash cot$ & coth & $\backslash coth$\\
+			csc & $\backslash csc$ & deg & $\backslash deg$ & det & $\backslash det$ & dim & $\backslash dim$ \\
+			exp & $\backslash exp$ & gcd & $\backslash gcd$ & hom & $\backslash hom$ & inf &  $\backslash inf$\\
+			ker & $\backslash exp$ & lg & $\backslash lg$ & lim & $\backslash lim$ & lim inf & $\backslash liminf$\\
+			lim sup & $\backslash limsup$ & ln & $\backslash ln$ & log & $\backslash log$ & max & $\backslash max$\\
+			min & $\backslash min$ & pr & $\backslash p$r & sec & $\backslash sec$ & sin & $\backslash sin$\\
+			sinh & $\backslash sinh$ & sup & $\backslash sup$ & tan & $\backslash tan$ & tanh & $\backslash tanh$\\
+			\hline
+		\end{tabular}
+	\end{table}
+
+	\begin{table}
+		\centering
+		\begin{tabular}{rlrlrlrlrl}
+			\hline
+			$\alpha$ & $\backslash$alpha & $\beta$ & $\backslash$beta & $\gamma$ & $\backslash$gamma & $\delta$ & $\backslash$delta & $\epsilon$ & $\backslash$epsilon\\
+			$\varepsilon$ & $\backslash$varepsilon & $\zeta$ & $\backslash$zeta & $\eta$ & $\backslash$eta & $\theta$ & $\backslash$theta & $\vartheta$ & $\backslash$vartheta\\
+			$\iota$ & $\backslash$iota & $\kappa$ & $\backslash$kappa & $\lambda$ & $\backslash$lambda & $\mu$ & $\backslash$mu & $\nu$ & $\backslash$nu\\ 
+			$\xi$ & $\backslash$xi & $o$ & o & $\pi$ & $\backslash$pi & $\varpi$ & $\backslash$varpi & $\rho$ & $\backslash$rho\\
+			$\varrho$ & $\backslash$varrho & $\sigma$ & $\backslash$sigma & $\varsigma$ & $\backslash$varsigma & $\tau$ & $\backslash$tau & $\upsilon$ & $\backslash$upsilon\\
+			$\phi$ & $\backslash$phi & $\varphi$ & $\backslash$varphi & $\chi$ & $\backslash$chi & $\psi$ & $\backslash$psi & $\omega$ & $\backslash$omega\\
+			\hline
+		\end{tabular}
+	\end{table}
+
+	\begin{table}
+		\centering
+		\begin{tabular}{rlrlrlrl}
+			\hline
+			$^\circ C$ & \textasciicircum$\backslash$circ C & $\infty$ & $\backslash$infty & $\partial$ & $\backslash$partial & $\triangle$ & $\backslash$triangle\\
+			$\rightarrow$ & $\backslash$rightarrow & $\leq$ & $\backslash$leq & $\geq$ & $\backslash$geq & $\neq$ & $\backslash$neq\\
+			$\in$ & $\backslash$in & $\ll$ & $\backslash$ll & $\gg$ & $\backslash$gg & $\doteq$ & $\backslash$doteq\\
+			$\pm$ & $\backslash$pm & $\div$ & $\backslash$div & $\approx$ & $\backslash$approx & $\backslash$ & $\backslash$backslash\\
+			\hline
+		\end{tabular}
+	\end{table}
+	
+\end{document}
+

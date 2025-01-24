@@ -4,16 +4,19 @@
 
 // Electromagnet
 const int magnetPin = 13;
+const int magnetPin1 = 0;
 int magnetActivated = HIGH;
 
 // Motors
-const int stepPinX = A0;
-const int dirPinx = A1;
-AccelStepper motorX(1, stepPinX, dirPinx);
+#define motorInterfaceType 1
 
-const int stepPinY = A2;
-const int dirPinY = A3;
-AccelStepper motorY(1, stepPinY, dirPinY);
+const int stepPinX = 12;
+const int dirPinX = 11;
+AccelStepper motorX(motorInterfaceType, stepPinX, dirPinX);
+
+const int stepPinY = 10;
+const int dirPinY = 9;
+AccelStepper motorY(motorInterfaceType, stepPinY, dirPinY);
 
 // Control multiplexor information
 bool playingAsWhite = true;
@@ -21,19 +24,29 @@ bool resetPieces = false;
 bool difficulty = 0;
 
 // General information
-int boxLength = 100;
+int boxLengthX = 125;
+int boxLengthY = 120;
 bool gameStarted = false;
+int boardValues [2][16];
+int showOff = 0;
+
 
 // Multilexers
-int muxEnable[4] = {4, 5, 0, 0};
-int muxAddr[4] = {11, 10, 9, 8};
+int muxEnable[4] = {4, 0, 0, 0};
+int muxAddr[4] = {A0, A1, A2, A3};
 int muxOutput = 2;
 
 void setup() {
 	// Electromagnet
 	pinMode(magnetPin, OUTPUT);
+	pinMode(magnetPin1, OUTPUT);
   
 	// Motors
+  pinMode(stepPinX, OUTPUT);
+	pinMode(dirPinX, OUTPUT);
+	pinMode(stepPinY, OUTPUT);
+  pinMode(dirPinY, OUTPUT);
+
   motorX.setMaxSpeed(400);
   motorY.setMaxSpeed(400);
 
@@ -50,36 +63,85 @@ void setup() {
     pinMode(muxAddr[i], OUTPUT);
     digitalWrite(muxAddr[i], LOW);
   }
-
-
-  // Serial communication for testing purposes
   Serial.begin(9600);
 }
 
 
 
 void loop() {
+  digitalWrite(magnetPin, HIGH);
+  digitalWrite(magnetPin1, LOW);
   if (!gameStarted) {
-    Serial.println("Game has not started yet");
     // Waiting for user to put pieces in the control part of the board
     
     // Check control multiplexor
 	  checkControlMultiplexor();
     return;
   }
-  
+
+  if (motorX.distanceToGo() != 0 || motorY.distanceToGo() != 0) {
+    motorX.runSpeedToPosition();
+    motorY.runSpeedToPosition();
+    return;
+  }/*
+
 	if (playingAsWhite) {
 		// White player's turn => waiting for movement
-    Serial.println("Printing reeds.");
     checkReeds();
+    if (boardValues[0][0] == 0) {
+      moveMotor(2, 4);
+      //moveMotor(2, 4);
+    } else if (boardValues[0][15] == 0) {
+      moveMotor(4, 4);
+      //moveMotor(4, 4);
+    }
 	} else {
 		// Black player's turn
     Serial.println("Ai is black...");
     AI_HvsC();
-	}
-  
-  // Wait ten seconds
-  delay(10000);
+	}*/
+
+  // Show off
+  switch (showOff) {
+    case 0:
+      moveMotor(8, 4);
+      break;
+    case 1:
+      moveMotor(6, 6);
+      break;
+    case 2:
+      moveMotor(8, 4);
+      break;
+    case 3:
+      moveMotor(4, 6);
+      break;
+    case 4:
+      moveMotor(2, 4);
+      break;           
+    case 5:
+      moveMotor(6, 8);
+      break;
+    case 6:
+      moveMotor(2, 4);
+      break;
+    case 7:
+      moveMotor(4, 8);
+      break;
+    case 8: 
+      moveMotor(9, 8);
+      break;
+    case 9:
+      moveMotor(4, 8);
+      break;
+    case 10:
+      moveMotor(3, 8);
+      break;
+    case 11: 
+      moveMotor(4, 8);
+    break;
+  }
+
+  showOff = showOff + 1;
 }
 
 
@@ -89,76 +151,75 @@ void moveMotor(int direction, int distance) {
     // Direction of the movement based on position of key in numeric keypad
     case 1:
       // Diagonal left down
-      motorY.move(boxLength*distance);;
-      motorX.move(boxLength*distance);;
-      motorY.setSpeed(150);
+      motorY.move(boxLengthY*distance);;
+      motorX.move(boxLengthX*distance);;
+      motorY.setSpeed(350);
       motorX.setSpeed(400);
       break;
 
     case 2:
       // Down
-      motorY.move(-boxLength*distance);;
-      motorY.setSpeed(150);
+      motorY.move(-boxLengthY*distance);;
+      motorY.setSpeed(350);
       break;
 
     case 3:
       // Diagonal right down
-      motorY.move(boxLength*distance);;
-      motorX.move(-boxLength*distance);;
-      motorY.setSpeed(150);
+      motorY.move(-boxLengthY*distance);;
+      motorX.move(-boxLengthX*distance);;
+      motorY.setSpeed(350);
       motorX.setSpeed(400);
       break;
 
     case 4:
       // Left
-      motorX.move(boxLength*distance);
+      motorX.move(boxLengthX*distance);
       motorX.setSpeed(400);
       break;
 
     case 6:
       // Right
-      motorX.move(-boxLength*distance);;
+      motorX.move(-boxLengthX*distance);;
       motorX.setSpeed(400);
       break;
 
     case 7:
       // Diagonal left up
-      motorY.move(-boxLength*distance);;
-      motorX.move(boxLength*distance);
-      motorY.setSpeed(150);
+      motorY.move(-boxLengthY*distance);;
+      motorX.move(boxLengthX*distance);
+      motorY.setSpeed(350);
       motorX.setSpeed(400);
       break;
 
     case 8:
       // Up
-      motorY.move(150);
-      motorY.setSpeed(200);
+      motorY.move(boxLengthY*distance);
+      motorY.setSpeed(350);
       break;
 
     case 9:
       // Diagonal right up
-      motorY.move(-boxLength*distance);;
-      motorX.move(-boxLength*distance);;
-      motorY.setSpeed(150);
+      motorY.move(boxLengthY*distance);;
+      motorX.move(-boxLengthX*distance);;
+      motorY.setSpeed(350);
       motorX.setSpeed(400);
       break;
   }
   
   // Enabling the electromagnet
-  digitalWrite(magnetPin, magnetActivated);  
+  //digitalWrite(magnetPin, magnetActivated);  
 
   // Running the motors
-  motorX.runSpeedToPosition();
-  motorY.runSpeedToPosition();
+  //motorX.runSpeedToPosition();
+  //motorY.runSpeedToPosition();
 
   // Disabling the electromagnet
-  digitalWrite(magnetPin, magnetActivated);  
+  //digitalWrite(magnetPin, magnetActivated);  
 }
 
 
 
 void checkControlMultiplexor() {
-  Serial.println("Checking control multiplexor");
 	// TODO
 	gameStarted = true;
 	difficulty = 1;
@@ -168,30 +229,18 @@ void checkControlMultiplexor() {
 
 void checkReeds() {
   for(int i = 0; i < 2; i++) {
-      Serial.print("Checking reeds for mux: ");
-      Serial.println(i);
-
       int currentMux = muxEnable[i];
-      Serial.println(currentMux);
       digitalWrite(currentMux, LOW);
 
       for(int j = 0; j < 16; j++) {
         // Checking all combinations
-        Serial.print(j);  
-        Serial.print(" - ");
-        Serial.print(j/8%2);
-        Serial.print(j/4%2);
-        Serial.print(j/2%2);
-        Serial.print(j%2);
-        Serial.print(" - ");
-        
         digitalWrite(muxAddr[0], j%2);
         digitalWrite(muxAddr[1], j/2%2);
         digitalWrite(muxAddr[2], j/4%2);
         digitalWrite(muxAddr[3], j/8%2);
 
         int reedValue = digitalRead(muxOutput);
-        Serial.println(reedValue);
+        boardValues[i][j] = reedValue;
 
       }
       digitalWrite(muxAddr[0], LOW);

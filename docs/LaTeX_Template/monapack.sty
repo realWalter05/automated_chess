@@ -1,0 +1,383 @@
+\ProvidesPackage{monapack}
+
+\usepackage{sectsty}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{forest}
+\usepackage[T1]{fontenc}
+
+%proměnné
+\newcommand{\student}[1]{\def\@student{#1}}
+\newcommand{\trida}[1]{\def\@trida{#1}}
+\newcommand{\vedouci}[1]{\def\@vedouci{#1}}
+\newcommand{\nazevPrace}[1]{\def\@nazevPrace{#1}}
+\newcommand{\cisloPrace}[1]{\def\@cisloPrace{#1}}
+\newcommand{\skolniRok}[1]{\def\@skolniRok{#1}}
+\newcommand{\obor}[1]{\def\@obor{#1}}
+\newcommand{\reditel}[1]{\def\@reditel{#1}}
+\newcommand{\bydliste}[1]{\def\@bydliste{#1}}
+\newcommand{\datumNarozeni}[1]{\def\@datumNarozeni{#1}}
+
+%okraje
+\usepackage[top=3cm, left=3cm, right=2cm, bottom=3cm]{geometry}
+
+%řádkování
+\renewcommand{\baselinestretch}{1.5}
+
+%seznamy
+\newcommand{\bod}{\item}
+\newcommand{\polozka}[2]{\item[#1] #2}
+
+\newcommand{\cislseznam}[1]{
+	\begin{enumerate}
+		#1
+	\end{enumerate}
+}
+\newcommand{\bodseznam}[1]{
+	\begin{itemize}
+		#1
+	\end{itemize}
+}
+\newcommand{\popisseznam}[1]{
+	\begin{description}
+		#1
+	\end{description}
+}
+
+%texty
+\newcommand{\kapitola}[1]{\chapter{#1}}
+\newcommand{\podkapitola}[1]{\section{#1}}
+\newcommand{\podpodkapitola}[1]{\subsection{#1}}			
+\newcommand{\podpodpodkapitola}[1]{\subsubsection{#1}}
+\newcommand{\strojopis}[1]{\texttt{#1}}
+\newcommand{\kurziva}[1]{{\it #1}}
+\newcommand{\tucne}[1]{{\bf #1}}
+\newcommand{\kapitalky}[1]{{\sc #1}}
+\newcommand{\zvyraznit}[1]{{\em #1}}
+
+%dokument
+\newcommand{\titulniStrana}{
+	\begin{titlepage}
+		\begin{center}
+			\includegraphics[width=3cm]{logo}\\[2mm]
+			Střední průmyslová škola a Vyšší odborná škola, Písek, Karla Čapka 402, Písek\\[2mm]
+			\@obor\\[1,2cm]
+			\Huge Maturitní práce\\[6mm]
+			{\textbf{\Huge{\@nazevPrace}}}\\[2mm]
+			\normalsize Téma číslo \@cisloPrace
+		\end{center}
+		\vfill
+		\noindent autor:\\
+		\emph{\bf \@student, \@trida}\\[2mm]
+		vedoucí maturitní práce:\\
+		\emph{\bf \@vedouci}\\[8mm]
+		Písek \@skolniRok
+	\end{titlepage}
+}
+\newcommand{\anotace}{\newpage \thispagestyle{empty} \section*{Anotace}}
+\newcommand{\annotation}{\section*{Annotation}}
+\newcommand{\podekovani}{
+	\newpage \thispagestyle{empty}
+	\vspace*{\fill}
+	\noindent Poděkování\\[2mm]
+}
+\newcommand{\obsah}{\tableofcontents \thispagestyle{empty}}
+\newcommand{\zacatek}{\begin{document}}
+\newcommand{\konec}{\end{document}}
+\newcommand{\seznamTabulek}{\listoftables}
+\newcommand{\seznamObrazku}{\listoffigures}
+\newcommand{\novastrana}{\newpage \noindent}
+
+%obrazek
+\newcommand{\obrazek}[4]{
+	\begin{figure}
+		\centering
+		\includegraphics[width=#3]{#4}
+		\caption{#2}
+		\label{#1}
+	\end{figure}
+}
+\newcommand{\viz}[1]{viz. obr. \ref{#1}}
+
+%citace
+\newcommand{\citace}[1]{\cite{#1}}
+\newcommand{\literatura}[1]{
+	\begin{thebibliography}{1}
+	\bibliographystyle{unsrt}
+	#1
+	\end{thebibliography}
+}
+\newcommand{\kniha}[8]{
+	\bibitem{#1}
+	{\sc #2}{,} #3.
+	\newblock {\em #4}.
+	\newblock #5: #6, #7.
+	\newblock ISBN #8.
+}
+\newcommand{\kvalifikacniprace}[9]{
+	\bibitem{#1}
+	{\sc #2}{,} #3.
+	\newblock {\em #4}.
+	\newblock #5, #6.
+	\newblock #7.
+	\newblock #8.
+	\newblock #9.
+}
+\newcommand{\url}[7]{
+	\bibitem{#1}
+	{\sc #2}. 
+	\newblock #3. 
+	\newblock {\em #4} [online]. 
+	\newblock ©#5 [cit.#6]. 
+	\newblock Dostupné~z: #7
+}
+
+%stromová stuktura
+\newcommand{\strom}[1]{
+	\begin{forest}
+		for tree={
+			font=\ttfamily,
+		}
+		#1
+	\end{forest}
+}
+
+%přílohy
+\newcommand{\prilohy}[1]{\appendix \addcontentsline{toc}{chapter}{Přílohy} #1}
+
+%matematický zápis
+\newcommand{\zlomek}{\frac}
+\newcommand{\vzorec}[1]{
+	\begin{eqnarray*}
+		#1
+	\end{eqnarray*}
+}
+\newcommand{\text}[1]{\mbox{#1}}
+\newcommand{\matice}[1]{
+	\begin{array}{|cc|}
+		#1
+	\end{array}
+}
+\newcommand{\sipka}{\rightarrow}
+\newcommand{\leva}{\left}
+\newcommand{\prava}{\right}
+
+%styl kapitoly
+\usepackage{titlesec}
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-30pt}{40pt}
+
+%datum pro citace
+\usepackage[yyyymmdd]{datetime} 
+\renewcommand{\dateseparator}{--}
+\newcommand{\dnes}{\today}
+
+%tabulka profesionální
+\usepackage{booktabs}
+\newcommand{\tabulka}[4]{
+	\begin{table}
+		\centering
+		\begin{tabular}{llllllllll}	
+			\toprule[1.5pt]
+			#3
+			\midrule
+			#4
+			\bottomrule[1,5pt]
+		\end{tabular}
+		\caption{#2}
+		\label{#1}
+	\end{table}
+}
+\newcommand{\viztab}[1]{viz tabulka \ref{#1}}
+
+%tabulka
+\newcommand{\cara}{\hline}
+\newcommand{\tab}[4]{
+	\begin{table}
+		\centering
+		\begin{tabular}{#3}
+			#4
+		\end{tabular}
+		\caption{#2}
+		\label{#1}
+	\end{table}
+}
+
+%licencni smlouva
+\newcommand{\licencniSmlouva}[1]{
+	\newpage \thispagestyle{empty} \section*{Licenční smlouva o podmínkách užití školního díla}
+	ve smyslu zákona č. 121/2000 Sb. o právu autorském, o právech souvisejících s právem autorským a o změně některých zákonů (autorský zákon) v platném znění (dále jen „AZ“), 
+	uzavřená mezi smluvními stranami:\\
+	
+	\begin{enumerate}
+		\item {\bf Autor práce: \@student}\\
+		bytem \@bydliste\\
+		datum narození: \@datumNarozeni\\
+		(dále jen „autor“)
+		\\[2mm]{\bf a}
+		\item {\bf Nabyvatel: Střední průmyslová škola a Vyšší odborná škola, Písek, Karla Čapka 402, Písek}\\
+		397 11 Písek, Karla Čapka 402\\
+		zastoupená ředitelem školy: \@reditel\\
+		(dále jen SPŠ a VOŠ Písek)\\
+	\end{enumerate}
+	
+	\subsubsection*{Článek 1\\Vymezení pojmů}
+	\begin{itemize}
+		\item [1.1] Školním dílem dle §60 AZ se pro účely této smlouvy rozumí dílo vytvořené žákem/studentem ke splnění školních nebo studijních povinností vyplývajících z jeho právního postavení ke škole.
+		\item [1.2] Licencí se pro účely této smlouvy rozumí oprávnění k výkonu práva školní dílo užít v~rozsahu a za podmínek dále stanovených.
+	\end{itemize}
+	
+	\subsubsection*{Článek 2\\Dílo}
+	\begin{itemize}
+		\item [2.1] Předmětem této smlouvy je poskytnutí licence k užití školního díla -- maturitní práce.\\
+		Název práce (dále jen „dílo“): \@nazevPrace\\
+		vedoucí práce: \@vedouci\\
+		odevzdané nabyvateli v tištěné a elektronické formě dne #1.
+		\item [2.2] Autor prohlašuje, že:
+		\begin{itemize}
+			\item[--] vytvořil dílo, specifikované touto smlouvou, samostatnou vlastní tvůrčí činností;
+			\item[--] při zpracovávání díla se sám nedostal do rozporu s autorským zákonem a předpisy souvisejícími;
+			\item[--] dílo je dílem původním;
+			\item[--] neposkytl třetí osobě výhradní oprávnění k užití díla v rozsahu licence poskytnuté nabyvateli dle této smlouvy před podpisem této smlouvy;
+			\item[--] je si vědom, že před zamýšleným poskytnutím výhradního oprávnění k užití díla v rozsahu licence poskytnuté nabyvateli dle této smlouvy třetí osobě, je povinen informovat tuto třetí osobu o skutečnosti, že již poskytl nevýhradní licenci k užití díla nabyvateli.
+		\end{itemize}
+		\item [2.3] Dílo je chráněno jako dílo dle autorského zákona v platném znění.
+	\end{itemize}
+	
+	\thispagestyle{empty}
+	
+	\subsubsection*{Článek 3\\Poskytnutí licence}
+	\begin{itemize}
+		\item [3.1] Licenční smlouvou autor poskytuje nabyvateli oprávnění k výkonu práva dílo užít pro účely výuky na SPŠ a VOŠ, Písek a pro vnitřní potřebu školy, ze které neplyne škole hospodářský výsledek.
+		\item [3.2] Licence je poskytována pro celou dobu trvání autorských a majetkových práv k dílu.
+		\item [3.3] Autor poskytuje nabyvateli oprávnění užít dílo způsoby podle 3.1 neomezeně.
+		\item [3.4] Autor poskytuje nabyvateli oprávnění užít dílo bezúplatně za splnění podmínky, že nabyvatel nebude užívat dílo za účelem dosažení zisku a nebude-li v budoucnu dohodnuto písemně jinak.
+	\end{itemize}
+	
+	\subsubsection*{Článek 4\\Údaje o autorství}
+	\begin{itemize}
+		\item[4.1] Nabyvatel se zavazuje, že uvede údaje o autorství autora dle Autorského zákona.
+	\end{itemize}
+	
+	\subsubsection*{Článek 5\\Poskytnutí licence}
+	\begin{itemize}
+		\item[5.1] Pokud to není v rozporu s oprávněnými zájmy nabyvatele, licence je poskytována jako nevýhradní. Nabyvatel je oprávněn postoupit tuto licenci třetí osobě a udělovat podlicence za splnění podmínek uvedených v § 48 zákona.
+		\item[5.2] Autor může své dílo užít či poskytnout jinému licenci, není-li to v rozporu s oprávněnými zájmy nabyvatele, za podmínky, že nabyvatel (dle této licenční smlouvy) je oprávněn po autoru školního díla požadovat, aby přiměřeně přispěl na úhradu nákladů, tak, jak je stanoveno v § 60 odst. 3 zákona.
+		\item[5.3] Nabyvatel není povinen dílo užít.
+		\item[5.4] Nabyvatel je oprávněn dílo spojovat s jinými díly i zařadit dílo do díla souborného. Autor dává svolení k tomu, aby nabyvatel pořídil pro účely užití uvedené v této smlouvě překlad díla.
+		\item[5.5] V případě, že z díla plyne hospodářský výsledek autorovi nebo nabyvateli, rozdělení zisku bude řešeno dodatkem k této smlouvě.
+	\end{itemize}
+	
+	\subsubsection*{Článek 6\\Výpověď smlouvy}
+	\begin{itemize}
+		\item[6.1] Každá smluvní strana může smlouvu kdykoliv písemně vypovědět bez udání úvodu.
+		\item[6.2] Výpověď musí být učiněna doporučeným dopisem doručeným druhé smluvní straně. Výpovědní lhůta je stanovena na dva měsíce a začíná běžet prvním dnem kalendářního měsíce následujícího po měsíci, v němž byla výpověď doručena druhé smluvní straně.
+	\end{itemize}
+	
+	\thispagestyle{empty}	
+	
+	\subsubsection*{Článek 7\\Závěrečná ustanovení}
+	\begin{itemize}
+		\item[7.1] Smlouva je sepsána ve dvou vyhotoveních s platností originálu, která budou vložena do dvou výtisků díla (práce), z toho nabyvatel i autor obdrží po jednom vyhotovení.
+		\item[7.2] Vztahy mezi smluvními stranami vzniklé a neupravené touto smlouvou se řídí autorským zákonem a občanským zákoníkem v platném znění, popř. dalšími právními předpisy.
+		\item[7.3] Smlouva byla uzavřena podle svobodné a pravé vůle smluvních stran, s plným porozuměním jejímu textu i důsledkům, nikoli v tísni a za nápadně nevýhodných podmínek.
+		\item[7.4] Smlouva nabývá platnosti a účinnosti dnem jejího podpisu oběma smluvními stranami.
+	\end{itemize}
+
+	\vfill 
+	\noindent V Písku dne #1\\[1cm]
+	Autor: \hspace{1,25cm} \makebox[2in]{\hrulefill}\\[5mm]
+	Nabyvatel: \hspace{0.5cm} \makebox[2in]{\hrulefill}\\
+
+	\thispagestyle{empty}
+}
+
+%zadání
+\newcommand{\zadani}[7]{
+\thispagestyle{empty}
+\begin{center}
+	\includegraphics[width=3cm]{logo}\\[2mm]
+	Střední průmyslová škola a Vyšší odborná škola, Písek, Karla Čapka 402, Písek\\[2mm]
+	\@obor\\[1,2cm]
+	\Huge Zadání maturitní práce\\[6mm]
+	{\textbf{\Huge{\@nazevPrace}}}\\[2mm]
+	\normalsize Téma číslo \@cisloPrace\\[2,5cm]
+	Termín odevzdání:\\
+	#1
+\end{center}
+\vfill
+\noindent student/ka:\\
+\emph{\bf \@student, \@trida}\\[2mm]
+vedoucí maturitní práce:\\
+\emph{\bf \@vedouci}\\[8mm]
+Písek \@skolniRok\\
+
+\newpage \thispagestyle{empty}
+\subsubsection*{Zadání}
+\begin{enumerate}
+	#2
+\end{enumerate}
+
+\subsubsection*{Kritéria hodnocení maturitní práce}
+(nutné parametry práce, které musí být splněny, aby práce byla uznána a byla hodnocena)
+\begin{enumerate}
+	\item splněn požadovaný minimální rozsah vlastního textu práce v rozsahu 15 stran textu s přiměřeným množstvím obrázků a tabulek nezbytně nutných k popisu/výkladu problému řešeného v textu
+	\item splněna struktura práce:
+	\begin{enumerate}
+		\item teoretický úvod k problematice řešené v práci v rozsahu max. 4 strany
+		\item  popis autorského řešení zadaného úkolu, doplněného výpočty, výkladem algoritmů, obrázky, které jsou nezbytně nutné k vyřešení částí zadání, v rozsahu min. 10 stran
+		\item závěr hodnotící dosažené výsledky v rozsahu min. 1 normované strany
+	\end{enumerate} 
+	\item pokud práce nesplňuje předchozí dvě kritéria, je hodnocena: nedostatečně\\
+	pokud jsou předchozí kritéria splněna, je práce hodnocena:
+	\begin{enumerate}
+		\item odpovědnost a přístup žáka v průběhu řešení zadání:\\
+		vedoucí 0--10 \%, oponent 0 \%	
+		\item dodržení obsahové a grafické struktury maturitní práce:\\ 
+		vedoucí 0--10 \%, oponent 0--10 \%
+		\item originalita a vhodnost řešení:\\
+		vedoucí 0--25 \%, oponent 0--35 \%\\
+		(konkretizuje vedoucí práce ve 2 až 5 bodech podle 
+		požadovaných výstupů práce)
+		\begin{enumerate}
+			#3
+		\end{enumerate}
+		\item funkčnost řešení:\\
+		vedoucí 0--30 \%, oponent 0--30 \%\\
+		(vedoucí práce ve 2 až 5 bodech konkretizuje podle 
+		požadovaných kritérií funkčnosti)
+		\begin{enumerate}
+			 #4
+		\end{enumerate}
+		\item vlastní obhajoba:\\
+		vedoucí 0--25 \%, oponent 0--25 \%
+	\end{enumerate}
+\end{enumerate}
+
+\thispagestyle{empty}
+\subsubsection*{Klasifikační stupnice}
+\begin{enumerate}
+	\item výborný 84--100 \%
+	\item chvalitebný 66--83 \%
+	\item dobrý 48--65 \%
+	\item dostatečný 31--47\%
+	\item nedostatečný 0--30 \%
+\end{enumerate}
+
+\subsubsection*{Způsob zpracování a pokyny k obsahu a rozsahu maturitní práce}
+Práce bude zpracována podle platného metodického pokynu dostupného na\\
+n:$\backslash$!maturita$\backslash$MetodickýPokyn$\backslash$...).\\[3mm]
+Kompletní práce se odevzdává do informačního střediska školy v jednom tištěném exempláři doplněném elektronickým nosičem dat (CD, DVD, USB flash disk, SD karta), na kterém bude uvedena kompletně zpracovaná práce včetně příloh. V případě tvorby software, také zdrojový kód navrženého software. V případě projektu, také projektová dokumentace (podrobná technická zpráva, úplná výkresová dokumentace, podrobný rozpočet).\\[3mm]
+Náklady na materiál bude hradit #5.\\
+Funkční vzorek bude majetkem #6.\\
+
+\thispagestyle{empty}
+
+\vfill \noindent
+V Písku #7\\[1cm]			
+\hspace{1,25cm} \makebox[2in]{\hrulefill}\\
+\@reditel\\
+ředitel SPŠ a VOŠ Písek\\	
+}

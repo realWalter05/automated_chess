@@ -1,4 +1,4 @@
-//  Chessboard
+/*//  Chessboard
 int reed_sensor_status [8][8];
 int reed_sensor_record [8][8];
 int reed_sensor_status_memory [8][8];
@@ -72,3 +72,4 @@ enum {WHITE, BLACK};
 
 //  MicroMax
 extern char lastH[], lastM[];
+*/
