@@ -92,7 +92,7 @@ void loop() {
       moveMotor(2, 4);
       //moveMotor(2, 4);
     } else if (boardValues[0][15] == 0) {
-      moveMotor(4, 4);
+      moveMotor(4b, 4);
       //moveMotor(4, 4);
     }
 	} else {
