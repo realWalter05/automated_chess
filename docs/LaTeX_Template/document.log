@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2025.2.5)  5 FEB 2025 14:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2025.2.5)  10 FEB 2025 14:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -777,23 +777,35 @@ Kapitola 3.
 Kapitola 4.
 [11
 
+]
+Kapitola 5.
+[12
+
+]
+Kapitola 6.
+[13
+
+]
+Kapitola 7.
+[14
+
 ] (./document.lot)
 \tf@lot=\write6
 \openout6 = `document.lot'.
 
- [12
+ [15
 
 ] (./document.lof)
 \tf@lof=\write7
 \openout7 = `document.lof'.
 
- [13
+ [16
 
 ]
 P\v {r}\'{\i }loha A.
-[14
+[17
 
-] [15
+] [18
 
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
 (./document.aux)
@@ -807,25 +819,24 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 25475 strings out of 476042
- 594028 string characters out of 5792599
+ 25468 strings out of 476042
+ 593928 string characters out of 5792599
  1934187 words of memory out of 5000000
- 47223 multiletter control sequences out of 15000+600000
- 568675 words of font info for 56 fonts, out of 8000000 for 9000
+ 47218 multiletter control sequences out of 15000+600000
+ 567132 words of font info for 54 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
  113i,5n,121p,1609b,270s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/
 texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/font
-s/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/
-cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx24
-88.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/sh
-are/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/
-fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf-dist/fonts/type1/pub
-lic/cm-super/sfti1200.pfb>
-Output written on document.pdf (16 pages, 172984 bytes).
+s/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/
+cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc12
+00.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/sh
+are/texmf-dist/fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf-dist/
+fonts/type1/public/cm-super/sfti1200.pfb>
+Output written on document.pdf (19 pages, 166485 bytes).
 PDF statistics:
- 111 PDF objects out of 1000 (max. 8388607)
- 71 compressed objects within 1 object stream
+ 116 PDF objects out of 1000 (max. 8388607)
+ 75 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 
