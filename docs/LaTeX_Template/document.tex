@@ -79,12 +79,12 @@ ovládané mikrokontrolérem, uživatelské ovládání šachovnice, vhodné kom
 	\anotace 
 	Maturitní práce se zabývala tvorbou samořídící šachovnice, jejíž cílem bylo kompletně simulovat protihráče.
 	Ať už se jedná o vymýšlení protitahu či o samotný manuální posun figurky. Šachovnice je ovládána mikrokontrolérem
-	Arduino~UNO.
-	Pomocí magnetických spínačů umístěných na PCB desce detekujeme pozici figurek na hracím poli. Tyto informace
+	Arduino~UNO. Pomocí magnetických spínačů umístěných na PCB desce detekujeme pozici figurek na hracím poli. Tyto informace
 	následně zpracováváme Arduinem a skrze dva krokové motory a elektromagnet realizujeme tahy figurek. Pro zjištění
 	ideálního příštího tahu využíváme Minimax algoritmus, jenž je schopný zevaluovat danou situaci a skrze programovou
 	logiku udat příkazy pro pohyb figurek. Celá samořídící šachovnice je vyrobena z dřevěné konstrukce, do které je
-	umístěna deska plošného spoje s elektronikou. V rámci projektu jsem si pomocí 3D tisku zhotovil magnetické šachové figurky. Šachovnice také umožňuje zvolení si obtížnosti a volbu hry buď za černé či bílé.
+	umístěna deska plošného spoje s elektronikou. V rámci projektu jsem si pomocí 3D tisku zhotovil magnetické šachové figurky. 
+	Šachovnice také umožňuje zvolení si obtížnosti a volbu hry buď za černé či bílé.
 
 	
 	
@@ -93,18 +93,47 @@ ovládané mikrokontrolérem, uživatelské ovládání šachovnice, vhodné kom
 
 	
 	\podekovani
-	Chtěl bych poděkovat panu Mgr. Janouškovi za podporu a vedení práce. Dále elektrotechnikům, co mi pomáhali s výrobou desky, Jířímu Kutilovi, dále mojí přítelkyni, Marečkovi Vejmelkovi a především světovému míru a mému permetum mobile Tadeášovi Hanusovi
+	 Chtěl bych poděkovat panu Mgr. Janouškovi za podporu a vedení práce. Dále elektrotechnikům,
+	 co mi pomáhali s výrobou desky, Jířímu Kutilovi, dále mojí rodině, přítelkyni, bráchovi a ségře,
+	 Marečkovi Vejmelkovi a především světovému míru a mému perpetum mobile Tadeášovi H(a)nusovi.
 	
 		
 	\obsah
 	
 	\kapitola{Úvod}
-		
-		\podkapitola{Cíl práce}
-		
-		\podkapitola{Inspirace}
-		
-		\podkapitola{Vlastní realizace}
+		Nápad pro automatickou šachovnici jsem dostal při hledání nového projektu,
+		který bych si doma zvládl sestrojit. Chtěl jsem, aby projekt obsahoval, jak 
+		část softwarovou, kterou jsem se do té doby primárně zabýval, ale také část 
+		mechanickou, kterou by bylo nutné vyrobit. 
+
+		Napadlo mě vytvořit nějakou deskovou hru pro více hračů. V té době jsem měl
+		ve velké oblibě šach a tím vznikla idea automatická šachovnice. Začal jsem nákresem
+		na papír a tím jsem získal základní představu o projektu. Šachovnice se skládá ze tří
+		hlavní částí:
+
+		\popisseznam{
+			\polozka {Konstrukční část} {
+				Tou jest samotná dřevěná konstrukce šachovnice, do které bude nutné umístít mechanismus
+				pro pohybování s figurky. V rámci toho také její opracování a  nadesignování projektu. 
+				Tvorba šachových políček a rozhraní pro jednoduché ovládání.
+			}
+			\polozka {Elektrotechnická část}{
+				Ta obsahuje systém pro detekci figurek na šachovnici. Ten by se dal vytvořit pomocí mnoha
+				způsobů, ale v práci budu popisovat řešení pomocí desky plošného spoje. Dále vytvoření pohybové 
+				soustavy pomocí krokových motorů a umístění elektromagnetu, jenž bude s figurky pohybovat. Posledním
+				krokem je sestrojení systému, jenž umožní uživateli variabilovat hru, pomocí volby barvy a obtížnosti.
+			}
+			\polozka {Softwarová část}{
+				Z hlediska softwaru je nutné vytvořit kód, který spojí všechny části dohromady. Je nutné transformovat
+				signály, tak aby s nimi bylo možné pracovat. Z hlediska kódu je nutné vytvořit rozhraní pro komunikaci
+				mezi mikrokontrolérem a součástky. Je zapotřebí umožnit evaluaci dat o pozicích figurek a předat je
+				algoritmu, který nám bude schopen vymyslet další tah. Údáje o dalším tahu ovšem musíme opět transformovat,
+				tak aby z něj byli čitelné pokyny pro krokové motory. Nesmíme opomenou ani řídící signály a minimalizovat
+				zpoždění a zatížení na hardware.
+			}
+		}
+
+
 	
 	\kapitola{Řídící jednotka}
 		
