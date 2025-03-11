@@ -85,11 +85,13 @@ ovládané mikrokontrolérem, uživatelské ovládání šachovnice, vhodné kom
 	logiku udat příkazy pro pohyb figurek. Celá samořídící šachovnice je vyrobena z dřevěné konstrukce, do které je
 	umístěna deska plošného spoje s elektronikou. V rámci projektu jsem si pomocí 3D tisku zhotovil magnetické šachové figurky. 
 	Šachovnice také umožňuje zvolení si obtížnosti a volbu hry buď za černé či bílé.
-
+	
+	\tucne{Klíčová slova:} \LaTeX, dokumentace, šablona, balík
 	
 	
 	\annotation
 	Aj...
+	\tucne{Key words:} \LaTeX, documentation, template, package
 
 	
 	\podekovani
@@ -97,6 +99,7 @@ ovládané mikrokontrolérem, uživatelské ovládání šachovnice, vhodné kom
 	 co mi pomáhali s výrobou desky, Jířímu Kutilovi, dále mojí rodině, přítelkyni, bráchovi a ségře,
 	 Marečkovi Vejmelkovi a především světovému míru a mému perpetum mobile Tadeášovi H(a)nusovi.
 	
+	\licencniSmlouva{11. 3. 2025}
 		
 	\obsah
 	
@@ -150,6 +153,7 @@ ovládané mikrokontrolérem, uživatelské ovládání šachovnice, vhodné kom
 		Postupy a zkušenosti, které jsem během práce získal postupně popíši a vysvětlím.
 
 	
+	
 	\kapitola{Rozložení projektu}
 	V této kapitole si popíšeme, jakým způsobem je projekt celkově sestrojen. Popíšeme si jednotlivé
 	systémy a jakým způsobem jsou spolu propojené. Na základě tohoto porozumění si v nadcházejících kapitolách
@@ -160,9 +164,37 @@ ovládané mikrokontrolérem, uživatelské ovládání šachovnice, vhodné kom
 	Automatická šachovnice, jak je vidět na schématu se skládá z...
 
 
+	\kapitola{Využité technologie}
+		V této kapitole si popíšeme technologie, které byli zapotřebí při tvorbě projektu.
+		Získáme k nim teoretický základ nutný k porozumění šachovnice.
+
+		\podkapitola{Arduino}
+		Arduino je platforma pro tvorbu různých elektronických projektů. Zabývá se 
+		hardwarem a softwarem a obě tyto části vytváří jako open-source. To je jeden
+		z důvodů velkého rozšíření mikrokontrolerů Arduino. 
+
+		Mikrokontrolér Arduino je malý počítač založen na jednom čipu. Arduino vyrábí
+		mnoho různých řad jejich projektů, ale mezi nejznámější se řadí Arduino UNO či
+		Mega. Arduino desky na sobě mají široké spektrum možných vstupů, výstupů a senzorů.
+		Velkou výhodou těchto desek je cena. Ta se pohybuje v řádech stovek korun.
+
+		Arduino desky se primárně programují pomocí platformy Arduino IDE. To je další open-source
+		program, který má na základě popularity mezi lidmi i velkou podporu knihoven
+		s různými zaměřeními.\citace{Arduino}
+
+		Obrázek arduina s piny
+
+		\podkapitola{Deska plošného spoje}
+		PCB deska, jak je zkratkou nazývána, nebo také DPS je velmi rozšířená elektronická součástka.
+		Jedná se o desky vyrobené z izolačních materiálů s pájecími poli zvanými podložky a elektrickými spoji označovanými jako stopy.\citace{PCB deska}
+		Na PCB desky se připájí potřebné součástky. Tyto součástky jsou spolu pak propojeny na základě schématu pro tvorbu PCB. Jsou dvě primární technologie 
+		montáže součástek na desku. Je tady technologie průchozích otvorů (THT, Through-Hole Technology), nebo povrchové montáže (SMD, Surface-Mounted Devices).
+
+		Obrázek pcb smd vs tht
+
+
 	\kapitola{Řídící jednotka}
 
-		
 	\kapitola{Šachové herní pole}	
 	
 	\kapitola{Programový kód}
@@ -188,6 +220,10 @@ ovládané mikrokontrolérem, uživatelské ovládání šachovnice, vhodné kom
 		\kvalifikacniprace{nazevCitace}{Příjmení autora}{Jméno autora}{Název práce}{Místo}{Rok}{Druh práce}{Univerzita, Fakulta, Katedra}{Vedoucí diplomové práce jméno}
 		
 		\url{nazevCitace}{Název stránek}{Titulek}{Stránky}{rok}{datum}{URL odkaz}
+
+		\url{Arduino}{conrad.cz}{Arduino® » Praktický mikrokontrolér pro individuální spínací a řídicí úlohy}{https://www.conrad.cz}{2024}{29. 2. 2024}{https://www.conrad.cz/cs/clanky/elektromechanika/arduino.html?srsltid=AfmBOoq-DVdYd1lkV0hVguOg5cvqM7O721czoRtYbZBji4hT3SLgxRoY}
+		\url{PCB deska}{botland.cz}{Deska PCB – co to je?}{2023}{13. 3. 2023}{https://botland.cz/blog/deska-pcb-co-to-je/}
+		
 		
 	}
 	
