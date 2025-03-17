@@ -111,6 +111,10 @@ void loop() {
       detectBoardMovement();
     }
 
+    strcpy(lastH, move);
+    Serial.println("User move: ");
+    Serial.println(lastH[0], lastH[1], lastH[2], lastH[3]);
+
     userTurn = false;
 
   } else {
@@ -130,6 +134,10 @@ void loop() {
         moveMagnet(4, 2, false);
       }
     }
+
+    Serial.println("Ai move: ");
+    Serial.println(lastM[0], lastM[1], lastM[2], lastM[3]);
+
     userTurn = true;
   }
 }
