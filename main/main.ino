@@ -1,6 +1,12 @@
 #include "Micro_Max.h"
-#include "global.h"
 #include <AccelStepper.h>
+
+// Detect values
+char move[4];
+char letterTranslate[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}; 
+
+//  MicroMax
+extern char lastH[], lastM[];
 
 // Electromagnet
 const int magnetPin = 13;
@@ -28,6 +34,8 @@ int boxLengthY = 120;
 bool gameStarted = false;
 
 int boardValues[8][8];
+int boardValuesMemory[8][8];
+int recordedReedValue[8];
 int controlValues[8];
 
 // Multilexers
@@ -96,21 +104,76 @@ void loop() {
   }
 
   // GAME STARTED
-  checkReeds();
 
   if (userTurn) {
     // Player's turn => waiting for movement
+    while (!move[0] && !move[1] && !move[2] && !move[3]) {
+      detectBoardMovement();
+    }
 
+    userTurn = false;
 
   } else {
     // AI turn
-    Serial.println("Ai is black...");
-    AI_HvsC();
+    Serial.println("Ai playing...");
+    AI_HvsC(move);
+
+    // TODO make the move
+    for (int i = 0; i < 3; i++) {
+      if (i == 0) {
+        moveMagnet(8, 2, false);
+      } else if (i == 1) {
+        moveMagnet(6, 2, true);
+      } else if (i == 2) {
+        moveMagnet(2, 2, true);
+      } else if (i == 3) {
+        moveMagnet(4, 2, false);
+      }
+    }
+    userTurn = true;
   }
 }
 
+
+void getReedValues(int targetMuxAddress, int from, int to) {
+  // DEBUG information
+  Serial.println("MUX ");
+  Serial.print(targetMuxAddress);
+  Serial.print(":    ");
+
+  // Splitting to two rows because row of chessboard has 8 pieces
+  int muxValues[8];
+
+  // Activating MUX
+  digitalWrite(targetMuxAddress, LOW);
+
+  for (int j = from; j < to; j++) {
+    // Checking MUX combinations
+    digitalWrite(muxAddr[0], j % 2);
+    digitalWrite(muxAddr[1], j / 2 % 2);
+    digitalWrite(muxAddr[2], j / 4 % 2);
+    digitalWrite(muxAddr[3], j / 8 % 2);
+
+    int reedValue = digitalRead(muxOutput);
+    Serial.print(reedValue);
+
+    muxValues[j] = reedValue;
+
+  }
+
+  // Resetting MUX
+  digitalWrite(muxAddr[0], LOW);
+  digitalWrite(muxAddr[1], LOW);
+  digitalWrite(muxAddr[2], LOW);
+  digitalWrite(muxAddr[3], LOW);
+
+  digitalWrite(targetMuxAddress, HIGH);
+  memcpy(recordedReedValue[8], muxValues, sizeof(recordedReedValue[8]));
+}
+
 void setControlMUX() {
-  controlValues = getReedValues(muxEnable[5])[0];
+  getReedValues(muxEnable[4], 0, 8);
+  memcpy(controlValues[8], recordedReedValue, sizeof(controlValues[8]));
 
   // Setting the data based on MUX wiring
   if (!controlValues[1]) {
@@ -122,15 +185,15 @@ void setControlMUX() {
   }
 
   if (!controlValues[3]) {
-    difficulty = 0
+    difficulty = 0;
   }
 
   if (!controlValues[4]) {
-    difficulty = 1
+    difficulty = 1;
   }
 
   if (!controlValues[5]) {
-    difficulty = 2
+    difficulty = 2;
   }
 
   if ((!controlValues[1] || !controlValues[2]) &&
@@ -143,51 +206,14 @@ void setControlMUX() {
 
 void setCurrentBoard() {
   for (int i = 0; i < 4; i = i + 2) {
-    int currentReedValues[2] = getReedValues(muxEnable[i]);
-    boardValues[i] = currentReedValues[0];
-    boardValues[i+1] = currentReedValues[1];
+      getReedValues(muxEnable[i], 0, 8);
+      memcpy(boardValues[i][8], recordedReedValue, sizeof(boardValues[i][8]));
+
+      getReedValues(muxEnable[i], 8, 16);
+      memcpy(boardValues[i+1][8], recordedReedValue, sizeof(boardValues[i][8]));      
   }
 }
 
-void getReedValues(int targetMuxAddress) {
-  // DEBUG information
-  Serial.println("MUX ");
-  Serial.print(i);
-  Serial.print(":    ");
-
-  // Splitting to two rows because row of chessboard has 8 pieces
-  int muxValuesFirstRow[8];
-  int muxValuesSecondRow[8];
-
-  // Activating MUX
-  digitalWrite(targetMuxAddress, LOW);
-
-  for (int j = 0; j < 16; j++) {
-    // Checking MUX combinations
-    digitalWrite(muxAddr[0], j % 2);
-    digitalWrite(muxAddr[1], j / 2 % 2);
-    digitalWrite(muxAddr[2], j / 4 % 2);
-    digitalWrite(muxAddr[3], j / 8 % 2);
-
-    int reedValue = digitalRead(muxOutput);
-    Serial.print(reedValue);
-
-    if (j < 8) {
-      muxValues[j] = reedValue;
-    } else {
-      muxValuesSecondRow[j-8] = reedValue;
-    }
-  }
-
-  // Resetting MUX
-  digitalWrite(muxAddr[0], LOW);
-  digitalWrite(muxAddr[1], LOW);
-  digitalWrite(muxAddr[2], LOW);
-  digitalWrite(muxAddr[3], LOW);
-
-  digitalWrite(targetMuxAddress, HIGH);
-  return {muxValuesFirstRow, muxValuesSecondRow};
-}
 
 void moveMagnet(int direction, int distance, bool magnetActivated) {
   // Enabling the electromagnet if neccesary
@@ -262,16 +288,25 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
 }
 
 void detectBoardMovement() {
-
-  int newBoardValues[4][16];
-
+  delay(1000);
+  memcpy(boardValues[8][8], boardValuesMemory, sizeof(boardValues[8][8]));
+  setCurrentBoard();
   
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
-      if (newBoardValues[i][j] != currentReedValues[i][j]) {
+      if (boardValuesMemory[i][j] != boardValues[i][j]) {
         // Position of piece has changes
-        
+        if (boardValues[i][j]) {
+          // Piece was here before
+          move[0] = j++;
+          move[1] = letterTranslate[j];
+        } else {
+          // New piece on this position
+          move[2] = j++;
+          move[3] = letterTranslate[j];
+        }
       }
     }
   }
+  delay(1000);
 }
