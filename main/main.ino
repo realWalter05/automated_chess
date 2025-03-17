@@ -10,7 +10,7 @@ extern char lastH[], lastM[];
 
 // Electromagnet
 const int magnetPin = 13;
-int magnetActivated = HIGH;
+bool magnetActivated = LOW;
 
 // Motors
 #define motorInterfaceType 1
@@ -32,6 +32,7 @@ int difficulty = 0;
 int boxLengthX = 125;
 int boxLengthY = 120;
 bool gameStarted = false;
+int showOffMove = 0;
 
 int boardValues[8][8];
 int boardValuesMemory[8][8];
@@ -89,12 +90,6 @@ void setup() {
 }
 
 void loop() {
-  if (motorX.distanceToGo() != 0 || motorY.distanceToGo() != 0) {
-    motorX.runSpeedToPosition();
-    motorY.runSpeedToPosition();
-    return;
-  }
-
   if (!gameStarted) {
     // Waiting for user to put pieces in the control part of the board
 
@@ -103,6 +98,11 @@ void loop() {
     return;
   }
 
+  while (motorX.distanceToGo() != 0) {
+    Serial.println(motorX.distanceToGo());
+    motorX.runSpeedToPosition();
+    return;
+  }
   // GAME STARTED
 
   if (userTurn) {
@@ -113,39 +113,40 @@ void loop() {
 
     strcpy(lastH, move);
     Serial.println("User move: ");
-    Serial.println(lastH[0], lastH[1], lastH[2], lastH[3]);
+    Serial.print(lastH[0]);
+    Serial.print(lastH[1]);
+    Serial.print(lastH[2]);
+    Serial.print(lastH[3]);
+    
+
 
     userTurn = false;
+    motorX.moveTo(-100);
+    motorX.setSpeed(400);
 
   } else {
     // AI turn
     Serial.println("Ai playing...");
-    AI_HvsC(move);
-
-    // TODO make the move
-    for (int i = 0; i < 3; i++) {
-      if (i == 0) {
-        moveMagnet(8, 2, false);
-      } else if (i == 1) {
-        moveMagnet(6, 2, true);
-      } else if (i == 2) {
-        moveMagnet(2, 2, true);
-      } else if (i == 3) {
-        moveMagnet(4, 2, false);
-      }
-    }
+    //AI_HvsC(move);
 
     Serial.println("Ai move: ");
-    Serial.println(lastM[0], lastM[1], lastM[2], lastM[3]);
+    Serial.print(lastM[0]);
+    Serial.print(lastM[1]);
+    Serial.print(lastM[2]);
+    Serial.print(lastM[3]);
+
 
     userTurn = true;
+    motorX.moveTo(100);
+    motorX.setSpeed(400);
   }
+  delay(2500);
 }
 
 
 void getReedValues(int targetMuxAddress, int from, int to) {
   // DEBUG information
-  Serial.println("MUX ");
+  Serial.print("MUX ");
   Serial.print(targetMuxAddress);
   Serial.print(":    ");
 
@@ -176,12 +177,15 @@ void getReedValues(int targetMuxAddress, int from, int to) {
   digitalWrite(muxAddr[3], LOW);
 
   digitalWrite(targetMuxAddress, HIGH);
-  memcpy(recordedReedValue[8], muxValues, sizeof(recordedReedValue[8]));
+  Serial.println("");
+
+  memcpy(recordedReedValue, muxValues, sizeof(recordedReedValue));
 }
 
 void setControlMUX() {
   getReedValues(muxEnable[4], 0, 8);
-  memcpy(controlValues[8], recordedReedValue, sizeof(controlValues[8]));
+  delay(100);
+  memcpy(controlValues, recordedReedValue, sizeof(controlValues));
 
   // Setting the data based on MUX wiring
   if (!controlValues[1]) {
@@ -208,22 +212,48 @@ void setControlMUX() {
       (!controlValues[3] || !controlValues[4] || !controlValues[5])) {
     // Checking if mandatory user info is set
     // TODO check if chess pieces are there
+    Serial.println("Game started");
     gameStarted = true;
   }
 }
 
 void setCurrentBoard() {
-  for (int i = 0; i < 4; i = i + 2) {
-      getReedValues(muxEnable[i], 0, 8);
-      memcpy(boardValues[i][8], recordedReedValue, sizeof(boardValues[i][8]));
+    getReedValues(muxEnable[0], 0, 8);
+    delay(100);
+    memcpy(boardValues[0], recordedReedValue, sizeof(boardValues[0]));
 
-      getReedValues(muxEnable[i], 8, 16);
-      memcpy(boardValues[i+1][8], recordedReedValue, sizeof(boardValues[i][8]));      
-  }
+    getReedValues(muxEnable[0], 8, 16);
+    delay(100);
+    memcpy(boardValues[1], recordedReedValue, sizeof(boardValues[1]));      
+
+    getReedValues(muxEnable[1], 0, 8);
+    delay(100);
+    memcpy(boardValues[2], recordedReedValue, sizeof(boardValues[2]));
+
+    getReedValues(muxEnable[1], 8, 16);
+    delay(100);
+    memcpy(boardValues[3], recordedReedValue, sizeof(boardValues[3]));  
+
+    getReedValues(muxEnable[2], 0, 8);
+    delay(100);
+    memcpy(boardValues[4], recordedReedValue, sizeof(boardValues[4]));
+
+    getReedValues(muxEnable[2], 8, 16);
+    delay(100);
+    memcpy(boardValues[5], recordedReedValue, sizeof(boardValues[5]));  
+
+    getReedValues(muxEnable[3], 0, 8);
+    delay(100);
+    memcpy(boardValues[6], recordedReedValue, sizeof(boardValues[6]));
+
+    getReedValues(muxEnable[3], 8, 16);
+    delay(100);
+    memcpy(boardValues[7], recordedReedValue, sizeof(boardValues[7]));      
 }
 
 
 void moveMagnet(int direction, int distance, bool magnetActivated) {
+  Serial.println("moving magnet");
   // Enabling the electromagnet if neccesary
   if (magnetActivated) {
     digitalWrite(magnetPin, HIGH);
@@ -234,56 +264,56 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
 
   case 1:
     // Diagonal left down
-    motorY.move(boxLengthY * distance);
-    motorX.move(boxLengthX * distance);
+    motorY.moveTo(boxLengthY * distance);
+    motorX.moveTo(boxLengthX * distance);
     motorY.setSpeed(350);
     motorX.setSpeed(400);
     break;
 
   case 2:
     // Down
-    motorY.move(-boxLengthY * distance);
+    motorY.moveTo(-boxLengthY * distance);
     motorY.setSpeed(350);
     break;
 
   case 3:
     // Diagonal right down
-    motorY.move(-boxLengthY * distance);
-    motorX.move(-boxLengthX * distance);
+    motorY.moveTo(-boxLengthY * distance);
+    motorX.moveTo(-boxLengthX * distance);
     motorY.setSpeed(350);
     motorX.setSpeed(400);
     break;
 
   case 4:
     // Left
-    motorX.move(boxLengthX * distance);
+    motorX.moveTo(-100);
     motorX.setSpeed(400);
     break;
 
   case 6:
     // Right
-    motorX.move(-boxLengthX * distance);
+    motorX.moveTo(100);
     motorX.setSpeed(400);
     break;
 
   case 7:
     // Diagonal left up
-    motorY.move(-boxLengthY * distance);
-    motorX.move(boxLengthX * distance);
+    motorY.moveTo(-boxLengthY * distance);
+    motorX.moveTo(boxLengthX * distance);
     motorY.setSpeed(350);
     motorX.setSpeed(400);
     break;
 
   case 8:
     // Up
-    motorY.move(boxLengthY * distance);
+    motorY.moveTo(boxLengthY * distance);
     motorY.setSpeed(350);
     break;
 
   case 9:
     // Diagonal right up
-    motorY.move(boxLengthY * distance);
-    motorX.move(-boxLengthX * distance);
+    motorY.moveTo(boxLengthY * distance);
+    motorX.moveTo(-boxLengthX * distance);
     motorY.setSpeed(350);
     motorX.setSpeed(400);
     break;
@@ -293,11 +323,12 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
   if (magnetActivated) {
     digitalWrite(magnetPin, LOW);
   }
+
 }
 
 void detectBoardMovement() {
   delay(1000);
-  memcpy(boardValues[8][8], boardValuesMemory, sizeof(boardValues[8][8]));
+  memcpy(boardValues, boardValuesMemory, sizeof(boardValues));
   setCurrentBoard();
   
   for (int i = 0; i < 8; i++) {
