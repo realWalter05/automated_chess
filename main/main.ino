@@ -12,15 +12,17 @@ extern char lastH[], lastM[];
 const int magnetPin = 13;
 bool magnetActivated = LOW;
 
+int showOff = 0;
+
 // Motors
 #define motorInterfaceType 1
 
-const int stepPinX = 12;
-const int dirPinX = 11;
+const int stepPinX = 10;
+const int dirPinX = 9;
 AccelStepper motorX(motorInterfaceType, stepPinX, dirPinX);
 
-const int stepPinY = 10;
-const int dirPinY = 9;
+const int stepPinY = 12;
+const int dirPinY = 11;
 AccelStepper motorY(motorInterfaceType, stepPinY, dirPinY);
 
 // Control multiplexor information
@@ -98,14 +100,15 @@ void loop() {
     return;
   }
 
-  while (motorX.distanceToGo() != 0) {
-    Serial.println(motorX.distanceToGo());
+  while (motorX.distanceToGo() != 0 || motorY.distanceToGo() != 0) {
+
     motorX.runSpeedToPosition();
+    motorY.runSpeedToPosition();
     return;
   }
   // GAME STARTED
 
-  if (userTurn) {
+  /*if (userTurn) {
     // Player's turn => waiting for movement
     while (!move[0] && !move[1] && !move[2] && !move[3]) {
       detectBoardMovement();
@@ -140,7 +143,25 @@ void loop() {
     motorX.moveTo(100);
     motorX.setSpeed(400);
   }
-  delay(2500);
+  delay(2500);*/
+
+  // Show off
+  switch (showOff) {
+    case 0:
+      moveMagnet(8, 4, true);
+      break;
+    case 1:
+      moveMagnet(6, 4, true);
+      break;
+    case 2:
+      moveMagnet(2, 4, true);
+      break;
+    case 3:
+      moveMagnet(4, 4, true);
+      break;
+  }
+
+  showOff++;
 }
 
 
@@ -266,56 +287,56 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
     // Diagonal left down
     motorY.moveTo(boxLengthY * distance);
     motorX.moveTo(boxLengthX * distance);
-    motorY.setSpeed(350);
+    motorY.setSpeed(250);
     motorX.setSpeed(400);
     break;
 
   case 2:
     // Down
     motorY.moveTo(-boxLengthY * distance);
-    motorY.setSpeed(350);
+    motorY.setSpeed(250);
     break;
 
   case 3:
     // Diagonal right down
     motorY.moveTo(-boxLengthY * distance);
     motorX.moveTo(-boxLengthX * distance);
-    motorY.setSpeed(350);
-    motorX.setSpeed(400);
+    motorY.setSpeed(250);
+    motorX.setSpeed(300);
     break;
 
   case 4:
     // Left
     motorX.moveTo(-100);
-    motorX.setSpeed(400);
+    motorX.setSpeed(300);
     break;
 
   case 6:
     // Right
     motorX.moveTo(100);
-    motorX.setSpeed(400);
+    motorX.setSpeed(300);
     break;
 
   case 7:
     // Diagonal left up
     motorY.moveTo(-boxLengthY * distance);
     motorX.moveTo(boxLengthX * distance);
-    motorY.setSpeed(350);
-    motorX.setSpeed(400);
+    motorY.setSpeed(250);
+    motorX.setSpeed(300);
     break;
 
   case 8:
     // Up
     motorY.moveTo(boxLengthY * distance);
-    motorY.setSpeed(350);
+    motorY.setSpeed(250);
     break;
 
   case 9:
     // Diagonal right up
     motorY.moveTo(boxLengthY * distance);
     motorX.moveTo(-boxLengthX * distance);
-    motorY.setSpeed(350);
-    motorX.setSpeed(400);
+    motorY.setSpeed(250);
+    motorX.setSpeed(300);
     break;
   }
 

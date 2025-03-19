@@ -13,223 +13,234 @@
 \reditel{Ing. Jiří Uhlík}
 
 \zacatek
-	
-	\titulniStrana
 
-	\zadani{31. 3. 2025}
-	{
+\titulniStrana
+
+\zadani{31. 3. 2025}
+{
+	\bod
+	Proveďte teoretický úvod k problematice samořídící šachovnice řešící realizaci šachové desky
+	ovládané mikrokontrolérem, uživatelské ovládání šachovnice, vhodné komponenty (součástky,
+	šachové figurky, hrací pole).
+	\bod
+	Realizujete vlastní řešení v následujících bodech
+	\cislseznam{
 		\bod
-		Proveďte teoretický úvod k problematice samořídící šachovnice řešící realizaci šachové desky
-ovládané mikrokontrolérem, uživatelské ovládání šachovnice, vhodné komponenty (součástky,
-šachové figurky, hrací pole).
+		Navrhněte všechna potřebná schémata pro realizaci samořídící šachovnice.
 		\bod
-		Realizujete vlastní řešení v následujících bodech
-		\cislseznam{
-			\bod
-			Navrhněte všechna potřebná schémata pro realizaci samořídící šachovnice.
-			\bod
-			Vyberte vhodný mikrokontrolér pro řízení šachovnice.
-			\bod
-			Vytvořte program pro zvolený mikrořadič.
-			\bod
-			Vyřešte pohyb figurek po šachovnici a sestrojte řešení.
-			\bod
-			Navrhněte způsob detekce obsazených polí na šachovnici.
-			\bod
-			Vyřešte komunikaci mezi řízením šachovnice a systémem, který bude simulovat tahy protihráče (např. serverem, algoritmem...).
-			\bod
-			Navrhněte a potřebnými součástkami osaďte desku šachovnice.
-			\bod
-			Realizujte konstrukci šachovnice.
-			\bod
-			Výsledné řešení prakticky ověřte.
-		}
+		Vyberte vhodný mikrokontrolér pro řízení šachovnice.
 		\bod
-		Zpracujte dokumentaci dle metodického návrhu a ppt prezentaci pro účely obhajoby.
+		Vytvořte program pro zvolený mikrořadič.
 		\bod
-		Propagujte výsledky své práce - např. vyhotovením posteru, účastí na SOČ, zhotovení informační
-		www stránky, natočení promo videa apod.
+		Vyřešte pohyb figurek po šachovnici a sestrojte řešení.
+		\bod
+		Navrhněte způsob detekce obsazených polí na šachovnici.
+		\bod
+		Vyřešte komunikaci mezi řízením šachovnice a systémem, který bude simulovat tahy protihráče (např. serverem, algoritmem...).
+		\bod
+		Navrhněte a potřebnými součástkami osaďte desku šachovnice.
+		\bod
+		Realizujte konstrukci šachovnice.
+		\bod
+		Výsledné řešení prakticky ověřte.
 	}
-	{
-		\bod
-		výběr řídící jednotky
-		\bod
-		mechanické provedení šachovnice s políčky a figurkami
-		\bod
-		obsazenost detekujících se políček
-		\bod
-		možnost hry s protihráčem
-		\bod
-		možnosti programového kódu
+	\bod
+	Zpracujte dokumentaci dle metodického návrhu a ppt prezentaci pro účely obhajoby.
+	\bod
+	Propagujte výsledky své práce - např. vyhotovením posteru, účastí na SOČ, zhotovení informační
+	www stránky, natočení promo videa apod.
+}
+{
+	\bod
+	výběr řídící jednotky
+	\bod
+	mechanické provedení šachovnice s políčky a figurkami
+	\bod
+	obsazenost detekujících se políček
+	\bod
+	možnost hry s protihráčem
+	\bod
+	možnosti programového kódu
+}
+{
+	\bod
+	pohyb figurek na hracím poli
+	\bod
+	detekce obsazenosti políček
+	\bod
+	algoritmus vytvořeného programu
+	\bod
+	použitelnost k šachové hře
+}
+{žák}
+{žáka}
+{15. 11. 2024}
+
+\anotace 
+Maturitní práce se zabývala tvorbou samořídící šachovnice, jejíž cílem bylo kompletně simulovat protihráče.
+Ať už se jedná o vymýšlení protitahu či o samotný manuální posun figurky. Šachovnice je ovládána mikrokontrolérem
+Arduino~UNO. Pomocí magnetických spínačů umístěných na PCB desce detekujeme pozici figurek na hracím poli. Tyto informace
+následně zpracováváme Arduinem a skrze dva krokové motory a elektromagnet realizujeme tahy figurek. Pro zjištění
+ideálního příštího tahu využíváme Minimax algoritmus, jenž je schopný zevaluovat danou situaci a skrze programovou
+logiku udat příkazy pro pohyb figurek. Celá samořídící šachovnice je vyrobena z dřevěné konstrukce, do které je
+umístěna deska plošného spoje s elektronikou. V rámci projektu jsem si pomocí 3D tisku zhotovil magnetické šachové figurky. 
+Šachovnice také umožňuje zvolení si obtížnosti a volbu hry buď za černé či bílé.
+
+\tucne{Klíčová slova:} ....
+
+
+\annotation
+Aj...
+
+\tucne{Key words:} ...
+
+
+\podekovani
+....
+
+\licencniSmlouva{11. 3. 2025}
+
+\obsah
+
+\kapitola{Úvod}
+Nápad pro automatickou šachovnici jsem dostal při hledání nového projektu,
+který bych si doma zvládl sestrojit. Chtěl jsem, aby projekt obsahoval, jak 
+část softwarovou, kterou jsem se do té doby primárně zabýval, ale také část 
+mechanickou, kterou by bylo nutné vyrobit. 
+
+Napadlo mě vytvořit nějakou deskovou hru pro více hračů. V té době jsem měl
+ve velké oblibě šach a tím vznikla idea automatická šachovnice. Začal jsem nákresem
+na papír a tím jsem získal základní představu o projektu. Šachovnice se skládá ze tří
+hlavní částí:
+
+\popisseznam{
+	\polozka {Konstrukční část} {
+		Tou jest samotná dřevěná konstrukce šachovnice, do které bude nutné umístít mechanismus
+		pro pohybování s figurky. V rámci toho také její opracování a  nadesignování projektu. 
+		Tvorba šachových políček a rozhraní pro jednoduché ovládání.
 	}
-	{
-		\bod
-		pohyb figurek na hracím poli
-		\bod
-		detekce obsazenosti políček
-		\bod
-		algoritmus vytvořeného programu
-		\bod
-		použitelnost k šachové hře
+	\polozka {Elektrotechnická část}{
+		Ta obsahuje systém pro detekci figurek na šachovnici. Ten by se dal vytvořit pomocí mnoha
+		způsobů, ale v práci budu popisovat řešení pomocí desky plošného spoje. Dále vytvoření pohybové 
+		soustavy pomocí krokových motorů a umístění elektromagnetu, který bude s figurky pohybovat. Posledním
+		krokem je sestrojení systému, jenž umožní uživateli variabilovat hru pomocí volby barvy a obtížnosti.
 	}
-	{žák}
-	{žáka}
-	{15. 11. 2024}
-	
-	\anotace 
-	Maturitní práce se zabývala tvorbou samořídící šachovnice, jejíž cílem bylo kompletně simulovat protihráče.
-	Ať už se jedná o vymýšlení protitahu či o samotný manuální posun figurky. Šachovnice je ovládána mikrokontrolérem
-	Arduino~UNO. Pomocí magnetických spínačů umístěných na PCB desce detekujeme pozici figurek na hracím poli. Tyto informace
-	následně zpracováváme Arduinem a skrze dva krokové motory a elektromagnet realizujeme tahy figurek. Pro zjištění
-	ideálního příštího tahu využíváme Minimax algoritmus, jenž je schopný zevaluovat danou situaci a skrze programovou
-	logiku udat příkazy pro pohyb figurek. Celá samořídící šachovnice je vyrobena z dřevěné konstrukce, do které je
-	umístěna deska plošného spoje s elektronikou. V rámci projektu jsem si pomocí 3D tisku zhotovil magnetické šachové figurky. 
-	Šachovnice také umožňuje zvolení si obtížnosti a volbu hry buď za černé či bílé.
-	
-	\tucne{Klíčová slova:} ....
-	
-	
-	\annotation
-	Aj...
-	
-	\tucne{Key words:} ...
-
-	
-	\podekovani
-	 ....
-	
-	\licencniSmlouva{11. 3. 2025}
-		
-	\obsah
-	
-	\kapitola{Úvod}
-		Nápad pro automatickou šachovnici jsem dostal při hledání nového projektu,
-		který bych si doma zvládl sestrojit. Chtěl jsem, aby projekt obsahoval, jak 
-		část softwarovou, kterou jsem se do té doby primárně zabýval, ale také část 
-		mechanickou, kterou by bylo nutné vyrobit. 
-
-		Napadlo mě vytvořit nějakou deskovou hru pro více hračů. V té době jsem měl
-		ve velké oblibě šach a tím vznikla idea automatická šachovnice. Začal jsem nákresem
-		na papír a tím jsem získal základní představu o projektu. Šachovnice se skládá ze tří
-		hlavní částí:
-
-		\popisseznam{
-			\polozka {Konstrukční část} {
-				Tou jest samotná dřevěná konstrukce šachovnice, do které bude nutné umístít mechanismus
-				pro pohybování s figurky. V rámci toho také její opracování a  nadesignování projektu. 
-				Tvorba šachových políček a rozhraní pro jednoduché ovládání.
-			}
-			\polozka {Elektrotechnická část}{
-				Ta obsahuje systém pro detekci figurek na šachovnici. Ten by se dal vytvořit pomocí mnoha
-				způsobů, ale v práci budu popisovat řešení pomocí desky plošného spoje. Dále vytvoření pohybové 
-				soustavy pomocí krokových motorů a umístění elektromagnetu, který bude s figurky pohybovat. Posledním
-				krokem je sestrojení systému, jenž umožní uživateli variabilovat hru pomocí volby barvy a obtížnosti.
-			}
-			\polozka {Softwarová část}{
-				Z hlediska softwaru je nutné vytvořit kód, který spojí všechny části dohromady. Je nutné transformovat
-				signály, tak aby s nimi bylo možné pracovat. Z hlediska kódu je nutné vytvořit rozhraní pro komunikaci
-				mezi mikrokontrolérem a součástky. Je zapotřebí umožnit evaluaci dat o pozicích figurek a předat je
-				algoritmu, který nám bude schopen vymyslet další tah. Údáje o dalším tahu ovšem musíme opět transformovat,
-				tak aby z něj byli čitelné pokyny pro krokové motory. Nesmíme opomenou ani řídící signály a minimalizovat
-				zpoždění a zatížení na hardware.
-			}
-		}
-
-		Poté, co jsem si udělal průzkum o projektu automatické
-		šachovnice zjistil jsem několik věcí. Překvapilo
-		mě očividné. Automatickou šachovnici bylo v dnešní
-		době možné zakoupit na internetu. Ovšem cena 
-		této šachovnice se pohybovala od necelé desítky tisíc až
-		po stovky tisíců. Tyto ohromné částky jsem se rozhodl
-		zminimalizovat a svůj projekt vytvořit cenově dostupný
-		ačkoli zachovám kvalitu šachovnice a nevyměním dřevo za
-		plasty a jiné méně vhodné materiály pro klasickou šachovnici.
-		
-		V průběhu projektu jsem si vyzkoušel práci s různými technologiemi.
-		Práce byla velmi různorodá a to ať už od práce se dřevem a jejím
-		opracováním, tak po pájení součástek na PCB desce. Také jsem získal 
-		zkušenosti s propojováním různých systémů a jejich vstupů a výstupů.
-		Postupy a zkušenosti, které jsem během práce získal postupně popíši a vysvětlím.
-
-	
-	
-	\kapitola{Rozložení projektu}
-	V této kapitole si popíšeme, jakým způsobem je projekt celkově sestrojen. Popíšeme si jednotlivé
-	systémy a jakým způsobem jsou spolu propojené. Na základě tohoto porozumění si v nadcházejících kapitolách
-	popíšeme části projektu podrobně.
-
-
-	Automatická šachovnice, jak je vidět na schématu se skládá z...
-
-
-	\kapitola{Využité technologie}
-		V této kapitole si popíšeme technologie, které byli zapotřebí při tvorbě projektu.
-		Získáme k nim teoretický základ nutný k porozumění šachovnice.
-
-		\podkapitola{Arduino}
-		Arduino je platforma pro tvorbu různých elektronických projektů. Zabývá se 
-		hardwarem a softwarem a obě tyto části vytváří jako open-source. To je jeden
-		z důvodů velkého rozšíření mikrokontrolerů Arduino. 
-
-		Mikrokontrolér Arduino je malý počítač založen na jednom čipu. Arduino vyrábí
-		mnoho různých řad jejich projektů, ale mezi nejznámější se řadí Arduino UNO či
-		Mega. Arduino desky na sobě mají široké spektrum možných vstupů, výstupů a senzorů.
-		Velkou výhodou těchto desek je cena. Ta se pohybuje v řádech stovek korun.
-
-		Arduino desky se primárně programují pomocí platformy Arduino IDE. To je další open-source
-		program, který má na základě popularity mezi lidmi i velkou podporu knihoven
-		s různými zaměřeními.\citace{Arduino}
-
-		Obrázek arduina s piny
-
-		\podkapitola{Deska plošného spoje}
-		PCB deska, jak je zkratkou nazývána, nebo také DPS je velmi rozšířená elektronická součástka.
-		Jedná se o desky vyrobené z izolačních materiálů s pájecími poli zvanými podložky a elektrickými spoji označovanými jako stopy.\citace{PCB deska}
-		Na PCB desky se připájí potřebné součástky. Tyto součástky jsou spolu pak propojeny na základě schématu pro tvorbu PCB. Jsou dvě primární technologie 
-		montáže součástek na desku. Je tady technologie průchozích otvorů (THT, Through-Hole Technology), nebo povrchové montáže (SMD, Surface-Mounted Devices).
-
-		Obrázek pcb smd vs tht
-
-		\podkapitola{Magnetický spínač}
-		\podkapitola{Multiplexor}
-		\podkapitola{Stabilizátor}
-		\podkapitola{Krokový motor}
-		\podkapitola{Elektromagnet}
-
-
-
-	\kapitola{Řídící jednotka}
-
-	\kapitola{Šachové herní pole}	
-	
-	\kapitola{Programový kód}
-		
-	\kapitola{Konstrukční provedení}
-	
-	\kapitola{Šachové figurky}
-			
-	\kapitola{Závěr}
-
-	\seznamTabulek
-	
-	\seznamObrazku
-	
-	\prilohy{
-		\kapitola{Příloha}
+	\polozka {Softwarová část}{
+		Z hlediska softwaru je nutné vytvořit kód, který spojí všechny části dohromady. Je nutné transformovat
+		signály, tak aby s nimi bylo možné pracovat. Z hlediska kódu je nutné vytvořit rozhraní pro komunikaci
+		mezi mikrokontrolérem a součástky. Je zapotřebí umožnit evaluaci dat o pozicích figurek a předat je
+		algoritmu, který nám bude schopen vymyslet další tah. Údáje o dalším tahu ovšem musíme opět transformovat,
+		tak aby z něj byli čitelné pokyny pro krokové motory. Nesmíme opomenou ani řídící signály a minimalizovat
+		zpoždění a zatížení na hardware.
 	}
-	
-	\literatura{
-		
-		\kniha{nazevCitace}{Příjmení autora}{Jméno autora}{Název knihy}{Místo vydání}{Nakladatelství}{Rok}{ISBN}
-		
-		\kvalifikacniprace{nazevCitace}{Příjmení autora}{Jméno autora}{Název práce}{Místo}{Rok}{Druh práce}{Univerzita, Fakulta, Katedra}{Vedoucí diplomové práce jméno}
-		
-		\url{nazevCitace}{Název stránek}{Titulek}{Stránky}{rok}{datum}{URL odkaz}
+}
 
-		\url{Arduino}{conrad.cz}{Arduino® » Praktický mikrokontrolér pro individuální spínací a řídicí úlohy}{https://www.conrad.cz}{2024}{29. 2. 2024}{https://www.conrad.cz/cs/clanky/elektromechanika/arduino.html?srsltid=AfmBOoq-DVdYd1lkV0hVguOg5cvqM7O721czoRtYbZBji4hT3SLgxRoY}
-		\url{PCB deska}{botland.cz}{Deska PCB – co to je?}{2023}{13. 3. 2023}{https://botland.cz/blog/deska-pcb-co-to-je/}
-		
-		
-	}
+Poté, co jsem si udělal průzkum o projektu automatické
+šachovnice zjistil jsem několik věcí. Překvapilo
+mě očividné. Automatickou šachovnici bylo v dnešní
+době možné zakoupit na internetu. Ovšem cena 
+této šachovnice se pohybovala od necelé desítky tisíc až
+po stovky tisíců. Tyto ohromné částky jsem se rozhodl
+zminimalizovat a svůj projekt vytvořit cenově dostupný
+ačkoli zachovám kvalitu šachovnice a nevyměním dřevo za
+plasty a jiné méně vhodné materiály pro klasickou šachovnici.
+
+V průběhu projektu jsem si vyzkoušel práci s různými technologiemi.
+Práce byla velmi různorodá a to ať už od práce se dřevem a jejím
+opracováním, tak po pájení součástek na PCB desce. Také jsem získal 
+zkušenosti s propojováním různých systémů a jejich vstupů a výstupů.
+Postupy a zkušenosti, které jsem během práce získal postupně popíši a vysvětlím.
+
+
+\kapitola{Využité technologie}
+V této kapitole si popíšeme technologie, které byli zapotřebí při tvorbě projektu.
+Získáme k nim teoretický základ nutný k porozumění šachovnice.
+
+\podkapitola{Arduino}
+Arduino je platforma pro tvorbu různých elektronických projektů. Zabývá se 
+hardwarem a softwarem a obě tyto části vytváří jako open-source. To je jeden
+z důvodů velkého rozšíření mikrokontrolerů Arduino. 
+
+Mikrokontrolér Arduino je malý počítač založen na jednom čipu. Arduino vyrábí
+mnoho různých řad jejich projektů, ale mezi nejznámější se řadí Arduino UNO či
+Mega. Arduino desky na sobě mají široké spektrum možných vstupů, výstupů a senzorů    \viz{arduino_uno_pinout}.
+Velkou výhodou těchto desek je cena. Ta se pohybuje v řádech stovek korun.
+
+Arduino desky se primárně programují pomocí platformy Arduino IDE. To je další open-source
+program, který má na základě popularity mezi lidmi i velkou podporu knihoven
+s různými zaměřeními.\citace{Arduino}
+\clearpage
+\obrazek{arduino_uno_pinout}{Arduino UNO}{10cm}{arduino_uno.png}
+
+
+\podkapitola{Deska plošného spoje}
+PCB deska, jak je zkratkou nazývána, nebo také DPS je velmi rozšířená elektronická součástka.
+Desky jsou vyrobené z izolačních materiálů s pájecími poli, kterým se říká podložky a elektrickými spoji nazývanými stopy.\citace{PCB deska}
+Na PCB desky se připájí potřebné součástky. Tyto součástky jsou spolu pak propojeny na základě schématu pro tvorbu PCB. Jsou dvě primární technologie 
+montáže součástek na desku. Je tady technologie průchozích otvorů (THT, Through-Hole Technology), nebo povrchové montáže (SMD, Surface-Mounted Devices) \viz{pcb_SMT_THT}. Při povrchové montáži se napájí součástky přímo na desku s tím, že jsou na ní připravené jednotlivé stopy. U THT jsou v desce připravené dírky, do kterých součástky umísťujeme.
+\clearpage
+\obrazek{pcb_SMT_THT}{Rozlišení SMT a THT na PCB desce}{16cm}{pcb_SMT_THT.png} 
+
+\podkapitola{Magnetický spínač}
+Tento typ spínače je elektronický obvod aktivován pomocí magntického pole. Nejběžnější je konstrukce pomocí dvou feromagnetických kovů umístěných kousek od sebe ve skleněné kapsli. V momentě, kdy je ke spínači přiložen magnet se kovy spojí a začnou vodit. Magnetické spínače jsou například využívány pro detekci uzavření dveří. 
+\clearpage
+\obrazek{reed_switch}{Magnetický spínač}{5cm}{reedSwitch.png}
+
+\podkapitola{Multiplexor}
+\podkapitola{Stabilizátor}
+\podkapitola{Krokový motor}
+\podkapitola{Elektromagnet}
+
+
+\kapitola{Rozložení projektu}
+V této kapitole si popíšeme, jakým způsobem je projekt celkově sestrojen. Popíšeme si jednotlivé
+systémy a jakým způsobem jsou spolu propojené. Na základě tohoto porozumění si v nadcházejících kapitolách
+popíšeme části projektu podrobně.
+
+\obrazek{project_scheme}{Schéme projektu}{10cm}{schema_sachovnice_v0.1.pdf}
+
+
+Automatická šachovnice, jak je vidět na schématu se skládá z...
+
+
+\kapitola{Řídící jednotka}
+
+\kapitola{Šachové herní pole}	
+
+\kapitola{Programový kód}
+
+\kapitola{Konstrukční provedení}
+
+\kapitola{Šachové figurky}
+
+\kapitola{Závěr}
+
+\seznamTabulek
+
+\seznamObrazku
+
+\prilohy{
+	\kapitola{Příloha}
+}
+
+\literatura{
 	
+	\kniha{nazevCitace}{Příjmení autora}{Jméno autora}{Název knihy}{Místo vydání}{Nakladatelství}{Rok}{ISBN}
+	
+	\kvalifikacniprace{nazevCitace}{Příjmení autora}{Jméno autora}{Název práce}{Místo}{Rok}{Druh práce}{Univerzita, Fakulta, Katedra}{Vedoucí diplomové práce jméno}
+	
+	\url{nazevCitace}{Název stránek}{Titulek}{Stránky}{rok}{datum}{URL odkaz}
+	
+	\url{Arduino}{conrad.cz}{Arduino® » Praktický mikrokontrolér pro individuální spínací a řídicí úlohy}{https://www.conrad.cz}{2024}{29. 2. 2024}{https://www.conrad.cz/cs/clanky/elektromechanika/arduino.html?srsltid=AfmBOoq-DVdYd1lkV0hVguOg5cvqM7O721czoRtYbZBji4hT3SLgxRoY}
+	\url{PCB deska}{botland.cz}{Deska PCB – co to je?}{2023}{13. 3. 2023}{https://botland.cz/blog/deska-pcb-co-to-je/}
+	\url{Magnetický spínač}{uk.rs-online.com}{reed-switches-guide}{2023}{1. 2. 2023}{https://uk.rs-online.com/web/content/discovery/ideas-and-advice/reed-switches-guide}
+	
+	
+	
+	\url{PCB SMT a THT}{pcba-manufacturers.com}{SMT vs THT}{2023}{23. 3. 2023}{https://www.pcba-manufacturers.com/smt-vs-tht/}
+	\url{Arduino UNO}{store.arduino.cc}{Arduino UNO pinout}{2025}{19. 3. 2025}{https://store.arduino.cc/en-cz/products/arduino-uno-rev3}
+	
+	
+}
+
 \konec

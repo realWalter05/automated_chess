@@ -1,19 +1,19 @@
 \babel@toc {czech}{}\relax 
 \contentsline {chapter}{\numberline {1}Úvod}{12}{}%
-\contentsline {chapter}{\numberline {2}Rozložení projektu}{14}{}%
-\contentsline {chapter}{\numberline {3}Využité technologie}{15}{}%
-\contentsline {section}{\numberline {3.1}Arduino}{15}{}%
-\contentsline {section}{\numberline {3.2}Deska plošného spoje}{15}{}%
-\contentsline {section}{\numberline {3.3}Magnetický spínač}{16}{}%
-\contentsline {section}{\numberline {3.4}Multiplexor}{16}{}%
-\contentsline {section}{\numberline {3.5}Stabilizátor}{16}{}%
-\contentsline {section}{\numberline {3.6}Krokový motor}{16}{}%
-\contentsline {section}{\numberline {3.7}Elektromagnet}{16}{}%
-\contentsline {chapter}{\numberline {4}Řídící jednotka}{17}{}%
-\contentsline {chapter}{\numberline {5}Šachové herní pole}{18}{}%
-\contentsline {chapter}{\numberline {6}Programový kód}{19}{}%
-\contentsline {chapter}{\numberline {7}Konstrukční provedení}{20}{}%
-\contentsline {chapter}{\numberline {8}Šachové figurky}{21}{}%
-\contentsline {chapter}{\numberline {9}Závěr}{22}{}%
-\contentsline {chapter}{Přílohy}{24}{}%
-\contentsline {chapter}{\numberline {A}Příloha}{25}{}%
+\contentsline {chapter}{\numberline {2}Využité technologie}{14}{}%
+\contentsline {section}{\numberline {2.1}Arduino}{14}{}%
+\contentsline {section}{\numberline {2.2}Deska plošného spoje}{15}{}%
+\contentsline {section}{\numberline {2.3}Magnetický spínač}{16}{}%
+\contentsline {section}{\numberline {2.4}Multiplexor}{17}{}%
+\contentsline {section}{\numberline {2.5}Stabilizátor}{17}{}%
+\contentsline {section}{\numberline {2.6}Krokový motor}{17}{}%
+\contentsline {section}{\numberline {2.7}Elektromagnet}{17}{}%
+\contentsline {chapter}{\numberline {3}Rozložení projektu}{18}{}%
+\contentsline {chapter}{\numberline {4}Řídící jednotka}{20}{}%
+\contentsline {chapter}{\numberline {5}Šachové herní pole}{21}{}%
+\contentsline {chapter}{\numberline {6}Programový kód}{22}{}%
+\contentsline {chapter}{\numberline {7}Konstrukční provedení}{23}{}%
+\contentsline {chapter}{\numberline {8}Šachové figurky}{24}{}%
+\contentsline {chapter}{\numberline {9}Závěr}{25}{}%
+\contentsline {chapter}{Přílohy}{27}{}%
+\contentsline {chapter}{\numberline {A}Příloha}{28}{}%
