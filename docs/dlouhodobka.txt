@@ -1,0 +1,18 @@
+ODEVZDÁVÁNÍ DLOUHODOBKY
+
+Licencni smlouva
+- je nova na Nku
+- ta v latexu nebude fungovat xd
+- 2x tisk licencni smlouva a podepsat v infosu
+
+Odevzdani
+- ne do sharepointu, ale na Nko
+- na Nko dame latex, pdf a podepsany zadani od reditele
+- do 31.3. vcetne ale pouze v provozni dobe infosu
+
+Prace
+- nebude obsahovat zadani
+- uvod max 6 stran, licencni smlouva, vlastni prace 15 stran, zaver 1800 znaku minimalne
+- nazev souboru bude trida_prijmeni_jmeno_cislo_vedouci_oponent_vX
+- budem si moct pujcit praci v infosu na nataceni socky
+

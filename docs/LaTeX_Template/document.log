@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Arch Linux) (preloaded format=pdflatex 2025.3.19)  19 MAR 2025 14:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Arch Linux) (preloaded format=pdflatex 2025.3.19)  19 MAR 2025 15:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -733,168 +733,140 @@ Package pdftex.def Info: images/logo.jpg  used on input line 17.
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts
 /enc/dvips/cm-super/cm-super-t1.enc} <./images/logo.jpg>]
-File: images/logo.jpg Graphic file (type jpg)
-<use images/logo.jpg>
-Package pdftex.def Info: images/logo.jpg  used on input line 77.
-(pdftex.def)             Requested size: 85.35826pt x 85.35973pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--77
-
- []
-
-
 
 [1]
 
 [2]
+Underfull \hbox (badness 10000) in paragraph at lines 42--42
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--42
+
+ []
+
+
 
 [3]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 77.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 77.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 77.
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--77
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
-
- []
-
-
 
 [4]
 
 [5]
-
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
+Underfull \hbox (badness 10000) in paragraph at lines 42--42
 
  []
 
 
 
-[7]
-
-[8]
-
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 101--101
-
- []
-
-
-
-[10] (./document.toc)
+[6] (./document.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 4.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 4.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 4.
+)
 \tf@toc=\write5
 \openout5 = `document.toc'.
 
 
 
-[11
+[7
 
 ]
 Kapitola 1.
 
 
-[12
+[8
 
 ]
 
-[13]
+[9]
 Kapitola 2.
+
+
+[10
+
+]
+<images/arduino_uno.png, id=47, 676.6881pt x 619.3539pt>
+File: images/arduino_uno.png Graphic file (type png)
+<use images/arduino_uno.png>
+Package pdftex.def Info: images/arduino_uno.png  used on input line 114.
+(pdftex.def)             Requested size: 284.52756pt x 260.42928pt.
+
+
+[11
+
+ <./images/arduino_uno.png (PNG copy)>]
+<images/pcb_SMT_THT.png, id=51, 1003.75pt x 501.875pt>
+File: images/pcb_SMT_THT.png Graphic file (type png)
+<use images/pcb_SMT_THT.png>
+Package pdftex.def Info: images/pcb_SMT_THT.png  used on input line 123.
+(pdftex.def)             Requested size: 455.24408pt x 227.62596pt.
+
+
+[12
+
+ <./images/pcb_SMT_THT.png>]
+<images/reedSwitch.png, id=58, 618.31pt x 407.5225pt>
+File: images/reedSwitch.png Graphic file (type png)
+<use images/reedSwitch.png>
+Package pdftex.def Info: images/reedSwitch.png  used on input line 128.
+(pdftex.def)             Requested size: 142.26378pt x 93.7655pt.
+
+
+[13
+
+ <./images/reedSwitch.png>]
+Kapitola 3.
+<images/schema_sachovnice_v0.1.pdf, id=62, 845.1575pt x 598.235pt>
+File: images/schema_sachovnice_v0.1.pdf Graphic file (type pdf)
+<use images/schema_sachovnice_v0.1.pdf>
+Package pdftex.def Info: images/schema_sachovnice_v0.1.pdf  used on input line 
+142.
+(pdftex.def)             Requested size: 284.52756pt x 201.3981pt.
 
 
 [14
 
 ]
-<images/arduino_uno.png, id=61, 676.6881pt x 619.3539pt>
-File: images/arduino_uno.png Graphic file (type png)
-<use images/arduino_uno.png>
-Package pdftex.def Info: images/arduino_uno.png  used on input line 173.
-(pdftex.def)             Requested size: 284.52756pt x 260.42928pt.
 
-
-[15
-
- <./images/arduino_uno.png (PNG copy)>]
-<images/pcb_SMT_THT.png, id=65, 1003.75pt x 501.875pt>
-File: images/pcb_SMT_THT.png Graphic file (type png)
-<use images/pcb_SMT_THT.png>
-Package pdftex.def Info: images/pcb_SMT_THT.png  used on input line 182.
-(pdftex.def)             Requested size: 455.24408pt x 227.62596pt.
-
-
-[16
-
- <./images/pcb_SMT_THT.png>]
-<images/reedSwitch.png, id=71, 618.31pt x 407.5225pt>
-File: images/reedSwitch.png Graphic file (type png)
-<use images/reedSwitch.png>
-Package pdftex.def Info: images/reedSwitch.png  used on input line 187.
-(pdftex.def)             Requested size: 142.26378pt x 93.7655pt.
-
-
-[17
-
- <./images/reedSwitch.png>]
-Kapitola 3.
-<images/schema_sachovnice_v0.1.pdf, id=75, 845.1575pt x 598.235pt>
-File: images/schema_sachovnice_v0.1.pdf Graphic file (type pdf)
-<use images/schema_sachovnice_v0.1.pdf>
-Package pdftex.def Info: images/schema_sachovnice_v0.1.pdf  used on input line 
-200.
-(pdftex.def)             Requested size: 284.52756pt x 201.3981pt.
-
-
-[18
-
-]
-
-[19 <./images/schema_sachovnice_v0.1.pdf>]
+[15 <./images/schema_sachovnice_v0.1.pdf>]
 Kapitola 4.
 
 
-[20
+[16
 
 ]
 Kapitola 5.
 
 
-[21
+[17
 
 ]
 Kapitola 6.
 
 
-[22
+[18
 
 ]
 Kapitola 7.
 
 
-[23
+[19
 
 ]
 Kapitola 8.
 
 
-[24
+[20
 
 ]
 Kapitola 9.
 
 
-[25
+[21
 
 ] (./document.lot)
 \tf@lot=\write6
@@ -902,7 +874,7 @@ Kapitola 9.
 
 
 
-[26
+[22
 
 ] (./document.lof)
 \tf@lof=\write7
@@ -910,42 +882,42 @@ Kapitola 9.
 
 
 
-[27
+[23
 
 ]
 P\v {r}\'{\i }loha A.
 
 
-[28
+[24
 
 ]
-Overfull \hbox (4.94444pt too wide) in paragraph at lines 244--244
+Overfull \hbox (4.94444pt too wide) in paragraph at lines 186--186
 \T1/cmr/m/n/12 https://www.conrad.cz/cs/clanky/elektromechanika/arduino.html?sr
 sltid=AfmBOoq-
  []
 
 
-Underfull \hbox (badness 2269) in paragraph at lines 244--244
+Underfull \hbox (badness 2269) in paragraph at lines 186--186
 []\T1/cmr/m/sc/12 botland.cz\T1/cmr/m/n/12 .  Deska PCB ^^U co to je?.  \T1/cmr
 /m/it/12 2023 \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\T1/cmr/m/n/12 13. 3.
  2023
  []
 
 
-Underfull \hbox (badness 4291) in paragraph at lines 244--244
+Underfull \hbox (badness 4291) in paragraph at lines 186--186
 []\T1/cmr/m/sc/12 uk.rs-online.com\T1/cmr/m/n/12 .  reed-switches-guide.  \T1/c
 mr/m/it/12 2023 \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\T1/cmr/m/n/12 1. 2
 . 2023
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 244--244
+Underfull \hbox (badness 10000) in paragraph at lines 186--186
 \T1/cmr/m/n/12 [cit.https://uk.rs-online.com/web/content/discovery/ideas-and-ad
 vice/reed-switches-
  []
 
 
-Underfull \hbox (badness 1237) in paragraph at lines 244--244
+Underfull \hbox (badness 1237) in paragraph at lines 186--186
 []\T1/cmr/m/sc/12 store.arduino.cc\T1/cmr/m/n/12 .  Ar-duino UNO pi-nout.  \T1/
 cmr/m/it/12 2025 \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\T1/cmr/m/n/12 19.
  3. 2025
@@ -953,7 +925,7 @@ cmr/m/it/12 2025 \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\T1/cmr/m/n/12 19.
 
 
 
-[29
+[25
 
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
 (./document.aux)
@@ -969,22 +941,21 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  25551 strings out of 475137
  595882 string characters out of 5765926
- 1027854 words of memory out of 5000000
+ 1026872 words of memory out of 5000000
  48191 multiletter control sequences out of 15000+600000
  567900 words of font info for 54 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
  113i,6n,119p,1609b,282s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/
-texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/font
-s/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/
-cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc12
-00.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/sh
-are/texmf-dist/fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf-dist/
-fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on document.pdf (30 pages, 1625874 bytes).
+</usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/t
+exmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts
+/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/c
+m-super/sfcc1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm120
+0.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm2488.pfb></usr/sha
+re/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
+Output written on document.pdf (26 pages, 1611659 bytes).
 PDF statistics:
- 190 PDF objects out of 1000 (max. 8388607)
- 122 compressed objects within 2 object streams
+ 173 PDF objects out of 1000 (max. 8388607)
+ 111 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  38 words of extra memory for PDF output out of 10000 (max. 10000000)
 
