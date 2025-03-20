@@ -12,11 +12,11 @@ const int magnetPin = 13;
 bool magnetActivated = LOW;
 
 // Motors
-const int stepPinX = 10;
-const int dirPinX = 9;
+const int stepPinX = 12;
+const int dirPinX = 11;
 
-const int stepPinY = 12;
-const int dirPinY = 11;
+const int stepPinY = 10;
+const int dirPinY = 9;
 
 // Control multiplexor information
 bool playingAsWhite = true;
@@ -24,8 +24,8 @@ bool userTurn = true;
 int difficulty = 0;
 
 // General information
-int boxLength = 125;
-int motorDelay = 10;
+int boxLength = 200;
+int motorDelay = 800;
 bool gameStarted = false;
 int showOffMove = 0;
 
@@ -109,7 +109,7 @@ void loop() {
 
     userTurn = false;
     moveMagnet(8, 2, true);
-
+    delay(10000);
   } else {
     // AI turn
     Serial.println("Ai playing...");
@@ -123,7 +123,12 @@ void loop() {
 
 
     userTurn = true;
+    move[0] = "";
+    move[1] = "";
+    move[2] = "";
+    move[3] = "";
     moveMagnet(2, 2, true);
+    delay(10000);
   }
 }
 
@@ -164,40 +169,6 @@ void getReedValues(int targetMuxAddress, int from, int to) {
   memcpy(recordedReedValue, muxValues, sizeof(recordedReedValue));
 }
 
-void setControlMUX() {
-  getReedValues(muxEnable[4], 0, 8);
-  delay(100);
-  memcpy(controlValues, recordedReedValue, sizeof(controlValues));
-
-  // Setting the data based on MUX wiring
-  if (!controlValues[1]) {
-    playingAsWhite = false;
-  }
-
-  if (!controlValues[2]) {
-    playingAsWhite = true;
-  }
-
-  if (!controlValues[3]) {
-    difficulty = 0;
-  }
-
-  if (!controlValues[4]) {
-    difficulty = 1;
-  }
-
-  if (!controlValues[5]) {
-    difficulty = 2;
-  }
-
-  if ((!controlValues[1] || !controlValues[2]) &&
-      (!controlValues[3] || !controlValues[4] || !controlValues[5])) {
-    // Checking if mandatory user info is set
-    // TODO check if chess pieces are there
-    Serial.println("Game started");
-    gameStarted = true;
-  }
-}
 
 void setCurrentBoard() {
   getReedValues(muxEnable[0], 0, 8);
@@ -233,6 +204,43 @@ void setCurrentBoard() {
   memcpy(boardValues[7], recordedReedValue, sizeof(boardValues[7]));
 }
 
+
+void setControlMUX() {
+  getReedValues(muxEnable[4], 0, 8);
+  delay(100);
+  memcpy(controlValues, recordedReedValue, sizeof(controlValues));
+
+  // Setting the data based on MUX wiring
+  if (!controlValues[1]) {
+    playingAsWhite = false;
+  }
+
+  if (!controlValues[2]) {
+    playingAsWhite = true;
+  }
+
+  if (!controlValues[3]) {
+    difficulty = 0;
+  }
+
+  if (!controlValues[4]) {
+    difficulty = 1;
+  }
+
+  if (!controlValues[5]) {
+    difficulty = 2;
+  }
+
+  if ((!controlValues[1] || !controlValues[2]) &&
+      (!controlValues[3] || !controlValues[4] || !controlValues[5])) {
+    // Checking if mandatory user info is set
+    // TODO check if chess pieces are there
+    Serial.println("Game started");
+    gameStarted = true;
+    setCurrentBoard();
+  }
+}
+
 void moveMagnet(int direction, int distance, bool magnetActivated) {
   Serial.println("moving magnet");
   // Enabling the electromagnet if neccesary
@@ -249,7 +257,10 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
     for (int i = 0; i < boxLength * distance; i++) {
       digitalWrite(stepPinY, HIGH);
       digitalWrite(stepPinX, HIGH);
-      delay(motorDelay);
+      delayMicroseconds(motorDelay);
+      digitalWrite(stepPinY, LOW);
+      digitalWrite(stepPinX, LOW);
+      delayMicroseconds(motorDelay);
     }
     break;
 
@@ -258,7 +269,9 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
     digitalWrite(dirPinY, LOW);
     for (int i = 0; i < boxLength * distance; i++) {
       digitalWrite(stepPinY, HIGH);
-      delay(motorDelay);
+      delayMicroseconds(motorDelay);
+      digitalWrite(stepPinY, LOW);
+      delayMicroseconds(motorDelay);
     }
     break;
 
@@ -269,7 +282,10 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
     for (int i = 0; i < boxLength * distance; i++) {
       digitalWrite(stepPinY, HIGH);
       digitalWrite(stepPinX, HIGH);
-      delay(motorDelay);
+      delayMicroseconds(motorDelay);
+      digitalWrite(stepPinY, LOW);
+      digitalWrite(stepPinX, LOW);
+      delayMicroseconds(motorDelay);
     }
     break;
 
@@ -278,7 +294,9 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
     digitalWrite(dirPinX, LOW);
     for (int i = 0; i < boxLength * distance; i++) {
       digitalWrite(stepPinX, HIGH);
-      delay(motorDelay);
+      delayMicroseconds(motorDelay);
+      digitalWrite(stepPinX, LOW);
+      delayMicroseconds(motorDelay);
     }
     break;
 
@@ -287,7 +305,9 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
     digitalWrite(dirPinX, HIGH);
     for (int i = 0; i < boxLength * distance; i++) {
       digitalWrite(stepPinX, HIGH);
-      delay(motorDelay);
+      delayMicroseconds(motorDelay);
+      digitalWrite(stepPinX, LOW);
+      delayMicroseconds(motorDelay);
     }
     break;
 
@@ -298,7 +318,10 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
     for (int i = 0; i < boxLength * distance; i++) {
       digitalWrite(stepPinY, HIGH);
       digitalWrite(stepPinX, HIGH);
-      delay(motorDelay);
+      delayMicroseconds(motorDelay);
+      digitalWrite(stepPinY, LOW);
+      digitalWrite(stepPinX, LOW);
+      delayMicroseconds(motorDelay);
     }
     break;
 
@@ -307,7 +330,9 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
     digitalWrite(dirPinY, HIGH);
     for (int i = 0; i < boxLength * distance; i++) {
       digitalWrite(stepPinY, HIGH);
-      delay(motorDelay);
+      delayMicroseconds(motorDelay);
+      digitalWrite(stepPinY, LOW);
+      delayMicroseconds(motorDelay);
     }
     break;
 
@@ -318,7 +343,10 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
     for (int i = 0; i < boxLength * distance; i++) {
       digitalWrite(stepPinY, HIGH);
       digitalWrite(stepPinX, HIGH);
-      delay(motorDelay);
+      delayMicroseconds(motorDelay);
+      digitalWrite(stepPinY, LOW);
+      digitalWrite(stepPinX, LOW);
+      delayMicroseconds(motorDelay);
     }
     break;
   }
@@ -336,8 +364,16 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
 
 void detectBoardMovement() {
   delay(1000);
-  memcpy(boardValues, boardValuesMemory, sizeof(boardValues));
+  memcpy(boardValuesMemory, boardValues, sizeof(boardValuesMemory));
   setCurrentBoard();
+
+/*
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      Serial.print(boardValuesMemory[i][j]);
+    }
+    Serial.println();
+  }
 
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
@@ -357,5 +393,6 @@ void detectBoardMovement() {
         }
       }
     }
-  }
+  }*/
+  delay(2000);
 }
