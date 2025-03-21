@@ -3,12 +3,14 @@
 \contentsline {chapter}{\numberline {2}Využité technologie}{10}{}%
 \contentsline {section}{\numberline {2.1}Arduino}{10}{}%
 \contentsline {section}{\numberline {2.2}Deska plošného spoje}{11}{}%
-\contentsline {section}{\numberline {2.3}Magnetický spínač}{12}{}%
-\contentsline {section}{\numberline {2.4}Multiplexor}{13}{}%
-\contentsline {section}{\numberline {2.5}Stabilizátor}{13}{}%
-\contentsline {section}{\numberline {2.6}Krokový motor}{13}{}%
-\contentsline {section}{\numberline {2.7}Elektromagnet}{13}{}%
-\contentsline {section}{\numberline {2.8}Minimax algoritmus}{13}{}%
+\contentsline {section}{\numberline {2.3}Elektronické součástky}{12}{}%
+\contentsline {subsection}{\numberline {2.3.1}Magnetický spínač}{12}{}%
+\contentsline {subsection}{\numberline {2.3.2}Multiplexor}{12}{}%
+\contentsline {subsection}{\numberline {2.3.3}Stabilizátor}{13}{}%
+\contentsline {subsection}{\numberline {2.3.4}Krokový motor}{13}{}%
+\contentsline {subsection}{\numberline {2.3.5}Elektromagnet}{13}{}%
+\contentsline {section}{\numberline {2.4}Minimax algoritmus}{13}{}%
+\contentsline {section}{\numberline {2.5}BFS algoritmus}{13}{}%
 \contentsline {chapter}{\numberline {3}Rozložení projektu}{14}{}%
 \contentsline {chapter}{\numberline {4}Řídící jednotka}{16}{}%
 \contentsline {chapter}{\numberline {5}Šachové herní pole}{17}{}%

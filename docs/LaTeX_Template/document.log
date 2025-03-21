@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Arch Linux) (preloaded format=pdflatex 2025.3.19)  19 MAR 2025 15:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Arch Linux) (preloaded format=pdflatex 2025.3.19)  21 MAR 2025 10:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -737,12 +737,12 @@ Package pdftex.def Info: images/logo.jpg  used on input line 17.
 [1]
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 42--42
+Underfull \hbox (badness 10000) in paragraph at lines 39--39
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 42--42
+Underfull \hbox (badness 10000) in paragraph at lines 39--39
 
  []
 
@@ -753,7 +753,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 42--42
 [4]
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 42--42
+Underfull \hbox (badness 10000) in paragraph at lines 39--39
 
  []
 
@@ -792,7 +792,7 @@ Kapitola 2.
 <images/arduino_uno.png, id=47, 676.6881pt x 619.3539pt>
 File: images/arduino_uno.png Graphic file (type png)
 <use images/arduino_uno.png>
-Package pdftex.def Info: images/arduino_uno.png  used on input line 114.
+Package pdftex.def Info: images/arduino_uno.png  used on input line 111.
 (pdftex.def)             Requested size: 284.52756pt x 260.42928pt.
 
 
@@ -802,29 +802,21 @@ Package pdftex.def Info: images/arduino_uno.png  used on input line 114.
 <images/pcb_SMT_THT.png, id=51, 1003.75pt x 501.875pt>
 File: images/pcb_SMT_THT.png Graphic file (type png)
 <use images/pcb_SMT_THT.png>
-Package pdftex.def Info: images/pcb_SMT_THT.png  used on input line 123.
+Package pdftex.def Info: images/pcb_SMT_THT.png  used on input line 120.
 (pdftex.def)             Requested size: 455.24408pt x 227.62596pt.
 
 
 [12
 
  <./images/pcb_SMT_THT.png>]
-<images/reedSwitch.png, id=58, 618.31pt x 407.5225pt>
-File: images/reedSwitch.png Graphic file (type png)
-<use images/reedSwitch.png>
-Package pdftex.def Info: images/reedSwitch.png  used on input line 128.
-(pdftex.def)             Requested size: 142.26378pt x 93.7655pt.
 
-
-[13
-
- <./images/reedSwitch.png>]
+[13]
 Kapitola 3.
 <images/schema_sachovnice_v0.1.pdf, id=62, 845.1575pt x 598.235pt>
 File: images/schema_sachovnice_v0.1.pdf Graphic file (type pdf)
 <use images/schema_sachovnice_v0.1.pdf>
 Package pdftex.def Info: images/schema_sachovnice_v0.1.pdf  used on input line 
-142.
+144.
 (pdftex.def)             Requested size: 284.52756pt x 201.3981pt.
 
 
@@ -891,33 +883,43 @@ P\v {r}\'{\i }loha A.
 [24
 
 ]
-Overfull \hbox (4.94444pt too wide) in paragraph at lines 186--186
+Overfull \hbox (4.94444pt too wide) in paragraph at lines 187--187
 \T1/cmr/m/n/12 https://www.conrad.cz/cs/clanky/elektromechanika/arduino.html?sr
 sltid=AfmBOoq-
  []
 
 
-Underfull \hbox (badness 2269) in paragraph at lines 186--186
-[]\T1/cmr/m/sc/12 botland.cz\T1/cmr/m/n/12 .  Deska PCB ^^U co to je?.  \T1/cmr
-/m/it/12 2023 \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\T1/cmr/m/n/12 13. 3.
- 2023
+Underfull \hbox (badness 10000) in paragraph at lines 187--187
+[]\T1/cmr/m/sc/12 dubno.cz\T1/cmr/m/n/12 .  VY_32_INOVACE_CTE_2.MA_13_Multiplex
+ory.
  []
 
 
-Underfull \hbox (badness 4291) in paragraph at lines 186--186
-[]\T1/cmr/m/sc/12 uk.rs-online.com\T1/cmr/m/n/12 .  reed-switches-guide.  \T1/c
-mr/m/it/12 2023 \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\T1/cmr/m/n/12 1. 2
-. 2023
+Underfull \hbox (badness 10000) in paragraph at lines 187--187
+\T1/cmr/m/it/12 https://dubno.cz/ \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\
+T1/cmr/m/n/12 2012 [cit.1.8.2012].  Do-stupné z:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
-\T1/cmr/m/n/12 [cit.https://uk.rs-online.com/web/content/discovery/ideas-and-ad
-vice/reed-switches-
+Overfull \hbox (150.67134pt too wide) in paragraph at lines 187--187
+\T1/cmr/m/n/12 https://dubno.cz/images/stories/dum/8.sablona/24/pdf/VY_32,_INOV
+ACE_CTE_2.MA_13_Multiplexory.pdf 
  []
 
 
-Underfull \hbox (badness 1237) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 187--187
+[]\T1/cmr/m/sc/12 wikipedia.cz\T1/cmr/m/n/12 .  Sta-bi-li-zá-tory na-p¥tí.  \T1
+/cmr/m/it/12 https://www.wikipedia.cz
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 187--187
+\T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\T1/cmr/m/n/12 2024 [cit.22.2.2024]
+.  Do-stupné z:
+ []
+
+
+Underfull \hbox (badness 1237) in paragraph at lines 187--187
 []\T1/cmr/m/sc/12 store.arduino.cc\T1/cmr/m/n/12 .  Ar-duino UNO pi-nout.  \T1/
 cmr/m/it/12 2025 \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\T1/cmr/m/n/12 19.
  3. 2025
@@ -939,23 +941,24 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 25551 strings out of 475137
- 595882 string characters out of 5765926
- 1026872 words of memory out of 5000000
- 48191 multiletter control sequences out of 15000+600000
- 567900 words of font info for 54 fonts, out of 8000000 for 9000
+ 25550 strings out of 475137
+ 595762 string characters out of 5765926
+ 1026830 words of memory out of 5000000
+ 48188 multiletter control sequences out of 15000+600000
+ 569443 words of font info for 56 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
- 113i,6n,119p,1609b,282s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 113i,6n,119p,1609b,280s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/t
-exmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts
-/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/c
-m-super/sfcc1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm120
-0.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm2488.pfb></usr/sha
-re/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on document.pdf (26 pages, 1611659 bytes).
+exmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts
+/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/c
+m-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc120
+0.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/sha
+re/texmf-dist/fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf-dist/f
+onts/type1/public/cm-super/sfti1200.pfb>
+Output written on document.pdf (26 pages, 1563698 bytes).
 PDF statistics:
- 173 PDF objects out of 1000 (max. 8388607)
- 111 compressed objects within 2 object streams
+ 177 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 38 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 33 words of extra memory for PDF output out of 10000 (max. 10000000)
 
