@@ -1,11 +1,13 @@
 #include "Micro_Max.h"
 
 // Detect values
-char move[4];
-char letterTranslate[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+char move [4] = {0, 0, 0, 0};
+char lastMove [4] = {0, 0, 0, 0};
+char numberTranslate[8] = {'1', '2', '3', '4', '5', '6', '7', '8'};
+char letterTranslate[8] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 
 //  MicroMax
-extern char lastH[], lastM[];
+//extern char lastH[], lastM[];
 
 // Electromagnet
 const int magnetPin = 13;
@@ -98,46 +100,41 @@ void loop() {
       detectBoardMovement();
     }
 
-    strcpy(lastH, move);
-    Serial.println("User move: ");
-    Serial.print(lastH[0]);
-    Serial.print(lastH[1]);
-    Serial.print(lastH[2]);
-    Serial.print(lastH[3]);
+    Serial.print("User move: ");
+    Serial.print(move[0]);
+    Serial.print(move[1]);
+    Serial.print(";");
+    Serial.print(move[2]);
+    Serial.println(move[3]);
 
 
 
     userTurn = false;
-    moveMagnet(8, 2, true);
-    delay(10000);
   } else {
     // AI turn
     Serial.println("Ai playing...");
     //AI_HvsC(move);
 
-    Serial.println("Ai move: ");
-    Serial.print(lastM[0]);
-    Serial.print(lastM[1]);
-    Serial.print(lastM[2]);
-    Serial.print(lastM[3]);
+    //Serial.println("Ai move: ");
+    //Serial.print(lastMove[0]);
+    //Serial.print(lastMove[1]);
+    //Serial.print(lastMove[2]);
+    //Serial.print(lastMove[3]);
 
+    lastMove[0] = move[0];
+    lastMove[1] = move[1];
+    lastMove[2] = move[2];
+    lastMove[3] = move[3];
 
+    move[0] = 0;
+    move[1] = 0;
+    move[2] = 0;
+    move[3] = 0;
     userTurn = true;
-    move[0] = "";
-    move[1] = "";
-    move[2] = "";
-    move[3] = "";
-    moveMagnet(2, 2, true);
-    delay(10000);
   }
 }
 
 void getReedValues(int targetMuxAddress, int from, int to) {
-  // DEBUG information
-  Serial.print("MUX ");
-  Serial.print(targetMuxAddress);
-  Serial.print(":    ");
-
   // Splitting to two rows because row of chessboard has 8 pieces
   int muxValues[8];
 
@@ -151,11 +148,18 @@ void getReedValues(int targetMuxAddress, int from, int to) {
     digitalWrite(muxAddr[2], j / 4 % 2);
     digitalWrite(muxAddr[3], j / 8 % 2);
 
+    delay(300);
     int reedValue = digitalRead(muxOutput);
     Serial.print(reedValue);
 
-    muxValues[j] = reedValue;
+    if (j > 7) {
+      muxValues[7-(j-8)] = reedValue;
+    } else {
+      muxValues[j] = reedValue;
+    }
   }
+
+  Serial.println("");
 
   // Resetting MUX
   digitalWrite(muxAddr[0], LOW);
@@ -164,44 +168,37 @@ void getReedValues(int targetMuxAddress, int from, int to) {
   digitalWrite(muxAddr[3], LOW);
 
   digitalWrite(targetMuxAddress, HIGH);
-  Serial.println("");
-
   memcpy(recordedReedValue, muxValues, sizeof(recordedReedValue));
 }
 
 
 void setCurrentBoard() {
-  getReedValues(muxEnable[0], 0, 8);
-  delay(100);
+  Serial.println("Board now:");
+  /*getReedValues(muxEnable[0], 0, 8);
   memcpy(boardValues[0], recordedReedValue, sizeof(boardValues[0]));
 
   getReedValues(muxEnable[0], 8, 16);
-  delay(100);
   memcpy(boardValues[1], recordedReedValue, sizeof(boardValues[1]));
-
+  
   getReedValues(muxEnable[1], 0, 8);
-  delay(100);
   memcpy(boardValues[2], recordedReedValue, sizeof(boardValues[2]));
 
   getReedValues(muxEnable[1], 8, 16);
-  delay(100);
   memcpy(boardValues[3], recordedReedValue, sizeof(boardValues[3]));
-
+*/
   getReedValues(muxEnable[2], 0, 8);
-  delay(100);
   memcpy(boardValues[4], recordedReedValue, sizeof(boardValues[4]));
 
   getReedValues(muxEnable[2], 8, 16);
-  delay(100);
   memcpy(boardValues[5], recordedReedValue, sizeof(boardValues[5]));
-
+/*
   getReedValues(muxEnable[3], 0, 8);
-  delay(100);
   memcpy(boardValues[6], recordedReedValue, sizeof(boardValues[6]));
 
   getReedValues(muxEnable[3], 8, 16);
-  delay(100);
-  memcpy(boardValues[7], recordedReedValue, sizeof(boardValues[7]));
+  memcpy(boardValues[7], recordedReedValue, sizeof(boardValues[7]));*/
+  Serial.println("/////////");
+  Serial.println("");
 }
 
 
@@ -366,8 +363,8 @@ void detectBoardMovement() {
   delay(1000);
   memcpy(boardValuesMemory, boardValues, sizeof(boardValuesMemory));
   setCurrentBoard();
-
 /*
+  Serial.println("Board change memory:");
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
       Serial.print(boardValuesMemory[i][j]);
@@ -375,24 +372,32 @@ void detectBoardMovement() {
     Serial.println();
   }
 
+  Serial.println("Board change values:");
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      Serial.print(boardValues[i][j]);
+    }
+    Serial.println();
+  }*/
+
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
       if (boardValuesMemory[i][j] != boardValues[i][j]) {
         Serial.print("Change of piece on: ");
-        Serial.print(i);
-        Serial.println(j);
+        Serial.print(letterTranslate[j]);
+        Serial.println(i);
         // Position of piece has changes
         if (boardValues[i][j]) {
           // Piece was here before
-          move[0] = j++;
+          move[0] = numberTranslate[i];
           move[1] = letterTranslate[j];
         } else {
           // New piece on this position
-          move[2] = j++;
+          move[2] = numberTranslate[i];
           move[3] = letterTranslate[j];
         }
       }
     }
-  }*/
+  }
   delay(2000);
 }

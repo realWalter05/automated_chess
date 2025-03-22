@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Arch Linux) (preloaded format=pdflatex 2025.3.19)  21 MAR 2025 10:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Arch Linux) (preloaded format=pdflatex 2025.3.19)  21 MAR 2025 12:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -642,14 +642,7 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@thisruleclass=\count356
 \@lastruleclass=\count357
 \@thisrulewidth=\dimen283
-)) (./document.aux
-
-LaTeX Warning: Label `nazevCitace' multiply defined.
-
-
-LaTeX Warning: Label `nazevCitace' multiply defined.
-
-)
+)) (./document.aux)
 \openout1 = `document.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
@@ -666,7 +659,8 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
 LaTeX Font Info:    ... okay on input line 15.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
 LaTeX Font Info:    ... okay on input line 15.
- (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+
+(/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count358
 \scratchdimen=\dimen284
@@ -935,19 +929,15 @@ cmr/m/it/12 2025 \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\T1/cmr/m/n/12 19.
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-
-
-LaTeX Warning: There were multiply-defined labels.
-
  ) 
 Here is how much of TeX's memory you used:
- 25550 strings out of 475137
- 595762 string characters out of 5765926
- 1026830 words of memory out of 5000000
- 48188 multiletter control sequences out of 15000+600000
+ 25549 strings out of 475137
+ 595749 string characters out of 5765926
+ 1026786 words of memory out of 5000000
+ 48187 multiletter control sequences out of 15000+600000
  569443 words of font info for 56 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
- 113i,6n,119p,1609b,280s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 113i,6n,119p,1609b,282s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/t
 exmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts
 /type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/c
@@ -955,7 +945,7 @@ m-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc120
 0.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/sha
 re/texmf-dist/fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf-dist/f
 onts/type1/public/cm-super/sfti1200.pfb>
-Output written on document.pdf (26 pages, 1563698 bytes).
+Output written on document.pdf (26 pages, 1563697 bytes).
 PDF statistics:
  177 PDF objects out of 1000 (max. 8388607)
  114 compressed objects within 2 object streams
