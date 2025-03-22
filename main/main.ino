@@ -4,7 +4,7 @@
 char move [4] = {0, 0, 0, 0};
 char lastMove [4] = {0, 0, 0, 0};
 char numberTranslate[8] = {'1', '2', '3', '4', '5', '6', '7', '8'};
-char letterTranslate[8] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+char letterTranslate[8] = {'h', 'g', 'f', 'e', 'd', 'c', 'b', 'a'};
 
 //  MicroMax
 //extern char lastH[], lastM[];
@@ -96,24 +96,36 @@ void loop() {
 
   if (userTurn) {
     // Player's turn => waiting for movement
-    while (!move[0] && !move[1] && !move[2] && !move[3]) {
+    memcpy(boardValuesMemory, boardValues, sizeof(boardValuesMemory));
+    while (!move[0] || !move[1] || !move[2] || !move[3]) {
       detectBoardMovement();
     }
 
-    Serial.print("User move: ");
+    Serial.print("User: ");
     Serial.print(move[0]);
     Serial.print(move[1]);
-    Serial.print(";");
-    Serial.print(move[2]);
-    Serial.println(move[3]);
+    Serial.print(" -> ");
+    Serial.println(move[2]);
+    Serial.print(move[3]);
+
+    moveMagnet(8, 2, true);
+    moveMagnet(4, 3, false);
+    moveMagnet(8, 1, true);
+
+    moveMagnet(6, 7, true);
+    moveMagnet(4, 7, false);
+
+    moveMagnet(2, 1, false);
+    moveMagnet(6, 2, false);
+    moveMagnet(4, 2, true);
 
 
-
+    delay(3000);
     userTurn = false;
   } else {
     // AI turn
     Serial.println("Ai playing...");
-    //AI_HvsC(move);
+    AI_HvsC(move);
 
     //Serial.println("Ai move: ");
     //Serial.print(lastMove[0]);
@@ -130,6 +142,7 @@ void loop() {
     move[1] = 0;
     move[2] = 0;
     move[3] = 0;
+    delay(3000);
     userTurn = true;
   }
 }
@@ -148,9 +161,7 @@ void getReedValues(int targetMuxAddress, int from, int to) {
     digitalWrite(muxAddr[2], j / 4 % 2);
     digitalWrite(muxAddr[3], j / 8 % 2);
 
-    delay(300);
     int reedValue = digitalRead(muxOutput);
-    Serial.print(reedValue);
 
     if (j > 7) {
       muxValues[7-(j-8)] = reedValue;
@@ -158,8 +169,6 @@ void getReedValues(int targetMuxAddress, int from, int to) {
       muxValues[j] = reedValue;
     }
   }
-
-  Serial.println("");
 
   // Resetting MUX
   digitalWrite(muxAddr[0], LOW);
@@ -173,8 +182,7 @@ void getReedValues(int targetMuxAddress, int from, int to) {
 
 
 void setCurrentBoard() {
-  Serial.println("Board now:");
-  /*getReedValues(muxEnable[0], 0, 8);
+  getReedValues(muxEnable[0], 0, 8);
   memcpy(boardValues[0], recordedReedValue, sizeof(boardValues[0]));
 
   getReedValues(muxEnable[0], 8, 16);
@@ -185,20 +193,18 @@ void setCurrentBoard() {
 
   getReedValues(muxEnable[1], 8, 16);
   memcpy(boardValues[3], recordedReedValue, sizeof(boardValues[3]));
-*/
+
   getReedValues(muxEnable[2], 0, 8);
   memcpy(boardValues[4], recordedReedValue, sizeof(boardValues[4]));
 
   getReedValues(muxEnable[2], 8, 16);
   memcpy(boardValues[5], recordedReedValue, sizeof(boardValues[5]));
-/*
+
   getReedValues(muxEnable[3], 0, 8);
   memcpy(boardValues[6], recordedReedValue, sizeof(boardValues[6]));
 
   getReedValues(muxEnable[3], 8, 16);
-  memcpy(boardValues[7], recordedReedValue, sizeof(boardValues[7]));*/
-  Serial.println("/////////");
-  Serial.println("");
+  memcpy(boardValues[7], recordedReedValue, sizeof(boardValues[7]));
 }
 
 
@@ -211,7 +217,7 @@ void setControlMUX() {
   if (!controlValues[1]) {
     playingAsWhite = false;
   }
-
+  /*
   if (!controlValues[2]) {
     playingAsWhite = true;
   }
@@ -226,16 +232,15 @@ void setControlMUX() {
 
   if (!controlValues[5]) {
     difficulty = 2;
-  }
+  }*/
 
-  if ((!controlValues[1] || !controlValues[2]) &&
-      (!controlValues[3] || !controlValues[4] || !controlValues[5])) {
+//  if ((!controlValues[1] || !controlValues[2]) &&
+  //    (!controlValues[3] || !controlValues[4] || !controlValues[5])) {
     // Checking if mandatory user info is set
     // TODO check if chess pieces are there
-    Serial.println("Game started");
-    gameStarted = true;
-    setCurrentBoard();
-  }
+  Serial.println("Game started");
+  gameStarted = true;
+  setCurrentBoard();
 }
 
 void moveMagnet(int direction, int distance, bool magnetActivated) {
@@ -360,41 +365,34 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
 }
 
 void detectBoardMovement() {
-  delay(1000);
-  memcpy(boardValuesMemory, boardValues, sizeof(boardValuesMemory));
   setCurrentBoard();
-/*
-  Serial.println("Board change memory:");
-  for (int i = 0; i < 8; i++) {
-    for (int j = 0; j < 8; j++) {
-      Serial.print(boardValuesMemory[i][j]);
+
+  Serial.println("////// Board //////");
+  for (int i = 7; i >= 0 ; i--) {
+    Serial.print(i+1);
+    Serial.print(" / ");
+    for (int j = 7; j >= 0; j--) {
+      Serial.print(boardValues[i][j]);
+      Serial.print(" ");
     }
     Serial.println();
   }
+  Serial.println("    A B C D E F G H");
 
-  Serial.println("Board change values:");
-  for (int i = 0; i < 8; i++) {
-    for (int j = 0; j < 8; j++) {
-      Serial.print(boardValues[i][j]);
-    }
-    Serial.println();
-  }*/
+  Serial.println("");
 
-  for (int i = 0; i < 8; i++) {
-    for (int j = 0; j < 8; j++) {
+  for (int i = 7; i >= 0; i--) {
+    for (int j = 7; j >= 0; j--) {
       if (boardValuesMemory[i][j] != boardValues[i][j]) {
-        Serial.print("Change of piece on: ");
-        Serial.print(letterTranslate[j]);
-        Serial.println(i);
         // Position of piece has changes
         if (boardValues[i][j]) {
           // Piece was here before
-          move[0] = numberTranslate[i];
-          move[1] = letterTranslate[j];
+          move[0] = letterTranslate[j];
+          move[1] = numberTranslate[i];
         } else {
           // New piece on this position
-          move[2] = numberTranslate[i];
-          move[3] = letterTranslate[j];
+          move[2] = letterTranslate[j];
+          move[3] = numberTranslate[i];
         }
       }
     }

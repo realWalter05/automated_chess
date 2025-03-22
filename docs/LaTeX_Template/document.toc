@@ -2,21 +2,21 @@
 \contentsline {chapter}{\numberline {1}Úvod}{8}{}%
 \contentsline {chapter}{\numberline {2}Využité technologie}{10}{}%
 \contentsline {section}{\numberline {2.1}Arduino}{10}{}%
-\contentsline {section}{\numberline {2.2}Deska plošného spoje}{11}{}%
-\contentsline {section}{\numberline {2.3}Elektronické součástky}{12}{}%
-\contentsline {subsection}{\numberline {2.3.1}Magnetický spínač}{12}{}%
-\contentsline {subsection}{\numberline {2.3.2}Multiplexor}{12}{}%
-\contentsline {subsection}{\numberline {2.3.3}Stabilizátor}{13}{}%
-\contentsline {subsection}{\numberline {2.3.4}Krokový motor}{13}{}%
-\contentsline {subsection}{\numberline {2.3.5}Elektromagnet}{13}{}%
-\contentsline {section}{\numberline {2.4}Minimax algoritmus}{13}{}%
-\contentsline {section}{\numberline {2.5}BFS algoritmus}{13}{}%
-\contentsline {chapter}{\numberline {3}Rozložení projektu}{14}{}%
-\contentsline {chapter}{\numberline {4}Řídící jednotka}{16}{}%
-\contentsline {chapter}{\numberline {5}Šachové herní pole}{17}{}%
-\contentsline {chapter}{\numberline {6}Programový kód}{18}{}%
-\contentsline {chapter}{\numberline {7}Konstrukční provedení}{19}{}%
-\contentsline {chapter}{\numberline {8}Šachové figurky}{20}{}%
-\contentsline {chapter}{\numberline {9}Závěr}{21}{}%
-\contentsline {chapter}{Přílohy}{23}{}%
-\contentsline {chapter}{\numberline {A}Příloha}{24}{}%
+\contentsline {section}{\numberline {2.2}Deska plošného spoje}{10}{}%
+\contentsline {section}{\numberline {2.3}Elektronické součástky}{11}{}%
+\contentsline {subsection}{\numberline {2.3.1}Magnetický spínač}{11}{}%
+\contentsline {subsection}{\numberline {2.3.2}Multiplexor}{11}{}%
+\contentsline {subsection}{\numberline {2.3.3}Stabilizátor}{11}{}%
+\contentsline {subsection}{\numberline {2.3.4}Krokový motor}{12}{}%
+\contentsline {subsection}{\numberline {2.3.5}Elektromagnet}{12}{}%
+\contentsline {section}{\numberline {2.4}Minimax algoritmus}{12}{}%
+\contentsline {section}{\numberline {2.5}BFS algoritmus}{12}{}%
+\contentsline {chapter}{\numberline {3}Rozložení projektu}{13}{}%
+\contentsline {chapter}{\numberline {4}Řídící jednotka}{15}{}%
+\contentsline {chapter}{\numberline {5}Šachové herní pole}{16}{}%
+\contentsline {chapter}{\numberline {6}Programový kód}{17}{}%
+\contentsline {chapter}{\numberline {7}Konstrukční provedení}{18}{}%
+\contentsline {chapter}{\numberline {8}Šachové figurky}{19}{}%
+\contentsline {chapter}{\numberline {9}Závěr}{20}{}%
+\contentsline {chapter}{Přílohy}{22}{}%
+\contentsline {chapter}{\numberline {A}Příloha}{23}{}%
