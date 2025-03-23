@@ -1,5 +1,34 @@
 \documentclass[a4paper, 12pt]{report}
 \usepackage{monapack}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+	backgroundcolor=\color{backgroundColour},   
+	commentstyle=\color{mGreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{mGray},
+	stringstyle=\color{mPurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	language=C
+}
+
+
 
 \student{Václav Zíka}
 \trida{B4.I}
@@ -36,7 +65,8 @@ Aj...\\
 \podekovani
 ....
 
-\licencniSmlouva{11. 3. 2025}
+\licencniSmlouva{23. 3. 2025}
+
 
 \obsah
 
@@ -84,6 +114,7 @@ ačkoli zachovám kvalitu šachovnice a nevyměním dřevo za
 plasty a jiné méně vhodné materiály pro klasickou šachovnici.
 
 
+
 \kapitola{Využité technologie}
 V této kapitole si popíšeme technologie, které byli zapotřebí při tvorbě projektu.
 Získáme k nim teoretický základ nutný k porozumění šachovnice.
@@ -95,7 +126,7 @@ z důvodů velkého rozšíření mikrokontrolerů Arduino.
 
 Mikrokontrolér Arduino je malý počítač založen na jednom čipu. Arduino vyrábí
 mnoho různých řad jejich projektů, ale mezi nejznámější se řadí Arduino UNO či
-Mega. Arduino desky na sobě mají široké spektrum možných vstupů, výstupů a senzorů    \viz{arduino_uno_pinout}.
+Mega. Arduino desky na sobě mají široké spektrum možných vstupů, výstupů a senzorů\viz{arduino_uno_pinout}.
 Velkou výhodou těchto desek je cena. Ta se pohybuje v řádech stovek korun.
 
 Arduino desky se primárně programují pomocí platformy Arduino IDE. To je další open-source
@@ -120,7 +151,6 @@ Tato elektronická součástka slouží k přepínání vstupů na jeden výstup
 \podpodkapitola{Stabilizátor}
 Stabilizátor nám zajištuje výstupní nápětí bez ohledu na změny výstupního proudu či vstupního napětí. Stabilázátory se dělí na lineární paremetrický, lineární zpětnovazební a spínací zpětnovazební. Stabilizátory fungují na principu regulace odporu pomocí tranzistoru na základě referečního napětí a napětí žádaného. Ke stabilizátoru se přidávají kondenzátory, který eliminuje šum a stabilizují výstup. Lineární stabilizátory regulují napětí, tím že fungují jako proměnný odpor mezi vstupem a výstupem. 
 
-
 \podpodkapitola{Elektromagnet}
 Elektromagnetem se rozumí cívka pomocí, které jsme schopni vytvořit dočasné magnetické pole. Jádro této cívky je z magneticky měkké oceli. V momentě, kdy začneme cívkou provádět proud, začne se okolo ní vytvářet magnetické pole. Velikost a polaritu tohoto pole jsme schopni ovládat.
 
@@ -134,12 +164,11 @@ Z počátku si Mini-Max vytvoří tzv. herní strom. Účelem tohoto stromu je r
 
 
 
-
 \kapitola{Elektrické zapojení}
 Pro projekt bylo zapotřebí vymyslet efektivní a spolehlivý způsob propojení. Zároveň však způsob nesměl bránit detekci figurek pomocí spínačů. Nabízela se spoustu možností, ale z důvodů velkého množství součástek jsem se rozhodl pro dle mě nejčistčí řešení a to desku plošného spoje. 
 
 \podkapitola{PCB deska}
-PCB deska bylo řešení, které se nabízelo kvůli spolehlivosti a zároveň, tím že deska je velmi tenké a její materiál nijak nebrání průchodu magnetického pole. Na základě mého schématu v programu Easy ADA jsem si desku nechal sestrojit. Schéma šachovnice najdete v přílohách pod názvem schema\_sachovnice.pdf. Z důvodu výrobních možností a rozměrů desky byla deska sestrojena na dvě poloviny. Tyto poloviny jsem spájel dohromady. Desku byla vyrobena technologií SMT, takže jsem na ní povrchově připájel piny pro všechny potřebné součástky. A to
+Deska plošného spoje bylo řešení, které se nabízelo kvůli spolehlivosti a zároveň, tím že deska je velmi tenké a její materiál nijak nebrání průchodu magnetického pole. Na základě mého schématu v programu Easy ADA jsem si desku nechal sestrojit. Schéma šachovnice najdete v přílohách pod názvem schema\_sachovnice.pdf. Z důvodu výrobních možností a rozměrů desky byla deska sestrojena na dvě poloviny. Tyto poloviny jsem spájel dohromady. Desku byla vyrobena technologií SMT, takže jsem na ní povrchově připájel piny pro všechny potřebné součástky. A to
 \bodseznam{
 	\bod 69 jazýčkový magnetických kontaktů
 	\bod 5 analogových multiplexorů
@@ -156,19 +185,157 @@ Tyto problémy jsem řešil za pomocí multimetru a posléze detekcí pomocí po
 
 Desky se mi po opravách podařilo dostat do spolehlivého stavu. Jednou věcí, která mi však projekt stížila bylo, že nespolehlivost dráh a spínačů jsem objevil až v momentě, kdy jsem programoval detekci figurek. V tuto chvíli jsem však již, alespoň mohl využít napojení na multiplexery a pomocí kódu je kontrolovat skrze konzoly na počítači. To usnadilo proces oprav.
 
+Deska je napájena externím 18V zdrojem. Na desce se pomocí stabilizátoru pro většinu součástek ustálí proud 5V, avšak pro motory a elektromagnet zůstává proud 18V.
+
+
 \podkapitola{Řídící jednotka}
-
-\podkapitola{Zapojení multiplexerů}
-
-
-
-
-
+Mikrokontrolér, který jsem si vybral pro samořídící šachovnici je Arduino UNO. Toto Arduino splňovalo veškeré nutné požadavky pro ovládání a zároveň to byl mikrokontroler, který jsem měl z počátku projektu doma a mohl jsem na něm zprvu testovat. Arduino je napájeno 5V z PCB desky a ovládá celou šachovnici. Arduino je naprogramováno variantou jazyku C++, ale o tom budu psát podrobněji až dále v práci. Do mikrokontroleru jsou skrze multiplexory zapojeny všechny magnetické spínače. Arduino si pomocí programové logiky přepíná, jaký z multiplexorů bude v dané chvíli aktivní, jelikož data multiplexorů proudí po stejných cestách. Dále jsou do Arduina zapojené ovladače motorů a transistor, který slouží k ovládání k elektromagnetu.
 
 
 \kapitola{Detekce pozice figurek}	
+V této kapitole popíši, na jakém principu se v šachovnici detekují pozici figurek. Vysvětlím jednotlivé zapojení multiplexorů a kód, který je ovládá. Spolehlivé detekování pozice figurek je stěžejním bodem této prace, jelikož z něho vychází další operace projektu.
+
+\podkapitola{Zapojení a princip}
+Aby samořídíc šachovnice fungovalo je zapotřebí vědět pozici figurek na herním poli. Nabízí se dvě řešení. Pomocí detekce pomocí kamer a zpracování obrazu a pomocí magnetickýc spínačů. Řešení pomocí kamer jsem zavrhl, již z počátku jelikož by to znamenalo nějaké rameno na šachovnice s kamerou. To mi nepřipadalo ideální. Magnetické spínače nám zachovají čistý vzhled šachovnice. Jelikož však na šachovnici máme 64 políček, potřebujeme 64 spínačů. Tolika piny naše Arduino Uno nedisponuje, a tak je zapotřebí využít nějaký systém pomocí, kterého počet vstupů snížíme. 
+
+Po průzkumu a práci na řešení jsem se inspiroval z jednoho projektu dostupném na internetu \citace{Řešení nedostatku pinů pomocí multiplexorů}. V tomto projektu bylo využita multiplexorové řešení. Zapojíme piny spínačů do multiplexoru a ten pak čteme pomocí řídící jednotky. Pomocí tohoto postupu jsme schopni zredukovat 64 pinů na 4 multiplexory. V této práci jsem jich využil pět, jelikož poslední multiplexor se stará o volbu obtížností a barvy.
+\clearpage\obrazek{spinaceSchema}{Zapojení magnetických spínačů na desce}{16cm}{spinaceSachovnice.png} 
+
+Multiplexory, které jsem využil mají 16 datových vstupů, 4 vstupy adresové, nápajení a zem, zapínací pin EN a výstup SIG. Výstupy multiplexorů, jak je vidět na schématu \viz{spinaceSchema} jsou zapojeny do stejných cest na PCB desce. Stejna tak výstup SIG je pro všechny multiplexory stejný. Toto není problém, jelikož v kódu využivám pin Enable (en). Jestliže je tento pin v logické jedničce, je multiplexor vypnutý. V momentě, kdy je v logické nule, je zapnutý. Na základě tohoto principu jsme schopni přepínat přepínače samotné a tím ještě více zminimalizovat počet nutných vstupů do Arduina UNO.
+
+\podkapitola{Programový kód}
+Jak, už jsme zmínili dříve v práci, šachovnice je ovládána mikrokontrolerem Arduino UNO, jenž se programuje variantou C++. Kód pro ovládání multiplexorů nám musí zajistit jejich přepínání pomocí Enable pin a stabilní detekci pozic. První věc, kterou musíme v kódu nastavit jsou Enable piny. Po zapnutí nastavím Enable pin jako OUTPUT a pomocí for loopu si procyklujeme všechny Enable piny multiplexorů a dáme na ně logickou jedničku. Tato část kódu je v setup() funkci kódu. Ta se spustí pouze po spuštění mikrokontroleru.
+\begin{lstlisting}[style=CStyle]
+// Disabling Multiplexers  (When high - does nothing)
+pinMode(muxEnable[4], OUTPUT);
+for (int i = 0; i < 4; i++) {
+	pinMode(muxEnable[i], OUTPUT);
+	digitalWrite(muxEnable[i], HIGH);
+}
+
+for (int i = 0; i < 4; i++) {
+	pinMode(muxAddr[i], OUTPUT);
+	digitalWrite(muxAddr[i], LOW);
+}
+\end{lstlisting}
+
+\podpodkapitola{Čtení hodnot pomocí getReedValues()}
+Samotný proces čtení pozic si ukážeme jako další. Využívám na tou svou funkci getReedValues. V této funkci nejprve zaktivujeme multiplexoru, tím že mu nastavíme pin na 0. Poté začneme na jeho adresové piny vysílat binarní kombinace od 0 do 15. Toho docíleme opět pomocí for cyklu a využití modulo funkce (v kódu jako \%). Data následně ukládáme do našeho interního variablu muxValues a poté, co deaktivujeme multiplexor a jeho adresové vstupy, překopírujeme pomocí funkce memcpy hodnoty do proměnné recordedReedValue, která nám slouží pouze pro ukládání nejnovější možné detekce pozic.
+
+\begin{lstlisting}[style=CStyle]
+
+void getReedValues(int targetMuxAddress, int from, int to) {
+	// Splitting to two rows because row of chessboard has 8 pieces
+	int muxValues[8];
+	
+	// Activating MUX
+	digitalWrite(targetMuxAddress, LOW);
+	
+	for (int j = from; j < to; j++) {
+		// Checking MUX combinations
+		digitalWrite(muxAddr[0], j % 2);
+		digitalWrite(muxAddr[1], j / 2 % 2);
+		digitalWrite(muxAddr[2], j / 4 % 2);
+		digitalWrite(muxAddr[3], j / 8 % 2);
+		
+		int reedValue = digitalRead(muxOutput);
+		
+		if (j > 7) {
+			muxValues[7-(j-8)] = reedValue;
+		} else {
+			muxValues[j] = reedValue;
+		}
+	}
+	
+	// Resetting MUX
+	digitalWrite(muxAddr[0], LOW);
+	digitalWrite(muxAddr[1], LOW);
+	digitalWrite(muxAddr[2], LOW);
+	digitalWrite(muxAddr[3], LOW);
+	
+	digitalWrite(targetMuxAddress, HIGH);
+	memcpy(recordedReedValue, muxValues, sizeof(recordedReedValue));
+}
+\end{lstlisting}
+
+Jelikož je SIG pin multiplexorů nastavený jako INPUT\_PULLUP, což je nutné pro detekci zda spínač spíná zem či je rozpojený, dostávám všechny rozpojené spínače jako jedničky. Ty seplé jako nuly. Ve výsledku může výstup v konzoli po zahájení hry vypadat takto.
+\clearpage
+\strojopis{\\
+8 - 0 0 0 0 0 0 0 0\\
+7 - 0 0 0 0 0 0 0 0\\
+6 - 1 1 1 1 1 1 1 1\\
+5 - 1 1 1 1 1 1 1 1\\
+4 - 1 1 1 1 1 1 1 1\\
+3 - 1 1 1 1 1 1 1 1\\
+2 - 0 0 0 0 0 0 0 0\\
+1 - 0 0 0 0 0 0 0 0\\
+-------A B C D E F G H
+}
+
+\podpodkapitola{Ukládání všech pozic}
+Tato funkce nám zajištuje přečtení hodnot multiplexoru na základě daných parametrů. V kódu máme další pomocnou funkci setCurrentBoard(). Cílem této funkce je projít všechny řady šachovnice od první až po osmou a uložit je do mikrokontroleru. V mikrokontroleru je opět pomocí funkce memcpy překopíruje do dvouřadého listu boardValues, který obsahuje všechny pozice figurek.
+\begin{lstlisting}[style=CStyle]
+void setCurrentBoard() {
+	getReedValues(muxEnable[0], 0, 8);
+	memcpy(boardValues[0], recordedReedValue, sizeof(boardValues[0]));
+	
+	getReedValues(muxEnable[0], 8, 16);
+	memcpy(boardValues[1], recordedReedValue, sizeof(boardValues[1]));
+	//.....another five reads
+	getReedValues(muxEnable[3], 8, 16);
+	memcpy(boardValues[7], recordedReedValue, sizeof(boardValues[7]));
+\end{lstlisting}
+
+\podpodkapitola{Detekce přemístění figurek}
+Předchozí funkce v této kapitole nám vysvětlují, jak šachovnice data čte. Nadcházející funkce je však zodpovědné za samotnou detekci změny pozic, když uživatel vezme figurky do ruky a přendá ji na jiné políčko. Tato funkce je napsána bloku loop(). To je opět platformou Arduino daná funkce, která se po spuštění již zmíněné funkce setup() neustále opakuje.
+
+Abychom zjistili zda se událo přemístění figurky musíme pravidelně číst pozice hodnot a porovnávat je z přechozími. To děláme pomocí while cyklu, který se opakuje do doby než jsou splněné podmínky uvedené v závorkách. Podmínky, které jsem v kódu nastavil jsou, že list move bude obsahove čtyři hodnoty. Neboli hodnotu čísla a písmena odkud se figurka přemístila a hodnoty kam. Jak zjistíme hodnoty, které ukládáme do move, vysvětlím dále v textu. Nejprve tedy uložíme hodnoty pozic do proměnné boardValuesMemory a následně přejdeme do cyklu. V tomto cyklu se neustále volá funkce detectBoardMovement() až do splníme zmíněných podmínek.
+\begin{lstlisting}[style=CStyle]
+	// Player's turn => waiting for movement
+	memcpy(boardValuesMemory, boardValues, sizeof(boardValuesMemory));
+	while (!move[0] || !move[1] || !move[2] || !move[3]) {
+		detectBoardMovement();
+	}
+\end{lstlisting}
+
+\podpodpodkapitola{Funkce detectBoardMovement()}
+Pomocí této funkce detekujeme, zda bylo uskutečněno přemístění figurek. Tato funkce je volána cyklicky z while loopu dokud nenajdeme čtyři hodnoty pro proměnnou move. Např. e2e4 by nám značilo pohyb z počátku hry pěšče o dvě místa z e2 na políčko e4. Funkce porovnává současné hodnoty pozic, které nastaví pomocí funkce setCurrentBoard(), boardValues s hodnoty uloženými v hlavním cyklu před zahájením while cyklu, boardValuesMemory. 
+
+\begin{lstlisting}[style=CStyle]
+void detectBoardMovement() {
+	setCurrentBoard();
+	
+	for (int i = 7; i >= 0; i--) {
+		for (int j = 7; j >= 0; j--) {
+			if (boardValuesMemory[i][j] != boardValues[i][j]) {
+				// Position of piece has changes
+				if (boardValues[i][j]) {
+					// Piece was here before
+					move[0] = letterTranslate[j];
+					move[1] = numberTranslate[i];
+				} else {
+					// New piece on this position
+					move[2] = letterTranslate[j];
+					move[3] = numberTranslate[i];
+				}
+			}
+		}
+	}
+	delay(2000);
+}
+\end{lstlisting}
+Takto pomocí dvou for loopu prochází hodnoty od nejvyšší po nejnižší. To je z důvodu uložení dat a zapojení multiplexorů. Tam postupně porovnává každé políčko s každým dokud nenajde nějakou změnu. V případě, že všechny hodnoty jsou stejné jako předtím, funkce se spustí z hlavního cyklu znovu. V případě změny však pomocí kódu detekujeme zda šlo o změnu z 0 na 1 či naopak. 
+
+\popisseznam{
+	\polozka {Změny z 0 na 1}{Jelikož logická jednička označuje prázdné políčko, tato zmena značí odkud se figurka přemístila. Zapíše se tedy do move na první a druhé pozici.}
+	\polozka {Změny z 1 na 0}{Značí, že políčko bylo dříve prázné a nyní se na něj umístila nová figurka. Zapíše se tedy do list move na třetí a čtvrtou pozici}
+}
+
+V momentě, kdy naplníme všechny čtyři místo v listu move, zruší se while cyklus v hlavní funkci programu a kód může postupovat dále. Ve funkci máme na konci ještě dané zpoždění, které zamezí chybám v detekci při pomalém přemísťování figurek.
 
 \kapitola{Pohyb figurek}
+
+\kapitola{Šachová hra}
 
 \kapitola{Závěr}
 
@@ -190,11 +357,15 @@ Desky se mi po opravách podařilo dostat do spolehlivého stavu. Jednou věcí,
 	\url{Stabilizátor}{wikipedia.cz}{Stabilizátory napětí}{https://www.wikipedia.cz}{2024}{22.2.2024}{https://cs.wikipedia.org/wiki/Stabiliz\%C3\%A1tor\_nap\%C4\%9Bt\%C3\%AD}
 	\url{Krokový motor}{lastminuteengineers.com}{28byj48-stepper-motor-arduino-tutorial/}{https://lastminuteengineers.com}{2025}{23. 3. 2025}{https://lastminuteengineers.com/28byj48-stepper-motor-arduino-tutorial/}https://lastminuteengineers.com/28byj48-stepper-motor-arduino-tutorial/
 	\url{Elektromagnet}{cs.wikipedia.org}{Elektromagnet}{https://cs.wikipedia.org/}{2025}{25. 1. 2025}{https://cs.wikipedia.org/wiki/Elektromagnet}https://cs.wikipedia.org/wiki/Elektromagnet
-
-	https://cs.wikipedia.org/wiki/Elektromagnet
+	\url{Mini-Max}{geeksforgeeks.com}{mini-max-algorithm-in-artificial-intelligence}{https://www.geeksforgeeks.org/}{2024}{27.8.2024}{https://www.geeksforgeeks.org/mini-max-algorithm-in-artificial-intelligence/}https://www.geeksforgeeks.org/mini-max-algorithm-in-artificial-intelligence/
+	
+	
+	\url{Řešení nedostatku pinů pomocí multiplexorů}{https://www.instructables.com}{Automated-Chessboard}{https://www.instructables.com}{2022}{2.1.2022}{https://www.instructables.com/Automated-Chessboard/}https://www.instructables.com/Automated-Chessboard/
+		
+		
 	\url{PCB SMT a THT}{pcba-manufacturers.com}{SMT vs THT}{2023}{23. 3. 2023}{https://www.pcba-manufacturers.com/smt-vs-tht/}
 	\url{Arduino UNO}{store.arduino.cc}{Arduino UNO pinout}{2025}{19. 3. 2025}{https://store.arduino.cc/en-cz/products/arduino-uno-rev3}
-	
+	\url{Mini-Max grafika algoritmus}{https://www.tpointtech.com}{minimax-algorithm-in-python}{https://www.tpointtech.com/}{2025}{23.3.2025}{https://www.tpointtech.com/minimax-algorithm-in-python}https://www.tpointtech.com/minimax-algorithm-in-python
 	
 	
 }

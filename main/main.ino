@@ -36,7 +36,7 @@ int boardValuesMemory[8][8];
 int recordedReedValue[8];
 int controlValues[8];
 
-// Multilexers
+// Multiplexers
 int muxEnable[5] = {A0, 4, 5, 6, 7};
 int muxAddr[4] = {A1, A2, A3, A4};
 int muxOutput = A5;
@@ -362,40 +362,4 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
   digitalWrite(dirPinY, LOW);
   digitalWrite(stepPinX, LOW);
   digitalWrite(stepPinY, LOW);
-}
-
-void detectBoardMovement() {
-  setCurrentBoard();
-
-  Serial.println("////// Board //////");
-  for (int i = 7; i >= 0 ; i--) {
-    Serial.print(i+1);
-    Serial.print(" / ");
-    for (int j = 7; j >= 0; j--) {
-      Serial.print(boardValues[i][j]);
-      Serial.print(" ");
-    }
-    Serial.println();
-  }
-  Serial.println("    A B C D E F G H");
-
-  Serial.println("");
-
-  for (int i = 7; i >= 0; i--) {
-    for (int j = 7; j >= 0; j--) {
-      if (boardValuesMemory[i][j] != boardValues[i][j]) {
-        // Position of piece has changes
-        if (boardValues[i][j]) {
-          // Piece was here before
-          move[0] = letterTranslate[j];
-          move[1] = numberTranslate[i];
-        } else {
-          // New piece on this position
-          move[2] = letterTranslate[j];
-          move[3] = numberTranslate[i];
-        }
-      }
-    }
-  }
-  delay(2000);
 }

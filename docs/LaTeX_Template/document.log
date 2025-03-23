@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Arch Linux) (preloaded format=pdflatex 2025.3.19)  23 MAR 2025 16:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Arch Linux) (preloaded format=pdflatex 2025.3.19)  23 MAR 2025 20:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -642,37 +642,65 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@thisruleclass=\count356
 \@lastruleclass=\count357
 \@thisrulewidth=\dimen283
-)) (./document.aux)
+))
+(/usr/share/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count358
+\lst@gtempboxa=\box86
+\lst@token=\toks54
+\lst@length=\count359
+\lst@currlwidth=\dimen284
+\lst@column=\count360
+\lst@pos=\count361
+\lst@lostspace=\dimen285
+\lst@width=\dimen286
+\lst@newlines=\count362
+\lst@lineno=\count363
+\lst@maxwidth=\dimen287
+
+(/usr/share/texmf-dist/tex/latex/listings/lstpatch.sty
+File: lstpatch.sty 2024/09/23 1.10c (Carsten Heinz)
+)
+(/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+\c@lstnumber=\count364
+\lst@skipnumbers=\count365
+\lst@framebox=\box87
+)
+(/usr/share/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2024/09/23 1.10c listings configuration
+))
+Package: listings 2024/09/23 1.10c (Carsten Heinz)
+ (./document.aux)
 \openout1 = `document.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count358
-\scratchdimen=\dimen284
-\scratchbox=\box86
-\nofMPsegments=\count359
-\nofMParguments=\count360
-\everyMPshowfont=\toks54
-\MPscratchCnt=\count361
-\MPscratchDim=\dimen285
-\MPnumerator=\count362
-\makeMPintoPDFobject=\count363
-\everyMPtoPDFconversion=\toks55
+\scratchcounter=\count366
+\scratchdimen=\dimen288
+\scratchbox=\box88
+\nofMPsegments=\count367
+\nofMParguments=\count368
+\everyMPshowfont=\toks55
+\MPscratchCnt=\count369
+\MPscratchDim=\dimen289
+\MPnumerator=\count370
+\makeMPintoPDFobject=\count371
+\everyMPtoPDFconversion=\toks56
 ) (/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -716,10 +744,11 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+\c@lstlisting=\count372
 <images/logo.jpg, id=4, 225.84375pt x 225.84375pt>
 File: images/logo.jpg Graphic file (type jpg)
 <use images/logo.jpg>
-Package pdftex.def Info: images/logo.jpg  used on input line 17.
+Package pdftex.def Info: images/logo.jpg  used on input line 46.
 (pdftex.def)             Requested size: 85.35826pt x 85.35973pt.
 
 
@@ -731,12 +760,12 @@ Package pdftex.def Info: images/logo.jpg  used on input line 17.
 [1]
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 39--39
+Underfull \hbox (badness 10000) in paragraph at lines 68--68
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 39--39
+Underfull \hbox (badness 10000) in paragraph at lines 68--68
 
  []
 
@@ -747,7 +776,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 39--39
 [4]
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 39--39
+Underfull \hbox (badness 10000) in paragraph at lines 68--68
 
  []
 
@@ -760,92 +789,121 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 4.
-)
+
+
+[7
+
+])
 \tf@toc=\write5
 \openout5 = `document.toc'.
 
 
 
-[7
-
-]
+[8]
 Kapitola 1.
 
 
-[8
+[9
 
 ]
 
-[9]
+[10]
 Kapitola 2.
 
-LaTeX Warning: Reference `arduino_uno_pinout' on page 10 undefined on input lin
-e 98.
+LaTeX Warning: Reference `arduino_uno_pinout' on page 11 undefined on input lin
+e 129.
 
-<images/pcb_SMT_THT.png, id=44, 1003.75pt x 501.875pt>
+<images/pcb_SMT_THT.png, id=47, 1003.75pt x 501.875pt>
 File: images/pcb_SMT_THT.png Graphic file (type png)
 <use images/pcb_SMT_THT.png>
-Package pdftex.def Info: images/pcb_SMT_THT.png  used on input line 111.
+Package pdftex.def Info: images/pcb_SMT_THT.png  used on input line 142.
 (pdftex.def)             Requested size: 284.52756pt x 142.26239pt.
 
 
-[10
+[11
 
 ]
 
-[11 <./images/pcb_SMT_THT.png>]
+[12 <./images/pcb_SMT_THT.png>]
 
-[12]
-<images/minimax.png, id=58, 668.4975pt x 479.7925pt>
+[13]
+<images/minimax.png, id=61, 668.4975pt x 479.7925pt>
 File: images/minimax.png Graphic file (type png)
 <use images/minimax.png>
-Package pdftex.def Info: images/minimax.png  used on input line 131.
+Package pdftex.def Info: images/minimax.png  used on input line 161.
 (pdftex.def)             Requested size: 284.52756pt x 204.21292pt.
 
 
-[13
+[14
 
  <./images/minimax.png>]
 Kapitola 3.
 
 
-[14
+[15
 
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-<images/pcbDesky.jpg, id=67, 2077.7625pt x 1722.435pt>
+<images/pcbDesky.jpg, id=70, 2077.7625pt x 1722.435pt>
 File: images/pcbDesky.jpg Graphic file (type jpg)
 <use images/pcbDesky.jpg>
-Package pdftex.def Info: images/pcbDesky.jpg  used on input line 152.
+Package pdftex.def Info: images/pcbDesky.jpg  used on input line 181.
 (pdftex.def)             Requested size: 455.24408pt x 377.38623pt.
 
 
-[15
+[16
 
  <./images/pcbDesky.jpg>]
 
-[16]
+[17]
 Kapitola 4.
-
-
-[17
-
-]
-Kapitola 5.
 
 
 [18
 
 ]
+<images/spinaceSachovnice.png, id=81, 909.3975pt x 764.8575pt>
+File: images/spinaceSachovnice.png Graphic file (type png)
+<use images/spinaceSachovnice.png>
+Package pdftex.def Info: images/spinaceSachovnice.png  used on input line 202.
+(pdftex.def)             Requested size: 455.24408pt x 382.89464pt.
+ (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/09/23 1.10c listings language file
+)
+(/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+)
+
+[19
+
+ <./images/spinaceSachovnice.png>]
+
+[20]
+
+[21]
+
+[22
+
+]
+
+[23]
+
+[24]
+Kapitola 5.
+
+
+[25
+
+]
 Kapitola 6.
 
 
-[19
+[26
 
 ]
 Kapitola 7.
 
 
-[20
+[27
 
 ] (./document.lot)
 \tf@lot=\write6
@@ -853,7 +911,7 @@ Kapitola 7.
 
 
 
-[21
+[28
 
 ] (./document.lof)
 \tf@lof=\write7
@@ -861,82 +919,128 @@ Kapitola 7.
 
 
 
-[22
+[29
 
 ]
 P\v {r}\'{\i }loha A.
 
 
-[23
+[30
 
 ]
-Overfull \hbox (4.94444pt too wide) in paragraph at lines 200--200
+Overfull \hbox (4.94444pt too wide) in paragraph at lines 371--371
 \T1/cmr/m/n/12 https://www.conrad.cz/cs/clanky/elektromechanika/arduino.html?sr
 sltid=AfmBOoq-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--200
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
 []\T1/cmr/m/sc/12 dubno.cz\T1/cmr/m/n/12 .  VY_32_INOVACE_CTE_2.MA_13_Multiplex
 ory.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--200
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
 \T1/cmr/m/it/12 https://dubno.cz/ \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\
 T1/cmr/m/n/12 2012 [cit.1.8.2012].  Do-stupné z:
  []
 
 
-Overfull \hbox (150.67134pt too wide) in paragraph at lines 200--200
+Overfull \hbox (150.67134pt too wide) in paragraph at lines 371--371
 \T1/cmr/m/n/12 https://dubno.cz/images/stories/dum/8.sablona/24/pdf/VY_32,_INOV
 ACE_CTE_2.MA_13_Multiplexory.pdf 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--200
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
 []\T1/cmr/m/sc/12 wikipedia.cz\T1/cmr/m/n/12 .  Sta-bi-li-zá-tory na-p¥tí.  \T1
 /cmr/m/it/12 https://www.wikipedia.cz
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--200
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
 \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\T1/cmr/m/n/12 2024 [cit.22.2.2024]
 .  Do-stupné z:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--200
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
 []\T1/cmr/m/sc/12 lastminuteengineers.com\T1/cmr/m/n/12 .  28byj48-stepper-moto
 r-arduino-tutorial/.
  []
 
 
-Underfull \hbox (badness 6188) in paragraph at lines 200--200
+Underfull \hbox (badness 6188) in paragraph at lines 371--371
 \T1/cmr/m/it/12 https://lastminuteengineers.com \T1/cmr/m/n/12 [on-line].  \TS1
 /cmr/m/n/12 ©\T1/cmr/m/n/12 2025 [cit.23. 3. 2025].  Do-
  []
 
 
-Underfull \hbox (badness 5939) in paragraph at lines 200--200
+Underfull \hbox (badness 5939) in paragraph at lines 371--371
 \T1/cmr/m/n/12 [cit.25. 1. 2025].  Do-stupné z: https://cs.wikipedia.org/wiki/E
 lektromagnet
  []
 
 
-Underfull \hbox (badness 1237) in paragraph at lines 200--200
-[]\T1/cmr/m/sc/12 store.arduino.cc\T1/cmr/m/n/12 .  Ar-duino UNO pi-nout.  \T1/
-cmr/m/it/12 2025 \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\T1/cmr/m/n/12 19.
- 3. 2025
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
+[]\T1/cmr/m/sc/12 geeksforgeeks.com\T1/cmr/m/n/12 .  mini-max-algorithm-in-arti
+ficial-intelligence.
+ []
+
+
+Underfull \hbox (badness 2126) in paragraph at lines 371--371
+\T1/cmr/m/it/12 https://www.geeksforgeeks.org/ \T1/cmr/m/n/12 [on-line].  \TS1/
+cmr/m/n/12 ©\T1/cmr/m/n/12 2024 [cit.27.8.2024].  Do-stupné z:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
+\T1/cmr/m/n/12 https://www.geeksforgeeks.org/mini-max-algorithm-in-artificial-i
+ntelligence/
  []
 
 
 
-[24
+[31
 
 ]
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
+[]\T1/cmr/m/sc/12 https://www.instructables.com\T1/cmr/m/n/12 .  Automated-Ches
+sboard.
+ []
 
-[25] (./document.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
+\T1/cmr/m/it/12 https://www.instructables.com \T1/cmr/m/n/12 [on-line].  \TS1/c
+mr/m/n/12 ©\T1/cmr/m/n/12 2022 [cit.2.1.2022].  Do-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
+\T1/cmr/m/n/12 stupné z: https://www.instructables.com/Automated-Chessboard/
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
+[]\T1/cmr/m/sc/12 https://www.tpointtech.com\T1/cmr/m/n/12 .  minimax-algorithm
+-in-python.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
+\T1/cmr/m/it/12 https://www.tpointtech.com/ \T1/cmr/m/n/12 [on-line].  \TS1/cmr
+/m/n/12 ©\T1/cmr/m/n/12 2025 [cit.23.3.2025].  Do-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
+\T1/cmr/m/n/12 stupné z: https://www.tpointtech.com/minimax-algorithm-in-python
+
+ []
+
+
+
+[32] (./document.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -947,24 +1051,26 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 25553 strings out of 475137
- 595615 string characters out of 5765926
- 1026801 words of memory out of 5000000
- 48191 multiletter control sequences out of 15000+600000
- 569443 words of font info for 56 fonts, out of 8000000 for 9000
+ 27390 strings out of 475137
+ 620473 string characters out of 5765926
+ 1356984 words of memory out of 5000000
+ 50007 multiletter control sequences out of 15000+600000
+ 571620 words of font info for 60 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
- 113i,7n,119p,1609b,286s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 113i,7n,119p,1628b,1727s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/t
 exmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts
 /type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/c
 m-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc120
-0.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/sha
-re/texmf-dist/fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf-dist/f
-onts/type1/public/cm-super/sfti1200.pfb>
-Output written on document.pdf (26 pages, 1715834 bytes).
+0.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/sha
+re/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/f
+onts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/publ
+ic/cm-super/sfrm2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sft
+i1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on document.pdf (33 pages, 1942966 bytes).
 PDF statistics:
- 144 PDF objects out of 1000 (max. 8388607)
- 91 compressed objects within 1 object stream
+ 186 PDF objects out of 1000 (max. 8388607)
+ 117 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 33 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 38 words of extra memory for PDF output out of 10000 (max. 10000000)
 
