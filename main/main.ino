@@ -383,13 +383,19 @@ void detectBoardMovement() {
 void makeChessMove(char givenMove[5]) {
   // Deconstruct move
   char fromXLetter = givenMove[0];
-  char fromX = strchr(normalLetterTranslate, fromXLetter);
-  char fromY = givenMove[1];
+  int fromX = 4;
+  int fromY = 6;
 
   char toXLetter = givenMove[2];
-  char toX = strchr(normalLetterTranslate, toXLetter);
-  char toY = givenMove[3];
+  int toX = 4;
+  int toY = 4;
 
+  Serial.println("Moving motor");
+  Serial.print(fromX);
+  Serial.print(fromY);
+  Serial.print("->");
+  Serial.print(toX);
+  Serial.print(toY);
   // TODO if we are taking a piece
 
   // Move magnet to starting position on X
