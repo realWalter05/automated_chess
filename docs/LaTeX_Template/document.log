@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Arch Linux) (preloaded format=pdflatex 2025.3.19)  22 MAR 2025 21:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Arch Linux) (preloaded format=pdflatex 2025.3.19)  23 MAR 2025 13:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -794,56 +794,64 @@ Package pdftex.def Info: images/pcb_SMT_THT.png  used on input line 111.
 ]
 
 [11 <./images/pcb_SMT_THT.png>]
+<images/minimax.png, id=54, 668.4975pt x 479.7925pt>
+File: images/minimax.png Graphic file (type png)
+<use images/minimax.png>
+Package pdftex.def Info: images/minimax.png  used on input line 132.
+(pdftex.def)             Requested size: 284.52756pt x 204.21292pt.
+
 
 [12]
+
+[13 <./images/minimax.png>]
 Kapitola 3.
-<images/schema_sachovnice_v0.1.pdf, id=58, 845.1575pt x 598.235pt>
+<images/schema_sachovnice_v0.1.pdf, id=63, 845.1575pt x 598.235pt>
 File: images/schema_sachovnice_v0.1.pdf Graphic file (type pdf)
 <use images/schema_sachovnice_v0.1.pdf>
 Package pdftex.def Info: images/schema_sachovnice_v0.1.pdf  used on input line 
-135.
+143.
 (pdftex.def)             Requested size: 284.52756pt x 201.3981pt.
 
 
-[13
+[14
 
 ]
 
-[14 <./images/schema_sachovnice_v0.1.pdf>]
+[15 <./images/schema_sachovnice_v0.1.pdf>]
 Kapitola 4.
-
-
-[15
-
-]
-Kapitola 5.
 
 
 [16
 
 ]
-Kapitola 6.
+Kapitola 5.
 
 
 [17
 
 ]
-Kapitola 7.
+Kapitola 6.
 
 
 [18
 
 ]
-Kapitola 8.
+Kapitola 7.
 
 
 [19
 
 ]
-Kapitola 9.
+Kapitola 8.
 
 
 [20
+
+]
+Kapitola 9.
+
+
+[21
 
 ] (./document.lot)
 \tf@lot=\write6
@@ -851,7 +859,7 @@ Kapitola 9.
 
 
 
-[21
+[22
 
 ] (./document.lof)
 \tf@lof=\write7
@@ -859,52 +867,70 @@ Kapitola 9.
 
 
 
-[22
+[23
 
 ]
 P\v {r}\'{\i }loha A.
 
 
-[23
+[24
 
 ]
-Overfull \hbox (4.94444pt too wide) in paragraph at lines 178--178
+Overfull \hbox (4.94444pt too wide) in paragraph at lines 186--186
 \T1/cmr/m/n/12 https://www.conrad.cz/cs/clanky/elektromechanika/arduino.html?sr
 sltid=AfmBOoq-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 178--178
+Underfull \hbox (badness 10000) in paragraph at lines 186--186
 []\T1/cmr/m/sc/12 dubno.cz\T1/cmr/m/n/12 .  VY_32_INOVACE_CTE_2.MA_13_Multiplex
 ory.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 178--178
+Underfull \hbox (badness 10000) in paragraph at lines 186--186
 \T1/cmr/m/it/12 https://dubno.cz/ \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\
 T1/cmr/m/n/12 2012 [cit.1.8.2012].  Do-stupné z:
  []
 
 
-Overfull \hbox (150.67134pt too wide) in paragraph at lines 178--178
+Overfull \hbox (150.67134pt too wide) in paragraph at lines 186--186
 \T1/cmr/m/n/12 https://dubno.cz/images/stories/dum/8.sablona/24/pdf/VY_32,_INOV
 ACE_CTE_2.MA_13_Multiplexory.pdf 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 178--178
+Underfull \hbox (badness 10000) in paragraph at lines 186--186
 []\T1/cmr/m/sc/12 wikipedia.cz\T1/cmr/m/n/12 .  Sta-bi-li-zá-tory na-p¥tí.  \T1
 /cmr/m/it/12 https://www.wikipedia.cz
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 178--178
+Underfull \hbox (badness 10000) in paragraph at lines 186--186
 \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\T1/cmr/m/n/12 2024 [cit.22.2.2024]
 .  Do-stupné z:
  []
 
 
-Underfull \hbox (badness 1237) in paragraph at lines 178--178
+Underfull \hbox (badness 10000) in paragraph at lines 186--186
+[]\T1/cmr/m/sc/12 lastminuteengineers.com\T1/cmr/m/n/12 .  28byj48-stepper-moto
+r-arduino-tutorial/.
+ []
+
+
+Underfull \hbox (badness 6188) in paragraph at lines 186--186
+\T1/cmr/m/it/12 https://lastminuteengineers.com \T1/cmr/m/n/12 [on-line].  \TS1
+/cmr/m/n/12 ©\T1/cmr/m/n/12 2025 [cit.23. 3. 2025].  Do-
+ []
+
+
+Underfull \hbox (badness 5939) in paragraph at lines 186--186
+\T1/cmr/m/n/12 [cit.25. 1. 2025].  Do-stupné z: https://cs.wikipedia.org/wiki/E
+lektromagnet
+ []
+
+
+Underfull \hbox (badness 1237) in paragraph at lines 186--186
 []\T1/cmr/m/sc/12 store.arduino.cc\T1/cmr/m/n/12 .  Ar-duino UNO pi-nout.  \T1/
 cmr/m/it/12 2025 \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\T1/cmr/m/n/12 19.
  3. 2025
@@ -912,10 +938,11 @@ cmr/m/it/12 2025 \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\T1/cmr/m/n/12 19.
 
 
 
-[24
+[25
 
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-(./document.aux)
+
+[26] (./document.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -926,10 +953,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 25540 strings out of 475137
- 595505 string characters out of 5765926
- 1026752 words of memory out of 5000000
- 48178 multiletter control sequences out of 15000+600000
+ 25552 strings out of 475137
+ 595753 string characters out of 5765926
+ 1026811 words of memory out of 5000000
+ 48190 multiletter control sequences out of 15000+600000
  569443 words of font info for 56 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
  113i,7n,119p,1609b,286s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -940,10 +967,10 @@ m-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc120
 0.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/sha
 re/texmf-dist/fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf-dist/f
 onts/type1/public/cm-super/sfti1200.pfb>
-Output written on document.pdf (25 pages, 1290675 bytes).
+Output written on document.pdf (27 pages, 1302790 bytes).
 PDF statistics:
- 173 PDF objects out of 1000 (max. 8388607)
- 112 compressed objects within 2 object streams
+ 181 PDF objects out of 1000 (max. 8388607)
+ 116 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 28 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 33 words of extra memory for PDF output out of 10000 (max. 10000000)
 
