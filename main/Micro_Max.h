@@ -4,4 +4,4 @@ void gameOver();
 void bkp();
 void serialBoard();
 void AI_HvsC(char move[4]);
-extern char lastMove[], lastMoveAi[];
+extern char lastMove[], lastMoveAI[];

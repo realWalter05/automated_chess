@@ -2,7 +2,6 @@
 
 // Detect values
 char move[4] = {0, 0, 0, 0};
-char lastMove[4] = {0, 0, 0, 0};
 char numberTranslate[8] = {'1', '2', '3', '4', '5', '6', '7', '8'};
 char letterTranslate[8] = {'h', 'g', 'f', 'e', 'd', 'c', 'b', 'a'};
 char normalLetterTranslate[8] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
@@ -245,8 +244,6 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
       digitalWrite(stepPinX, LOW);
       delayMicroseconds(motorDelay);
     }
-    magnetX--;
-    magnetY--;
     break;
 
   case 2:
@@ -258,7 +255,6 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
       digitalWrite(stepPinY, LOW);
       delayMicroseconds(motorDelay);
     }
-    magnetY--;
     break;
 
   case 3:
@@ -273,8 +269,6 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
       digitalWrite(stepPinX, LOW);
       delayMicroseconds(motorDelay);
     }
-    magnetX++;
-    magnetY--;
     break;
 
   case 4:
@@ -286,7 +280,6 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
       digitalWrite(stepPinX, LOW);
       delayMicroseconds(motorDelay);
     }
-    magnetX--;
     break;
 
   case 6:
@@ -298,7 +291,6 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
       digitalWrite(stepPinX, LOW);
       delayMicroseconds(motorDelay);
     }
-    magnetX++;
     break;
 
   case 7:
@@ -313,8 +305,6 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
       digitalWrite(stepPinX, LOW);
       delayMicroseconds(motorDelay);
     }
-    magnetX--;
-    magnetY++;
     break;
 
   case 8:
@@ -326,7 +316,6 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
       digitalWrite(stepPinY, LOW);
       delayMicroseconds(motorDelay);
     }
-    magnetY++;
     break;
 
   case 9:
@@ -341,8 +330,6 @@ void moveMagnet(int direction, int distance, bool magnetActivated) {
       digitalWrite(stepPinX, LOW);
       delayMicroseconds(motorDelay);
     }
-    magnetX++;
-    magnetY++;
     break;
   }
 
@@ -396,16 +383,11 @@ void detectBoardMovement() {
 void makeChessMove(char givenMove[5]) {
   // Deconstruct move
   char fromXLetter = givenMove[0];
-
-  // IndexOf x letter
-  char end = normalLetterTranslate +
-             sizeof(normalLetterTranslate) / sizeof(normalLetterTranslate[0]);
-  char fromX = std::find(fromXLetter, end, fromXLetter);
-
+  char fromX = strchr(normalLetterTranslate, fromXLetter);
   char fromY = givenMove[1];
 
   char toXLetter = givenMove[2];
-  char toX = std::find(toXLetter, end, toXLetter);
+  char toX = strchr(normalLetterTranslate, toXLetter);
   char toY = givenMove[3];
 
   // TODO if we are taking a piece
@@ -414,9 +396,11 @@ void makeChessMove(char givenMove[5]) {
   if (fromX > magnetX) {
     // Move to right
     moveMagnet(6, fromX - magnetX, false);
+    magnetX = fromX;
   } else if (fromX < magnetX) {
     // Move to left
     moveMagnet(4, magnetX - fromX, false);
+    magnetX = fromX;
   }
 
   // Move magnet to starting position on Y
