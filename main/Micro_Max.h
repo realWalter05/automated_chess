@@ -1,7 +1,7 @@
-// Minimax algorithm parmas
+// Minimax algorithm params
 unsigned short myrand(void);
 void gameOver();
 void bkp();
 void serialBoard();
 void AI_HvsC(char move[4]);
-extern char lastH[], lastM[];
+extern char lastMove[], lastMoveAi[];
