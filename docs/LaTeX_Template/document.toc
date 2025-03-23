@@ -10,12 +10,12 @@
 \contentsline {subsection}{\numberline {2.3.4}Elektromagnet}{12}{}%
 \contentsline {subsection}{\numberline {2.3.5}Krokový motor}{12}{}%
 \contentsline {section}{\numberline {2.4}Mini-Max algoritmus}{12}{}%
-\contentsline {chapter}{\numberline {3}Rozložení projektu}{14}{}%
-\contentsline {chapter}{\numberline {4}Řídící jednotka}{16}{}%
-\contentsline {chapter}{\numberline {5}Šachové herní pole}{17}{}%
-\contentsline {chapter}{\numberline {6}Programový kód}{18}{}%
-\contentsline {chapter}{\numberline {7}Konstrukční provedení}{19}{}%
-\contentsline {chapter}{\numberline {8}Šachové figurky}{20}{}%
-\contentsline {chapter}{\numberline {9}Závěr}{21}{}%
-\contentsline {chapter}{Přílohy}{23}{}%
-\contentsline {chapter}{\numberline {A}Příloha}{24}{}%
+\contentsline {chapter}{\numberline {3}Elektrické zapojení}{14}{}%
+\contentsline {section}{\numberline {3.1}PCB deska}{14}{}%
+\contentsline {chapter}{\numberline {4}Řídící jednotka}{17}{}%
+\contentsline {section}{\numberline {4.1}Řídící jednotka}{17}{}%
+\contentsline {chapter}{\numberline {5}Detekce pozice figurek}{18}{}%
+\contentsline {chapter}{\numberline {6}Pohyb figurek}{19}{}%
+\contentsline {chapter}{\numberline {7}Závěr}{20}{}%
+\contentsline {chapter}{Přílohy}{22}{}%
+\contentsline {chapter}{\numberline {A}schema\_sachovnice.pdf}{23}{}%

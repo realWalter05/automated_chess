@@ -127,34 +127,48 @@ Elektromagnetem se rozumí cívka pomocí, které jsme schopni vytvořit dočasn
 \podpodkapitola{Krokový motor}
 Krokové motor je zařízení, který nám dovolí na základě elektromagnetických pulsů přesně rotovat. V motoru je ozubené kolo, které můžeme otočát na základě polových dvojic. Pomocí pulsování jednotlivá pole přitáhnout ozubené kolo a na základě tohoto jevu, můžeme motor otočit o přesný počet kroků. Rychlost rotování jsme schopni korigovat na základě změn frekvence aktivace polí. To realizujeme skrze ovladače krokových motorů.
 
-
 \podkapitola{Mini-Max algoritmus}
-Tento typ algorithmu je fundamentálním konceptem umělé inteligence a teorie her. Mini-Max má za cíl zminimalizovat možnou ztrátu na základě analýzy nejhorších možných scénářu, neboli min, a těch nejlepších, max. V hře pro dva hráče si algoritmus vytvoří dvě interní entity. Ta první se jmenuje Maximizer a cílí získat nejvyšší možné skóre. Oproti ní druhá, minimizer, má za cíl, co nejvíce skóre Maximizer snížit. Toho docílí způsobem, že evaluuje všechny možné tahy obou hráčů zároveň.\obrazek{minimax}{Minimax algorithmus}{10cm}{minimax.png}
+Tento typ algorithmu je fundamentálním konceptem umělé inteligence a teorie her. Mini-Max má za cíl zminimalizovat možnou ztrátu na základě analýzy nejhorších možných scénářu, neboli min, a těch nejlepších, max. V hře pro dva hráče si algoritmus vytvoří dvě interní entity. Ta první se jmenuje Maximizer a cílí získat nejvyšší možné skóre. Oproti ní druhá, Minimizer, má za cíl, co nejvíce skóre Maximizer snížit. Toho docílí způsobem, že evaluuje všechny možné tahy obou hráčů zároveň.\clearpage\obrazek{minimax}{Minimax algorithmus}{10cm}{minimax.png}
+
+Z počátku si Mini-Max vytvoří tzv. herní strom. Účelem tohoto stromu je reprezentovat všechny možné tahy, které mohou v daný moment ve hře nastat. Dalším krokem je, že u tzv. závěrečných stavů (terminal nodes) určí skóre. Skoŕe se určuje na základě kritériích daných v kódu a postupně ve stromu postupuje výše a určuje skóre dál. Poté, co Mini-Max určí skóre pro všechny možné stavy, projde jednotlivé scénáře. V kole Maximizera volí variantu s nejvyšším možným skórem. Naopak v kole minimizera tu s nejnižším. Podle nejvyššího možného celkového skóre algoritmus určí příští zvolený blok.
+
+
+
+
+\kapitola{Elektrické zapojení}
+Pro projekt bylo zapotřebí vymyslet efektivní a spolehlivý způsob propojení. Zároveň však způsob nesměl bránit detekci figurek pomocí spínačů. Nabízela se spoustu možností, ale z důvodů velkého množství součástek jsem se rozhodl pro dle mě nejčistčí řešení a to desku plošného spoje. 
+
+\podkapitola{PCB deska}
+PCB deska bylo řešení, které se nabízelo kvůli spolehlivosti a zároveň, tím že deska je velmi tenké a její materiál nijak nebrání průchodu magnetického pole. Na základě mého schématu v programu Easy ADA jsem si desku nechal sestrojit. Schéma šachovnice najdete v přílohách pod názvem schema\_sachovnice.pdf. Z důvodu výrobních možností a rozměrů desky byla deska sestrojena na dvě poloviny. Tyto poloviny jsem spájel dohromady. Desku byla vyrobena technologií SMT, takže jsem na ní povrchově připájel piny pro všechny potřebné součástky. A to
+\bodseznam{
+	\bod 69 jazýčkový magnetických kontaktů
+	\bod 5 analogových multiplexorů
+	\bod Mikrokontroler Arduino UNO
+	\bod Dva ovladače pro krokové motorů A4988
+	\bod Stabilizátor a piny pro vstupní napětí
+	\bod Napájení pro motory a elektromagnety
+	\bod Transistor a různé drobné zařízení
+}
+\clearpage\obrazek{pcb_porovnani}{porovnání PCB desky z výroby a hotové}{16cm}{pcbDesky.jpg}
+Desku jsem si násladně nechal pocínovat za účelem lepší vodivosti. Dvě části jsem pomocí propojek spojil dohromady. Během práce jsem posléze při detekci figurek musel řešit velký problém a to se spolehlivostí desky. Magnetické spínače nefungovali spolehlivě. Důvodem byli narušené cesty a také křekhost spínačů. Ty během pájení velmi snadno praskli. 
+
+Tyto problémy jsem řešil za pomocí multimetru a posléze detekcí pomocí počítače. Na desce jsem postupně zkontroloval všechny cesty a v momentě, kdy špatně vodili jsem na ně napájel vrstvu cínu. Pokud problém spočíval v propojení dvou vedlejších cest, vzal jsem nůž a cín manuálně odstranil. Největším úśkalím bylo manuální propojení dvou desek dohromady. Tato část desky vyžadovalo časově velmi úpornou manuální péči.
+
+Desky se mi po opravách podařilo dostat do spolehlivého stavu. Jednou věcí, která mi však projekt stížila bylo, že nespolehlivost dráh a spínačů jsem objevil až v momentě, kdy jsem programoval detekci figurek. V tuto chvíli jsem však již, alespoň mohl využít napojení na multiplexery a pomocí kódu je kontrolovat skrze konzoly na počítači. To usnadilo proces oprav.
+
+\podkapitola{Řídící jednotka}
+
+\podkapitola{Zapojení multiplexerů}
 
 
 
 
 
-\kapitola{Rozložení projektu}
-V této kapitole si popíšeme, jakým způsobem je projekt celkově sestrojen. Popíšeme si jednotlivé
-systémy a jakým způsobem jsou spolu propojené. Na základě tohoto porozumění si v nadcházejících kapitolách
-popíšeme části projektu podrobně.
-
-\obrazek{project_scheme}{Schéme projektu}{10cm}{schema_sachovnice_v0.1.pdf}
 
 
-Automatická šachovnice, jak je vidět na schématu se skládá z...
+\kapitola{Detekce pozice figurek}	
 
-
-\kapitola{Řídící jednotka}
-
-\kapitola{Šachové herní pole}	
-
-\kapitola{Programový kód}
-
-\kapitola{Konstrukční provedení}
-
-\kapitola{Šachové figurky}
+\kapitola{Pohyb figurek}
 
 \kapitola{Závěr}
 
@@ -163,7 +177,7 @@ Automatická šachovnice, jak je vidět na schématu se skládá z...
 \seznamObrazku
 
 \prilohy{
-	\kapitola{Příloha}
+	\kapitola{schema\_sachovnice.pdf}
 }
 
 \literatura{
