@@ -1,32 +1,32 @@
 \babel@toc {czech}{}\relax 
-\contentsline {chapter}{\numberline {1}Úvod}{9}{}%
-\contentsline {chapter}{\numberline {2}Využité technologie}{11}{}%
-\contentsline {section}{\numberline {2.1}Arduino}{11}{}%
-\contentsline {section}{\numberline {2.2}Deska plošného spoje}{11}{}%
-\contentsline {section}{\numberline {2.3}Elektronické součástky}{12}{}%
-\contentsline {subsection}{\numberline {2.3.1}Magnetický spínač}{12}{}%
-\contentsline {subsection}{\numberline {2.3.2}Multiplexor}{12}{}%
-\contentsline {subsection}{\numberline {2.3.3}Stabilizátor}{12}{}%
-\contentsline {subsection}{\numberline {2.3.4}Elektromagnet}{13}{}%
-\contentsline {subsection}{\numberline {2.3.5}Krokový motor}{13}{}%
-\contentsline {section}{\numberline {2.4}Mini-Max algoritmus}{13}{}%
-\contentsline {chapter}{\numberline {3}Elektrické zapojení}{15}{}%
-\contentsline {section}{\numberline {3.1}PCB deska}{15}{}%
-\contentsline {section}{\numberline {3.2}Řídící jednotka}{17}{}%
-\contentsline {chapter}{\numberline {4}Detekce pozice figurek}{18}{}%
-\contentsline {section}{\numberline {4.1}Zapojení a princip}{18}{}%
-\contentsline {section}{\numberline {4.2}Programový kód}{20}{}%
-\contentsline {subsection}{\numberline {4.2.1}Čtení hodnot pomocí getReedValues()}{20}{}%
-\contentsline {subsection}{\numberline {4.2.2}Ukládání všech pozic}{22}{}%
-\contentsline {subsection}{\numberline {4.2.3}Detekce přemístění figurek}{22}{}%
-\contentsline {subsubsection}{Funkce detectBoardMovement()}{23}{}%
-\contentsline {chapter}{\numberline {5}Pohyb figurek}{25}{}%
-\contentsline {section}{\numberline {5.1}Elektromagnet}{25}{}%
-\contentsline {section}{\numberline {5.2}Krokové motory}{26}{}%
-\contentsline {subsection}{\numberline {5.2.1}Konstrukce}{27}{}%
-\contentsline {subsection}{\numberline {5.2.2}Programový kód}{27}{}%
-\contentsline {chapter}{\numberline {6}Šachová hra}{30}{}%
-\contentsline {chapter}{\numberline {7}Konstrukční provedení}{31}{}%
-\contentsline {chapter}{\numberline {8}Závěr}{32}{}%
-\contentsline {chapter}{Přílohy}{34}{}%
-\contentsline {chapter}{\numberline {A}schema\_sachovnice.pdf}{35}{}%
+\contentsline {chapter}{\numberline {1}Úvod}{14}{}%
+\contentsline {chapter}{\numberline {2}Využité technologie}{16}{}%
+\contentsline {section}{\numberline {2.1}Arduino}{16}{}%
+\contentsline {section}{\numberline {2.2}Deska plošného spoje}{16}{}%
+\contentsline {section}{\numberline {2.3}Elektronické součástky}{17}{}%
+\contentsline {subsection}{\numberline {2.3.1}Magnetický spínač}{17}{}%
+\contentsline {subsection}{\numberline {2.3.2}Multiplexor}{17}{}%
+\contentsline {subsection}{\numberline {2.3.3}Stabilizátor}{17}{}%
+\contentsline {subsection}{\numberline {2.3.4}Elektromagnet}{18}{}%
+\contentsline {subsection}{\numberline {2.3.5}Krokový motor}{18}{}%
+\contentsline {section}{\numberline {2.4}Mini-Max algoritmus}{18}{}%
+\contentsline {chapter}{\numberline {3}Elektrické zapojení}{20}{}%
+\contentsline {section}{\numberline {3.1}PCB deska}{20}{}%
+\contentsline {section}{\numberline {3.2}Řídící jednotka}{22}{}%
+\contentsline {chapter}{\numberline {4}Detekce pozice figurek}{23}{}%
+\contentsline {section}{\numberline {4.1}Zapojení a princip}{23}{}%
+\contentsline {section}{\numberline {4.2}Programový kód}{25}{}%
+\contentsline {subsection}{\numberline {4.2.1}Čtení hodnot pomocí getReedValues()}{25}{}%
+\contentsline {subsection}{\numberline {4.2.2}Ukládání všech pozic}{27}{}%
+\contentsline {subsection}{\numberline {4.2.3}Detekce přemístění figurek}{27}{}%
+\contentsline {subsubsection}{Funkce detectBoardMovement()}{28}{}%
+\contentsline {chapter}{\numberline {5}Pohyb figurek}{30}{}%
+\contentsline {section}{\numberline {5.1}Elektromagnet}{30}{}%
+\contentsline {section}{\numberline {5.2}Krokové motory}{31}{}%
+\contentsline {subsection}{\numberline {5.2.1}Konstrukce}{32}{}%
+\contentsline {subsection}{\numberline {5.2.2}Programový kód}{32}{}%
+\contentsline {chapter}{\numberline {6}Šachová hra}{35}{}%
+\contentsline {chapter}{\numberline {7}Konstrukční provedení}{36}{}%
+\contentsline {chapter}{\numberline {8}Závěr}{37}{}%
+\contentsline {chapter}{Přílohy}{39}{}%
+\contentsline {chapter}{\numberline {A}schema\_sachovnice.pdf}{40}{}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Arch Linux) (preloaded format=pdflatex 2025.3.19)  24 MAR 2025 11:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Arch Linux) (preloaded format=pdflatex 2025.3.19)  24 MAR 2025 14:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -756,42 +756,72 @@ Package pdftex.def Info: images/logo.jpg  used on input line 46.
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts
 /enc/dvips/cm-super/cm-super-t1.enc} <./images/logo.jpg>]
+File: images/logo.jpg Graphic file (type jpg)
+<use images/logo.jpg>
+Package pdftex.def Info: images/logo.jpg  used on input line 107.
+(pdftex.def)             Requested size: 85.35826pt x 85.35973pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 107--107
+
+ []
+
+
 
 [1]
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 68--68
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 68--68
-
- []
-
-
 
 [3]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 107.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 107.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 107.
+
+Underfull \hbox (badness 10000) in paragraph at lines 107--107
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 107--108
+
+ []
+
+
 
 [4]
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 68--68
+
+[6]
+
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 140--140
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--140
 
  []
 
 
 
-[6] (./document.toc
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 4.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 4.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 4.
+[8]
+
+[9]
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 140--140
+
+ []
 
 
-[7
+
+[11] (./document.toc
+
+[12
 
 ])
 \tf@toc=\write5
@@ -799,72 +829,72 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 
 
-[8]
+[13]
 Kapitola 1.
 
 
-[9
+[14
 
 ]
 
-[10]
+[15]
 Kapitola 2.
 
-LaTeX Warning: Reference `arduino_uno_pinout' on page 11 undefined on input lin
-e 129.
+LaTeX Warning: Reference `arduino_uno_pinout' on page 16 undefined on input lin
+e 201.
 
-<images/pcb_SMT_THT.png, id=47, 1003.75pt x 501.875pt>
+<images/pcb_SMT_THT.png, id=64, 1003.75pt x 501.875pt>
 File: images/pcb_SMT_THT.png Graphic file (type png)
 <use images/pcb_SMT_THT.png>
-Package pdftex.def Info: images/pcb_SMT_THT.png  used on input line 142.
+Package pdftex.def Info: images/pcb_SMT_THT.png  used on input line 214.
 (pdftex.def)             Requested size: 284.52756pt x 142.26239pt.
 
 
-[11
+[16
 
 ]
 
-[12 <./images/pcb_SMT_THT.png>]
+[17 <./images/pcb_SMT_THT.png>]
 
-[13]
-<images/minimax.png, id=61, 668.4975pt x 479.7925pt>
+[18]
+<images/minimax.png, id=78, 668.4975pt x 479.7925pt>
 File: images/minimax.png Graphic file (type png)
 <use images/minimax.png>
-Package pdftex.def Info: images/minimax.png  used on input line 161.
+Package pdftex.def Info: images/minimax.png  used on input line 233.
 (pdftex.def)             Requested size: 284.52756pt x 204.21292pt.
 
 
-[14
+[19
 
  <./images/minimax.png>]
 Kapitola 3.
 
 
-[15
+[20
 
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-<images/pcbDesky.jpg, id=70, 2077.7625pt x 1722.435pt>
+<images/pcbDesky.jpg, id=87, 2077.7625pt x 1722.435pt>
 File: images/pcbDesky.jpg Graphic file (type jpg)
 <use images/pcbDesky.jpg>
-Package pdftex.def Info: images/pcbDesky.jpg  used on input line 181.
+Package pdftex.def Info: images/pcbDesky.jpg  used on input line 253.
 (pdftex.def)             Requested size: 455.24408pt x 377.38623pt.
 
 
-[16
+[21
 
  <./images/pcbDesky.jpg>]
 
-[17]
+[22]
 Kapitola 4.
 
 
-[18
+[23
 
 ]
-<images/spinaceSachovnice.png, id=81, 909.3975pt x 764.8575pt>
+<images/spinaceSachovnice.png, id=97, 909.3975pt x 764.8575pt>
 File: images/spinaceSachovnice.png Graphic file (type png)
 <use images/spinaceSachovnice.png>
-Package pdftex.def Info: images/spinaceSachovnice.png  used on input line 202.
+Package pdftex.def Info: images/spinaceSachovnice.png  used on input line 274.
 (pdftex.def)             Requested size: 455.24408pt x 382.89464pt.
  (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/09/23 1.10c listings language file
@@ -873,62 +903,62 @@ File: lstlang1.sty 2024/09/23 1.10c listings language file
 File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
 )
 
-[19
+[24
 
  <./images/spinaceSachovnice.png>]
 
-[20]
+[25]
 
-[21]
+[26]
 
-[22
-
-]
-
-[23]
-
-[24]
-Kapitola 5.
-<images/transistor.png, id=105, 569.12625pt x 361.35pt>
-File: images/transistor.png Graphic file (type png)
-<use images/transistor.png>
-Package pdftex.def Info: images/transistor.png  used on input line 342.
-(pdftex.def)             Requested size: 227.62204pt x 144.52089pt.
-
-
-[25
+[27
 
 ]
-<images/krokoveMotory.png, id=109, 928.46875pt x 713.66624pt>
-File: images/krokoveMotory.png Graphic file (type png)
-<use images/krokoveMotory.png>
-Package pdftex.def Info: images/krokoveMotory.png  used on input line 357.
-(pdftex.def)             Requested size: 284.52756pt x 218.70784pt.
-
-
-[26 <./images/transistor.png>]
-
-[27 <./images/krokoveMotory.png>]
 
 [28]
 
 [29]
-Kapitola 6.
+Kapitola 5.
+<images/transistor.png, id=121, 569.12625pt x 361.35pt>
+File: images/transistor.png Graphic file (type png)
+<use images/transistor.png>
+Package pdftex.def Info: images/transistor.png  used on input line 414.
+(pdftex.def)             Requested size: 227.62204pt x 144.52089pt.
 
 
 [30
 
 ]
+<images/krokoveMotory.png, id=126, 928.46875pt x 713.66624pt>
+File: images/krokoveMotory.png Graphic file (type png)
+<use images/krokoveMotory.png>
+Package pdftex.def Info: images/krokoveMotory.png  used on input line 429.
+(pdftex.def)             Requested size: 284.52756pt x 218.70784pt.
+
+
+[31 <./images/transistor.png>]
+
+[32 <./images/krokoveMotory.png>]
+
+[33]
+
+[34]
+Kapitola 6.
+
+
+[35
+
+]
 Kapitola 7.
 
 
-[31
+[36
 
 ]
 Kapitola 8.
 
 
-[32
+[37
 
 ] (./document.lot)
 \tf@lot=\write6
@@ -936,7 +966,7 @@ Kapitola 8.
 
 
 
-[33
+[38
 
 ] (./document.lof)
 \tf@lof=\write7
@@ -944,128 +974,128 @@ Kapitola 8.
 
 
 
-[34
+[39
 
 ]
 P\v {r}\'{\i }loha A.
 
 
-[35
+[40
 
 ]
-Overfull \hbox (4.94444pt too wide) in paragraph at lines 431--431
+Overfull \hbox (4.94444pt too wide) in paragraph at lines 503--503
 \T1/cmr/m/n/12 https://www.conrad.cz/cs/clanky/elektromechanika/arduino.html?sr
 sltid=AfmBOoq-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--431
+Underfull \hbox (badness 10000) in paragraph at lines 503--503
 []\T1/cmr/m/sc/12 dubno.cz\T1/cmr/m/n/12 .  VY_32_INOVACE_CTE_2.MA_13_Multiplex
 ory.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--431
+Underfull \hbox (badness 10000) in paragraph at lines 503--503
 \T1/cmr/m/it/12 https://dubno.cz/ \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\
 T1/cmr/m/n/12 2012 [cit.1.8.2012].  Do-stupné z:
  []
 
 
-Overfull \hbox (150.67134pt too wide) in paragraph at lines 431--431
+Overfull \hbox (150.67134pt too wide) in paragraph at lines 503--503
 \T1/cmr/m/n/12 https://dubno.cz/images/stories/dum/8.sablona/24/pdf/VY_32,_INOV
 ACE_CTE_2.MA_13_Multiplexory.pdf 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--431
+Underfull \hbox (badness 10000) in paragraph at lines 503--503
 []\T1/cmr/m/sc/12 wikipedia.cz\T1/cmr/m/n/12 .  Sta-bi-li-zá-tory na-p¥tí.  \T1
 /cmr/m/it/12 https://www.wikipedia.cz
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--431
+Underfull \hbox (badness 10000) in paragraph at lines 503--503
 \T1/cmr/m/n/12 [on-line].  \TS1/cmr/m/n/12 ©\T1/cmr/m/n/12 2024 [cit.22.2.2024]
 .  Do-stupné z:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--431
+Underfull \hbox (badness 10000) in paragraph at lines 503--503
 []\T1/cmr/m/sc/12 lastminuteengineers.com\T1/cmr/m/n/12 .  28byj48-stepper-moto
 r-arduino-tutorial/.
  []
 
 
-Underfull \hbox (badness 6188) in paragraph at lines 431--431
+Underfull \hbox (badness 6188) in paragraph at lines 503--503
 \T1/cmr/m/it/12 https://lastminuteengineers.com \T1/cmr/m/n/12 [on-line].  \TS1
 /cmr/m/n/12 ©\T1/cmr/m/n/12 2025 [cit.23. 3. 2025].  Do-
  []
 
 
-Underfull \hbox (badness 5939) in paragraph at lines 431--431
+Underfull \hbox (badness 5939) in paragraph at lines 503--503
 \T1/cmr/m/n/12 [cit.25. 1. 2025].  Do-stupné z: https://cs.wikipedia.org/wiki/E
 lektromagnet
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--431
+Underfull \hbox (badness 10000) in paragraph at lines 503--503
 []\T1/cmr/m/sc/12 geeksforgeeks.com\T1/cmr/m/n/12 .  mini-max-algorithm-in-arti
 ficial-intelligence.
  []
 
 
-Underfull \hbox (badness 2126) in paragraph at lines 431--431
+Underfull \hbox (badness 2126) in paragraph at lines 503--503
 \T1/cmr/m/it/12 https://www.geeksforgeeks.org/ \T1/cmr/m/n/12 [on-line].  \TS1/
 cmr/m/n/12 ©\T1/cmr/m/n/12 2024 [cit.27.8.2024].  Do-stupné z:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--431
+Underfull \hbox (badness 10000) in paragraph at lines 503--503
 \T1/cmr/m/n/12 https://www.geeksforgeeks.org/mini-max-algorithm-in-artificial-i
 ntelligence/
  []
 
 
 
-[36
+[41
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 431--431
+Underfull \hbox (badness 10000) in paragraph at lines 503--503
 []\T1/cmr/m/sc/12 https://www.instructables.com\T1/cmr/m/n/12 .  Automated-Ches
 sboard.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--431
+Underfull \hbox (badness 10000) in paragraph at lines 503--503
 \T1/cmr/m/it/12 https://www.instructables.com \T1/cmr/m/n/12 [on-line].  \TS1/c
 mr/m/n/12 ©\T1/cmr/m/n/12 2022 [cit.2.1.2022].  Do-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--431
+Underfull \hbox (badness 10000) in paragraph at lines 503--503
 \T1/cmr/m/n/12 stupné z: https://www.instructables.com/Automated-Chessboard/
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--431
+Underfull \hbox (badness 10000) in paragraph at lines 503--503
 []\T1/cmr/m/sc/12 https://www.tpointtech.com\T1/cmr/m/n/12 .  minimax-algorithm
 -in-python.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--431
+Underfull \hbox (badness 10000) in paragraph at lines 503--503
 \T1/cmr/m/it/12 https://www.tpointtech.com/ \T1/cmr/m/n/12 [on-line].  \TS1/cmr
 /m/n/12 ©\T1/cmr/m/n/12 2025 [cit.23.3.2025].  Do-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--431
+Underfull \hbox (badness 10000) in paragraph at lines 503--503
 \T1/cmr/m/n/12 stupné z: https://www.tpointtech.com/minimax-algorithm-in-python
 
  []
 
 
 
-[37] (./document.aux)
+[42] (./document.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1078,24 +1108,25 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  27444 strings out of 475137
  621482 string characters out of 5765926
- 1392061 words of memory out of 5000000
+ 1392064 words of memory out of 5000000
  50061 multiletter control sequences out of 15000+600000
  571620 words of font info for 60 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
  113i,7n,119p,1628b,1727s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/t
-exmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts
-/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/c
-m-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc120
-0.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/sha
-re/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/f
-onts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/publ
-ic/cm-super/sfrm2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sft
-i1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on document.pdf (38 pages, 3396085 bytes).
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/
+texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/font
+s/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/
+cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx24
+88.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/sh
+are/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf-dist/
+fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sf
+rm2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></us
+r/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on document.pdf (43 pages, 3410819 bytes).
 PDF statistics:
- 206 PDF objects out of 1000 (max. 8388607)
- 130 compressed objects within 2 object streams
+ 227 PDF objects out of 1000 (max. 8388607)
+ 144 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  48 words of extra memory for PDF output out of 10000 (max. 10000000)
 
