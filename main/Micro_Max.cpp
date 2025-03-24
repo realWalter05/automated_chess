@@ -38,6 +38,7 @@ uint32_t byteBoard[8];
 char sym[17] = {".?pnkbrq?P?NKBRQ"};
 int mn = 1;
 char lastMove[5], lastMoveAI[5];
+bool validMove = true;
 unsigned short ledv = 1;
 
 String inputString = "";
@@ -220,7 +221,7 @@ void serialBoard() {
 }
 
 //***************************  AI COMPUTER PLAYER
-void AI_HvsC(char move[4]) {
+void getAIMove(char move[4]) {
 
   // Take move from human
   // inputString += move;
@@ -248,10 +249,12 @@ void AI_HvsC(char move[4]) {
   }
   if (k == 0x10) { /* The flag turn must change to 0x08 */
     Serial.println("No valid move");
+    validMove = false;
     return;
   }
 
   strcpy(lastMove, c); /* Valid human movement */
+  validMove = true;
 
   mn++; /* Next move */
 

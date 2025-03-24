@@ -334,8 +334,68 @@ Takto pomocí dvou for loopu prochází hodnoty od nejvyšší po nejnižší. T
 V momentě, kdy naplníme všechny čtyři místo v listu move, zruší se while cyklus v hlavní funkci programu a kód může postupovat dále. Ve funkci máme na konci ještě dané zpoždění, které zamezí chybám v detekci při pomalém přemísťování figurek.
 
 \kapitola{Pohyb figurek}
+Realizaci šachových tahů nám zajištují dva krokové motory a elektromagnet. Pro účel práce bylo nutné umožnit XY pohyb elektromagnetu uvnitř šachovnice. Soustavu bylo nutné umístit dovnitř konstrukce a zajistit, aby byl elektromagnet velmi blízko PCB desce a tím i figurkám.
+
+\podkapitola{Elektromagnet}
+Samotné přemístění figurky je realizováno pomocí elektromagnetu. Ten po přivedení proudu, vytvoří elektromagnetické pole, které začne působit na magnetickou šachovou figurku nad ním a tím s ní můžeme hýbat. Během tvorby řešení jsem musel zajistit, aby elektromagnetické pole nebylo příliš velké a neovlivňovalo ostatní figurky. Zprvu ovšem nastal jiný problém, a to že elektromagnet, i když zapnutý, nebyl schopen figurkou pohnout. Tato situace nastala na základě faktu, že pro velkou účinost elektromagnetu je nutné zminimalizovat prostor mezi elektromagnetem a přitahovaným tělesem. V situaci, kdy jsem používal elektromagnet se silou 150N stále to nebylo dostatečné. Problém jsem vyřešil vyvýšením elektromagnetu v konstrukci a zasazením jej blíže k plošnému spoji. Po těchto úpravách mi postačil, elektromagnet se silou 50N. Avšak ani tento elektromagnet by s figurky nepohl, jestliže by do nich nebyli umístěné magnetické prvky. Pokud bu do figurky byla umístěna prostá ocel, nedokázal by jí elektromagnet přemístit.
+
+Elektromagnet, který v práci využívám je v paremetrech u prodejce uváděn na 12V. Já do něj však vysílám 18V z důvodu lepší spolehlivosti. Abychom však elektromagnet mohli ovládat, musel jsem vymyslet způsob, jakým do elektromagnetu těchto 18V budu1 vpouštět pouze po zaslání signálů. Na to využivám transistor. Transistor použitý v práci po přivedení signálu na bázi, přepne vstup do kolektoru na emitor. Na kolektoru mám přivedenou zem a po zaslání signálů na bázi, vyšlu zem skrze emitor do elektromagnetu. Ten je z jeho druhého vstupu připojen k napětí a po přivedení země, začne působit. Po ukončení signálu na bázi se elektromagnet vypne.\obrazek{transistor}{Ovládání elektromagnetu pomocí transistoru}{8cm}{transistor.png} 
+
+Kód, který transistor ovládá je velmi jednoduchý. Ve fuknci moveMagnet, o které bude v dalších kapitolách hovořit, je boolovská proměnná magnetActivated. V případě, že magnet potřebuji nastavím jí jako true a pomocí podmínky v této funkci vyšlu na pin báze transistoru (magnetPin) logickou jedničku. Na konci funkce  po provedení pohyby, magnet vždy vypínám.
+\begin{lstlisting}[style=CStyle]
+void moveMagnet(int direction, int distance, bool magnetActivated) {
+	// Enabling the electromagnet if neccesary
+	if (magnetActivated) {
+		digitalWrite(magnetPin, HIGH);
+	}
+\end{lstlisting}
+
+\podkapitola{Krokové motory}
+Pro zajištění pohybu využívám dva krokové motory NEMA17 s krokovými ovladači A4988. Krokový ovladač slouží jako mezikrok mezi programem a kódem a zajištuje pohodlné ovládání motorů. Do těchto ovladačů přivádím po desce, jak 18V, tak 5V. Dále na nich nastavujeme směr pohybu a vysíláme signály pomocí, kterých pak motor hýbe s konstrukcí. Pro zajištění správného pohybu bylo nutné zajistit dostačné napětí. To je dle specifikací 8 až 35V. Po otestovaní jsem zjistil, že 18V bylo pro projekt ideální. Abych zamezil přehřívání ovladčů, nalepil jsem na ně z vrchu na ovladač, který je s nimi prodáván.
+
+\podpodkapitola{Konstrukce}
+První motor je umístěn zevnitř boční stěny šachovnice. Na motor jsem umístil vhodnou řemenici a řemen natáhl na protější stěnu. Zde jsem si ze dřeva vyrobil sestrojil ústrojí pro další řemenici. Pod řemenem vedou tři vodicí tyče, do kterých jsem umístil druhý motor s konstrukcí. Řemen prochází touto konstrukcí a při otáčení řemenice, tak pomocí řemenu pohybujeme na Y ose i s konstrukcí uvnitř šachovnice. Vnitřní konstrukce je umístěna na třech ložiskách, kterými prochází vodící tyče. V této vnitřní dřevěné konstrukci je vyříznut otvor pro druhý krokový motor a zde je zde postupováno podle podobného postupu. Vedou zde dvě vodicí tyče na X ose. Na těchto vodicích tyčí jsou dvě ložiška, na které jsem si sestrojil dřevěnou plošinku připravenou pro umístění magnetu. Magnet je na plošině vyvýšen pro zajištění spolehlivého přenosu figurek a kabely jsou vyvedeny na PCB desku. Na druhé straně je opět ústrojí pro řemenice a řemen je proveden skrze plošinu s elektromagnetem.\obrazek{konstrukceKrokovychMotoru}{Konstrukce krokových motorů}{10cm}{krokoveMotory.png} 
+
+\podpodkapitola{Programový kód}
+Funkci, která ovládá motory jsem nazval moveMagnet. Tato funkce bere tři vstupní parametry. Směr (direction), vzdálenou (distance) a zda má být magnet aktivován při pohybu (magnetActivated). Pro přehlednost nerozlišuje směry pomocí if podmínek, ale pomocí switche. V něm nastavím, jaký blok kódu se provedu jestliže směr bude odpovídat hodnote za case. Hodnota směru je dána jako pozice v numerické klávesnici. Tedy 4 jako pohyb vlevo, 2 pohyb směrem dolů a např. 9 jako diagonální pohyb doprava nahoru.
+\begin{lstlisting}[style=CStyle]
+void moveMagnet(int direction, int distance, bool magnetActivated) {
+	switch (direction) {
+		//...
+		case 4:
+			// Left
+			digitalWrite(dirPinX, LOW);
+			for (int i = 0; i < boxLength * distance; i++) {
+				digitalWrite(stepPinX, HIGH);
+				delayMicroseconds(motorDelay);
+				digitalWrite(stepPinX, LOW);
+				delayMicroseconds(motorDelay);
+			}
+			magnetX = magnetX - distance;
+		break;
+		case 9:
+			// Diagonal right up
+			digitalWrite(dirPinY, HIGH);
+			digitalWrite(dirPinX, HIGH);
+			for (int i = 0; i < boxLength * distance; i++) {
+				digitalWrite(stepPinY, HIGH);
+				digitalWrite(stepPinX, HIGH);
+				delayMicroseconds(motorDelay);
+				digitalWrite(stepPinY, LOW);
+				digitalWrite(stepPinX, LOW);
+				delayMicroseconds(motorDelay);
+			}
+			magnetX = magnetX + distance;
+			magnetY = magnetY + distance;
+		break;
+	}
+//...
+\end{lstlisting}
+Samotný kód, který vysílá signály ovladači je v bloku pod case. Nejprve určíme směr pohybu. Buď logickou nulou či jedničkou. Následně začneme pomocí for cyklu vysílat pulzy do motoru. Vždy nejdříve aktivujeme nutný stepPin. Pak zahájíme prodlevu. Tato prodleva nám určuje rychlost otáčení. Čím menší je, tím rychleji se motory točí. Poté stepPin vypneme a znovu zahajíme prodlevu. Tento cyklus se opakuje podle žádané vzdálenosti, kterou násobím délkou jednoho políčka.
 
 \kapitola{Šachová hra}
+
+\kapitola{Konstrukční provedení}
 
 \kapitola{Závěr}
 
