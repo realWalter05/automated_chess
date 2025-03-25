@@ -33,6 +33,6 @@
 \contentsline {section}{\numberline {6.3}MiniMax algoritmus}{34}{}%
 \contentsline {chapter}{\numberline {7}Konstrukční provedení}{36}{}%
 \contentsline {section}{\numberline {7.1}Herní část šachovnice}{36}{}%
-\contentsline {chapter}{\numberline {8}Závěr}{38}{}%
-\contentsline {chapter}{Přílohy}{40}{}%
-\contentsline {chapter}{\numberline {A}schema\_sachovnice.pdf}{41}{}%
+\contentsline {chapter}{\numberline {8}Závěr}{37}{}%
+\contentsline {chapter}{Přílohy}{39}{}%
+\contentsline {chapter}{\numberline {A}schema\_sachovnice.pdf}{40}{}%
