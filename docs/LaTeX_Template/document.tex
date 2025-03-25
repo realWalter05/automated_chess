@@ -120,22 +120,22 @@ umístěna deska plošného spoje s elektronikou. V rámci projektu jsem si pomo
 \anotace 
 Maturitní práce se zabývala tvorbou samořídící šachovnice, jejíž cílem bylo kompletně simulovat protihráče.
 Ať už se jedná o vymýšlení protitahu či o samotný manuální posun figurky. Šachovnice je ovládána mikrokontrolérem
-Arduino~UNO. Pomocí magnetických spínačů umístěných na PCB desce detekujeme pozici figurek na hracím poli. Tyto informace
+Arduino~UNO. Pomocí magnetických spínačů umístěných na PCB detekujeme pozici figurek na hracím poli. Tyto informace
 následně zpracováváme Arduinem a skrze dva krokové motory a elektromagnet realizujeme tahy figurek. Pro zjištění
-ideálního příštího tahu využíváme Minimax algoritmus, jenž je schopný zevaluovat danou situaci a skrze programovou
+ideálního příštího tahu využíváme MiniMax algoritmus, jenž je schopný zevaluovat danou situaci a skrze programovou
 logiku udat příkazy pro pohyb figurek. Celá samořídící šachovnice je vyrobena z dřevěné konstrukce, do které je
-umístěna deska plošného spoje s elektronikou. V rámci projektu jsem si pomocí 3D tisku zhotovil magnetické šachové figurky. 
-Šachovnice také umožňuje zvolení si obtížnosti a volbu hry buď za černé či bílé.\\
-\tucne{Klíčová slova:} ....
+umístěna deska plošného spoje s elektronikou. V rámci projektu jsem si pomocí 3D tisku zhotovil magnetické šachové figurky. \\
+\tucne{Klíčová slova:} Samořídící šachovnice, automatizace, programové řízení
 
 
 \annotation
-Aj...\\
-\tucne{Key words:} ...
+Graduation thesis focuses on construction of self-controlling chessbord. The goal of the work is to completely simulate opponent. within the simulation, we should be able to come up with ideal counter move and manual movement of the piece. The chessboard is controller by a microcontroller Arduino UNO. We use reed switches situated on a PCB to detect position of chess pieces. These information we proccess with Arduino and through two stepper motors and an electromagnet we realize the moves of the pieces. To detect ideal next move we use MiniMax algorithm, which is able to evaluate given situation and through program logic set signals for stepper motors. The self-controlling chessboard is made out of wooden construction inside which is isntalled printed circuit board wit neccessary electronics. Within the project I made magnetic chess pieces using 3D printing. \\
+
+\tucne{Key words:} Self-controlling chessboard, automatization, program control
 
 
 \podekovani
-....
+Chtěl bych poděkovat panu Mgr. Janouškovi za podporu a vedení práce. Za jeho odborné rady a konzultace ohledně možných řešení. Také bych chtěl poděkovat panu Táborovi, panu Kutilovi a elektrotechnikům, co mi poskytli rady.
 
 \licencniSmlouva{23. 3. 2025}
 
@@ -658,11 +658,23 @@ Horní překližka má v sobě zasazenou PCB desku. Ta je do ní připevněna po
 
 \podkapitola{Herní část šachovnice}
 \obrazek{chessStickerFull}{Návrh vzhledu herní částí šachovnice}{6cm}{chessStickerFull.jpg} 
-Pro vzhled šachovnice jsem si v programu Pinta vytvořil návrh šachových políček. Na pravou část návrhu jsem umístil kontrolní spínače pro volbu hry. Návrh jsem si nechal vytisknout na pevný papír, jenž jsem na desku přilepil.
+Pro vzhled šachovnice jsem si v programu Pinta vytvořil návrh šachových políček. Na pravou část návrhu jsem umístil kontrolní spínače pro volbu hry. Návrh jsem si nechal vytisknout na pevný papír, jenž jsem na desku přilepil. Pro šachovnici jsem si nechal vytisknout vhodné šachové figurky pomocí 3D tisku a do nich vložil malé magnety.
 
 
 
 \kapitola{Závěr}
+Samořídící šachovnici byla v rámci práce zrealizována. Umožnuje šachovou hru proti oponentovi, kterého simuluje algoritmus. 
+
+Šachovnice je schopna detekovat figurky umístěné na jejím herním poli. Pro řešení je vyrobena deska plošného spoje s potřebnými součástky. Deska obsahuje 69 magnetických spínačů, které skrze multiplexory čteme pomocí řídící jednotky. Jako řídící jednotku jsem zvolil Arduino UNO, které dostatečně plní všechny potřebné úlohy práce.
+
+Pro účely řízení jsem vytvořil program, který je schopen ovládat všechny potřebné části šachovnice. Program je schopen řešit situace, které během hry mohou nastat. Je schopen zařídit odpověd na šachový tah hráče, který rozpozná na základě sepnutí spínačů. Pro tento účel využívá algoritmus MiniMax, který pomocí výpočtů zjistí ideální odpovídající tah. Následně tento tah transformuje do signálů, které jsou schopné vykonat krokové motory a přemístí požadovanou šachovou figurku na odpovědné místo. 
+
+Samořídící šachovnice jsem zkonstruoval do dřevěné skříně, ve které jsou umístěny všechny potřebné prvky. Je do ní z boční strany přivedeno odpovídající napětí. Toto napětí nám stabilizátor umožní variovat pro motory, eletromagnet a ostatní součástky.
+
+Dovnitř šachovnice jsem strojil sestavu krokových motorů, která je schopna provádět pohyb po XY souřadnicích. Tento mechanismus je sestrojen pomocí umístění vnitřní plošiny na vodicí tyče v konstrukci. Touto plošinou je proveden řemen zakončený řemenicí. Na horizontální ose je podobný mechanismus. Je na ní však použit elektromagnet, který pohybuje s figurky
+
+Pro projekt jsem zařídíl šachové figurky vytvořené pomocí 3D tisku, do kterých jsem umístil malé magnety. Návrh pro herní pole jsem vytvořil a následně ho nechal vytisknout na vhodný materiál. Ten jsem připevnil na desku plošného spoje.
+
 
 \seznamTabulek
 
