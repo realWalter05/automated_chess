@@ -39,10 +39,8 @@ char sym[17] = {".?pnkbrq?P?NKBRQ"};
 int mn = 1;
 char lastMove[5], lastMoveAI[5];
 bool validMove = true;
+int gameStatus = 0;
 unsigned short ledv = 1;
-
-String inputString = "";
-bool stringComplete = false; // whether the string is complete
 
 int r;
 
@@ -217,20 +215,12 @@ void serialBoard() {
 
 //***************************  AI COMPUTER PLAYER
 void getAIMove(char move[4]) {
-
-  // Take move from human
-  // inputString += move;
-  // Serial.print(mn);
-  // Serial.print(". ");
-  // Serial.print(inputString.substring(0, 4));
   c[0] = move[0];
   c[1] = move[1];
   c[2] = move[2];
   c[3] = move[3];
   c[4] = 0;
-  // clear the string:
-  inputString = "";
-  stringComplete = false;
+
   Serial.print(" Think "); /* Turn for ARDUINO */
 
   K = *c - 16 * c[1] + 799, L = c[2] - 16 * c[3] + 799; /* parse entered move */

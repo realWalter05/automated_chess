@@ -1,4 +1,4 @@
-#include "Micro_Max.h"
+#include "MiniMax.h"
 
 // Detect values
 char move[4] = {0, 0, 0, 0};
@@ -28,9 +28,8 @@ int difficulty = 0;
 
 // General information
 int boxLength = 135;
-int motorDelay = 800;
+int motorDelay = 1200;
 bool gameStarted = false;
-int showOffMove = 0;
 
 int boardValues[8][8];
 int boardValuesMemory[8][8];
@@ -73,8 +72,7 @@ void setup() {
   }
 
   // Disabling Multiplexers  (When high - does nothing)
-  pinMode(muxEnable[4], OUTPUT);
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < 5; i++) {
     pinMode(muxEnable[i], OUTPUT);
     digitalWrite(muxEnable[i], HIGH);
   }
@@ -83,8 +81,6 @@ void setup() {
     pinMode(muxAddr[i], OUTPUT);
     digitalWrite(muxAddr[i], LOW);
   }
-  
-  setupMagnet();
 }
 
 
@@ -94,10 +90,9 @@ void loop() {
     // Check control multiplexor
     delay(5000);
     setControlMUX();
+    setupMagnet();
     return;
   }
-
-  // GAME STARTED
 
   // Player's turn => waiting for movement
   setCurrentBoard();
@@ -128,9 +123,16 @@ void loop() {
     return;
   }
 
-  Serial.println("Prepare figurku...");
-  delay(20000);
+  if (gameStatus == 1) {
+    Serial.println("AI won");
+  } else if (gameStatus == 2) {
+    Serial.println("User won");
+  }
+
   // Make Ai's move stored in lastMoveAI
+  Serial.println("Prepare for move: ");
+  Serial.println(lastMoveAI);
+  delay(10000);
   makeChessMove(lastMoveAI);
 
   // Resseting move
@@ -154,7 +156,7 @@ void getReedValues(int targetMuxAddress, int from, int to) {
   // Activating MUX
   digitalWrite(targetMuxAddress, LOW);
 
-  for (int j = from; j < to; j++) {
+  for (int j = 0; j < to; j++) {
     // Checking MUX combinations
     digitalWrite(muxAddr[0], j % 2);
     digitalWrite(muxAddr[1], j / 2 % 2);
@@ -241,21 +243,24 @@ void setControlMUX() {
 }
 
 void setupMagnet() {
-  digitalWrite(dirPinX, HIGH);
-  for (int i = 0; i < 60; i++) {
-    digitalWrite(stepPinX, HIGH);
-    delayMicroseconds(motorDelay);
-    digitalWrite(stepPinX, LOW);
-    delayMicroseconds(motorDelay);
-  }
-
   digitalWrite(dirPinY, LOW);
-  for (int i = 0; i < 25; i++) {
+  for (int i = 0; i < 80; i++) {
     digitalWrite(stepPinY, HIGH);
-    delayMicroseconds(motorDelay);
+    delayMicroseconds(motorDelay + 600);
     digitalWrite(stepPinY, LOW);
-    delayMicroseconds(motorDelay);
+    delayMicroseconds(motorDelay + 600);
   }
+  digitalWrite(dirPinY, LOW);
+
+  delay(2000);
+  digitalWrite(dirPinX, HIGH);
+  for (int j = 0; j < 200; j++) {
+    digitalWrite(stepPinX, HIGH);
+    delayMicroseconds(motorDelay + 600);
+    digitalWrite(stepPinX, LOW);
+    delayMicroseconds(motorDelay + 600);
+  }
+  digitalWrite(dirPinX, LOW);
 }
 
 void moveMagnet(int direction, int distance) {
@@ -267,7 +272,7 @@ void moveMagnet(int direction, int distance) {
     // Diagonal left down
     digitalWrite(dirPinY, HIGH);
     digitalWrite(dirPinX, LOW);
-    for (int i = 0; i < (boxLength * distance) * 1.2; i++) {
+    for (int i = 0; i < boxLength * distance; i++) {
       digitalWrite(stepPinY, HIGH);
       digitalWrite(stepPinX, HIGH);
       delayMicroseconds(motorDelay);
@@ -282,7 +287,7 @@ void moveMagnet(int direction, int distance) {
   case 2:
     // Down
     digitalWrite(dirPinY, HIGH);
-    for (int i = 0; i < boxLength * distance; i++) {
+    for (int i = 0; i < boxLength * 1.08 * distance; i++) {
       digitalWrite(stepPinY, HIGH);
       delayMicroseconds(motorDelay);
       digitalWrite(stepPinY, LOW);
@@ -295,7 +300,7 @@ void moveMagnet(int direction, int distance) {
     // Diagonal right down
     digitalWrite(dirPinY, HIGH);
     digitalWrite(dirPinX, HIGH);
-    for (int i = 0; i < (boxLength * distance) * 1.2; i++) {
+    for (int i = 0; i < boxLength * distance; i++) {
       digitalWrite(stepPinY, HIGH);
       digitalWrite(stepPinX, HIGH);
       delayMicroseconds(motorDelay);
@@ -335,7 +340,7 @@ void moveMagnet(int direction, int distance) {
     // Diagonal left up
     digitalWrite(dirPinY, LOW);
     digitalWrite(dirPinX, LOW);
-    for (int i = 0; i < (boxLength * distance) * 1.2; i++) {
+    for (int i = 0; i < boxLength * distance; i++) {
       digitalWrite(stepPinY, HIGH);
       digitalWrite(stepPinX, HIGH);
       delayMicroseconds(motorDelay);
@@ -350,7 +355,7 @@ void moveMagnet(int direction, int distance) {
   case 8:
     // Up
     digitalWrite(dirPinY, LOW);
-    for (int i = 0; i < boxLength * distance; i++) {
+    for (int i = 0; i < boxLength * 1.08 * distance; i++) {
       digitalWrite(stepPinY, HIGH);
       delayMicroseconds(motorDelay);
       digitalWrite(stepPinY, LOW);
@@ -363,7 +368,7 @@ void moveMagnet(int direction, int distance) {
     // Diagonal right up
     digitalWrite(dirPinY, LOW);
     digitalWrite(dirPinX, HIGH);
-    for (int i = 0; i < (boxLength * distance) * 1.2; i++) {
+    for (int i = 0; i < boxLength * distance; i++) {
       digitalWrite(stepPinY, HIGH);
       digitalWrite(stepPinX, HIGH);
       delayMicroseconds(motorDelay);
@@ -410,13 +415,13 @@ void detectBoardMovement() {
       if (boardValuesMemory[i][j] != boardValues[i][j]) {
         // Position of piece has changes
 
-        if (boardValues[i][j] && !move[0] && !move[1]) {
+        if (boardValues[i][j]) {
           // Piece was here before
           move[0] = letterTranslate[j];
           move[1] = numberTranslate[i];
         }
         
-        if (!boardValues[i][j] && !move[2] && !move[3]) {
+        if (!boardValues[i][j]) {
           // New piece on this position
           move[2] = letterTranslate[j];
           move[3] = numberTranslate[i];
@@ -431,7 +436,7 @@ void detectBoardMovement() {
 void makeMove(int x, int y, int targetX, int targetY, bool magnetActivated) {
   if (magnetActivated) {
     digitalWrite(magnetPin, HIGH);
-    delay(2000);
+    delay(3000);
   }
 
   if (abs(y - targetY) == abs(targetX - x)) {
