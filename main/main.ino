@@ -258,7 +258,7 @@ void setupMagnet() {
   }
 }
 
-void moveMagnet(int direction, int distance, bool magnetActivated) {
+void moveMagnet(int direction, int distance) {
   distance = abs(distance);
 
   switch (direction) {
@@ -440,18 +440,18 @@ void makeMove(int x, int y, int targetX, int targetY, bool magnetActivated) {
       // Diagonal down
       if (x < targetX) {
         // Right
-        moveMagnet(3, targetX - x, magnetActivated);
+        moveMagnet(3, targetX - x);
       } else {
         // Left
-        moveMagnet(1, targetX - x, magnetActivated);
+        moveMagnet(1, targetX - x);
       }
     } else {
       if (x < targetX) {
         // Right
-        moveMagnet(9, targetX - x, magnetActivated);
+        moveMagnet(9, targetX - x);
       } else {
         // Left
-        moveMagnet(7, targetX - x, magnetActivated);
+        moveMagnet(7, targetX - x);
       }
     }
     Serial.println("Magnet is on after diagonal");
@@ -464,20 +464,20 @@ void makeMove(int x, int y, int targetX, int targetY, bool magnetActivated) {
   if (x < targetX) {
     // Move to right
     Serial.println("moving right");
-    moveMagnet(6, x - targetX, magnetActivated);
+    moveMagnet(6, x - targetX);
   } else if (x > targetX) {
     // Move to left
-    moveMagnet(4, targetX - x, magnetActivated);
+    moveMagnet(4, targetX - x);
   }
 
   // Move magnet to starting position on Y
   if (y < targetY) {
     // Move up
     Serial.println("moving up");
-    moveMagnet(8, y - targetY, magnetActivated);
+    moveMagnet(8, y - targetY);
   } else if (y > targetY) {
     // Move down
-    moveMagnet(2, targetY - y, magnetActivated);
+    moveMagnet(2, targetY - y);
   }
   
   if (magnetActivated) {

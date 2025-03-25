@@ -1,5 +1,5 @@
 //******************************  INCLUDING FILES
-#include "Micro_Max.h"
+#include "MiniMax.h"
 #include "Arduino.h"
 
 //************************************  VARIABLES
@@ -189,11 +189,6 @@ short D(short q, short l, short e, unsigned char E, unsigned char z,
   return m += m < e; /* delayed-loss bonus       */
 }
 
-//************************************  GAME OVER
-void gameOver() {
-  for (;;)
-    ;
-}
 
 //******************************************  BKP
 void bkp() {
@@ -245,7 +240,7 @@ void getAIMove(char move[4]) {
   r = D(-I, I, Q, O, 1, 3); /* Check & do the human movement */
   if (!(r > -I + 1)) {
     Serial.println("Lose ");
-    gameOver();
+    gameStatus = 1;
   }
   if (k == 0x10) { /* The flag turn must change to 0x08 */
     Serial.println("No valid move");
@@ -264,14 +259,14 @@ void getAIMove(char move[4]) {
   r = D(-I, I, Q, O, 1, 3); /* Think & do*/
   if (!(r > -I + 1)) {
     Serial.println("Lose*");
-    gameOver();
+    gameStatus = 1;
   }
 
   strcpy(lastMoveAI, c); /* Valid ARDUINO movement */
   r = D(-I, I, Q, O, 1, 3);
   if (!(r > -I + 1)) {
     Serial.println(lastMoveAI);
-    gameOver();
+    gameStatus = 2;
   }
   Serial.println(lastMoveAI);
   serialBoard();

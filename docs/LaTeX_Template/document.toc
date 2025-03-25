@@ -24,9 +24,15 @@
 \contentsline {section}{\numberline {5.1}Elektromagnet}{30}{}%
 \contentsline {section}{\numberline {5.2}Krokové motory}{31}{}%
 \contentsline {subsection}{\numberline {5.2.1}Konstrukce}{32}{}%
-\contentsline {subsection}{\numberline {5.2.2}Programový kód}{32}{}%
-\contentsline {chapter}{\numberline {6}Šachová hra}{35}{}%
-\contentsline {chapter}{\numberline {7}Konstrukční provedení}{36}{}%
-\contentsline {chapter}{\numberline {8}Závěr}{37}{}%
-\contentsline {chapter}{Přílohy}{39}{}%
-\contentsline {chapter}{\numberline {A}schema\_sachovnice.pdf}{40}{}%
+\contentsline {subsection}{\numberline {5.2.2}Programový kód}{33}{}%
+\contentsline {section}{\numberline {5.3}Šachový tah}{34}{}%
+\contentsline {subsection}{\numberline {5.3.1}Realizace tahu dle souřadnic}{36}{}%
+\contentsline {chapter}{\numberline {6}Šachová hra}{38}{}%
+\contentsline {section}{\numberline {6.1}Variablizace hry}{38}{}%
+\contentsline {section}{\numberline {6.2}Průběh hry}{39}{}%
+\contentsline {section}{\numberline {6.3}MiniMax algoritmus}{40}{}%
+\contentsline {chapter}{\numberline {7}Konstrukční provedení}{42}{}%
+\contentsline {section}{\numberline {7.1}Herní část šachovnice}{42}{}%
+\contentsline {chapter}{\numberline {8}Závěr}{44}{}%
+\contentsline {chapter}{Přílohy}{46}{}%
+\contentsline {chapter}{\numberline {A}schema\_sachovnice.pdf}{47}{}%
