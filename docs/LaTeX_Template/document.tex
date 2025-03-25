@@ -46,77 +46,6 @@
 \titulniStrana
 
 
-\zadani{31. 3. 2025}
-{
-	\bod
-	Proveďte teoretický úvod k problematice samořídící šachovnice řešící realizaci šachové desky
-ovládané mikrokontrolérem, uživatelské ovládání šachovnice, vhodné komponenty (součástky,
-šachové figurky, hrací pole).
-	\bod
-	Realizujete vlastní řešení v následujících bodech
-	\cislseznam{
-		\bod
-		Navrhněte všechna potřebná schémata pro realizaci samořídící šachovnice.
-		\bod
-		Vyberte vhodný mikrokontrolér pro řízení šachovnice.
-		\bod
-		Vytvořte program pro zvolený mikrořadič.
-		\bod
-		Vyřešte pohyb figurek po šachovnici a sestrojte řešení.
-		\bod
-		Navrhněte způsob detekce obsazených polí na šachovnici.
-		\bod
-		Vyřešte komunikaci mezi řízením šachovnice a systémem, který bude simulovat tahy protihráče (např. serverem, algoritmem...).
-		\bod
-		Navrhněte a potřebnými součástkami osaďte desku šachovnice.
-		\bod
-		Realizujte konstrukci šachovnice.
-		\bod
-		Výsledné řešení prakticky ověřte.
-	}
-	\bod
-	Zpracujte dokumentaci dle metodického návrhu a ppt prezentaci pro účely obhajoby.
-	\bod
-	Propagujte výsledky své práce - např. vyhotovením posteru, účastí na SOČ, zhotovení informační
-	www stránky, natočení promo videa apod.
-}
-{
-	\bod
-	výběr řídící jednotky
-	\bod
-	mechanické provedení šachovnice s políčky a figurkami
-	\bod
-	obsazenost detekujících se políček
-	\bod
-	možnost hry s protihráčem
-	\bod
-	možnosti programového kódu
-}
-{
-	\bod
-	pohyb figurek na hracím poli
-	\bod
-	detekce obsazenosti políček
-	\bod
-	algoritmus vytvořeného programu
-	\bod
-	použitelnost k šachové hře
-}
-{žák}
-{žáka}
-{15. 11. 2024}
-
-\anotace 
-Maturitní práce se zabývala tvorbou samořídící šachovnice, jejíž cílem bylo kompletně simulovat protihráče.
-Ať už se jedná o vymýšlení protitahu či o samotný manuální posun figurky. Šachovnice je ovládána mikrokontrolérem
-Arduino~UNO.
-Pomocí magnetických spínačů umístěných na PCB desce detekujeme pozici figurek na hracím poli. Tyto informace
-následně zpracováváme Arduinem a skrze dva krokové motory a elektromagnet realizujeme tahy figurek. Pro zjištění
-ideálního příštího tahu využíváme Minimax algoritmus, jenž je schopný zevaluovat danou situaci a skrze programovou
-logiku udat příkazy pro pohyb figurek. Celá samořídící šachovnice je vyrobena z dřevěné konstrukce, do které je
-umístěna deska plošného spoje s elektronikou. V rámci projektu jsem si pomocí 3D tisku zhotovil magnetické šachové figurky. Šachovnice také umožňuje zvolení si obtížnosti a volbu hry buď za černé či bílé.
-
-
 \anotace 
 Maturitní práce se zabývala tvorbou samořídící šachovnice, jejíž cílem bylo kompletně simulovat protihráče.
 Ať už se jedná o vymýšlení protitahu či o samotný manuální posun figurky. Šachovnice je ovládána mikrokontrolérem
@@ -130,14 +59,13 @@ umístěna deska plošného spoje s elektronikou. V rámci projektu jsem si pomo
 
 \annotation
 Graduation thesis focuses on construction of self-controlling chessbord. The goal of the work is to completely simulate opponent. within the simulation, we should be able to come up with ideal counter move and manual movement of the piece. The chessboard is controller by a microcontroller Arduino UNO. We use reed switches situated on a PCB to detect position of chess pieces. These information we proccess with Arduino and through two stepper motors and an electromagnet we realize the moves of the pieces. To detect ideal next move we use MiniMax algorithm, which is able to evaluate given situation and through program logic set signals for stepper motors. The self-controlling chessboard is made out of wooden construction inside which is isntalled printed circuit board wit neccessary electronics. Within the project I made magnetic chess pieces using 3D printing. \\
-
 \tucne{Key words:} Self-controlling chessboard, automatization, program control
 
 
 \podekovani
 Chtěl bych poděkovat panu Mgr. Janouškovi za podporu a vedení práce. Za jeho odborné rady a konzultace ohledně možných řešení. Také bych chtěl poděkovat panu Táborovi, panu Kutilovi a elektrotechnikům, co mi poskytli rady.
 
-\licencniSmlouva{23. 3. 2025}
+\licencniSmlouva{1. 4. 2025}
 
 
 \obsah
@@ -172,8 +100,7 @@ hlavní částí:
 		Z hlediska softwaru je nutné vytvořit kód, který spojí všechny části dohromady. Je nutné transformovat
 		signály, tak aby s nimi bylo možné pracovat. Z hlediska kódu je nutné vytvořit rozhraní pro komunikaci
 		mezi mikrokontrolérem a součástky. Je zapotřebí umožnit evaluaci dat o pozicích figurek a předat je
-		algoritmu, který nám bude schopen vymyslet další tah. Údáje o dalším tahu ovšem musíme opět transformovat,
-		tak aby z něj byli čitelné pokyny pro krokové motory.
+		algoritmu, který nám bude schopen vymyslet další tah. 
 	}
 }
 
@@ -692,19 +619,19 @@ Pro projekt jsem zařídíl šachové figurky vytvořené pomocí 3D tisku, do k
 	\url{Magnetický spínač}{uk.rs-online.com}{reed-switches-guide}{https://uk.rs-online.com}{2023}{1. 2. 2023}{https://uk.rs-online.com/web/content/discovery/ideas-and-advice/reed-switches-guide}
 	\url{Multiplexor}{dubno.cz}{VY\_32\_INOVACE\_CTE\_2.MA\_13\_Multiplexory}{https://dubno.cz/}{2012}{1.8.2012}{https://dubno.cz/images/stories/dum/8.sablona/24/pdf/VY\_32,\_INOVACE\_CTE\_2.MA\_13\_Multiplexory.pdf}
 	\url{Stabilizátor}{wikipedia.cz}{Stabilizátory napětí}{https://www.wikipedia.cz}{2024}{22.2.2024}{https://cs.wikipedia.org/wiki/Stabiliz\%C3\%A1tor\_nap\%C4\%9Bt\%C3\%AD}
-	\url{Krokový motor}{lastminuteengineers.com}{28byj48-stepper-motor-arduino-tutorial/}{https://lastminuteengineers.com}{2025}{23. 3. 2025}{https://lastminuteengineers.com/28byj48-stepper-motor-arduino-tutorial/}https://lastminuteengineers.com/28byj48-stepper-motor-arduino-tutorial/
-	\url{Elektromagnet}{cs.wikipedia.org}{Elektromagnet}{https://cs.wikipedia.org/}{2025}{25. 1. 2025}{https://cs.wikipedia.org/wiki/Elektromagnet}https://cs.wikipedia.org/wiki/Elektromagnet
-	\url{Mini-Max}{geeksforgeeks.com}{mini-max-algorithm-in-artificial-intelligence}{https://www.geeksforgeeks.org/}{2024}{27.8.2024}{https://www.geeksforgeeks.org/mini-max-algorithm-in-artificial-intelligence/}https://www.geeksforgeeks.org/mini-max-algorithm-in-artificial-intelligence/
+	\url{Krokový motor}{lastminuteengineers.com}{28byj48-stepper-motor-arduino-tutorial/}{https://lastminuteengineers.com}{2025}{23. 3. 2025}{https://lastminuteengineers.com/28byj48-stepper-motor-arduino-tutorial/}
+	\url{Elektromagnet}{cs.wikipedia.org}{Elektromagnet}{https://cs.wikipedia.org/}{2025}{25. 1. 2025}{https://cs.wikipedia.org/wiki/Elektromagnet}
+	\url{Mini-Max}{geeksforgeeks.com}{mini-max-algorithm-in-artificial-intelligence}{https://www.geeksforgeeks.org/}{2024}{27.8.2024}{https://www.geeksforgeeks.org/mini-max-algorithm-in-artificial-intelligence/}
 	
 	
 	
-	\url{Projekt automatické šachovnice}{https://www.instructables.com}{Automated-Chessboard}{https://www.instructables.com}{2022}{2.1.2022}{https://www.instructables.com/Automated-Chessboard/}https://www.instructables.com/Automated-Chessboard/
-	\url{Projekt řízené šachovnice}{https://projecthub.arduino.cc}{maguerero/automated-chess-board-67db6f}{https://projecthub.arduino.cc}{2018}{24.10.2018}{https://projecthub.arduino.cc/maguerero/automated-chess-board-67db6f/}https://projecthub.arduino.cc/maguerero/automated-chess-board-67db6f
-	\url{H.G.Mullerův algoritmus}{home.hccnet.nl}{/h.g.muller/max-src2}{https://home.hccnet.nl/}{2025}{25.3.2025}{https://home.hccnet.nl/h.g.muller/max-src2.html}https://home.hccnet.nl/h.g.muller/max-src2.html
+	\url{Projekt automatické šachovnice}{https://www.instructables.com}{Automated-Chessboard}{https://www.instructables.com}{2022}{2.1.2022}{https://www.instructables.com/Automated-Chessboard/}
+	\url{Projekt řízené šachovnice}{https://projecthub.arduino.cc}{maguerero/automated-chess-board-67db6f}{https://projecthub.arduino.cc}{2018}{24.10.2018}{https://projecthub.arduino.cc/maguerero/automated-chess-board-67db6f/}
+	\url{H.G.Mullerův algoritmus}{home.hccnet.nl}{/h.g.muller/max-src2}{https://home.hccnet.nl/}{2025}{25.3.2025}{https://home.hccnet.nl/h.g.muller/max-src2.html}
 		
 	\url{PCB SMT a THT}{pcba-manufacturers.com}{SMT vs THT}{2023}{23. 3. 2023}{https://www.pcba-manufacturers.com/smt-vs-tht/}
 	\url{Arduino UNO}{store.arduino.cc}{Arduino UNO pinout}{2025}{19. 3. 2025}{https://store.arduino.cc/en-cz/products/arduino-uno-rev3}
-	\url{Mini-Max grafika algoritmus}{https://www.tpointtech.com}{minimax-algorithm-in-python}{https://www.tpointtech.com/}{2025}{23.3.2025}{https://www.tpointtech.com/minimax-algorithm-in-python}https://www.tpointtech.com/minimax-algorithm-in-python
+	\url{Mini-Max grafika algoritmus}{https://www.tpointtech.com}{minimax-algorithm-in-python}{https://www.tpointtech.com/}{2025}{23.3.2025}{https://www.tpointtech.com/minimax-algorithm-in-python}
 	
 	
 }
