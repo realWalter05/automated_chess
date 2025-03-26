@@ -1,38 +1,38 @@
 \babel@toc {czech}{}\relax 
 \contentsline {chapter}{\numberline {1}Úvod}{9}{}%
-\contentsline {chapter}{\numberline {2}Využité technologie}{10}{}%
-\contentsline {section}{\numberline {2.1}Arduino}{10}{}%
-\contentsline {section}{\numberline {2.2}Deska plošného spoje}{10}{}%
-\contentsline {section}{\numberline {2.3}Elektronické součástky}{11}{}%
-\contentsline {subsection}{\numberline {2.3.1}Magnetický spínač}{11}{}%
-\contentsline {subsection}{\numberline {2.3.2}Multiplexor}{11}{}%
-\contentsline {subsection}{\numberline {2.3.3}Stabilizátor}{11}{}%
-\contentsline {subsection}{\numberline {2.3.4}Elektromagnet}{12}{}%
-\contentsline {subsection}{\numberline {2.3.5}Krokový motor}{12}{}%
-\contentsline {section}{\numberline {2.4}Mini-Max algoritmus}{12}{}%
-\contentsline {chapter}{\numberline {3}Elektrické zapojení}{14}{}%
-\contentsline {section}{\numberline {3.1}PCB deska}{14}{}%
-\contentsline {section}{\numberline {3.2}Řídící jednotka}{16}{}%
-\contentsline {chapter}{\numberline {4}Detekce pozice figurek}{17}{}%
-\contentsline {section}{\numberline {4.1}Zapojení a princip}{17}{}%
-\contentsline {section}{\numberline {4.2}Programový kód}{19}{}%
-\contentsline {subsection}{\numberline {4.2.1}Čtení hodnot pomocí getReedValues()}{19}{}%
-\contentsline {subsection}{\numberline {4.2.2}Ukládání všech pozic}{21}{}%
-\contentsline {subsection}{\numberline {4.2.3}Detekce přemístění figurek}{21}{}%
-\contentsline {subsubsection}{Funkce detectBoardMovement()}{22}{}%
-\contentsline {chapter}{\numberline {5}Pohyb figurek}{24}{}%
-\contentsline {section}{\numberline {5.1}Elektromagnet}{24}{}%
-\contentsline {section}{\numberline {5.2}Krokové motory}{25}{}%
-\contentsline {subsection}{\numberline {5.2.1}Konstrukce}{26}{}%
-\contentsline {subsection}{\numberline {5.2.2}Programový kód}{27}{}%
-\contentsline {section}{\numberline {5.3}Šachový tah}{28}{}%
-\contentsline {subsection}{\numberline {5.3.1}Realizace tahu dle souřadnic}{30}{}%
-\contentsline {chapter}{\numberline {6}Šachová hra}{32}{}%
-\contentsline {section}{\numberline {6.1}Variablizace hry}{32}{}%
-\contentsline {section}{\numberline {6.2}Průběh hry}{33}{}%
-\contentsline {section}{\numberline {6.3}MiniMax algoritmus}{34}{}%
-\contentsline {chapter}{\numberline {7}Konstrukční provedení}{36}{}%
-\contentsline {section}{\numberline {7.1}Herní část šachovnice}{36}{}%
-\contentsline {chapter}{\numberline {8}Závěr}{37}{}%
-\contentsline {chapter}{Přílohy}{39}{}%
-\contentsline {chapter}{\numberline {A}schema\_sachovnice.pdf}{40}{}%
+\contentsline {chapter}{\numberline {2}Využité technologie}{11}{}%
+\contentsline {section}{\numberline {2.1}Arduino}{11}{}%
+\contentsline {section}{\numberline {2.2}Deska plošného spoje}{11}{}%
+\contentsline {section}{\numberline {2.3}Elektronické součástky}{12}{}%
+\contentsline {subsection}{\numberline {2.3.1}Magnetický spínač}{12}{}%
+\contentsline {subsection}{\numberline {2.3.2}Multiplexor}{12}{}%
+\contentsline {subsection}{\numberline {2.3.3}Stabilizátor}{12}{}%
+\contentsline {subsection}{\numberline {2.3.4}Elektromagnet}{13}{}%
+\contentsline {subsection}{\numberline {2.3.5}Krokový motor}{13}{}%
+\contentsline {section}{\numberline {2.4}Mini-Max algoritmus}{13}{}%
+\contentsline {chapter}{\numberline {3}Elektrické zapojení}{15}{}%
+\contentsline {section}{\numberline {3.1}PCB deska}{15}{}%
+\contentsline {section}{\numberline {3.2}Řídící jednotka}{17}{}%
+\contentsline {chapter}{\numberline {4}Detekce pozice figurek}{18}{}%
+\contentsline {section}{\numberline {4.1}Zapojení a princip}{18}{}%
+\contentsline {section}{\numberline {4.2}Programový kód}{20}{}%
+\contentsline {subsection}{\numberline {4.2.1}Čtení hodnot pomocí getReedValues()}{20}{}%
+\contentsline {subsection}{\numberline {4.2.2}Ukládání všech pozic}{22}{}%
+\contentsline {subsection}{\numberline {4.2.3}Detekce přemístění figurek}{22}{}%
+\contentsline {subsubsection}{Funkce detectBoardMovement()}{23}{}%
+\contentsline {chapter}{\numberline {5}Pohyb figurek}{25}{}%
+\contentsline {section}{\numberline {5.1}Elektromagnet}{25}{}%
+\contentsline {section}{\numberline {5.2}Krokové motory}{26}{}%
+\contentsline {subsection}{\numberline {5.2.1}Konstrukce}{27}{}%
+\contentsline {subsection}{\numberline {5.2.2}Programový kód}{28}{}%
+\contentsline {section}{\numberline {5.3}Šachový tah}{29}{}%
+\contentsline {subsection}{\numberline {5.3.1}Realizace tahu dle souřadnic}{31}{}%
+\contentsline {chapter}{\numberline {6}Šachová hra}{33}{}%
+\contentsline {section}{\numberline {6.1}Variablizace hry}{33}{}%
+\contentsline {section}{\numberline {6.2}Průběh hry}{34}{}%
+\contentsline {section}{\numberline {6.3}MiniMax algoritmus}{35}{}%
+\contentsline {chapter}{\numberline {7}Konstrukční provedení}{37}{}%
+\contentsline {section}{\numberline {7.1}Herní část šachovnice}{37}{}%
+\contentsline {chapter}{\numberline {8}Závěr}{38}{}%
+\contentsline {chapter}{Přílohy}{40}{}%
+\contentsline {chapter}{\numberline {A}schema\_sachovnice.pdf}{41}{}%
