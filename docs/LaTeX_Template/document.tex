@@ -45,6 +45,7 @@
 
 \titulniStrana
 
+\licencniSmlouva{31. 3. 2025}
 
 \anotace 
 Maturitní práce se zabývala tvorbou samořídící šachovnice, jejíž cílem bylo kompletně simulovat protihráče.
@@ -65,7 +66,7 @@ Graduation thesis focuses on construction of self-controlling chessbord. The goa
 \podekovani
 Chtěl bych poděkovat panu Mgr. Janouškovi za podporu a vedení práce. Za jeho odborné rady a konzultace ohledně možných řešení. Také bych chtěl poděkovat panu Táborovi, panu Kutilovi, panu Kolpovi a elektrotechnikům, co mi poskytli rady.
 
-\licencniSmlouva{31. 3. 2025}
+
 
 
 \obsah
@@ -86,7 +87,7 @@ hlavní částí:
 
 \popisseznam{
 	\polozka {Konstrukční část} {
-		Tou jest samotná dřevěná konstrukce šachovnice, do které bude nutné umístít mechanismus
+		Konstrukční část se skládá ze samotné dřevěné konstrukce šachovnice, do které bude nutné umístít mechanismus
 		pro pohybování s figurky. V rámci toho také její opracování a  nadesignování projektu. 
 		Tvorba šachových políček a rozhraní pro jednoduché ovládání.
 	}
@@ -94,7 +95,7 @@ hlavní částí:
 		Ta obsahuje systém pro detekci figurek na šachovnici. Ten by se dal vytvořit pomocí mnoha
 		způsobů, ale v práci budu popisovat řešení pomocí desky plošného spoje. Dále vytvoření pohybové 
 		soustavy pomocí krokových motorů a umístění elektromagnetu, který bude s figurky pohybovat. Posledním
-		krokem je sestrojení systému, jenž umožní uživateli variabilovat hru pomocí volby hry za černé či bílé a obtížnosti.
+		krokem je sestrojení systému, který dovolí hráči nastavit jakou obtížnost bude mít oponent.
 	}
 	\polozka {Softwarová část}{
 		Z hlediska softwaru je nutné vytvořit kód, který spojí všechny části dohromady. Je nutné transformovat
@@ -106,8 +107,7 @@ hlavní částí:
 
 
 
-
-\kapitola{Využité technologie}
+\kapitola{Teoretická část}
 V této kapitole si popíšeme technologie, které byli zapotřebí při tvorbě projektu.
 Získáme k nim teoretický základ nutný k porozumění šachovnice.
 
@@ -130,7 +130,7 @@ s různými zaměřeními.
 PCB deska, jak je zkratkou nazývána, nebo také DPS je velmi rozšířená elektronická součástka.
 Desky jsou vyrobené z izolačních materiálů s pájecími poli, kterým se říká podložky a elektrickými spoji nazývanými stopy.
 Na PCB desky se připájí potřebné součástky. Tyto součástky jsou spolu pak propojeny na základě schématu pro tvorbu PCB. Jsou dvě primární technologie 
-montáže součástek na desku. Je tady technologie průchozích otvorů (THT, Through-Hole Technology), nebo povrchové montáže (SMD, Surface-Mounted Devices) \viz{pcb_SMT_THT}. Při povrchové montáži se napájí součástky přímo na desku s tím, že jsou na ní připravené jednotlivé stopy. U THT jsou v desce připravené dírky, do kterých součástky umísťujeme.
+montáže součástek na desku. Je tady technologie průchozích otvorů (THT, Through-Hole Technology), nebo povrchové montáže (SMD, Surface-Mounted Devices) \viz{pcb_SMT_THT}. Při povrchové montáži se napájí součástky přímo na desku s tím, že jsou na ní připravené jednotlivé stopy. U THT jsou v desce připravené otvory, do kterých součástky umísťujeme.
 \obrazek{pcb_SMT_THT}{Rozlišení SMT a THT na PCB desce}{10cm}{pcb_SMT_THT.png} 
 
 \podkapitola{Elektronické součástky}
@@ -156,11 +156,13 @@ Z počátku si Mini-Max vytvoří tzv. herní strom. Účelem tohoto stromu je r
 
 
 
+\kapitola{Praktická část}
 
-\kapitola{Elektrické zapojení}
+
+\podkapitola{Elektrické zapojení}
 Pro projekt bylo zapotřebí vymyslet efektivní a spolehlivý způsob propojení. Zároveň však způsob nesměl bránit detekci figurek pomocí spínačů. Nabízela se spoustu možností, ale z důvodů velkého množství součástek jsem se rozhodl pro dle mě nejčistčí řešení a to desku plošného spoje. 
 
-\podkapitola{PCB deska}
+\podpodkapitola{PCB deska}
 Deska plošného spoje bylo řešení, které se nabízelo kvůli spolehlivosti a zároveň, tím že deska je velmi tenká  a její materiál nijak nebrání průchodu magnetického pole. Na základě mého schématu v programu EasyADA jsem si desku nechal sestrojit. Schéma šachovnice najdete v přílohách pod názvem schema\_sachovnice.pdf. Z důvodu výrobních možností a rozměrů desky byla deska sestrojena na dvě poloviny. Tyto poloviny jsem spájel dohromady. Desku byla vyrobena technologií SMT, takže jsem na ní povrchově připájel piny pro všechny potřebné součástky. A to
 \bodseznam{
 	\bod 69 jazýčkový magnetických kontaktů
@@ -172,33 +174,33 @@ Deska plošného spoje bylo řešení, které se nabízelo kvůli spolehlivosti 
 	\bod Transistor a různé drobné zařízení
 }
 \clearpage\obrazek{pcb_porovnani}{porovnání PCB desky z výroby a osázené}{16cm}{pcbDesky.jpg}
-Desku jsem si následně nechal pocínovat za účelem lepší vodivosti. Dvě části jsem pomocí propojek spojil dohromady. Během práce jsem posléze při detekci figurek musel řešit velký problém a to se spolehlivostí desky. Magnetické spínače nefungovali spolehlivě. Důvodem byli narušené cesty a také křekhost spínačů. Ty během pájení velmi snadno praskli. 
+Desku jsem si následně nechal pocínovat. Dvě části jsem pomocí propojek spojil dohromady. Během práce jsem posléze při detekci figurek musel řešit velký problém a to se spolehlivostí desky. Magnetické spínače nefungovali spolehlivě. Důvodem byli narušené cesty a také křekhost spínačů. Ty během pájení velmi snadno praskli. 
 
 Tyto problémy jsem řešil za pomocí multimetru a posléze detekcí pomocí počítače. Na desce jsem postupně zkontroloval všechny cesty a v momentě, kdy špatně vodili jsem na ně napájel vrstvu cínu. Pokud problém spočíval v propojení dvou vedlejších cest, vzal jsem nůž a cín manuálně odstranil. Největším úśkalím bylo manuální propojení dvou desek dohromady. Tato část desky vyžadovalo časově velmi úpornou manuální péči.
 
-Desky se mi po opravách podařilo dostat do spolehlivého stavu. Jednou věcí, která mi však projekt stížila bylo, že nespolehlivost dráh a spínačů jsem objevil až v momentě, kdy jsem programoval detekci figurek. V tuto chvíli jsem však již, alespoň mohl využít napojení na multiplexery a pomocí kódu je kontrolovat skrze konzoly na počítači. To usnadilo proces oprav.
+Desky se mi po opravách podařilo dostat do spolehlivého stavu. Jednou věcí, která mi však projekt stížila bylo, že nespolehlivost cest na desce a spínačů jsem objevil až v momentě, kdy jsem programoval detekci figurek. V tuto chvíli jsem však již, alespoň mohl využít napojení na multiplexery a pomocí kódu je kontrolovat skrze konzoly na počítači. To usnadilo proces oprav.
 
-Deska je napájena externím 18V zdrojem. Na desce se pomocí stabilizátoru pro většinu součástek ustálí proud 5V, avšak pro motory a elektromagnet zůstává proud 18V.
+Deska je napájena externím 18V zdrojem. Na desce se pomocí stabilizátoru pro většinu součástek nastaví napětí 5V, avšak pro motory a elektromagnet zůstává napětí 18V.
 
 
-\podkapitola{Řídící jednotka}
+\podpodkapitola{Výběr řídící jednotky}
 Mikrokontrolér, který jsem si vybral pro samořídící šachovnici je Arduino UNO. Toto Arduino splňovalo veškeré nutné požadavky pro ovládání a zároveň to byl mikrokontroler, který jsem měl z počátku projektu doma a mohl jsem na něm zprvu testovat. Arduino je napájeno 5V z PCB desky a ovládá celou šachovnici. Arduino je naprogramováno variantou jazyku C++, ale o tom budu psát podrobněji až dále v práci. Do mikrokontroleru jsou skrze multiplexory zapojeny všechny magnetické spínače. Arduino si pomocí programové logiky přepíná, jaký z multiplexorů bude v dané chvíli aktivní, jelikož data multiplexorů proudí po stejných cestách. Dále jsou do Arduina zapojené ovladače motorů a transistor, který slouží k ovládání k elektromagnetu.
 
 
 
 
-\kapitola{Detekce pozice figurek}	
-V této kapitole popíši, na jakém principu se v šachovnici detekují pozici figurek. Vysvětlím jednotlivé zapojení multiplexorů a kód, který je ovládá. Spolehlivé detekování pozice figurek je stěžejním bodem této práce, jelikož z něho vychází další operace projektu.
+\podkapitola{Detekce obsazenosti políček}	
+V této kapitole popíši, na jakém principu se v šachovnici detekují pozice figurek. Vysvětlím jednotlivé zapojení multiplexorů a kód, který je ovládá. Spolehlivé detekování pozice figurek je stěžejním bodem této práce, jelikož z něho vychází další operace projektu.
 
-\podkapitola{Zapojení a princip}
+\podpodkapitola{Zapojení a princip}
 Aby samořídící šachovnice fungovala je zapotřebí vědět pozici figurek na herním poli. Nabízí se dvě řešení. Detekce pomocí kamer a zpracování obrazu a pomocí magnetických spínačů. Řešení pomocí kamer jsem zavrhl, již z počátku jelikož by to znamenalo nějaké rameno na šachovnice s kamerou. To mi nepřipadalo ideální. Magnetické spínače nám zachovají čistý vzhled šachovnice. Jelikož však na šachovnici máme 64 políček, potřebujeme 64 spínačů. Tolika piny naše Arduino Uno nedisponuje, a tak je zapotřebí využít nějaký systém pomocí, kterého počet vstupů snížíme. 
 
 Po průzkumu a práci na řešení jsem se inspiroval z jednoho projektu dostupném na internetu \citace{Projekt automatické šachovnice}. V tomto projektu bylo využito multiplexorové řešení. Zapojíme piny spínačů do multiplexoru a ten pak čteme pomocí řídící jednotky. Pomocí tohoto postupu jsme schopni zredukovat 64 pinů na 4 multiplexory. V této práci jsem jich využil pět, jelikož poslední multiplexor se stará o volbu obtížností a barvy.
 \clearpage\obrazek{spinaceSchema}{Zapojení magnetických spínačů na desce}{16cm}{spinaceSachovnice.png} 
 
-Multiplexory, které jsem využil mají 16 datových vstupů, 4 vstupy adresové, nápajení a zem, zapínací pin EN a výstup SIG. Výstupy multiplexorů, jak je vidět na schématu \viz{spinaceSchema} jsou zapojeny do stejných cest na PCB desce. Stejně tak výstup SIG je pro všechny multiplexory stejný. Toto není problém, jelikož v kódu využivám pin Enable (en). Jestliže je tento pin v logické jedničce, je multiplexor vypnutý. V momentě, kdy je v logické nule, je zapnutý. Na základě tohoto principu jsme schopni přepínat přepínače samotné a tím ještě více zminimalizovat počet nutných vstupů do Arduina UNO.
+Multiplexory, které jsem využil mají 16 datových vstupů, 4 vstupy adresové, nápajení, zem, zapínací pin EN a výstup SIG. Výstupy multiplexorů, jak je vidět na schématu \viz{spinaceSchema}, jsou zapojeny do stejných cest na PCB desce. Stejně tak výstup SIG je pro všechny multiplexory stejný. Toto není problém, jelikož v kódu využivám pin Enable (en). Jestliže je tento pin v logické jedničce, je multiplexor vypnutý. V momentě, kdy je v logické nule, je zapnutý. Na základě tohoto principu jsme schopni přepínat přepínače samotné a tím ještě více zminimalizovat počet nutných vstupů do Arduina UNO.
 
-\podkapitola{Programový kód}
+\podpodkapitola{Programový kód}
 Jak, už jsme zmínili dříve v práci, šachovnice je ovládána mikrokontrolerem Arduino UNO, jenž se programuje variantou C++. Kód pro ovládání multiplexorů nám musí zajistit jejich přepínání pomocí Enable pin a stabilní detekci pozic. První věc, kterou musíme v kódu nastavit jsou Enable piny. Po zapnutí nastavím Enable pin jako OUTPUT a pomocí for loopu si procyklujeme všechny Enable piny multiplexorů a dáme na ně logickou jedničku. Tato část kódu je v setup() funkci kódu. Ta se spustí pouze po spuštění mikrokontroleru.
 \begin{lstlisting}[style=CStyle]
 // Disabling Multiplexers  (When high - does nothing)
@@ -213,8 +215,8 @@ for (int i = 0; i < 4; i++) {
 }
 \end{lstlisting}
 
-\podpodkapitola{Čtení hodnot pomocí getReedValues()}
-Samotný proces čtení pozic si ukážeme jako další. Využívám na to svou funkci getReedValues. V této funkci nejprve zaktivujeme multiplexor, tím že mu nastavíme pin na 0. Poté začneme na jeho adresové piny vysílat binarní kombinace od 0 do 15. Toho docíleme opět pomocí for cyklu a využití modulo funkce (v kódu jako \%). Data následně ukládáme do našeho interního variablu muxValues a poté, co deaktivujeme multiplexor a jeho adresové vstupy, překopírujeme pomocí funkce memcpy hodnoty do proměnné recordedReedValue, která nám slouží pouze pro ukládání nejnovější možné detekce pozic.
+\podpodpodkapitola{Čtení hodnot pomocí getReedValues()}
+Pro čtení hodnot využíváme funkci getReedValues. V ní nejprve zaktivujeme multiplexor, tím že mu nastavíme pin na 0. Poté začneme na jeho adresové piny vysílat binarní kombinace od 0 do 15. Toho docíleme opět pomocí for cyklu a využití modulo funkce (v kódu jako \%). Data následně ukládáme do našeho interního variablu muxValues a poté, co deaktivujeme multiplexor a jeho adresové vstupy, překopírujeme pomocí funkce memcpy hodnoty do proměnné recordedReedValue, která nám slouží pouze pro ukládání nejnovější možné detekce pozic.
 
 \begin{lstlisting}[style=CStyle]
 
@@ -268,7 +270,7 @@ Jelikož je SIG pin multiplexorů nastavený jako INPUT\_PULLUP, což je nutné 
 }
 \end{center}
 
-\podpodkapitola{Ukládání všech pozic}
+\podpodpodkapitola{Ukládání všech pozic}
 Předchozí funkce nám zajištuje přečtení hodnot multiplexoru na základě daných parametrů. V kódu máme další pomocnou funkci setCurrentBoard(). Cílem této funkce je projít všechny řady šachovnice od první až po osmou a uložit je do mikrokontroleru. V mikrokontroleru je opět pomocí funkce memcpy překopíruje do dvouřadého listu boardValues, který obsahuje všechny pozice figurek.
 \begin{lstlisting}[style=CStyle]
 void setCurrentBoard() {
@@ -282,7 +284,7 @@ void setCurrentBoard() {
 	memcpy(boardValues[7], recordedReedValue, sizeof(boardValues[7]));
 \end{lstlisting}
 
-\podpodkapitola{Detekce přemístění figurek}
+\podpodpodkapitola{Detekce přemístění figurek}
 Předchozí funkce v této kapitole nám vysvětlují, jak šachovnice data čte. Nadcházející funkce je však zodpovědné za samotnou detekci změny pozic, když uživatel vezme figurku do ruky a přendá ji na jiné políčko. Tato funkce je napsána bloku loop(). To je opět platformou Arduino daná funkce, která se po spuštění již zmíněné funkce setup() neustále opakuje.
 
 Abychom zjistili zda se událo přemístění figurky musíme pravidelně číst pozice hodnot a porovnávat je z přechozími. To děláme pomocí while cyklu, který se opakuje do doby než jsou splněné podmínky uvedené v závorkách. Podmínky, které jsem v kódu nastavil jsou, že list move bude obsahove čtyři hodnoty. Neboli hodnotu čísla a písmena odkud se figurka přemístila a hodnoty kam. Jak zjistíme hodnoty, které ukládáme do move, vysvětlím dále v textu. Nejprve tedy uložíme hodnoty pozic do proměnné boardValuesMemory a následně přejdeme do cyklu. V tomto cyklu se neustále volá funkce detectBoardMovement() až do splníme zmíněných podmínek.
@@ -332,10 +334,10 @@ V momentě, kdy naplníme všechny čtyři místo v listu move, zruší se while
 
 
 
-\kapitola{Pohyb figurek}
+\podkapitola{Pohyb figurek na hracím poli}
 Realizaci šachových tahů nám zajištují dva krokové motory a elektromagnet. Pro účel práce bylo nutné umožnit XY pohyb elektromagnetu uvnitř šachovnice. Soustavu bylo nutné umístit dovnitř konstrukce a zajistit, aby byl elektromagnet velmi blízko PCB desce a tím i figurkám.
 
-\podkapitola{Elektromagnet}
+\podpodkapitola{Elektromagnet}
 Samotné přemístění figurky je realizováno pomocí elektromagnetu. Ten po přivedení proudu, vytvoří elektromagnetické pole, které začne působit na magnetickou šachovou figurku nad ním a tím s ní můžeme hýbat. Během tvorby řešení jsem musel zajistit, aby elektromagnetické pole nebylo příliš velké a neovlivňovalo ostatní figurky. Zprvu ovšem nastal jiný problém, a to že elektromagnet, i když zapnutý, nebyl schopen figurkou pohnout. Tato situace nastala na základě faktu, že pro velkou účinost elektromagnetu je nutné zminimalizovat prostor mezi elektromagnetem a přitahovaným tělesem. V situaci, kdy jsem používal elektromagnet se silou 150N stále to nebylo dostatečné. Problém jsem vyřešil vyvýšením elektromagnetu v konstrukci a zasazením jej blíže k plošnému spoji. Po těchto úpravách mi postačil, elektromagnet se silou 50N. Avšak ani tento elektromagnet by s figurky nepohl, jestliže by do nich nebyli umístěné magnetické prvky. Pokud bu do figurky byla umístěna prostá ocel, nedokázal by jí elektromagnet přemístit.
 
 Elektromagnet, který v práci využívám je v paremetrech u prodejce uváděn na 12V. Já do něj však vysílám 18V z důvodu lepší spolehlivosti. Abychom však elektromagnet mohli ovládat, musel jsem vymyslet způsob, jakým do elektromagnetu těchto 18V budu vpouštět pouze po zaslání signálů. Na to využivám transistor. Transistor použitý v práci po přivedení signálu na bázi, přepne vstup z kolektoru na emitor. Na kolektoru mám přivedenou zem a po zaslání signálů na bázi, vyšlu zem skrze emitor do elektromagnetu. Ten je z jeho druhého vstupu připojen k napětí a po přivedení země, začne působit. Po ukončení signálu na bázi se elektromagnet vypne.\obrazek{transistor}{Ovládání elektromagnetu pomocí transistoru}{8cm}{transistor.png} 
@@ -348,13 +350,13 @@ Kód, který transistor ovládá je velmi jednoduchý. Ve fuknci makeMove, o kte
 	}
 \end{lstlisting}
 
-\podkapitola{Krokové motory}
-Pro zajištění pohybu využívám dva krokové motory NEMA17 s krokovými ovladači A4988. Krokový ovladač slouží jako mezikrok mezi programem a kódem a zajištuje pohodlné ovládání motorů. Do těchto ovladačů přivádím po desce, jak 18V, tak 5V. Dále na nich nastavujeme směr pohybu a vysíláme signály pomocí, kterých pak motor hýbe s konstrukcí. Pro zajištění správného pohybu bylo nutné zajistit dostačné napětí. To je dle specifikací 8 až 35V. Po otestovaní jsem zjistil, že 18V bylo pro projekt ideální. Abych zamezil přehřívání ovladačů, nalepil jsem na ně z vrchu na chlazení, který je s nimi prodáváno.
+\podpodkapitola{Krokové motory}
+Pro zajištění pohybu využívám dva krokové motory NEMA17 s driverem A4988. Driver krokových motorů slouží jako mezikrok mezi programem a kódem a zajištuje pohodlné ovládání motorů. Do těchto driverů přivádím po desce, jak 18V, tak 5V. Dále na nich nastavujeme směr pohybu a vysíláme signály, pomocí kterých pak motor hýbe s konstrukcí. Pro zajištění správného pohybu bylo nutné zajistit dostačné napětí. To je dle specifikací 8 až 35V. Po otestovaní jsem zjistil, že 18V bylo pro projekt ideální. Abych zamezil přehřívání ovladačů, nalepil jsem na ně z vrchu chlazení, který je s nimi prodáváno.
 
-\podpodkapitola{Konstrukce}
+\podpodpodkapitola{Konstrukce}
 Konstrukce je realizována pomocí soustavy dvou motorů. Během řešení této problematiky jsem se inspiroval tímto projektem\citace{Projekt řízené šachovnice}. První motor je umístěn zevnitř boční stěny šachovnice. Na motor jsem umístil vhodnou řemenici a řemen natáhl na protější stěnu. Zde jsem si ze dřeva vyrobil sestrojil ústrojí pro další řemenici. Pod řemenem vedou tři vodicí tyče, do kterých jsem umístil druhý motor s konstrukcí. Řemen prochází touto konstrukcí a při otáčení řemenice, tak pomocí řemenu pohybujeme na Y ose i s konstrukcí uvnitř šachovnice. Vnitřní konstrukce je umístěna na třech ložiskách, kterými prochází vodící tyče. V této vnitřní dřevěné konstrukci je vyříznut otvor pro druhý krokový motor a zde je postupováno podle podobného postupu. Vedou zde dvě vodicí tyče na X ose. Na těchto vodicích tyčí jsou dvě ložiška, na které jsem si sestrojil dřevěnou plošinku připravenou pro umístění magnetu. Magnet je na plošině vyvýšen pro zajištění spolehlivého přenosu figurek a kabely jsou vyvedeny na PCB desku. Na druhé straně je opět ústrojí pro řemenice a řemen je proveden skrze plošinu s elektromagnetem.\clearpage\obrazek{konstrukceKrokovychMotoru}{Konstrukce krokových motorů}{14cm}{krokoveMotory.png} 
 
-\podpodkapitola{Programový kód}
+\podpodpodkapitola{Programový kód}
 Funkci, která ovládá motory jsem nazval moveMagnet. Tato funkce bere tři vstupní parametry. Směr (direction) a vzdálenost (distance). Pro přehlednost nerozlišuje směry pomocí if podmínek, ale pomocí switche. V něm nastavím, jaký blok kódu se provedu jestliže směr bude odpovídat hodnotě za case. Hodnota směru je dána jako pozice v numerické klávesnici. Tedy 4 jako pohyb vlevo, 2 pohyb směrem dolů a např. 9 jako diagonální pohyb doprava nahoru.
 \begin{lstlisting}[style=CStyle]
 void moveMagnet(int direction, int distance) {
@@ -391,7 +393,7 @@ void moveMagnet(int direction, int distance) {
 \end{lstlisting}
 Samotný kód, který vysílá signály ovladači je v bloku pod case. Nejprve určíme směr pohybu. Buď logickou nulou či jedničkou. Následně začneme pomocí for cyklu vysílat pulzy do motoru. Vždy nejdříve aktivujeme nutný stepPin. Pak zahájíme prodlevu. Tato prodleva nám určuje rychlost otáčení. Čím menší je, tím rychleji se motory točí. Poté stepPin vypneme a znovu zahajíme prodlevu. Tento cyklus se opakuje podle žádané vzdálenosti, kterou násobím délkou jednoho políčka.
 
-\podkapitola{Šachový tah}
+\podpodkapitola{Šachový tah}
 Algoritmus, který nám určuje tahy oponenta je udává v tomto formátu: "e2e4"~ Tento fakt nám velmi komplikuje proces tahu oponenta. Musíme totiž transformovat tento příkaz do příkazu, kterému rozumí krokové motory.
 
 Tuto transformaci provádíme ve funkcni makeChessMove. Ta má jako vstup daný set znaků, který si přeloží do instrukcí. K překladu využíváme C funkcni strchr, které nám udá pozici v listu. K ní pak přičteme jedničku a máme požadovanou X souřadnici tahu. Pro "e" by to tedy bylo 5. Y souřadnici pouze změníme z textu na číslo tím, že od něj odečteme textovou nulu.
@@ -431,7 +433,7 @@ Po těchto operacích teprve zahajíme požadovaný přesun figurky. Přemístí
  makeMove(fromX, fromY, toX, toY, true);
 \end{lstlisting}
 
-\podpodkapitola{Realizace tahu dle souřadnic}
+\podpodpodkapitola{Realizace tahu dle souřadnic}
 Abychom byli schopni zahrát šachový tah musíme ho transformovat do souřadnic. Zde si vysvětlíme funkci, která tah realizuje.
 
 Tato funkce se jmenuje makeMove a bere pět vstupních parametrů, XY souřadnice odkud a kam a dále zda má být elektromagnet zapnutý. Věc, kterou jsem určil, tak aby se provedla jako první je diagonální pohyb. Pomocí testování různých vztahů na šachovnici, jsem přišel na vzorec, který nám určuje diagonální pohyb.
@@ -479,10 +481,10 @@ if (x < targetX) {
 
 
 
-\kapitola{Šachová hra}
-Šachová hra se odehrává v hlavním cyklu programu. V této části práci si vystvětlíme, jak probíhá od samotného spuštění, po tvorbu tahů oponenta až po ukončení hry.
+\podkapitola{Algoritmus vytvořeného programu}
+Algoritus pro šachovou hru se odehrává v hlavním cyklu programu. V této části práci si vystvětlíme, jak probíhá od samotného spuštění, po tvorbu tahů oponenta až po ukončení hry.
 
-\podkapitola{Variablizace hry}
+\podpodkapitola{Variablizace hry}
 To realizuje pomocí pátého kontrolního multiplexoru. Tento multiplexor má pouze pět spínačů a to
 \popisseznam{
 	\polozka {První dva spínače} {
@@ -513,7 +515,7 @@ void setControlMUX() {
 	}
 \end{lstlisting}
 
-\podkapitola{Průběh hry} 
+\podpodkapitola{Průběh hry} 
 V hlavním cyklu programu po splnění proměnné gameStarted probíhá hra. Kód v cyklu primárně využívá již výše popsané funkce. Zde si ukážeme jejich aplikaci. Nejprve získáme hodnoty spínačů pomocí setCurrentBoard, následně tyto hodnoty uložíme do paměti a spustíme detekci pohybu. V případě, že hráč začíná za bílé, spustí se funkce detectBoardMovement a běží až do doby, kdy hráč s nějakou figurkou pohne. Tento pohyb se uloží do proměnné move a ta se předá MiniMax algoritmu pro šachovou hru. Ten rozeberu dále v práci. 
 
 \begin{lstlisting}[style=CStyle]
@@ -546,8 +548,8 @@ if (!validMove) {
 makeChessMove(lastMoveAI);
 \end{lstlisting}
 
-\podkapitola{MiniMax algoritmus}
-Pro tvorbu ideálního tahu pro oponenta využíváme šachový algoritmus od pána H.~G.~Mullera \citace{H.G.Mullerův algoritmus}. Program je dostupný pod Open source licencí a pro Arduino ho přepsal pán Diego Cueva. Tento algoritmus jsem objevil v jedné realizaci projektu šachovnice \citace{Projekt automatické šachovnice} a jeho využití jsem si přepsal pro své potřeby.
+\podpodkapitola{Možnost hry s protihráčem}
+Šachovou hru s protihráčem realizujeme pomocí MiniMax algoritmu. Tento šachový algoritmus od pána H.~G.~Mullera \citace{H.G.Mullerův algoritmus}. Program je dostupný pod Open source licencí a pro Arduino ho přepsal pán Diego Cueva. Tento algoritmus jsem objevil v jedné realizaci projektu šachovnice \citace{Projekt automatické šachovnice} a jeho využití jsem si přepsal pro své potřeby.
 
 Kód pro algoritmus je v odlišném souboru a to v MiniMax.h a MiniMax.cpp. Samotný kód algoritmu je extrémně optimalizován za účelem nejvyšší možné efektivity a délky. Jména proměnných i funkcích jsou zde zkracována, na co nejkratší a kód je díky tomu těžko srozumitelný. Z prvu v kódu nastavíme hodnoty pro šachové figurky.
 
@@ -577,13 +579,13 @@ strcpy(lastMove, c); /* Valid human movement */
 validMove = true;
 \end{lstlisting}
 
-\kapitola{Konstrukční provedení}
-Šachovnice bylo zapotřebí umístít do pevného obalu, který bude elektrické součástky chránit před poškozením. Já jsem rozhodl pro dřevo. Dřevo bylo pro mě volba z důvodu dobrých možností úprav a opracování. Dále se mi také velmi zamlouvalo zachovat dojem klasické šachovnice, která je bězně také vyrobena ze dřeva. Box se skládá ze čtyř zakladních dřevěnných desek. Ze zhora a ze spoda je šachovnice uzavřena tenkými překližky. Samořídící šachovnici jsem v závěru projektu nalakoval ochranou vrstvou.
+\podkapitola{Mechanické provedení}
+Šachovnice bylo zapotřebí umístít do pevného krytu, který bude elektrické součástky chránit před poškozením. Já jsem rozhodl pro dřevo. Dřevo bylo pro mě volba z důvodu dobrých možností úprav a opracování. Dále se mi také velmi zamlouvalo zachovat dojem klasické šachovnice, která je bězně také vyrobena ze dřeva. Box se skládá ze čtyř zakladních dřevěnných desek. Ze zhora a ze spoda je šachovnice uzavřena tenkými překližky. Samořídící šachovnici jsem v závěru projektu nalakoval ochranou vrstvou.
 
 Horní překližka má v sobě zasazenou PCB desku. Ta je do ní připevněna pomocí 8 šroubů, které zárověn společně s cínem drží oba kusy desky pohromady. Do desky jsou vyvedeny kabely od motoru a elektromagnetu. Napajení je realizováno bočním otvorem do šachovnice a připevněno dřevěnou destičkou.
 
 
-\podkapitola{Herní část šachovnice}
+\podpodkapitola{Herní část šachovnice}
  Pro vzhled šachovnice jsem si v programu Pinta vytvořil návrh šachových políček. Na pravou část návrhu jsem umístil kontrolní spínače pro volbu hry. Návrh jsem si nechal vytisknout na pevný papír, jenž jsem na desku přilepil. Pro šachovnici jsem si nechal vytisknout vhodné šachové figurky pomocí 3D tisku a do nich vložil malé magnety.\obrazek{chessStickerFull}{Návrh vzhledu herní částí šachovnice}{5cm}{chessStickerFull.jpg}
 
 
@@ -600,9 +602,6 @@ Samořídící šachovnici jsem zkonstruoval do dřevěné skříně, ve které 
 Dovnitř šachovnice jsem sestrojil sestavu krokových motorů, která je schopna provádět pohyb po XY souřadnicích. Tento mechanismus je sestrojen pomocí umístění vnitřní plošiny na vodicí tyče v konstrukci. Touto plošinou je proveden řemen zakončený řemenicí. Na horizontální ose je podobný mechanismus. Je na ní však použit elektromagnet, který pohybuje s figurky
 
 Pro projekt jsem zařídíl šachové figurky vytvořené pomocí 3D tisku, do kterých jsem umístil malé magnety. Návrh pro herní pole jsem vytvořil a následně ho nechal vytisknout na vhodný materiál. Ten je připevněný na desku plošného spoje.
-
-
-\seznamTabulek
 
 \seznamObrazku
 

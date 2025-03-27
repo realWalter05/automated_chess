@@ -135,11 +135,7 @@ void loop() {
   delay(10000);
   makeChessMove(lastMoveAI);
 
-  // Resseting move
-  move[0] = 0;
-  move[1] = 0;
-  move[2] = 0;
-  move[3] = 0;
+  resetMove();
 }
 
 bool isPlaceOccupied(int x, int y) {
@@ -389,6 +385,7 @@ void moveMagnet(int direction, int distance) {
 }
 
 void detectBoardMovement() {
+  bool fromChange = false;
   setCurrentBoard();
 
   Serial.println("////// Board //////");
@@ -413,10 +410,10 @@ void detectBoardMovement() {
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
       if (boardValuesMemory[i][j] != boardValues[i][j]) {
-        // Position of piece has changes
-
+        // Position of piece has changed
         if (boardValues[i][j]) {
           // Piece was here before
+          fromChange = true;
           move[0] = letterTranslate[j];
           move[1] = numberTranslate[i];
         }
@@ -429,9 +426,21 @@ void detectBoardMovement() {
       }
     }
   }
+
+  if (!fromChange) {
+    setCurrentBoard();
+    memcpy(boardValuesMemory, boardValues, sizeof(boardValuesMemory));
+    resetMove();
+  }
   delay(1000);
 }
 
+void resetMove() {
+  move[0] = 0;
+  move[1] = 0;
+  move[2] = 0;
+  move[3] = 0;
+}
 
 void makeMove(int x, int y, int targetX, int targetY, bool magnetActivated) {
   if (magnetActivated) {

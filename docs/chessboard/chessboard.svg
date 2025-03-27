@@ -26,15 +26,16 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
-     inkscape:zoom="4"
-     inkscape:cx="949.375"
-     inkscape:cy="102.125"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="553.66461"
+     inkscape:cy="420.72853"
      inkscape:window-width="1896"
      inkscape:window-height="1006"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer4" />
+     inkscape:current-layer="layer2"
+     showgrid="false" />
   <defs
      id="defs1">
     <filter
@@ -289,8 +290,8 @@
      inkscape:label="light"
      style="display:inline">
     <path
-       style="fill:#c8b291;fill-opacity:1;stroke-width:0.363274"
-       d="M 0,112.50141 V 0.00141655 H 142.49999 285 V 112.50141 225.00142 H 142.49999 0 Z"
+       style="fill:#c8b291;fill-opacity:1;stroke-width:0.370218"
+       d="M 0,112.50141 V 0.00141655 H 147.99999 296 V 112.50141 225.00142 H 147.99999 0 Z"
        id="path3"
        sodipodi:nodetypes="ccccccccc" />
   </g>
