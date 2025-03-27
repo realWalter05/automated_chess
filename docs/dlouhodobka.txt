@@ -16,3 +16,7 @@ Prace
 - nazev souboru bude trida_prijmeni_jmeno_cislo_vedouci_oponent_vX
 - budem si moct pujcit praci v infosu na nataceni socky
 
+
+
+drzet se zadani
+v oblibě šach, tou jest
