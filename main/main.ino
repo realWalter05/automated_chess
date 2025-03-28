@@ -132,7 +132,6 @@ void loop() {
   // Make Ai's move stored in lastMoveAI
   Serial.println("Prepare for move: ");
   Serial.println(lastMoveAI);
-  delay(10000);
   makeChessMove(lastMoveAI);
 
   resetMove();
@@ -152,7 +151,7 @@ void getReedValues(int targetMuxAddress, int from, int to) {
   // Activating MUX
   digitalWrite(targetMuxAddress, LOW);
 
-  for (int j = 0; j < to; j++) {
+  for (int j = from; j < to; j++) {
     // Checking MUX combinations
     digitalWrite(muxAddr[0], j % 2);
     digitalWrite(muxAddr[1], j / 2 % 2);
@@ -162,9 +161,9 @@ void getReedValues(int targetMuxAddress, int from, int to) {
     int reedValue = digitalRead(muxOutput);
 
     if (j > 7) {
-      muxValues[7 - (j - 8)] = reedValue;
+      muxValues[j - 8] = reedValue;
     } else {
-      muxValues[j] = reedValue;
+      muxValues[to-j-1] = reedValue;
     }
   }
 
@@ -205,9 +204,6 @@ void setCurrentBoard() {
 }
 
 void setControlMUX() {
-  getReedValues(muxEnable[4], 0, 8);
-  memcpy(controlValues, recordedReedValue, sizeof(controlValues));
-
   // Setting the data based on MUX wiring
   if (!controlValues[1]) {
     playingAsWhite = false;
@@ -392,7 +388,7 @@ void detectBoardMovement() {
   for (int i = 7; i >= 0; i--) {
     Serial.print(i + 1);
     Serial.print(" / ");
-    for (int j = 7; j >= 0; j--) {
+    for (int j = 0; j < 8; j++) {
       Serial.print(boardValues[i][j]);
       Serial.print(" ");
     }
