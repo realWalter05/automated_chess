@@ -1,6 +1,6 @@
 #include "MiniMax.h"
 
-// General 
+// General
 int boxLength = 135;
 int motorDelay = 1200;
 bool gameStarted = false;
@@ -10,13 +10,11 @@ int boardValuesMemory[8][8];
 int recordedReedValue[8];
 int controlValues[8];
 
-
 // Detect values
 char move[4] = {0, 0, 0, 0};
 char numberTranslate[8] = {'1', '2', '3', '4', '5', '6', '7', '8'};
 char letterTranslate[8] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 char aiLetterTranslate[8] = "abcdefgh";
-
 
 // Magnet
 const int magnetPin = 13;
@@ -26,7 +24,6 @@ bool magnetReady = false;
 int magnetX = 0;
 int magnetY = 0;
 
-
 // Motors
 const int stepPinX = 12;
 const int dirPinX = 11;
@@ -34,19 +31,15 @@ const int dirPinX = 11;
 const int stepPinY = 10;
 const int dirPinY = 9;
 
-
 // MUX
 int muxEnable[5] = {A0, 4, 5, 6, 7};
 int muxAddr[4] = {A1, A2, A3, A4};
 int muxOutput = A5;
 
-
 // Control MUX
 bool playingAsWhite = true;
 bool userTurn = true;
 int difficulty = 0;
-
-
 
 /* ------------------ */
 /* ARDUINO SETUP FUNC */
@@ -93,9 +86,6 @@ void setup() {
   }
 }
 
-
-
-
 /* ------------------ */
 /* ARDUINO MAIN FUNC */
 /* ------------------ */
@@ -106,7 +96,7 @@ void loop() {
       delay(2000);
       resetMagnet();
     }
-  
+
     // Check control multiplexor
     delay(7500);
 
@@ -118,7 +108,7 @@ void loop() {
     // AI starting as BLACK
     Serial.println("AI starts");
     getAIMove("");
-    makeChessMove(lastMoveAI);  
+    makeChessMove(lastMoveAI);
   }
 
   // User's turn
@@ -160,8 +150,6 @@ void loop() {
   resetMove();
 }
 
-
-
 /* ----------- */
 /* HELPER FUNC */
 /* ----------- */
@@ -178,7 +166,6 @@ void resetMove() {
   move[2] = 0;
   move[3] = 0;
 }
-
 
 /* ----------------- */
 /* DETECT BOARD FUNC */
@@ -292,7 +279,6 @@ void detectBoardMovement() {
   }
   delay(500);
 }
-
 
 /* ---------- */
 /* SETUP FUNC */
@@ -594,81 +580,196 @@ void makeChessMove(char givenMove[5]) {
   int toX = strchr(aiLetterTranslate, givenMove[2]) - aiLetterTranslate + 1;
   int toY = givenMove[3] - '0';
 
-  // Checking if target position is taken
-  bool takingPiece = isPlaceOccupied(toX, toY);
-  Serial.println(takingPiece);
-  if (takingPiece) {
-    // Moving piece away
-    makeMove(magnetX, magnetY, toX, toY, false);
-    makeMove(toX, toY, 9, 4, true);
-    makeMove(magnetX, magnetY, fromX, fromY, false);
-  } else {
-    makeMove(magnetX, magnetY, fromX, fromY, false);
+  // Taking piece
+  if (isPlaceOccupied(toX, toY)) {
+    Serial.println("Taking a piece");
+    handlePieceTaking(fromX, fromY, toX, toY);
   }
 
-  Serial.println("Magnet is on");
-  Serial.print(magnetX);
-  Serial.println(magnetY);
+  // Prepare magnet
+  makeMove(magnetX, magnetY, fromX, fromY, false);
 
-  //// Moving magnet from fromPosition to toPosition with piece ////
-
-  // Horse movement
+  // Piece Movement options
   if (abs(fromY - toY) != abs(toX - fromX) && fromY != toY && fromX != toX) {
-    // NOT DIAGONAL and not in same line or row
+    // Horse movement
     Serial.println("Horse movement");
-    if (fromY > toY) {
-      // Horse moving down
-
-      if (fromX != 0) {
-        bool placeInFrontLeft = isPlaceOccupied(fromX - 1, fromY - 1);
-        if (!placeInFrontLeft) {
-          makeMove(fromX, fromY, fromX - 1, fromY - 1, true);
-          makeMove(fromX - 1, fromY - 1, toX - 1, toY, true);
-          makeMove(toX - 1, toY, toX, toY, true);
-          return;
-        }
-      }
-
-      bool placeInFront = isPlaceOccupied(fromX, fromY - 1);
-      if (!placeInFront) {
-        // Empty in front him, procced normally
-        makeMove(fromX, fromY, toX, toY, true);
-        return;
-      }
-
-      if (fromX != 8) {
-        bool placeInFrontRight = isPlaceOccupied(fromX + 1, fromY - 1);
-        if (!placeInFrontRight) {
-          Serial.println("Front in right");
-          makeMove(fromX, fromY, fromX + 1, fromY - 1, true);
-          makeMove(fromX + 1, fromY - 1, toX, toY, true);
-          return;
-        }
-      }
-
-      // No place how to move horse, we need to make space
-      makeMove(fromX, fromY, fromX, fromY - 1, false);
-      makeMove(fromX, fromY - 1, fromX, fromY - 3, true);
-      makeMove(fromX, fromY - 3, fromX, fromY, false);
-      makeMove(fromX, fromY, toX, toY, true);
-      makeMove(toX, toY, fromX, fromY - 3, false);
-      makeMove(fromX, fromY - 3, fromX, fromY - 1, true);
-    }
+    handleHorseMovement(fromX, fromY, toX, toY);
+  } else if (fromX == 5 && (toX == 7 || toX == 3) &&
+             (toY = 1 &&fromY = 1 || fromY = 8 && toY == 8)) {
+    // Castling
+    Serial.println("Castling");
+    handleCastling(fromX, fromY, toX, toY);
   } else {
-    // Preparing magnet to fromPosition without a piece
+    // Other pieces
     makeMove(fromX, fromY, toX, toY, true);
   }
+  delay(1000);
+}
+void handlePieceTaking(int fromX, int fromY, int toX, int toY) {
+  // Prepare magnet to taken piece
+  makeMove(magnetX, magnetY, toX, toY, false);
 
-  Serial.println("Magnet is on");
-  Serial.print(magnetX);
-  Serial.println(magnetY);
+  int movingInRow = toY;
+  for (int blockRightX = blockRightX; blockRightX <= 9; blockRightX++) {
+    // Move taken piece out of chess board
+    if (isPlaceOccupied(blockRightX + 1, movingInRow)) {
+      if (movingInRow != 0) {
+        if (!isPlaceOccupied(blockRightX, movingInRow - 1)) {
+          // If piece bellow empty, move there and then continue right
+          makeMove(blockRightX, movingInRow, blockRightX + 1, movingInRow - 1,
+                   true);
+          movingInRow = movingInRow - 1;
+          continue;
+        }
+      }
 
-  /*
-    vež může jenom rovně a do stran
-    střelec může jenom diagonálně
-    kůň batshit crazy
-    dáma na všechny strany
-    král na všechny strany o jeden, a ještě umí castlovat
-    pěšec, takuje do stran, en passant a na konci dela cavyky
-  */
+      if (movingInRow != 8) {
+        if (!isPlaceOccupied(blockRightX, movingInRow + 1)) {
+          // If piece above empty, move there and then continue right
+          makeMove(blockRightX, movingInRow, blockRightX + 1, movingInRow + 1,
+                   true);
+          movingInRow = movingInRow + 1;
+          continue;
+        }
+      }
+    }
+
+    // If empty, move it right
+    makeMove(blockRightX, movingInRow, blockRightX, movingInRow, true);
+  }
+}
+
+void handleCastling(int fromX, int fromY, int toX, int toY) {
+  int awayY = 7;
+  int awayPawnY = 6;
+  if (toY == 1) {
+    awayY = 2 awayPawnY = 3
+  }
+
+  if (fromX < toX) {
+    // Castle to right
+    // Move rook away
+    makeMove(magnetX, magnety, toX, toY, false);
+    makeMove(toX, toY, 9, awayY, true);
+
+    // Moving king away
+    makeMove(9, awayY, fromX, fromY, false);
+    makeMove(fromX, fromY, 9, toY, true);
+
+    // Putting rook in place
+    makeMove(9, toY, 9, awayY, false);
+    makeMove(9, awayY, 8, toY, true);
+    makeMove(8, toY, toX - 1, toY, true);
+
+    // Putting king in place
+    makeMove(toX - 1, toY, 9, toY false);
+    makeMove(9, toY, toX, toY true);
+  } else {
+    // Castle to left
+    if (isPlaceOccupied(4, awayY)) {
+      // Puting pawn away
+      makeMove(magnetX, magnetY, 4, awayY, false);
+      makeMove(4, awayY, 4, awayPawnY, true);
+      makeMove(4, awayPawnY, fromX, fromY, false);
+    }
+    // Moving king away
+    makeMove(fromX, fromY, 4, awayY, true);
+
+    // Putting rook in place
+    makeMove(4, awayY, 1, fromY, false);
+    makeMove(1, fromY, 4, fromY, true);
+
+    // Putting king in place
+    makeMove(4, fromY, 4, awayY, false);
+    makeMove(4, awayY, 3 fromY, true);
+  }
+}
+
+void handleHorseMovement(int fromX, int fromY, int toX, int toY) {
+  // Detected by not diagonal and not in same line or row
+  if (toY == fromY - 1 && abs(fromX - toX) == 1) {
+    // Vertical horse movement
+    int awayY = fromY - 1;
+    int awayPawnY = fromY - 3;
+    if (fromY < toY) {
+      awayY = fromY + 1;
+      awayPawnY = fromY + 3;
+    }
+
+    if (fromX != 0 && !isPlaceOccupied(fromX - 1, awayY)) {
+      makeMove(fromX, fromY, fromX - 1, awayY, true);
+      makeMove(fromX - 1, awayY, toX, toY, true);
+      return;
+    }
+
+    if (!isPlaceOccupied(fromX, awayY)) {
+      // Empty in front him
+      makeMove(fromX, fromY, fromX, awayY, true);
+      makeMove(fromX, awayY, toX, toY, true);
+      return;
+    }
+
+    if (fromX != 8 && !isPlaceOccupied(fromX + 1, awayY)) {
+      Serial.println("Front in right");
+      makeMove(fromX, fromY, fromX + 1, awayY, true);
+      makeMove(fromX + 1, awayY, toX, toY, true);
+      return;
+    }
+
+    if (awayPawnY > 0 && awayPawnY < 9 && !isPlaceOccupied(fromX, awayPawnY)) {
+      // Otherwise move pawn away
+      makeMove(fromX, fromY, fromX, awayY, false);
+      makeMove(fromX, awayY, fromX, awayPawnY, true);
+
+      // Move horse to place
+      makeMove(fromX, awayPawnY, fromX, fromY, false);
+      makeMove(fromX, fromY, toX, toY, true);
+
+      // Move pawn back to place
+      makeMove(toX, toY, fromX, awayPawnY, false);
+      makeMove(fromX, awayPawnY, fromX, awayY, true);
+    }
+  } else if (fromY < toY && abs(fromX - toX) == 1) {
+    // Horizontal horse movement
+    int awayX = fromX - 1;
+    int awayPawnX = fromX - 3;
+    if (fromX < toX) {
+      awayX = fromX + 1;
+      awayPawnX = fromX + 3;
+    }
+
+    if (fromY != 0 && !isPlaceOccupied(awayX, fromY + 1)) {
+      makeMove(fromX, fromY, awayX, fromY + 1, true);
+      makeMove(awayX, fromY + 1, toX, toY, true);
+      return;
+    }
+
+    if (!isPlaceOccupied(awayX, fromY)) {
+      // Empty next to him
+      makeMove(fromX, fromY, awayX, fromY, true);
+      makeMove(awayX, fromY, toX, toY, true);
+      return;
+    }
+
+    if (fromY != 8 && !isPlaceOccupied(awayX, fromY - 1)) {
+      Serial.println("Horse bellow");
+      makeMove(fromX, fromY, awayX, fromY - 1, true);
+      makeMove(awayX, fromY - 1, toX, toY, true);
+      return;
+    }
+
+    if (awayPawnX > 0 && awayPawnX < 9 && !isPlaceOccupied(awayPawnX, fromY)) {
+      // Otherwise move pawn away
+      makeMove(fromX, fromY, awayX, fromY, false);
+      makeMove(awayX, fromY, awayPawnX, fromY true);
+
+      // Move horse to place
+      makeMove(awayPawnX, fromY fromX, fromY, false);
+      makeMove(fromX, fromY, toX, toY, true);
+
+      // Move pawn back to place
+      makeMove(toX, toY, awayPawnX, fromY false);
+      makeMove(awayPawnX, fromY awayX, fromY, true);
+    }
+  }
 }

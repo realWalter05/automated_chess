@@ -246,7 +246,14 @@ void getAIMove(char move[4]) {
 
   K = I;
   N = 0;
-  T = 0x3F;                 /* T=Computer Play strength */
+  T = 0x3F; /* T=Computer Play strength */
+  if (difficulty == 0) {
+    Serial.println("Difficulty change na 0");
+    T = 0x2F;                 
+  } else if (difficulty == 2) {
+    Serial.println("Difficulty change na 2");
+    T = 0x4F;                 
+  }
   r = D(-I, I, Q, O, 1, 3); /* Think & do*/
   if (!(r > -I + 1)) {
     Serial.println("Lose*");
