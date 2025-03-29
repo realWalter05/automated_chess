@@ -1,32 +1,6 @@
 #include "MiniMax.h"
 
-// Detect values
-char move[4] = {0, 0, 0, 0};
-char numberTranslate[8] = {'1', '2', '3', '4', '5', '6', '7', '8'};
-char letterTranslate[8] = {'h', 'g', 'f', 'e', 'd', 'c', 'b', 'a'};
-char aiLetterTranslate[8] = "abcdefgh";
-
-// Electromagnet
-const int magnetPin = 13;
-bool magnetActivated = LOW;
-
-// Electromagnet positioned on a1
-int magnetX = 1;
-int magnetY = 1;
-
-// Motors
-const int stepPinX = 12;
-const int dirPinX = 11;
-
-const int stepPinY = 10;
-const int dirPinY = 9;
-
-// Control multiplexor information
-bool playingAsWhite = true;
-bool userTurn = true;
-int difficulty = 0;
-
-// General information
+// General 
 int boxLength = 135;
 int motorDelay = 1200;
 bool gameStarted = false;
@@ -36,11 +10,47 @@ int boardValuesMemory[8][8];
 int recordedReedValue[8];
 int controlValues[8];
 
-// Multiplexers
+
+// Detect values
+char move[4] = {0, 0, 0, 0};
+char numberTranslate[8] = {'1', '2', '3', '4', '5', '6', '7', '8'};
+char letterTranslate[8] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+char aiLetterTranslate[8] = "abcdefgh";
+
+
+// Magnet
+const int magnetPin = 13;
+bool magnetActivated = LOW;
+bool magnetReady = false;
+
+int magnetX = 0;
+int magnetY = 0;
+
+
+// Motors
+const int stepPinX = 12;
+const int dirPinX = 11;
+
+const int stepPinY = 10;
+const int dirPinY = 9;
+
+
+// MUX
 int muxEnable[5] = {A0, 4, 5, 6, 7};
 int muxAddr[4] = {A1, A2, A3, A4};
 int muxOutput = A5;
 
+
+// Control MUX
+bool playingAsWhite = true;
+bool userTurn = true;
+int difficulty = 0;
+
+
+
+/* ------------------ */
+/* ARDUINO SETUP FUNC */
+/* ------------------ */
 void setup() {
   // DEBUG info
   Serial.begin(9600);
@@ -84,17 +94,34 @@ void setup() {
 }
 
 
+
+
+/* ------------------ */
+/* ARDUINO MAIN FUNC */
+/* ------------------ */
 void loop() {
   if (!gameStarted) {
     // Waiting for user to put pieces in the control part of the board
+    if (!magnetX != 1 && !magnetY == 1) {
+      delay(2000);
+      resetMagnet();
+    }
+  
     // Check control multiplexor
-    delay(5000);
+    delay(7500);
+
     setControlMUX();
-    setupMagnet();
     return;
   }
 
-  // Player's turn => waiting for movement
+  if (playingAsWhite == false && !lastMoveAI) {
+    // AI starting as BLACK
+    Serial.println("AI starts");
+    getAIMove("");
+    makeChessMove(lastMoveAI);  
+  }
+
+  // User's turn
   setCurrentBoard();
   memcpy(boardValuesMemory, boardValues, sizeof(boardValuesMemory));
   while (!move[0] || !move[1] || !move[2] || !move[3]) {
@@ -113,13 +140,10 @@ void loop() {
   Serial.println("Ai playing...");
   getAIMove(move);
 
+  // Checking game
   if (!validMove) {
     // If user made invalid move
-    // Resseting move
-    move[0] = 0;
-    move[1] = 0;
-    move[2] = 0;
-    move[3] = 0;
+    resetMove();
     return;
   }
 
@@ -129,21 +153,36 @@ void loop() {
     Serial.println("User won");
   }
 
-  // Make Ai's move stored in lastMoveAI
-  Serial.println("Prepare for move: ");
+  // Make AI move
   Serial.println(lastMoveAI);
   makeChessMove(lastMoveAI);
 
   resetMove();
 }
 
+
+
+/* ----------- */
+/* HELPER FUNC */
+/* ----------- */
 bool isPlaceOccupied(int x, int y) {
-  if (!boardValues[y-1][x-1]) {
+  if (!boardValues[y - 1][x - 1]) {
     return true;
   }
   return false;
 }
 
+void resetMove() {
+  move[0] = 0;
+  move[1] = 0;
+  move[2] = 0;
+  move[3] = 0;
+}
+
+
+/* ----------------- */
+/* DETECT BOARD FUNC */
+/* ----------------- */
 void getReedValues(int targetMuxAddress, int from, int to) {
   // Splitting to two rows because row of chessboard has 8 pieces
   int muxValues[8];
@@ -163,7 +202,7 @@ void getReedValues(int targetMuxAddress, int from, int to) {
     if (j > 7) {
       muxValues[j - 8] = reedValue;
     } else {
-      muxValues[to-j-1] = reedValue;
+      muxValues[to - j - 1] = reedValue;
     }
   }
 
@@ -203,35 +242,139 @@ void setCurrentBoard() {
   memcpy(boardValues[7], recordedReedValue, sizeof(boardValues[7]));
 }
 
+void detectBoardMovement() {
+  bool fromChange = false;
+  setCurrentBoard();
+
+  Serial.println("////// Board //////");
+  for (int first = 7; first >= 0; first--) {
+    Serial.print(first + 1);
+    Serial.print(" / ");
+    for (int second = 0; second < 8; second++) {
+      Serial.print(boardValues[first][second]);
+      Serial.print(" ");
+    }
+    Serial.println();
+  }
+  Serial.println("    A B C D E F G H");
+
+  Serial.print("Moves:");
+  Serial.print(move[0]);
+  Serial.print(move[1]);
+  Serial.print("/");
+  Serial.print(move[2]);
+  Serial.println(move[3]);
+
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      if (boardValuesMemory[i][j] != boardValues[i][j]) {
+        // Position of piece has changed
+        if (boardValues[i][j]) {
+          // Piece was here before
+          fromChange = true;
+          move[0] = letterTranslate[j];
+          move[1] = numberTranslate[i];
+        }
+
+        if (!boardValues[i][j]) {
+          // New piece on this position
+          move[2] = letterTranslate[j];
+          move[3] = numberTranslate[i];
+        }
+      }
+    }
+  }
+
+  if (!fromChange) {
+    setCurrentBoard();
+    memcpy(boardValuesMemory, boardValues, sizeof(boardValuesMemory));
+    resetMove();
+  }
+  delay(500);
+}
+
+
+/* ---------- */
+/* SETUP FUNC */
+/* ---------- */
+void resetMagnet() {
+  getReedValues(muxEnable[4], 0, 8);
+  memcpy(controlValues, recordedReedValue, sizeof(controlValues));
+
+  Serial.println("Magnet reset values");
+  Serial.print(controlValues[2]);
+  Serial.print(controlValues[3]);
+  Serial.print(controlValues[4]);
+  Serial.print(controlValues[5]);
+  Serial.println(controlValues[6]);
+
+  digitalWrite(dirPinX, LOW);
+  while (!controlValues[4] && !controlValues[5] && !controlValues[6]) {
+    getReedValues(muxEnable[4], 0, 8);
+    memcpy(controlValues, recordedReedValue, sizeof(controlValues));
+
+    digitalWrite(stepPinX, HIGH);
+    delayMicroseconds(motorDelay + 600);
+    digitalWrite(stepPinX, LOW);
+    delayMicroseconds(motorDelay + 600);
+    magnetX = 1;
+  }
+
+  while (controlValues[4] && !controlValues[5] && !controlValues[6]) {
+    getReedValues(muxEnable[4], 0, 8);
+    memcpy(controlValues, recordedReedValue, sizeof(controlValues));
+
+    digitalWrite(dirPinY, HIGH);
+    digitalWrite(stepPinY, HIGH);
+    delayMicroseconds(motorDelay + 600);
+    digitalWrite(stepPinY, LOW);
+    delayMicroseconds(motorDelay + 600);
+    magnetY = 1;
+  }
+  digitalWrite(dirPinY, LOW);
+}
+
 void setControlMUX() {
   // Setting the data based on MUX wiring
-  if (!controlValues[1]) {
-    playingAsWhite = false;
-  }
-  /*
-  if (!controlValues[2]) {
+  if (!controlValues[6]) {
     playingAsWhite = true;
   }
 
-  if (!controlValues[3]) {
-    difficulty = 0;
+  if (!controlValues[5]) {
+    playingAsWhite = false;
   }
 
   if (!controlValues[4]) {
+    difficulty = 0;
+  }
+
+  if (!controlValues[3]) {
     difficulty = 1;
   }
 
-  if (!controlValues[5]) {
+  if (!controlValues[2]) {
     difficulty = 2;
-  }*/
+  }
 
-  //  if ((!controlValues[1] || !controlValues[2]) &&
-  //    (!controlValues[3] || !controlValues[4] || !controlValues[5])) {
-  // Checking if mandatory user info is set
-  // TODO check if chess pieces are there
-  Serial.println("Game started");
-  gameStarted = true;
-  setCurrentBoard();
+  if ((!controlValues[6] || !controlValues[5]) &&
+      (!controlValues[4] || !controlValues[3] || !controlValues[2])) {
+    // Checking if mandatory user info is set
+    setCurrentBoard();
+    bool gameReady = true;
+
+    for (int reed = 0; reed < 8; reed++) {
+      if (boardValues[0][reed] || boardValues[1][reed] ||
+          boardValues[6][reed] || boardValues[7][reed]) {
+        // If somewhere is missing piece
+        gameReady = false;
+      }
+    }
+    if (gameReady) {
+      Serial.println("Game started");
+      setupMagnet();
+      gameStarted = true;
+    }
+  }
 }
 
 void setupMagnet() {
@@ -254,6 +397,10 @@ void setupMagnet() {
   }
   digitalWrite(dirPinX, LOW);
 }
+
+/* ------------- */
+/* MOVEMENT FUNC */
+/* ------------- */
 
 void moveMagnet(int direction, int distance) {
   distance = abs(distance);
@@ -380,64 +527,6 @@ void moveMagnet(int direction, int distance) {
   digitalWrite(stepPinY, LOW);
 }
 
-void detectBoardMovement() {
-  bool fromChange = false;
-  setCurrentBoard();
-
-  Serial.println("////// Board //////");
-  for (int i = 7; i >= 0; i--) {
-    Serial.print(i + 1);
-    Serial.print(" / ");
-    for (int j = 0; j < 8; j++) {
-      Serial.print(boardValues[i][j]);
-      Serial.print(" ");
-    }
-    Serial.println();
-  }
-  Serial.println("    A B C D E F G H");
-
-  Serial.print("Moves:");
-  Serial.print(move[0]);
-  Serial.print(move[1]);
-  Serial.print("/");
-  Serial.print(move[2]);
-  Serial.println(move[3]);
-
-  for (int i = 0; i < 8; i++) {
-    for (int j = 0; j < 8; j++) {
-      if (boardValuesMemory[i][j] != boardValues[i][j]) {
-        // Position of piece has changed
-        if (boardValues[i][j]) {
-          // Piece was here before
-          fromChange = true;
-          move[0] = letterTranslate[j];
-          move[1] = numberTranslate[i];
-        }
-        
-        if (!boardValues[i][j]) {
-          // New piece on this position
-          move[2] = letterTranslate[j];
-          move[3] = numberTranslate[i];
-        }
-      }
-    }
-  }
-
-  if (!fromChange) {
-    setCurrentBoard();
-    memcpy(boardValuesMemory, boardValues, sizeof(boardValuesMemory));
-    resetMove();
-  }
-  delay(1000);
-}
-
-void resetMove() {
-  move[0] = 0;
-  move[1] = 0;
-  move[2] = 0;
-  move[3] = 0;
-}
-
 void makeMove(int x, int y, int targetX, int targetY, bool magnetActivated) {
   if (magnetActivated) {
     digitalWrite(magnetPin, HIGH);
@@ -446,7 +535,7 @@ void makeMove(int x, int y, int targetX, int targetY, bool magnetActivated) {
 
   if (abs(y - targetY) == abs(targetX - x)) {
     // Diagonal movement when moving piece
-    if(y > targetY) {
+    if (y > targetY) {
       // Diagonal down
       if (x < targetX) {
         // Right
@@ -470,6 +559,16 @@ void makeMove(int x, int y, int targetX, int targetY, bool magnetActivated) {
     return;
   }
 
+  // Move magnet to starting position on Y
+  if (y < targetY) {
+    // Move up
+    Serial.println("moving up");
+    moveMagnet(8, y - targetY);
+  } else if (y > targetY) {
+    // Move down
+    moveMagnet(2, targetY - y);
+  }
+
   // Move magnet to starting position on X
   if (x < targetX) {
     // Move to right
@@ -480,16 +579,6 @@ void makeMove(int x, int y, int targetX, int targetY, bool magnetActivated) {
     moveMagnet(4, targetX - x);
   }
 
-  // Move magnet to starting position on Y
-  if (y < targetY) {
-    // Move up
-    Serial.println("moving up");
-    moveMagnet(8, y - targetY);
-  } else if (y > targetY) {
-    // Move down
-    moveMagnet(2, targetY - y);
-  }
-  
   if (magnetActivated) {
     digitalWrite(magnetPin, LOW);
   }
@@ -514,7 +603,6 @@ void makeChessMove(char givenMove[5]) {
     makeMove(toX, toY, 9, 4, true);
     makeMove(magnetX, magnetY, fromX, fromY, false);
   } else {
-    // Preparing magnet to fromPosition without a piece
     makeMove(magnetX, magnetY, fromX, fromY, false);
   }
 
@@ -522,10 +610,54 @@ void makeChessMove(char givenMove[5]) {
   Serial.print(magnetX);
   Serial.println(magnetY);
 
-
   //// Moving magnet from fromPosition to toPosition with piece ////
 
-  makeMove(fromX, fromY, toX, toY, true);
+  // Horse movement
+  if (abs(fromY - toY) != abs(toX - fromX) && fromY != toY && fromX != toX) {
+    // NOT DIAGONAL and not in same line or row
+    Serial.println("Horse movement");
+    if (fromY > toY) {
+      // Horse moving down
+
+      if (fromX != 0) {
+        bool placeInFrontLeft = isPlaceOccupied(fromX - 1, fromY - 1);
+        if (!placeInFrontLeft) {
+          makeMove(fromX, fromY, fromX - 1, fromY - 1, true);
+          makeMove(fromX - 1, fromY - 1, toX - 1, toY, true);
+          makeMove(toX - 1, toY, toX, toY, true);
+          return;
+        }
+      }
+
+      bool placeInFront = isPlaceOccupied(fromX, fromY - 1);
+      if (!placeInFront) {
+        // Empty in front him, procced normally
+        makeMove(fromX, fromY, toX, toY, true);
+        return;
+      }
+
+      if (fromX != 8) {
+        bool placeInFrontRight = isPlaceOccupied(fromX + 1, fromY - 1);
+        if (!placeInFrontRight) {
+          Serial.println("Front in right");
+          makeMove(fromX, fromY, fromX + 1, fromY - 1, true);
+          makeMove(fromX + 1, fromY - 1, toX, toY, true);
+          return;
+        }
+      }
+
+      // No place how to move horse, we need to make space
+      makeMove(fromX, fromY, fromX, fromY - 1, false);
+      makeMove(fromX, fromY - 1, fromX, fromY - 3, true);
+      makeMove(fromX, fromY - 3, fromX, fromY, false);
+      makeMove(fromX, fromY, toX, toY, true);
+      makeMove(toX, toY, fromX, fromY - 3, false);
+      makeMove(fromX, fromY - 3, fromX, fromY - 1, true);
+    }
+  } else {
+    // Preparing magnet to fromPosition without a piece
+    makeMove(fromX, fromY, toX, toY, true);
+  }
 
   Serial.println("Magnet is on");
   Serial.print(magnetX);

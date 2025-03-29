@@ -5,8 +5,10 @@ OFFSET: x + 11mm
 7 o o o o o o o o
 6 o o o s o o o o
 5 o o o o o o o o
-4 o o s o o c o o
-3 o o c c o o o o
+4 o o s o o X o o
+3 o o c c o X o o
 2 o o o o o o o c
-1 c o o o o o o o
+1 c X o o o o o o
   A B C D E F G H
+
+  H radek blbne

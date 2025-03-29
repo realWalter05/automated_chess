@@ -16,8 +16,8 @@ char *p, c[5],
 
 char L, w[] = {0, 2, 2, 7, -1, 8, 12, 23}, /* relative piece values    */
     o[] = {-16, -15, -17, 0,  1,  16, 0,  1, 16,
-           15,  17,  0,   14, 18, 31, 33, 0, /* step-vector lists */
-           7,   -1,  11,  6,  8,  3,  6,     /* 1st dir. in o[] per piece*/
+           15,  17,  0,   14, 18, 31, 33, 0,  /* step-vector lists */
+           7,   -1,  11,  6,  8,  3,  6,      /* 1st dir. in o[] per piece*/
            6,   3,   5,   7,  4,  5,  3,  6}; /* initial piece setup      */
 /* board is left part, center-pts table is right part, and dummy */
 
@@ -187,7 +187,6 @@ short D(short q, short l, short e, unsigned char E, unsigned char z,
   return m += m < e; /* delayed-loss bonus       */
 }
 
-
 //******************************************  BKP
 void bkp() {
   for (int i = 0; i < 16 * 8 + 1; i++) {
@@ -215,32 +214,34 @@ void serialBoard() {
 
 //***************************  AI COMPUTER PLAYER
 void getAIMove(char move[4]) {
-  c[0] = move[0];
-  c[1] = move[1];
-  c[2] = move[2];
-  c[3] = move[3];
-  c[4] = 0;
+  if (move) {
+    c[0] = move[0];
+    c[1] = move[1];
+    c[2] = move[2];
+    c[3] = move[3];
+    c[4] = 0;
 
-  Serial.print(" Think "); /* Turn for ARDUINO */
+    Serial.print(" Think "); /* Turn for ARDUINO */
 
-  K = *c - 16 * c[1] + 799, L = c[2] - 16 * c[3] + 799; /* parse entered move */
-  N = 0;
-  T = 0x3F;                 /* T=Computer Play strength */
-  bkp();                    /* Save the board just in case */
-  r = D(-I, I, Q, O, 1, 3); /* Check & do the human movement */
-  if (!(r > -I + 1)) {
-    Serial.println("Lose ");
-    gameStatus = 1;
+    K = *c - 16 * c[1] + 799,
+    L = c[2] - 16 * c[3] + 799; /* parse entered move */
+    N = 0;
+    T = 0x3F;                 /* T=Computer Play strength */
+    bkp();                    /* Save the board just in case */
+    r = D(-I, I, Q, O, 1, 3); /* Check & do the human movement */
+    if (!(r > -I + 1)) {
+      Serial.println("Lose ");
+      gameStatus = 1;
+    }
+    if (k == 0x10) { /* The flag turn must change to 0x08 */
+      Serial.println("No valid move");
+      validMove = false;
+      return;
+    }
+
+    strcpy(lastMove, c); /* Valid human movement */
+    validMove = true;
   }
-  if (k == 0x10) { /* The flag turn must change to 0x08 */
-    Serial.println("No valid move");
-    validMove = false;
-    return;
-  }
-
-  strcpy(lastMove, c); /* Valid human movement */
-  validMove = true;
-
   mn++; /* Next move */
 
   K = I;
