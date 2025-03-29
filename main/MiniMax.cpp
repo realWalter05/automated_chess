@@ -194,7 +194,26 @@ void bkp() {
   }
 }
 
-//*********************************  SERIAL BOARD
+void getKingsChessCoordinates() {
+  for (int i = 0; i < 8; i++) {
+    if (!loosingKingCordinates[0]) {
+      loosingKingCordinates[0] = (8-i) - '0';
+    } else {
+      loosingKingCordinates[2] = (8-i) - '0';
+    }
+    for (int j = 0; j < 8; j++) {
+      char c = sym[b[16 * i + j] & 15];
+      if (c == "k") {
+        if (!loosingKingCordinates[1]) {
+          loosingKingCordinates[1] = j+1;
+        } else {
+          loosingKingCordinates[3] = j+1;          
+        }
+      }
+    }
+  }
+}
+
 void serialBoard() {
   Serial.println("  +-----------------+");
   for (int i = 0; i < 8; i++) {

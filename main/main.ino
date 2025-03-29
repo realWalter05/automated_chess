@@ -16,6 +16,8 @@ char numberTranslate[8] = {'1', '2', '3', '4', '5', '6', '7', '8'};
 char letterTranslate[8] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 char aiLetterTranslate[8] = "abcdefgh";
 
+int kingsCordinates[4] = {0, 0, 0, 0};
+
 // Magnet
 const int magnetPin = 13;
 bool magnetActivated = LOW;
@@ -137,10 +139,19 @@ void loop() {
     return;
   }
 
-  if (gameStatus == 1) {
-    Serial.println("AI won");
-  } else if (gameStatus == 2) {
-    Serial.println("User won");
+  if (gameStatus == 1 || gameStatus == 2) {
+    getKingsChessCoordinates();
+    
+    Serial.print("Kings cordinates: ");
+    Serial.print(kingsCordinates[0]);
+    Serial.print(kingsCordinates[1]);
+    Serial.print("/");
+    Serial.print(kingsCordinates[2]);
+    Serial.print(kingsCordinates[3]);
+
+    // Moving kings out of chess board
+    handlePieceTaking(magnetX, magnetY, kingsCordinates[0], kingsCordinates[1]);
+    handlePieceTaking(magnetX, magnetY, kingsCordinates[2], kingsCordinates[3]);
   }
 
   // Make AI move
