@@ -10,7 +10,7 @@
 
 #define MYRAND_MAX 65535  /* 16bit pseudo random generator */
 long N, T;                /* N=evaluated positions+S, T=recursion limit */
-short Q, O, K, R, k = 16; /* k=moving side */
+short Q, O, K, R, k = 8; /* AI now plays as black */
 char *p, c[5],
     Z; /* p=pointer to c, c=user input, computer output, Z=recursion counter */
 
@@ -194,20 +194,20 @@ void bkp() {
   }
 }
 
-void getKingsChessCoordinates() {
+void getKingsCordinates() {
   for (int i = 0; i < 8; i++) {
-    if (!loosingKingCordinates[0]) {
-      loosingKingCordinates[0] = (8-i) - '0';
+    if (!kingsCordinates[0]) {
+      kingsCordinates[0] = (8-i) - '0';
     } else {
-      loosingKingCordinates[2] = (8-i) - '0';
+      kingsCordinates[2] = (8-i) - '0';
     }
     for (int j = 0; j < 8; j++) {
       char c = sym[b[16 * i + j] & 15];
       if (c == "k") {
-        if (!loosingKingCordinates[1]) {
-          loosingKingCordinates[1] = j+1;
+        if (!kingsCordinates[1]) {
+          kingsCordinates[1] = j+1;
         } else {
-          loosingKingCordinates[3] = j+1;          
+          kingsCordinates[3] = j+1;          
         }
       }
     }
@@ -233,7 +233,7 @@ void serialBoard() {
 
 //***************************  AI COMPUTER PLAYER
 void getAIMove(char move[4]) {
-  if (move) {
+  if (move != "") {
     c[0] = move[0];
     c[1] = move[1];
     c[2] = move[2];
@@ -259,24 +259,31 @@ void getAIMove(char move[4]) {
     }
 
     strcpy(lastMove, c); /* Valid human movement */
-    validMove = true;
   }
+  validMove = true;
   mn++; /* Next move */
 
   K = I;
   N = 0;
   T = 0x3F; /* T=Computer Play strength */
   if (difficulty == 0) {
-    Serial.println("Difficulty change na 0");
     T = 0x2F;                 
   } else if (difficulty == 2) {
-    Serial.println("Difficulty change na 2");
     T = 0x4F;                 
   }
   r = D(-I, I, Q, O, 1, 3); /* Think & do*/
   if (!(r > -I + 1)) {
     Serial.println("Lose*");
     gameStatus = 1;
+  }
+
+  if (c[0] == "a" && c[1] == "8" && c[2] == "a" && c[3] == "8") {
+    // Reset AI due to fault
+    memset(I, 0, sizeof(I));
+    memset(Q, 0, sizeof(Q));
+    memset(O, 0, sizeof(O));
+    validMove == false;
+    return;
   }
 
   strcpy(lastMoveAI, c); /* Valid ARDUINO movement */
