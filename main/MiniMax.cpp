@@ -10,7 +10,7 @@
 
 #define MYRAND_MAX 65535  /* 16bit pseudo random generator */
 long N, T;                /* N=evaluated positions+S, T=recursion limit */
-short Q, O, K, R, k = 8; /* AI now plays as black */
+ /* AI now plays as black */
 char *p, c[5],
     Z; /* p=pointer to c, c=user input, computer output, Z=recursion counter */
 
@@ -240,7 +240,7 @@ void getAIMove(char move[4]) {
     c[3] = move[3];
     c[4] = 0;
 
-    Serial.print(" Think "); /* Turn for ARDUINO */
+    //Serial.print(" Think "); /* Turn for ARDUINO */
 
     K = *c - 16 * c[1] + 799,
     L = c[2] - 16 * c[3] + 799; /* parse entered move */
@@ -249,17 +249,18 @@ void getAIMove(char move[4]) {
     bkp();                    /* Save the board just in case */
     r = D(-I, I, Q, O, 1, 3); /* Check & do the human movement */
     if (!(r > -I + 1)) {
-      Serial.println("Lose ");
+      //Serial.println("Lose ");
       gameStatus = 1;
     }
     if (k == 0x10) { /* The flag turn must change to 0x08 */
-      Serial.println("No valid move");
+      //Serial.println("No valid move");
       validMove = false;
       return;
     }
 
     strcpy(lastMove, c); /* Valid human movement */
   }
+
   validMove = true;
   mn++; /* Next move */
 
@@ -273,7 +274,7 @@ void getAIMove(char move[4]) {
   }
   r = D(-I, I, Q, O, 1, 3); /* Think & do*/
   if (!(r > -I + 1)) {
-    Serial.println("Lose*");
+    //Serial.println("Lose*");
     gameStatus = 1;
   }
 
@@ -289,9 +290,9 @@ void getAIMove(char move[4]) {
   strcpy(lastMoveAI, c); /* Valid ARDUINO movement */
   r = D(-I, I, Q, O, 1, 3);
   if (!(r > -I + 1)) {
-    Serial.println(lastMoveAI);
+    //Serial.println(lastMoveAI);
     gameStatus = 2;
   }
-  Serial.println(lastMoveAI);
-  serialBoard();
+  //Serial.println(lastMoveAI);
+  //serialBoard();
 }
