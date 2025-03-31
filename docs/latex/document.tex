@@ -131,7 +131,7 @@ PCB deska, jak je zkratkou nazývána, nebo také DPS je velmi rozšířená ele
 Desky jsou vyrobené z izolačních materiálů s pájecími poli, kterým se říká podložky a elektrickými spoji nazývanými stopy.
 Na PCB desky se připájí potřebné součástky. Tyto součástky jsou spolu pak propojeny na základě schématu pro tvorbu PCB. Jsou dvě primární technologie 
 montáže součástek na desku. Je tady technologie průchozích otvorů (THT, Through-Hole Technology), nebo povrchové montáže (SMD, Surface-Mounted Devices) \viz{pcb_SMT_THT}. Při povrchové montáži se napájí součástky přímo na desku s tím, že jsou na ní připravené jednotlivé stopy. U THT jsou v desce připravené otvory, do kterých součástky umísťujeme.
-\obrazek{pcb_SMT_THT}{Rozlišení SMT a THT na PCB desce}{10cm}{pcb_SMT_THT.png} 
+\obrazek{pcb_SMT_THT}{Rozlišení SMT a THT na PCB desce}{12cm}{pcb_SMT_THT.png} 
 
 \podkapitola{Elektronické součástky}
 \podpodkapitola{Magnetický spínač}
@@ -163,7 +163,7 @@ Z počátku si Mini-Max vytvoří tzv. herní strom. Účelem tohoto stromu je r
 Pro projekt bylo zapotřebí vymyslet efektivní a spolehlivý způsob propojení. Zároveň však způsob nesměl bránit detekci figurek pomocí spínačů. Nabízela se spoustu možností, ale z důvodů velkého množství součástek jsem se rozhodl pro dle mě nejčistčí řešení, a to desku plošného spoje. 
 
 \podpodkapitola{PCB deska}
-Deska plošného spoje bylo řešením, které se nabízelo kvůli spolehlivosti a zároveň tím, že deska je velmi tenká  a její materiál nijak nebrání průchodu magnetického pole. Na základě mého schématu v programu EasyADA jsem si desku nechal sestrojit. Schéma šachovnice najdete v přílohách pod názvem schema\_sachovnice.pdf. Z důvodu výrobních možností a rozměrů desky byla deska sestrojena na dvě poloviny. Tyto poloviny jsem spájel dohromady. Deska byla vyrobena technologií SMT, takže jsem na ní povrchově připájel piny pro všechny potřebné součástky. A to
+Deska plošného spoje bylo řešením, které se nabízelo kvůli spolehlivosti a zároveň tím, že deska je velmi tenká  a její materiál nijak nebrání průchodu magnetického pole. Na základě mého schématu v programu EasyADA jsem si desku nechal sestrojit. Schéma šachovnice najdete v přílohách pod názvem schema\_sachovnice.pdf. Z důvodu výrobních možností a rozměrů desky byla deska sestrojena na dvě poloviny. Tyto poloviny jsem spájel dohromady. Deska byla vyrobena technologií SMT, takže jsem na ní povrchově připájel piny pro všechny potřebné součástky. A to:
 \bodseznam{
 	\bod 69 jazýčkových magnetických kontaktů
 	\bod 5 analogových multiplexorů, transistor a různé drobné zařízení
@@ -172,7 +172,7 @@ Deska plošného spoje bylo řešením, které se nabízelo kvůli spolehlivosti
 	\bod Stabilizátor a piny pro vstupní napětí
 	\bod Napájení pro motory a elektromagnety
 }
-\clearpage\obrazek{pcb_porovnani}{porovnání PCB desky z výroby a osázené}{16cm}{pcbDesky.jpg}
+\clearpage\obrazek{pcb_porovnani}{Porovnání PCB desky z výroby a osázené}{16cm}{pcbDesky.jpg}
 Desku jsem si následně nechal pocínovat. Dvě části jsem pomocí propojek spojil dohromady. Během práce jsem posléze při detekci figurek musel řešit velký problém, a to se spolehlivostí desky. Magnetické spínače nefungovaly spolehlivě. Důvodem byly narušené cesty a také křekhost spínačů. Ty během pájení velmi snadno praskly.
 
 Tyto problémy jsem řešil za pomocí multimetru a posléze detekcí pomocí počítače. Na desce jsem postupně zkontroloval všechny cesty a v momentě, kdy špatně vodily jsem na ně napájel vrstvu cínu. Pokud problém spočíval v propojení dvou vedlejších cest, vzal jsem nůž a cín manuálně odstranil. Největším úśkalím bylo manuální propojení dvou desek dohromady. Tato část desky vyžadovala časově velmi úpornou manuální péči.
@@ -215,17 +215,15 @@ for (int i = 0; i < 4; i++) {
 \end{lstlisting}
 
 \podpodpodkapitola{Čtení hodnot pomocí getReedValues()}
-Pro čtení hodnot využíváme funkci getReedValues. V ní nejprve zaktivujeme multiplexor tím, že mu nastavíme pin na 0. Poté začneme na jeho adresové piny vysílat binarní kombinace od 0 do 15. Toho docíleme opět pomocí for cyklu a využití modulo funkce (v kódu jako \%). Data následně ukládáme do našeho interního variablu muxValues a poté, co deaktivujeme multiplexor a jeho adresové vstupy, překopírujeme pomocí funkce memcpy hodnoty do proměnné recordedReedValue, která nám slouží pouze pro ukládání nejnovější možné detekce pozic.
+Pro čtení hodnot využíváme funkci getReedValues. V ní nejprve zaktivujeme multiplexor tím, že mu nastavíme pin na 0. Poté začneme na jeho adresové piny vysílat binarní kombinace od 0 do 15. Toho docíleme opět pomocí for cyklu a využití modulo funkce (v kódu jako \%). Data následně ukládáme do našeho interního variablu muxValues a poté, co deaktivujeme multiplexor a jeho adresové vstupy, překopírujeme pomocí funkce memcpy hodnoty do proměnné recordedReedValue. Ta nám slouží pouze pro ukládání nejnovější možné detekce pozic. Pozice každé druhé řady zapisujeme oproti řadě první obráceně. To je z důvodu zapojení na PCB desce a realizováno podmínkou ve funkci.
 
 \begin{lstlisting}[style=CStyle]
-
 void getReedValues(int targetMuxAddress, int from, int to) {
 	// Splitting to two rows because row of chessboard has 8 pieces
 	int muxValues[8];
 	
 	// Activating MUX
 	digitalWrite(targetMuxAddress, LOW);
-	
 	for (int j = from; j < to; j++) {
 		// Checking MUX combinations
 		digitalWrite(muxAddr[0], j % 2);
@@ -236,12 +234,11 @@ void getReedValues(int targetMuxAddress, int from, int to) {
 		int reedValue = digitalRead(muxOutput);
 		
 		if (j > 7) {
-			muxValues[7-(j-8)] = reedValue;
+			muxValues[j - 8] = reedValue;
 		} else {
-			muxValues[j] = reedValue;
+			muxValues[to - j - 1] = reedValue;
 		}
 	}
-	
 	// Resetting MUX
 	digitalWrite(muxAddr[0], LOW);
 	digitalWrite(muxAddr[1], LOW);
@@ -289,6 +286,7 @@ Předchozí funkce v této kapitole nám vysvětlují, jak šachovnice data čte
 Abychom zjistili, zda se událo přemístění figurky musíme pravidelně číst pozice hodnot a porovnávat je z přechozími. To děláme pomocí while cyklu, který se opakuje do doby, než jsou splněné podmínky uvedené v závorkách. Podmínky, které jsou v kódu nastavené vyžadují, aby list proměnných move obsahoval čtyři hodnoty. Neboli hodnotu čísla a písmena odkud se figurka přemístila a hodnoty kam. Jak zjistíme hodnoty, které ukládáme do move, vysvětlím dále v textu. Nejprve tedy uložíme hodnoty pozic do proměnné boardValuesMemory a následně přejdeme do cyklu. V tomto cyklu se neustále volá funkce detectBoardMovement() až do splnění zmíněných podmínek.
 \begin{lstlisting}[style=CStyle]
 	// Player's turn => waiting for movement
+	setCurrentBoard();
 	memcpy(boardValuesMemory, boardValues, sizeof(boardValuesMemory));
 	while (!move[0] || !move[1] || !move[2] || !move[3]) {
 		detectBoardMovement();
@@ -300,36 +298,43 @@ Pomocí této funkce detekujeme, zda bylo uskutečněno přemístění figurek. 
 
 \begin{lstlisting}[style=CStyle]
 void detectBoardMovement() {
+	bool fromChange = false;
 	setCurrentBoard();
-	
-	for (int i = 7; i >= 0; i--) {
-		for (int j = 7; j >= 0; j--) {
-			if (boardValuesMemory[i][j] != boardValues[i][j]) {
-				// Position of piece has changes
+
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j < 8; j++) {
+			if (boardValuesMemory[i][j] != boardValues[i][j] && boardValues[i][j]) {
+				// Position of piece has changed
+				delay(1000);
+				setCurrentBoard();
 				if (boardValues[i][j]) {
 					// Piece was here before
+					fromChange = true;
 					move[0] = letterTranslate[j];
 					move[1] = numberTranslate[i];
-				} else {
-					// New piece on this position
-					move[2] = letterTranslate[j];
-					move[3] = numberTranslate[i];
 				}
 			}
 		}
 	}
-	delay(2000);
+
+	// For loop for 1-0...
+
+	if (!fromChange || (move[2] && !move[0])) {
+		setCurrentBoard();
+		memcpy(boardValuesMemory, boardValues, sizeof(boardValuesMemory));
+		resetMove();
+	}
+	delay(1000);
 }
 \end{lstlisting}
-Takto pomocí dvou for loopu prochází hodnoty od nejvyšší po nejnižší. To je z důvodu uložení dat a zapojení multiplexorů. Tam se postupně porovnává každé políčko s každým dokud nenajde nějakou změnu. V případě, že všechny hodnoty jsou stejné jako předtím, funkce se spustí z hlavního cyklu znovu. V případě změny však pomocí kódu detekujeme zda šlo o změnu z 0 na 1 či naopak. 
+Funkce pomocí for loopu prochází hodnoty pozic a tam postupně porovnává každé políčko s každým dokud nenajde nějakou změnu. V případě, že všechny hodnoty jsou stejné jako předtím, funkce se s vteřinovým zpožděním spustí znovu. V případě změny však pomocí kódu detekujeme zda šlo o změnu z 0 na 1 či naopak. 
 
 \popisseznam{
 	\polozka {Změny z 0 na 1}{Jelikož logická jednička označuje prázdné políčko, tato zmena značí odkud se figurka přemístila. Zapíše se tedy do move na první a druhé pozici.}
 	\polozka {Změny z 1 na 0}{Značí, že políčko bylo dříve prázdné a nyní se na něj umístila nová figurka. Zapíše se tedy do list move na třetí a čtvrtou pozici}
 }
 
-V momentě, kdy naplníme všechny čtyři místa v listu move, zruší se while cyklus v hlavní funkci programu a kód může postupovat dále. Ve funkci máme na konci ještě dané zpoždění, které zamezí chybám v detekci při pomalém přemísťování figurek.
-
+V momentě, kdy naplníme všechny čtyři místa v listu move, zruší se while cyklus v hlavní funkci programu a kód může postupovat dále. Ve funkci na konci kontrolujeme situaci, kdy se projde celý cyklus a najde pouze pozici, kam se figurka přemístila ale ne odkud. Také hlídáme situaci, kdy se žadný tah nenajde. V takových případech, tah resetujeme a nastavíme novou hodnotu pozic spínačů do boardValuesMemory. Poté je ve funkci vteřinové zpoždění, které zajištuje větší spolehlivost detekce při přesunu figurek.
 
 
 
@@ -341,13 +346,30 @@ Samotné přemístění figurky je realizováno pomocí elektromagnetu. Ten po p
 
 Elektromagnet, který v práci využívám je v paremetrech u prodejce uváděn na 12V. Já do něj však vysílám 18V z důvodu lepší spolehlivosti. Abychom však elektromagnet mohli ovládat, musel jsem vymyslet způsob, jakým do elektromagnetu těchto 18V budu vpouštět pouze po zaslání signálů. Na to využivám transistor. Transistor použitý v práci po přivedení signálu na bázi, přepne vstup z kolektoru na emitor. Na kolektoru mám přivedenou zem a po zaslání signálů na bázi, vyšlu zem skrze emitor do elektromagnetu. Ten je z jeho druhého vstupu připojen k napětí a po přivedení země, začne působit. Po ukončení signálu na bázi se elektromagnet vypne.\obrazek{transistor}{Ovládání elektromagnetu pomocí transistoru}{8cm}{transistor.png} 
 
-Kód, který transistor ovládá je velmi jednoduchý. Ve fuknci makeMove, o které budu v dalších kapitolách hovořit, je boolovská proměnná magnetActivated. V případě, že magnet potřebuji nastavím jí jako true a pomocí podmínky v této funkci vyšlu na pin báze transistoru (magnetPin) logickou jedničku. Na konci funkce  po provedení pohyby, magnet vždy vypínám.
+Kód, který transistor ovládá je velmi jednoduchý. Ve fuknci makeMove, o které budu v dalších kapitolách hovořit, je boolovská proměnná magnetActivated. V případě, že magnet potřebuji, nastavím jí jako true a pomocí podmínky v této funkci vyšlu na pin báze transistoru (magnetPin) logickou jedničku. Na konci funkce  po provedení pohyby, magnet vždy vypínám.
 \begin{lstlisting}[style=CStyle]
 	// Enabling the electromagnet if neccesary
 	if (magnetActivated) {
 		digitalWrite(magnetPin, HIGH);
 	}
 \end{lstlisting}
+
+Dále je důležitá kalibrace elektromagnetu. Pro správný průběh programu je zapotřebí, aby elektromagnet byl vždy na začátku hry na stejném místě. Toto místo je mírně vedle pozici a1. Ke kalibraci využíváme funkci resetMagnet a setupMagnet. Přemístění provedeme, tak že po zapnutí samořídící šachovnice, umístíme na pozice ovládacích spínačů tři figury. Obsadíme pozice pro volbu hry za bílé, černé a první obtížnost.
+
+\begin{lstlisting}[style=CStyle]
+while (!controlValues[4] && !controlValues[5] && !controlValues[6]) {
+	getReedValues(muxEnable[4], 0, 8);
+	memcpy(controlValues, recordedReedValue, sizeof(controlValues));
+	digitalWrite(dirPinX, LOW);	
+	digitalWrite(stepPinX, HIGH);
+	delayMicroseconds(motorDelay + 600);
+	digitalWrite(stepPinX, LOW);
+	delayMicroseconds(motorDelay + 600);
+	magnetX = 1;
+}
+\end{lstlisting}
+
+Kód začne přesouvat elektromagnet doleva až do doby, kdy odstraníme figury ze spínače pro obtížnost. Poté se začne elektromagnet přesouvat směrem dolů. Cílovou pozici poznáme pomocí zvuku, které motory při pohybu dodávájí. V momentě, kdy magnet dosáhne cílové ať už X či Y souřadnice, začne zvuk motoru zintenzivňovat. Elektromagnet eventuálně pomocí funkce setupMagnet, posuneme mírně směrem vpravo a tím zajistíme start na pozici a1.
 
 \podpodkapitola{Krokové motory}
 Pro zajištění pohybu využívám dva krokové motory NEMA17 s driverem A4988. Driver krokových motorů slouží jako mezikrok mezi programem a kódem a zajištuje pohodlné ovládání motorů. Do těchto driverů přivádím po desce, jak 18V, tak 5V. Dále na nich nastavujeme směr pohybu a vysíláme signály, pomocí kterých pak motor hýbe s konstrukcí. Pro zajištění správného pohybu bylo nutné zajistit dostačné napětí. To je dle specifikací 8 až 35V. Po otestovaní jsem zjistil, že 18V bylo pro projekt ideální. Abych zamezil přehřívání ovladačů, nalepil jsem na ně z vrchu chlazení, které je s nimi prodáváno.
@@ -392,46 +414,6 @@ void moveMagnet(int direction, int distance) {
 \end{lstlisting}
 Samotný kód, který vysílá signály ovladači je v bloku pod case. Nejprve určíme směr pohybu. Buď logickou nulou či jedničkou. Následně začneme pomocí for cyklu vysílat pulzy do motoru. Vždy nejdříve aktivujeme nutný stepPin. Pak zahájíme prodlevu. Tato prodleva nám určuje rychlost otáčení. Čím menší je, tím rychleji se motory točí. Poté stepPin vypneme a znovu zahajíme prodlevu. Tento cyklus se opakuje podle žádané vzdálenosti, kterou násobím délkou jednoho políčka.
 
-\podpodkapitola{Šachový tah}
-Algoritmus, který nám určuje tahy oponenta je udáván v tomto formátu: "e2e4"~ Tento fakt nám velmi komplikuje proces tahu oponenta. Musíme totiž transformovat tento příkaz do příkazu, kterému rozumí krokové motory.
-
-Tuto transformaci provádíme ve funkcni makeChessMove. Ta má jako vstup daný set znaků, který si přeloží do instrukcí. K překladu využíváme C funkcni strchr, které nám udá pozici v listu. K ní pak přičteme jedničku a máme požadovanou X souřadnici tahu. Pro "e" by to tedy bylo 5. Y souřadnici pouze změníme z textu na číslo tím, že od něj odečteme textovou nulu.
-\begin{lstlisting}[style=CStyle]
-void makeChessMove(char givenMove[5]) {
-	char aiLetterTranslate[8] = "abcdefgh";
-		
-	int fromX = strchr(aiLetterTranslate, givenMove[0])-aiLetterTranslate + 1;
-	int fromY = givenMove[1] - '0';
-
-	int toX = strchr(aiLetterTranslate, givenMove[2])-aiLetterTranslate + 1;
-	int toY = givenMove[3] - '0';
-	//...
-\end{lstlisting}
-
-Následně tyto souřadnice předáme do funkce makeMove, kterou vystvělím v příští kapitole. Než však přejdeme dále, musíme vysvětlit ještě jeden element šachového tahu a to je braní figurek. V kódu braní realizujeme právě ve funkci makeChessMove. Pomocí funkce isPlaceOccupied zjistíme zda jsou cílové souřadnice obsazené či volné.
-\begin{lstlisting}[style=CStyle]
-bool isPlaceOccupied(int x, int y) {
-	if (!boardValues[y-1][x-1]) {
-		return true;
-	}
-	return false;
-}
-\end{lstlisting}
-V případě, že funkce vrátí true, musíme danou figurku odstranit. To provádíme tak, že ji přesuneme mimo šachovnici neboli na 9. X souřadnici. Do funkce makeMove dáme nejprve současné souřadnice magnetu a poté cílové, kde se náchází figurka. Poté, co elektromagnet dosáhne souřadnic figurky, aktivujeme ho a přemístíme mimo hrací pole.
-\begin{lstlisting}[style=CStyle]
-if (takingPiece) {
-	// Moving piece away
-	makeMove(magnetX, magnetY, toX, toY, false);
-	makeMove(toX, toY, 9, 4, true);
-}
-\end{lstlisting}
-
-Po těchto operacích teprve zahajíme požadovaný přesun figurky. Přemístíme magnet z jeho současných souřadnic na souřadnice figurky, s kterou má pohnout a poté, co tam dorazí aktivujeme elektromagnet a přemístíme magnet i s figurkou na souřadnice cílové.
-\begin{lstlisting}[style=CStyle]
- makeMove(magnetX, magnetY, fromX, fromY, false);
- makeMove(fromX, fromY, toX, toY, true);
-\end{lstlisting}
-
 \podpodpodkapitola{Realizace tahu dle souřadnic}
 Abychom byli schopni zahrát šachový tah musíme ho transformovat do souřadnic. Zde si vysvětlíme funkci, která tah realizuje.
 
@@ -439,7 +421,7 @@ Tato funkce se jmenuje makeMove a bere pět vstupních parametrů, XY souřadnic
 \vzorec{|y-targetY| == |targetX-x|}
 Jestliže v situaci vztah platí, provedeme diagonální pohyb na místo a ukončíme funkci pomocí return. Ve funkci dále rozlišujeme pohyb diogonální doprava/doleva nahorů či dolů. Jaký potřebujeme zjistíme porovnáním x a targetX. 
 \begin{lstlisting}[style=CStyle]
-	 if (abs(y - targetY) == abs(targetX - x)) {
+	if (abs(y - targetY) == abs(targetX - x)) {
 		// Diagonal movement when moving piece
 		if(y > targetY) {
 			// Diagonal down
@@ -463,25 +445,168 @@ Jestliže v situaci vztah platí, provedeme diagonální pohyb na místo a ukon�
 	}
 \end{lstlisting}
 
-Pokud pohyb dle souřadnic není diagonální, pohneme s figurkou po X či Y ose. Proces je podobný jako předtím, akorát zde neaplikujeme vzorec ale pouze porovnáváme. Využíváme zde dřívě zmíněnou funkci moveMagnet, kterou dáváme jako požadovanou urazenou vzdálenost rozdílem mezi x a targetX.
+Pokud pohyb dle souřadnic není diagonální, pohneme s figurkou po X či Y ose. Proces je podobný jako předtím, akorát zde neaplikujeme vzorec ale pouze porovnáváme. Využíváme zde dřívě zmíněnou funkci moveMagnet, kterou dáváme jako požadovanou urazenou vzdálenost rozdílem mezi x a targetX. Nejprve provedeme pohyb vertikální a až poté horizontální.
 
 \begin{lstlisting}[style=CStyle]
-// Move magnet to starting position on X
-if (x < targetX) {
-	// Move to right
-	Serial.println("moving right");
-	moveMagnet(6, x - targetX);
-} else if (x > targetX) {
-	// Move to left
-	moveMagnet(4, targetX - x);
+// Move magnet to starting position on Y
+if (y < targetY) {
+	// Move up
+	moveMagnet(8, y - targetY);
+} else if (y > targetY) {
+	// Move down
+	moveMagnet(2, targetY - y);
 }
 \end{lstlisting}
 
 
 
+\podpodkapitola{Šachový tah}
+Algoritmus, který nám určuje tahy oponenta je udáván v tomto formátu šachovém formátu, např. e2e4. Tento fakt nám komplikuje proces tahu oponenta. Musíme totiž transformovat tento příkaz do příkazu, kterému rozumí krokové motory.
+
+Tuto transformaci provádíme ve funkcni makeChessMove. Ta má jako vstup daný set znaků, který si přeloží do instrukcí. K překladu využíváme C funkcni strchr, které nám udá pozici v listu. K ní pak přičteme jedničku a máme požadovanou X souřadnici tahu. Pro "e" by to tedy bylo 5. Y souřadnici pouze změníme z textu na číslo tím, že od něj odečteme textovou nulu. Následně tyto souřadnice předáme do funkce makeMove, kterou jsme vysvětlili v předchozí kapitole.
+\begin{lstlisting}[style=CStyle]
+void makeChessMove(char givenMove[5]) {
+	char aiLetterTranslate[8] = "abcdefgh";
+		
+	int fromX = strchr(aiLetterTranslate, givenMove[0])-aiLetterTranslate+1;
+	int fromY = givenMove[1] - '0';
+
+	int toX = strchr(aiLetterTranslate, givenMove[2])-aiLetterTranslate+1;
+	int toY = givenMove[3] - '0';
+	//...
+\end{lstlisting}
+
+Po těchto operacích teprve zahajíme požadovaný přesun figurky. Přemístíme magnet z jeho současných souřadnic na souřadnice figurky, s kterou má pohnout a poté, co tam dorazí aktivujeme elektromagnet a přemístíme magnet i s figurou na souřadnice cílové. V momentě, kdy není nutný žádný speciální typ pohybu, realizujeme ho takto.
+
+\begin{lstlisting}[style=CStyle]
+  // Other pieces
+  makeMove(magnetX, magnetY, fromX, fromY, false);
+  makeMove(fromX, fromY, toX, toY, true);
+\end{lstlisting}
+
+Přenos na cílové souřadnice musíme dále rozlišit na základě různých situací, které mohou nastat. Šachovnice si musí umět poradit s pohybem koně i v situaci, kdy kůň nemá prostor na pohyb, s rošádou a běžným šachovým pohybem.
+
+\podpodpodkapitola{Pohyb koně}
+Ve funkci makeChessMove musíme nějakých způsobem pohyb koně detekovat. V rámci práce jsem postupným testováním přišel na tento vzorec, kterým  pohyb detekujeme.
+\vzorec{[fromY - toY]~!=~[toX - fromX] ~~\&\&~~  ([fromX - toX] == 1~||~[fromX - toX] == 2)}
+
+Pohyb koně řeším ve funkci handleHorseMovement. Rozlišuji ho na horizontální a vertikální. O jaký se jedná zjistím opět pomocí absolutní hodnoty. Jestliže je rozdíl počátečního a konečného X rovné 1, jedná se o pohyb vertikální. V případě, že je to 2, tak pohyb horizontální. Horizontální pohyb se vykonává principiálně stejným způsobem jako vertikální, a tak dále popíši pouze ten vertikální.
+
+\begin{lstlisting}[style=CStyle]
+if (!isPlaceOccupied(fromX, awayY)) {
+	// Empty in front him
+	makeMove(fromX, fromY, fromX, awayY, true);
+	makeMove(fromX, awayY, toX, toY, true);
+	return;
+}
+\end{lstlisting}
+
+Ve funkci opět kontrolujeme pozice před koněm. V bloku nad tímto textem je kód pro řešení situace, kdy je pole přímo před koněm volné. Pak pouze standartně vyjedeme. V momentě, kdy je jsou volná místa na stranách, přemístěme koně diagonálně do nich a až poté na cílové místo.
+
+Další situací, kterou jsem v práci musel vyřešit je když kůň nemá žádný prostor pro pohyb. Tato situace nastane například pokud chce algoritmus zahrát pohyb koně jako první tah. Jako řešení jsem vytvořil kód, který nejprve uhne s figurkou před koněm, poté přemístí koně a figurku vrátí.
+
+\begin{lstlisting}[style=CStyle]
+int awayY = fromY - 1;
+int awayPawnY = fromY - 3;
+if (fromY < toY) {
+	awayY = fromY + 1;
+	awayPawnY = fromY + 3;
+}
+	
+if (awayPawnY > 0 && awayPawnY < 9) {
+	// Move pawn away
+	makeMove(fromX, fromY, fromX, awayY, false);
+	makeMove(fromX, awayY, fromX, awayPawnY, true);
+	
+	// Move horse to place
+	makeMove(fromX, awayPawnY, fromX, fromY, false);
+	makeMove(fromX, fromY, toX, toY, true);
+	
+	// Move pawn back to place
+	makeMove(toX, toY, fromX, awayPawnY, false);
+	makeMove(fromX, awayPawnY, fromX, awayY, true);
+}
+\end{lstlisting}
+
+
+Nejprve nastavíme hodnoty awayY a awayPawnY. Away Y nám určuje s jakou figurkou chceme uhýbat a awayPawnY nám udává, kam s ní uhneme. Poté zkontrolujeme, zda pozice, kam chceme figurku blokující pohyb koně přemístit, je v rámci šachového pole. Poté s ní uhneme na pozici awayPawnY. Koně přesuneme na pozici figurky a pak na cílové místo. Figurku z awayPawnY vrátíme na původní pozici.
+
+\podpodpodkapitola{Řošáda}
+V šachu mohou nastat pouze 4 různé šachové rošády. V kódu jsem v podmínce tyto situace zadefinoval a kontroluji je při makeChessMove. 
+
+\begin{lstlisting}[style=CStyle]
+if (fromX == 5 && (toX == 7 || toX == 3) &&
+(toY == 1 && fromY == 1 || fromY == 8 && toY == 8)) {
+	// Castling
+	handleCastling(fromX, fromY, toX, toY);
+} 
+\end{lstlisting}
+
+Ve funkci handleCastling rošádu řeším pomocí uhybání figurek, které rošádě brání.  S funkcionalitou rošády mám v práci mírný problém a to z důvodu malého prostoru pro manipulaci s figury na poslední a první řadě šachovnice. I přesto jsem realizoval kód, který se o její provedení pokouší. Rozděluji si rošádu na dva typy a popíši, jak řeším rošádu za černou barvu.
+
+\popisseznam{
+	\polozka {Rošáda doleva} {
+		Nejprve se podívám zda před cílovou pozicí věže po rošádě je nějaká figurka. Jestliže ano, přemístím jí dopředu. Poté na místo této figurky posunu krále. Dalším krokem je přemístění věže na její cílovou pozici rošády. Poté diagonálním pohybem umístím krále vedle ní.
+	}
+	\polozka {Rošáda doprava}{
+		Zde je situace odlišná, jelikož jsme schopni využívat 9. horizontální souřadnice šachovnice. Nejprve vyjedu s vězí na tuto souřadnici mimo pole a zde jí posunu o políčko níže. Poté nad ní umístím krále a věž diagonálním pohybem posunu vedle něj. Posledním krokem je posunutí obou figurek o jednu pozici doleva.
+	}
+}
+
+\podpodkapitola{Braní figury}
+V kódu braní šachové figury realizujeme právě ve funkci makeChessMove. Pomocí funkce isPlaceOccupied zjistíme zda jsou cílové souřadnice obsazené či volné. 
+\begin{lstlisting}[style=CStyle]
+bool isPlaceOccupied(int x, int y) {
+	if (!boardValues[y-1][x-1]) {
+		return true;
+	}
+	return false;
+}
+\end{lstlisting}
+
+V případě, že funkce vrátí true, musíme danou figuru odstranit. To provádíme tak, že ji přesuneme mimo šachovnici neboli na 9. horizontální souřadnici. Do funkce makeMove dáme nejprve současné souřadnice magnetu a poté cílové, kde se náchází figurka. Na braní figurek jsem vytvořil funkci handlePieceTaking. Tato funkce má jako vstupní parametry souřadnice odkud a kam.
+
+\begin{lstlisting}[style=CStyle]
+void handlePieceTaking(int fromX, int fromY, int toX, int toY) {
+	// Prepare magnet to taken piece
+	makeMove(magnetX, magnetY, toX, toY, false);
+	
+	int movingInRow = toY;
+	for (int blockRightX = toX; blockRightX < 9; blockRightX++) {
+		// Move taken piece out of chess board
+		if (isPlaceOccupied(blockRightX + 1, movingInRow)) {
+			if (movingInRow != 0) {
+				if (!isPlaceOccupied(blockRightX, movingInRow - 1)) {
+					// If piece bellow empty, move there and then continue right
+					makeMove(blockRightX, movingInRow,blockRightX+1,movingInRow-1,1);
+					movingInRow = movingInRow - 1;
+					continue;
+				}
+			}
+			
+			if (movingInRow != 8) {
+				if (!isPlaceOccupied(blockRightX, movingInRow + 1)) {
+				// If piece above empty, move there and then continue right
+				makeMove(blockRightX, movingInRow, blockRightX+1, movingInRow+1,1);
+				movingInRow = movingInRow + 1;
+				continue;
+				}
+			}
+		}
+		
+		// If empty, move it right
+		makeMove(blockRightX, movingInRow, blockRightX + 1, movingInRow, true);
+	}
+}
+\end{lstlisting}
+
+Problematika této funkcionality je, že musíme zajistit volný průchod figury na pravou stranu. Nemůžeme figuru jednoduše přemístit na 9. souřadnici doprava, jelikož by mohla narazit do nějaké jiné šachové figury umístěné na políčkách vpravo.
+
+Programový kód funguje takovým způsobem, že se nejprve podívá o jednu pozici doprava, jestliže je volná, přesune tam figuru pomocí funkce makeMove. V momentě, kdy volná není, podívá se o jednu pozici doprava výše. Jestliže je tato pozice volná, přesune se celý cyklus o Y souřadnici výše a opět se pokouší pohnout doprava. Stejným způsobem funkce kontroluje i pozici pod figurkou. Tímto procesem se figura ve většině běžných šachových situací dostane mimo herní pole. Jsou zde i scénaře, ve kterých by se jí to nepodařilo, ale z důvodu jejich zřídkého vyskytnutí je neřeším.
+
 
 \podkapitola{Algoritmus vytvořeného programu}
-Algoritus pro šachovou hru se odehrává v hlavním cyklu programu. V této části práci si vystvětlíme, jak probíhá od samotného spuštění, po tvorbu tahů oponenta, až po ukončení hry.
+Algoritus pro šachovou hru se odehrává v hlavním cyklu programu. V této části práci si vystvětlíme, jak probíhá od samotného spuštění, po tvorbu tahů oponenta, až po ukončení hry. 
 
 \podpodkapitola{Variablizace hry}
 To realizujeme pomocí pátého kontrolního multiplexoru. Tento multiplexor má pouze pět spínačů, a to
@@ -495,30 +620,53 @@ To realizujeme pomocí pátého kontrolního multiplexoru. Tento multiplexor má
 }
 V kódu variabilazaci sledujeme pomocí podmínek ve funkci setControlMux, která se volá hned na začátku hry. Nejprve přečteme hodnoty spínačů, poté určíme parametry. V momentě, kdy uživatel zvolil barvu a jeden ze spínačů obtížnosti je spuštěný, zahájíme hru přepnutím proměnné gameStarted na true.
 \begin{lstlisting}[style=CStyle]
-void setControlMUX() {
-	getReedValues(muxEnable[4], 0, 8);
-	memcpy(controlValues, recordedReedValue, sizeof(controlValues));
+getReedValues(muxEnable[4], 0, 8);
+memcpy(controlValues, recordedReedValue, sizeof(controlValues));
 
-	// Setting the data based on MUX wiring
-	if (!controlValues[1]) {
-		playingAsWhite = false;
-	}
-	//...
-	if (!controlValues[5]) {
-		difficulty = 2;
-	}
+//...
+if (!controlValues[5]) {
+	playingAsWhite = false;
+	Q = 8;
+	O = 8;
+	K = 8;
+	R = 8;
+	k = 8;
+}
 
-	if ((!controlValues[1] || !controlValues[2]) &&
-    	(!controlValues[3] || !controlValues[4] || !controlValues[5])) {
+if (!controlValues[4]) {
+	difficulty = 0;
+}
+//...
+
+if ((!controlValues[6] || !controlValues[5]) &&
+(!controlValues[4] || !controlValues[3] || !controlValues[2])) {
+	// Checking if mandatory user info is set
+	
+	//Serial.println("Game started");
+	setupMagnet();
 	gameStarted = true;
-	}
+}
+\end{lstlisting}
+
+V případě, že si hráč zvolí začínát hru za černé, je nutné fyzicky prohodit pozice figurek na šachovém poli. Poté začne šachový algoritmus prvním tahem. Ten v kódu provádím jednak nastavním hodnot Q, O, K, R, k na 8 a poté tímto blokem. Ten se provede v případě, že playingAsWhite je nastavný na false a není zaevidován žádný předchozí pohyb algoritmu, neboli je to první tah hry. Pak zavolám Mini-Max funkci getAiMove s prázdnou hodnotou a nový tah provedu.
+
+\begin{lstlisting}[style=CStyle]
+if (playingAsWhite == false && lastMoveAI[0] == lastMoveAI[1]) {
+	// AI starting as BLACK
+	setCurrentBoard();
+	memcpy(boardValuesMemory, boardValues, sizeof(boardValuesMemory));
+		
+	getAIMove("");
+	makeChessMove(lastMoveAI);
+	resetMove();
+}
 \end{lstlisting}
 
 \podpodkapitola{Průběh hry} 
-V hlavním cyklu programu, po splnění proměnné gameStarted probíhá hra. Kód v cyklu primárně využívá již výše popsané funkce. Zde si ukážeme jejich aplikaci. Nejprve získáme hodnoty spínačů pomocí setCurrentBoard, následně tyto hodnoty uložíme do paměti a spustíme detekci pohybu. V případě, že uživatel hraje za bílé figurky, spustí se funkce detectBoardMovement a běží až do doby, kdy hráč s nějakou figurkou pohne. Tento pohyb se uloží do proměnné move, a ta se předá MiniMax algoritmu pro šachovou hru. Ten rozeberu dále v práci. 
+V hlavním cyklu programu, po splnění proměnné gameStarted probíhá hra. Kód v cyklu primárně využívá již výše popsané funkce. Zde si ukážeme jejich aplikaci. Samotná záznam části šachové partie je v přílohách pod názvem samoridici\_sachovnice.mov. Nejprve získáme hodnoty spínačů pomocí setCurrentBoard, následně tyto hodnoty uložíme do paměti a spustíme detekci pohybu. V případě, že uživatel hraje za bílé figurky, spustí se funkce detectBoardMovement a běží až do doby, kdy hráč s nějakou figurkou pohne. Tento pohyb se uloží do proměnné move, a ta se předá MiniMax algoritmu pro šachovou hru. Ten rozeberu dále v práci. 
 
 \begin{lstlisting}[style=CStyle]
-// Player's turn => waiting for movement
+// Users's turn => waiting for movement
 setCurrentBoard();
 memcpy(boardValuesMemory, boardValues, sizeof(boardValuesMemory));
 while (!move[0] || !move[1] || !move[2] || !move[3]) {
@@ -529,18 +677,7 @@ while (!move[0] || !move[1] || !move[2] || !move[3]) {
 getAIMove(move);
 \end{lstlisting}
 
-MiniMax vyhodnotí zda, byl tah uživatele validní a následně zda je hra u konce či ještě pokračuje. V případě, že tah nebyl validní, což se může stát chybou uživatele a přepnutím jiných spínačů, to vyřešíme resetem tahu.
-\begin{lstlisting}[style=CStyle]
-if (!validMove) {
-	// If user made invalid move
-	// Resseting move
-	move[0] = 0;
-	move[1] = 0;
-	move[2] = 0;
-	move[3] = 0;
-	return;
-}
-\end{lstlisting}
+MiniMax vyhodnotí zda, byl tah uživatele validní a následně zda je hra u konce či ještě pokračuje. V případě, že tah nebyl validní, což se může stát chybou uživatele a přepnutím jiných spínačů. Vyřešíme to resetem tahu pomocí funkce resetMove.
 
  Dále nám algoritmus vrátí ideální tah pro oponenta uložený pod externí proměnnou lastMoveAi. Ta obsahuje šachový tah, v šachovém formátu. V práci jsem již implementoval řešení funkční makeChessMove. Tuto funkci zde zavoláme a tah se provede. Po provedení tahu opět vyresetujeme proměnnou move a cyklus spustíme od začátku.
 \begin{lstlisting}[style=CStyle]
@@ -550,20 +687,15 @@ makeChessMove(lastMoveAI);
 \podpodkapitola{Možnost hry s protihráčem}
 Šachovou hru s protihráčem realizujeme pomocí MiniMax algoritmu. Tento šachový algoritmus od pana H.~G.~Mullera \citace{H.G.Mullerův algoritmus}. Program je dostupný pod Open source licencí a pro Arduino ho přepsal pan Diego Cueva. Tento algoritmus jsem objevil v jedné realizaci projektu šachovnice \citace{Projekt automatické šachovnice} a jeho využití jsem si přepsal pro své potřeby.
 
-Kód pro algoritmus je v odlišném souboru, a to v MiniMax.h a MiniMax.cpp. Samotný kód algoritmu je extrémně optimalizován za účelem nejvyšší možné efektivity a délky. Jména proměnných i funkcí jsou zde zkracována, na co nejkratší a kód je díky tomu těžko srozumitelný. Z prvu v kódu nastavíme hodnoty pro šachové figurky.
+Kód pro algoritmus je v odlišném souboru, a to v MiniMax.h a MiniMax.cpp. Samotný kód algoritmu je extrémně optimalizován za účelem nejvyšší možné efektivity a délky. Jména proměnných i funkcí jsou zde zkracována, na co nejkratší a kód je díky tomu těžko srozumitelný. V kódu se ideální tah získá pomocí zavolání funkce D.
 
 \begin{lstlisting}[style=CStyle]
-char L, w[] = {0, 2, 2, 7, -1, 8, 12, 23}, /* relative piece values    */
-o[] = {-16, -15, -17, 0,  1,  16, 0,  1, 16,
-	15,  17,  0,   14, 18, 31, 33, 0, /* step-vector lists */
-	7,   -1,  11,  6,  8,  3,  6,     /* 1st dir. in o[] per piece*/
-	6,   3,   5,   7,  4,  5,  3,  6}; /* initial piece setup      */
-/* board is left part, center-pts table is right part, and dummy */
+ r = D(-I, I, Q, O, 1, 3); /* Think & do*/
 \end{lstlisting}
 
-Kód pokračuje sekcí výpočtu MiniMaxu na základě parametrů pro výhru oponenta. Tento výpočet je velmi koplikovaný a na stránkách pana Mullera uvedených ve zdrojích vysvětlený dopodrobna. Já zde vysvětlím části, které byli důležité pro projení s mým kódem.
+Funkce D obsahuje výpočet Mini-Maxu na základě parametrů pro výhru oponenta. Tento výpočet je velmi koplikovaný a na stránkách pana Mullera uvedených ve zdrojích vysvětlený dopodrobna. Já zde vysvětlím části, které byli důležité pro projení s mým kódem.
 
-Důležitá je zde funkce getAiMove, která má za vstup šachový tah. Algoritmus si tah rozebere a provede opět výpočet. Zde můžeme upravit obtížnost pod proměnnou v kódu určenou jako velké T. Dále je pro nás důležitý status hry. Ten ukládáme do externí proměnné z hlavního souboru gameStatus, kde ji kontrolujeme. V případě výhry ji stanovíme na 2 a v případě prohry na 1.
+Důležitá je zde funkce getAiMove, která má za vstup šachový tah. Algoritmus si tah rozebere a opět provede výpočet. Zde můžeme upravit obtížnost pod proměnnou v kódu určenou jako velké T. Dále je pro nás důležitý status hry. Ten ukládáme do externí proměnné z hlavního souboru gameStatus, kde ji kontrolujeme. V případě výhry ji stanovíme na 2 a v případě prohry na 1.
 \begin{lstlisting}[style=CStyle]
   if (!(r > -I + 1)) {
 	Serial.println("Lose ");
@@ -579,22 +711,20 @@ validMove = true;
 \end{lstlisting}
 
 \podkapitola{Mechanické provedení}
-Šachovnici bylo zapotřebí umístít do pevného krytu, který bude elektrické součástky chránit před poškozením. Já jsem se rozhodl pro dřevo. Dřevo bylo pro mě volba z důvodu dobrých možností úprav a opracování. Dále se mi také velmi zamlouvalo zachovat dojem klasické šachovnice, která je bězně také dřevěná. Box se skládá ze čtyř zakladních dřevěnných desek. Ze shora a ze spoda je šachovnice uzavřena tenkými překližkami. Samořídící šachovnici jsem v závěru projektu nalakoval ochranou vrstvou.
+Šachovnici bylo zapotřebí umístít do pevného krytu, který bude elektrické součástky chránit před poškozením. Já jsem se rozhodl pro dřevo. Dřevo bylo pro mě volba z důvodu dobrých možností úprav a opracování. Dále se mi také velmi zamlouvalo zachovat dojem klasické šachovnice, která je bězně také dřevěná. Box se skládá ze čtyř zakladních dřevěnných desek. Ze shora a ze spoda je šachovnice uzavřena tenkými překližkami. Samořídící šachovnici jsem v závěru projektu nalakoval ochranou vrstvou. Na šachovnici byly také vypracovány designové prvky a číslování. 
 
-Horní překližka má v sobě zasazenou PCB desku. Ta je do ní připevněna pomocí 8 šroubů, které zárověn společně s cínem drží oba kusy desky pohromady. Do desky jsou vyvedeny kabely od motoru a elektromagnetu. Napajení je realizováno bočním otvorem do šachovnice a připevněno dřevěnou destičkou.
+Horní překližka má v sobě zasazenou PCB desku, připevněnou pomocí 8 šroubů, které zárověn společně s cínem drží oba kusy desky pohromady. Do desky jsou vyvedeny kabely od motoru a elektromagnetu. Napajení je realizováno bočním otvorem do šachovnice.
 
 
 \podpodkapitola{Herní část šachovnice}
- Pro vzhled šachovnice jsem si v programu Pinta vytvořil návrh šachových políček. Na pravou část návrhu jsem umístil kontrolní spínače pro volbu hry. Návrh jsem si nechal vytisknout na pevný papír, jenž jsem na desku přilepil. Pro šachovnici jsem si nechal vytisknout vhodné šachové figurky pomocí 3D tisku a do nich vložil malé magnety.\obrazek{chessStickerFull}{Návrh vzhledu herní části šachovnice}{5cm}{chessStickerFull.jpg}
+ Pro vzhled šachovnice jsem si v programu InkScape vytvořil návrh šachových políček, jenž lze naleznout v přílohách pod názvem navrh\_herniho\_pole.pdf. Na pravou část návrhu jsem umístil kontrolní spínače pro volbu hry. Návrh jsem si nechal vytisknout na pevný papír, jenž jsem na desku přilepil. Pro šachovnici jsem si nechal vytisknout vhodné šachové figurky pomocí 3D tisku a do nich vložil malé magnety.\obrazek{chessVzhled}{Vzhled herní části šachovnice}{16cm}{sachyVzhled.jpg}
 
 
 
 \kapitola{Závěr}
-Samořídící šachovnice byla v rámci práce zrealizována. Umožnuje šachovou hru proti oponentovi, kterého simuluje algoritmus. 
+Samořídící šachovnice byla v rámci práce zrealizována. Je schopna detekovat figurky umístěné na jejím herním poli. Rešení byla deska plošného spoje s potřebnými součástkami. Deska obsahuje 69 magnetických spínačů, které skrze multiplexory čteme pomocí řídící jednotky. Jako řídící jednotku jsem si zvolil Arduino UNO, které dostatečně plní všechny potřebné úlohy práce. Šachovnice s mírnými odchylky umožnuje šachovou hru proti oponentovi, kterého simuluje algoritmus. 
 
-Šachovnice je schopna detekovat figurky umístěné na jejím herním poli. Jako řešení byla vyrobena deska plošného spoje s potřebnými součástkami. Deska obsahuje 69 magnetických spínačů, které skrze multiplexory čteme pomocí řídící jednotky. Jako řídící jednotku jsem si zvolil Arduino UNO, které dostatečně plní všechny potřebné úlohy práce.
-
-Pro účely řízení jsem vytvořil program, který je schopen ovládat všechny potřebné části šachovnice. Program je schopen řešit situace, které během hry mohou nastat. Dokáže zařídit odpověd na šachový tah hráče, který rozpozná na základě sepnutí spínačů. Pro tento účel využívá algoritmus MiniMax, který pomocí výpočtů zjistí ideální odpovídající tah. Následně tento tah transformuje do signálů, které jsou schopné vykonat krokové motory a přemístí požadovanou šachovou figurku na odpovědné místo. 
+Pro účely řízení jsem vytvořil program, který je schopen ovládat všechny potřebné části šachovnice. Program je schopen řešit situace, které během hry mohou nastat. Dokáže zařídit odpověd na šachový tah hráče, který rozpozná na základě sepnutí spínačů. Pro tento účel využívá algoritmus Mini-Max, který pomocí výpočtů zjistí ideální odpovídající tah. Následně tento tah transformuje do signálů, které jsou schopné vykonat krokové motory a přemístí požadovanou šachovou figurku na odpovědné místo. 
 
 Samořídící šachovnici jsem zkonstruoval do dřevěné skříně, ve které jsou umístěny všechny potřebné prvky. Je do ní z boční strany přivedeno odpovídající napětí. Toto napětí nám stabilizátor umožní variovat pro motory, eletromagnet a ostatní součástky.
 
@@ -605,7 +735,10 @@ Pro projekt jsem zařídíl šachové figurky vytvořené pomocí 3D tisku, do k
 \seznamObrazku
 
 \prilohy{
-	\kapitola{schema\_sachovnice.pdf}
+	\kapitola{Samořídící šachovnice}
+	\podkapitola{schema\_sachovnice.pdf}
+	\podkapitola{navrh\_herniho\_pole.pdf}
+	\podkapitola{samoridici\_sachovnice.mov}
 }
 
 \literatura{

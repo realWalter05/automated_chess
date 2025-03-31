@@ -6,7 +6,7 @@
 \contentsline {section}{\numberline {2.3}Elektronické součástky}{11}{}%
 \contentsline {subsection}{\numberline {2.3.1}Magnetický spínač}{11}{}%
 \contentsline {subsection}{\numberline {2.3.2}Multiplexor}{11}{}%
-\contentsline {subsection}{\numberline {2.3.3}Stabilizátor}{11}{}%
+\contentsline {subsection}{\numberline {2.3.3}Stabilizátor}{12}{}%
 \contentsline {subsection}{\numberline {2.3.4}Elektromagnet}{12}{}%
 \contentsline {subsection}{\numberline {2.3.5}Krokový motor}{12}{}%
 \contentsline {section}{\numberline {2.4}Mini-Max algoritmus}{12}{}%
@@ -21,19 +21,25 @@
 \contentsline {subsubsection}{Ukládání všech pozic}{21}{}%
 \contentsline {subsubsection}{Detekce přemístění figurek}{21}{}%
 \contentsline {subsubsection}{Funkce detectBoardMovement()}{22}{}%
-\contentsline {section}{\numberline {3.3}Pohyb figurek na hracím poli}{23}{}%
+\contentsline {section}{\numberline {3.3}Pohyb figurek na hracím poli}{24}{}%
 \contentsline {subsection}{\numberline {3.3.1}Elektromagnet}{24}{}%
-\contentsline {subsection}{\numberline {3.3.2}Krokové motory}{25}{}%
-\contentsline {subsubsection}{Konstrukce}{25}{}%
+\contentsline {subsection}{\numberline {3.3.2}Krokové motory}{26}{}%
+\contentsline {subsubsection}{Konstrukce}{26}{}%
 \contentsline {subsubsection}{Programový kód}{27}{}%
-\contentsline {subsection}{\numberline {3.3.3}Šachový tah}{28}{}%
-\contentsline {subsubsection}{Realizace tahu dle souřadnic}{30}{}%
-\contentsline {section}{\numberline {3.4}Algoritmus vytvořeného programu}{31}{}%
-\contentsline {subsection}{\numberline {3.4.1}Variablizace hry}{31}{}%
-\contentsline {subsection}{\numberline {3.4.2}Průběh hry}{32}{}%
-\contentsline {subsection}{\numberline {3.4.3}Možnost hry s protihráčem}{33}{}%
-\contentsline {section}{\numberline {3.5}Mechanické provedení}{34}{}%
-\contentsline {subsection}{\numberline {3.5.1}Herní část šachovnice}{35}{}%
-\contentsline {chapter}{\numberline {4}Závěr}{36}{}%
-\contentsline {chapter}{Přílohy}{37}{}%
-\contentsline {chapter}{\numberline {A}schema\_sachovnice.pdf}{38}{}%
+\contentsline {subsubsection}{Realizace tahu dle souřadnic}{28}{}%
+\contentsline {subsection}{\numberline {3.3.3}Šachový tah}{30}{}%
+\contentsline {subsubsection}{Pohyb koně}{31}{}%
+\contentsline {subsubsection}{Řošáda}{32}{}%
+\contentsline {subsection}{\numberline {3.3.4}Braní figury}{33}{}%
+\contentsline {section}{\numberline {3.4}Algoritmus vytvořeného programu}{35}{}%
+\contentsline {subsection}{\numberline {3.4.1}Variablizace hry}{35}{}%
+\contentsline {subsection}{\numberline {3.4.2}Průběh hry}{36}{}%
+\contentsline {subsection}{\numberline {3.4.3}Možnost hry s protihráčem}{37}{}%
+\contentsline {section}{\numberline {3.5}Mechanické provedení}{38}{}%
+\contentsline {subsection}{\numberline {3.5.1}Herní část šachovnice}{39}{}%
+\contentsline {chapter}{\numberline {4}Závěr}{40}{}%
+\contentsline {chapter}{Přílohy}{41}{}%
+\contentsline {chapter}{\numberline {A}Samořídící šachovnice}{42}{}%
+\contentsline {section}{\numberline {A.1}schema\_sachovnice.pdf}{42}{}%
+\contentsline {section}{\numberline {A.2}navrh\_herniho\_pole.pdf}{42}{}%
+\contentsline {section}{\numberline {A.3}samoridici\_sachovnice.mov}{42}{}%
