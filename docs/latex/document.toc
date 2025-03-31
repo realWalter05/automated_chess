@@ -13,27 +13,27 @@
 \contentsline {chapter}{\numberline {3}Praktická část}{14}{}%
 \contentsline {section}{\numberline {3.1}Elektrické zapojení}{14}{}%
 \contentsline {subsection}{\numberline {3.1.1}PCB deska}{14}{}%
-\contentsline {subsection}{\numberline {3.1.2}Výběr řídící jednotky}{17}{}%
-\contentsline {section}{\numberline {3.2}Detekce obsazenosti políček}{17}{}%
-\contentsline {subsection}{\numberline {3.2.1}Zapojení a princip}{17}{}%
-\contentsline {subsection}{\numberline {3.2.2}Programový kód}{19}{}%
-\contentsline {subsubsection}{Čtení hodnot pomocí getReedValues()}{20}{}%
-\contentsline {subsubsection}{Ukládání všech pozic}{22}{}%
-\contentsline {subsubsection}{Detekce přemístění figurek}{22}{}%
-\contentsline {subsubsection}{Funkce detectBoardMovement()}{23}{}%
-\contentsline {section}{\numberline {3.3}Pohyb figurek na hracím poli}{24}{}%
-\contentsline {subsection}{\numberline {3.3.1}Elektromagnet}{25}{}%
-\contentsline {subsection}{\numberline {3.3.2}Krokové motory}{26}{}%
-\contentsline {subsubsection}{Konstrukce}{26}{}%
-\contentsline {subsubsection}{Programový kód}{28}{}%
-\contentsline {subsection}{\numberline {3.3.3}Šachový tah}{29}{}%
-\contentsline {subsubsection}{Realizace tahu dle souřadnic}{31}{}%
-\contentsline {section}{\numberline {3.4}Algoritmus vytvořeného programu}{32}{}%
-\contentsline {subsection}{\numberline {3.4.1}Variablizace hry}{32}{}%
-\contentsline {subsection}{\numberline {3.4.2}Průběh hry}{33}{}%
-\contentsline {subsection}{\numberline {3.4.3}Možnost hry s protihráčem}{34}{}%
-\contentsline {section}{\numberline {3.5}Mechanické provedení}{35}{}%
-\contentsline {subsection}{\numberline {3.5.1}Herní část šachovnice}{36}{}%
-\contentsline {chapter}{\numberline {4}Závěr}{37}{}%
-\contentsline {chapter}{Přílohy}{38}{}%
-\contentsline {chapter}{\numberline {A}schema\_sachovnice.pdf}{39}{}%
+\contentsline {subsection}{\numberline {3.1.2}Výběr řídící jednotky}{16}{}%
+\contentsline {section}{\numberline {3.2}Detekce obsazenosti políček}{16}{}%
+\contentsline {subsection}{\numberline {3.2.1}Zapojení a princip}{16}{}%
+\contentsline {subsection}{\numberline {3.2.2}Programový kód}{18}{}%
+\contentsline {subsubsection}{Čtení hodnot pomocí getReedValues()}{19}{}%
+\contentsline {subsubsection}{Ukládání všech pozic}{21}{}%
+\contentsline {subsubsection}{Detekce přemístění figurek}{21}{}%
+\contentsline {subsubsection}{Funkce detectBoardMovement()}{22}{}%
+\contentsline {section}{\numberline {3.3}Pohyb figurek na hracím poli}{23}{}%
+\contentsline {subsection}{\numberline {3.3.1}Elektromagnet}{24}{}%
+\contentsline {subsection}{\numberline {3.3.2}Krokové motory}{25}{}%
+\contentsline {subsubsection}{Konstrukce}{25}{}%
+\contentsline {subsubsection}{Programový kód}{27}{}%
+\contentsline {subsection}{\numberline {3.3.3}Šachový tah}{28}{}%
+\contentsline {subsubsection}{Realizace tahu dle souřadnic}{30}{}%
+\contentsline {section}{\numberline {3.4}Algoritmus vytvořeného programu}{31}{}%
+\contentsline {subsection}{\numberline {3.4.1}Variablizace hry}{31}{}%
+\contentsline {subsection}{\numberline {3.4.2}Průběh hry}{32}{}%
+\contentsline {subsection}{\numberline {3.4.3}Možnost hry s protihráčem}{33}{}%
+\contentsline {section}{\numberline {3.5}Mechanické provedení}{34}{}%
+\contentsline {subsection}{\numberline {3.5.1}Herní část šachovnice}{35}{}%
+\contentsline {chapter}{\numberline {4}Závěr}{36}{}%
+\contentsline {chapter}{Přílohy}{37}{}%
+\contentsline {chapter}{\numberline {A}schema\_sachovnice.pdf}{38}{}%
