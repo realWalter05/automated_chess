@@ -62,9 +62,17 @@ void setup() {
 
   //// MOTORS ////
   pinMode(stepPinX, OUTPUT);
+  digitalWrite(stepPinX, LOW);
+
   pinMode(dirPinX, OUTPUT);
+  digitalWrite(dirPinX, LOW);
+
   pinMode(stepPinY, OUTPUT);
+  digitalWrite(stepPinY, LOW);
+
   pinMode(dirPinY, OUTPUT);
+  digitalWrite(dirPinY, LOW);
+
 
   //// MULTIPLEXERS ////
 
@@ -98,13 +106,13 @@ void setup() {
 /* ARDUINO MAIN FUNC */
 /* ------------------ */
 void loop() {
-  if (!gameStarted || (magnetX == 0 && magnetY == 0)) {
-    // Waiting for user to put pieces in the control part of the board
-    if (magnetX == 0 && magnetY == 0) {
-    delay(2000);
+  if (magnetX == 0 && magnetY == 0) {
+    delay(1000);
     resetMagnet();
+    return;
   }
-    delay(5000);
+
+  if (!gameStarted) {
     setControlMUX();
     return;
   }
@@ -128,12 +136,12 @@ void loop() {
   }
 
   // Debug info
-  //Serial.print("User: ");
-  //Serial.print(move[0]);
-  //Serial.print(move[1]);
-  //Serial.print(" -> ");
-  //Serial.print(move[2]);
-  //Serial.println(move[3]);
+  /*Serial.print("User: ");
+  Serial.print(move[0]);
+  Serial.print(move[1]);
+  Serial.print(" -> ");
+  Serial.print(move[2]);
+  Serial.println(move[3]);*/
 
   // AI turn
   //Serial.println("Ai playing...");
@@ -258,22 +266,15 @@ void detectBoardMovement() {
 
   /*Serial.println("////// Board //////");
   for (int first = 7; first >= 0; first--) {
-    //Serial.print(first + 1);
-    //Serial.print(" / ");
+    Serial.print(first + 1);
+    Serial.print(" / ");
     for (int second = 0; second < 8; second++) {
-      //Serial.print(boardValues[first][second]);
-      //Serial.print(" ");
+      Serial.print(boardValues[first][second]);
+      Serial.print(" ");
     }
-    //Serial.println();
+    Serial.println();
   }
-  //Serial.println("    A B C D E F G H");
-
-  //Serial.print("Moves:");
-  //Serial.print(move[0]);
-  //Serial.print(move[1]);
-  //Serial.print("/");
-  //Serial.print(move[2]);
-  //Serial.println(move[3]);*/
+  Serial.println("    A B C D E F G H");*/
 
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
@@ -328,7 +329,7 @@ void resetMagnet() {
   Serial.print(controlValues[5]);
   Serial.println(controlValues[6]);*/
 
-  while (!controlValues[4] && !controlValues[5] && !controlValues[6]) {
+  while (!controlValues[2] && !controlValues[4]) {
     getReedValues(muxEnable[4], 0, 8);
     memcpy(controlValues, recordedReedValue, sizeof(controlValues));
     digitalWrite(dirPinX, LOW);
@@ -339,7 +340,7 @@ void resetMagnet() {
     magnetX = 1;
   }
 
-  while (controlValues[4] && !controlValues[5] && !controlValues[6]) {
+  while (controlValues[2] && !controlValues[4]) {
     getReedValues(muxEnable[4], 0, 8);
     memcpy(controlValues, recordedReedValue, sizeof(controlValues));
 
@@ -401,8 +402,16 @@ void setControlMUX() {
 
 void setupMagnet() {
   delay(2000);
+  digitalWrite(dirPinY, LOW);
+  for (int i = 0; i < 100; i++) {
+    digitalWrite(stepPinY, HIGH);
+    delayMicroseconds(motorDelay + 600);
+    digitalWrite(stepPinY, LOW);
+    delayMicroseconds(motorDelay + 600);
+  }
+  delay(500);
   digitalWrite(dirPinX, HIGH);
-  for (int j = 0; j < 210; j++) {
+  for (int j = 0; j < 190; j++) {
     digitalWrite(stepPinX, HIGH);
     delayMicroseconds(motorDelay + 600);
     digitalWrite(stepPinX, LOW);
@@ -410,14 +419,6 @@ void setupMagnet() {
   }
   digitalWrite(dirPinX, LOW);
 
-  digitalWrite(dirPinY, HIGH);
-  for (int i = 0; i < 40; i++) {
-    digitalWrite(stepPinY, HIGH);
-    delayMicroseconds(motorDelay + 600);
-    digitalWrite(stepPinY, LOW);
-    delayMicroseconds(motorDelay + 600);
-  }
-  digitalWrite(dirPinY, LOW);
 }
 
 /* ------------- */
@@ -448,7 +449,7 @@ void moveMagnet(int direction, int distance) {
   case 2:
     // Down
     digitalWrite(dirPinY, HIGH);
-    for (int i = 0; i < boxLength * distance; i++) {
+    for (int i = 0; i < boxLength * 0.93 * distance; i++) {
       digitalWrite(stepPinY, HIGH);
       delayMicroseconds(motorDelay);
       digitalWrite(stepPinY, LOW);
@@ -516,7 +517,7 @@ void moveMagnet(int direction, int distance) {
   case 8:
     // Up
     digitalWrite(dirPinY, LOW);
-    for (int i = 0; i < boxLength * distance; i++) {
+    for (int i = 0; i < boxLength * 0.93 * distance; i++) {
       digitalWrite(stepPinY, HIGH);
       delayMicroseconds(motorDelay);
       digitalWrite(stepPinY, LOW);
