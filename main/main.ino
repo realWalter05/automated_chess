@@ -20,6 +20,8 @@ char move[4] = {0, 0, 0, 0};
 char numberTranslate[8] = {'1', '2', '3', '4', '5', '6', '7', '8'};
 char letterTranslate[8] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 char aiLetterTranslate[8] = "abcdefgh";
+int detectCounter = 0;
+
 
 int kingsCordinates[4] = {0, 0, 0, 0};
 
@@ -54,7 +56,7 @@ short int aiPlayColor = 16;
 /* ------------------ */
 void setup() {
   // DEBUG info
-  //Serial.begin(9600);
+  Serial.begin(9600);
 
   // Electromagnet
   pinMode(magnetPin, OUTPUT);
@@ -106,9 +108,11 @@ void setup() {
 /* ARDUINO MAIN FUNC */
 /* ------------------ */
 void loop() {
-  if (magnetX == 0 && magnetY == 0) {
+  if (magnetX == 0 || magnetY == 0) {
     delay(1000);
     resetMagnet();
+    Serial.println(magnetX);
+    Serial.println(magnetY);
     return;
   }
 
@@ -131,20 +135,21 @@ void loop() {
   // User's turn
   setCurrentBoard();
   memcpy(boardValuesMemory, boardValues, sizeof(boardValuesMemory));
+  detectCounter = 0;
   while (!move[0] || !move[1] || !move[2] || !move[3]) {
     detectBoardMovement();
   }
 
   // Debug info
-  /*Serial.print("User: ");
+  Serial.print("User: ");
   Serial.print(move[0]);
   Serial.print(move[1]);
   Serial.print(" -> ");
   Serial.print(move[2]);
-  Serial.println(move[3]);*/
+  Serial.println(move[3]);
 
   // AI turn
-  //Serial.println("Ai playing...");
+  Serial.println("Ai playing...");
   getAIMove(move);
 
   // Checking game
@@ -176,7 +181,7 @@ void loop() {
   }
 
   // Make AI move
-  //Serial.println(lastMoveAI);
+  Serial.println(lastMoveAI);
   makeChessMove(lastMoveAI);
 
   resetMove();
@@ -261,10 +266,11 @@ void setCurrentBoard() {
 }
 
 void detectBoardMovement() {
+  detectCounter += 1;
   bool fromChange = false;
   setCurrentBoard();
 
-  /*Serial.println("////// Board //////");
+  Serial.println("////// Board //////");
   for (int first = 7; first >= 0; first--) {
     Serial.print(first + 1);
     Serial.print(" / ");
@@ -274,20 +280,19 @@ void detectBoardMovement() {
     }
     Serial.println();
   }
-  Serial.println("    A B C D E F G H");*/
+  Serial.println("    A B C D E F G H");
 
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
       if (boardValuesMemory[i][j] != boardValues[i][j] && boardValues[i][j]) {
         // Position of piece has changed
-        delay(1000);
-        setCurrentBoard();
-        if (boardValues[i][j]) {
-          // Piece was here before
-          fromChange = true;
-          move[0] = letterTranslate[j];
-          move[1] = numberTranslate[i];
-        }
+        Serial.println("Zmena");
+        // Piece was here before
+        fromChange = true;
+        move[0] = letterTranslate[j];
+        move[1] = numberTranslate[i];
+        Serial.print(move[0]);
+        Serial.println(move[1]);
       }
     }
   }
@@ -296,22 +301,24 @@ void detectBoardMovement() {
     for (int j1 = 0; j1 < 8; j1++) {
       if (boardValuesMemory[i1][j1] != boardValues[i1][j1] &&
           !boardValues[i1][j1]) {
-        delay(1000);
-        setCurrentBoard();
-        if (!boardValues[i1][j1]) {
-          // New piece on this position
-          move[2] = letterTranslate[j1];
-          move[3] = numberTranslate[i1];
-        }
+        Serial.println("Zmena 2");
+        // New piece on this position
+        move[2] = letterTranslate[j1];
+        move[3] = numberTranslate[i1];
+        Serial.print(move[2]);
+        Serial.println(move[3]);
       }
     }
   }
 
-  if (!fromChange || (move[2] && !move[0])) {
+  if (!fromChange || (move[2] && !move[0]) || (fromChange && !move[2] && detectCounter > 4)) {
+    Serial.println("resetting");
     setCurrentBoard();
     memcpy(boardValuesMemory, boardValues, sizeof(boardValuesMemory));
     resetMove();
+    detectCounter = 0;
   }
+  Serial.println(detectCounter);
   delay(1000);
 }
 
@@ -322,34 +329,38 @@ void resetMagnet() {
   getReedValues(muxEnable[4], 0, 8);
   memcpy(controlValues, recordedReedValue, sizeof(controlValues));
 
-  /*Serial.println("Magnet reset values");
+  Serial.println("Magnet reset values");
   Serial.print(controlValues[2]);
   Serial.print(controlValues[3]);
   Serial.print(controlValues[4]);
   Serial.print(controlValues[5]);
-  Serial.println(controlValues[6]);*/
+  Serial.println(controlValues[6]);
 
-  while (!controlValues[2] && !controlValues[4]) {
-    getReedValues(muxEnable[4], 0, 8);
-    memcpy(controlValues, recordedReedValue, sizeof(controlValues));
-    digitalWrite(dirPinX, LOW);
-    digitalWrite(stepPinX, HIGH);
-    delayMicroseconds(motorDelay + 600);
-    digitalWrite(stepPinX, LOW);
-    delayMicroseconds(motorDelay + 600);
-    magnetX = 1;
+  if (magnetX == 0) {
+    while (!controlValues[2] && !controlValues[4]) {
+      getReedValues(muxEnable[4], 0, 8);
+      memcpy(controlValues, recordedReedValue, sizeof(controlValues));
+      digitalWrite(dirPinX, LOW);
+      digitalWrite(stepPinX, HIGH);
+      delayMicroseconds(motorDelay + 600);
+      digitalWrite(stepPinX, LOW);
+      delayMicroseconds(motorDelay + 600);
+      magnetX = 1;
+    }
   }
+  
+  if (magnetY == 0) {
+    while (controlValues[2] && !controlValues[4]) {
+      getReedValues(muxEnable[4], 0, 8);
+      memcpy(controlValues, recordedReedValue, sizeof(controlValues));
 
-  while (controlValues[2] && !controlValues[4]) {
-    getReedValues(muxEnable[4], 0, 8);
-    memcpy(controlValues, recordedReedValue, sizeof(controlValues));
-
-    digitalWrite(dirPinY, HIGH);
-    digitalWrite(stepPinY, HIGH);
-    delayMicroseconds(motorDelay + 600);
-    digitalWrite(stepPinY, LOW);
-    delayMicroseconds(motorDelay + 600);
-    magnetY = 1;
+      digitalWrite(dirPinY, HIGH);
+      digitalWrite(stepPinY, HIGH);
+      delayMicroseconds(motorDelay + 600);
+      digitalWrite(stepPinY, LOW);
+      delayMicroseconds(motorDelay + 600);
+      magnetY = 1;
+    }
   }
   digitalWrite(dirPinY, LOW);
 }
@@ -394,7 +405,7 @@ void setControlMUX() {
       (!controlValues[4] || !controlValues[3] || !controlValues[2])) {
     // Checking if mandatory user info is set
 
-    //Serial.println("Game started");
+    Serial.println("Game started");
     setupMagnet();
     gameStarted = true;
   }
@@ -403,7 +414,7 @@ void setControlMUX() {
 void setupMagnet() {
   delay(2000);
   digitalWrite(dirPinY, LOW);
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < 75; i++) {
     digitalWrite(stepPinY, HIGH);
     delayMicroseconds(motorDelay + 600);
     digitalWrite(stepPinY, LOW);
@@ -449,7 +460,7 @@ void moveMagnet(int direction, int distance) {
   case 2:
     // Down
     digitalWrite(dirPinY, HIGH);
-    for (int i = 0; i < boxLength * 0.93 * distance; i++) {
+    for (int i = 0; i < boxLength * distance; i++) {
       digitalWrite(stepPinY, HIGH);
       delayMicroseconds(motorDelay);
       digitalWrite(stepPinY, LOW);
@@ -462,7 +473,7 @@ void moveMagnet(int direction, int distance) {
     // Diagonal right down
     digitalWrite(dirPinY, HIGH);
     digitalWrite(dirPinX, HIGH);
-    for (int i = 0; i < boxLength * 1.08 * distance; i++) {
+    for (int i = 0; i < boxLength * distance; i++) {
       digitalWrite(stepPinY, HIGH);
       digitalWrite(stepPinX, HIGH);
       delayMicroseconds(motorDelay);
@@ -502,7 +513,7 @@ void moveMagnet(int direction, int distance) {
     // Diagonal left up
     digitalWrite(dirPinY, LOW);
     digitalWrite(dirPinX, LOW);
-    for (int i = 0; i < boxLength * 1.08 * distance; i++) {
+    for (int i = 0; i < boxLength * distance; i++) {
       digitalWrite(stepPinY, HIGH);
       digitalWrite(stepPinX, HIGH);
       delayMicroseconds(motorDelay);
@@ -517,7 +528,7 @@ void moveMagnet(int direction, int distance) {
   case 8:
     // Up
     digitalWrite(dirPinY, LOW);
-    for (int i = 0; i < boxLength * 0.93 * distance; i++) {
+    for (int i = 0; i < boxLength * distance; i++) {
       digitalWrite(stepPinY, HIGH);
       delayMicroseconds(motorDelay);
       digitalWrite(stepPinY, LOW);
@@ -609,8 +620,8 @@ void makeMove(int x, int y, int targetX, int targetY, bool magnetActivated) {
 
 void makeChessMove(char givenMove[5]) {
   // Deconstruct move
-  //Serial.println("making chess move");
-  //Serial.println(givenMove);
+  Serial.println("making chess move");
+  Serial.println(givenMove);
   int fromX = strchr(aiLetterTranslate, givenMove[0]) - aiLetterTranslate + 1;
   int fromY = givenMove[1] - '0';
 
@@ -619,7 +630,7 @@ void makeChessMove(char givenMove[5]) {
 
   // Taking piece
   if (isPlaceOccupied(toX, toY)) {
-  //  Serial.println("Taking a piece");
+    Serial.println("Taking a piece");
     handlePieceTaking(fromX, fromY, toX, toY);
   }
 
@@ -630,12 +641,12 @@ void makeChessMove(char givenMove[5]) {
   if (fromX == 5 && (toX == 7 || toX == 3) &&
       (toY == 1 && fromY == 1 || fromY == 8 && toY == 8)) {
     // Castling
-    //Serial.println("Castling");
+    Serial.println("Castling");
     handleCastling(fromX, fromY, toX, toY);
   } else if (abs(fromY - toY) != abs(toX - fromX) &&
              (abs(fromX - toX) == 1 || abs(fromX - toX) == 2)) {
     // Horse movement
-    //Serial.println("Horse movement");
+    Serial.println("Horse movement");
     handleHorseMovement(fromX, fromY, toX, toY);
   } else {
     // Other pieces
